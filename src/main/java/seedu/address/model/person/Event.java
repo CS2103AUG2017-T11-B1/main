@@ -4,15 +4,19 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
+/**
+ * Represents a Person's event in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidEvent(String)}
+ */
 public class Event {
 
     public static final String MESSAGE_EVENT_CONSTRAINTS =
-            "Person emails should be 2 alphanumeric/period strings separated by '@'";
+            "Person event should be 2 alphanumeric/period strings separated by '@'";
     public static final String EVENT_VALIDATION_REGEX = "[\\w\\.]+@[\\w\\.]+";
 
     public final String eventAll;
-    public final String eventName;
-    public final String eventDate;
+    //public final String eventName;
+    //public final String eventDate;
 
     /**
      * Validates given email.
@@ -26,9 +30,9 @@ public class Event {
             throw new IllegalValueException(MESSAGE_EVENT_CONSTRAINTS);
         }
         this.eventAll = trimmedEvent;
-        String[] splitEvent = trimmedEvent.split("@");
-        this.eventName = splitEvent[0];
-        this.eventDate = splitEvent[1];
+        //String[] splitEvent = trimmedEvent.split("@");
+        //this.eventName = splitEvent[0];
+        //this.eventDate = splitEvent[1];
     }
 
     /**
@@ -51,6 +55,7 @@ public class Event {
     /**
      * Format state as text for viewing.
      */
+    @Override
     public String toString() {
         return '[' + eventAll + ']';
     }
