@@ -1,5 +1,15 @@
 package seedu.address.model.person;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Date;
+
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -11,12 +21,15 @@ import seedu.address.commons.exceptions.IllegalValueException;
 public class Event {
 
     public static final String MESSAGE_EVENT_CONSTRAINTS =
-            "Person event should be 2 alphanumeric/period strings separated by '@'";
-    public static final String EVENT_VALIDATION_REGEX = "[\\w\\.]+@[\\w\\.]+";
+            "Person event can take in any two strings separated by '@'";
+    public static final String MESSAGE_EVENT_DATE_CONSTRAINTS =
+            "Person event can only date in (day)/(month) in numbers";
+    public static final String EVENT_VALIDATION_REGEX = ".*@.*";
 
     public final String eventAll;
-    //public final String eventName;
-    //public final String eventDate;
+    public final String eventName;
+    public static String eventDateString;
+    public final Date eventDate;
 
     /**
      * Validates given email.
@@ -30,9 +43,36 @@ public class Event {
             throw new IllegalValueException(MESSAGE_EVENT_CONSTRAINTS);
         }
         this.eventAll = trimmedEvent;
-        //String[] splitEvent = trimmedEvent.split("@");
-        //this.eventName = splitEvent[0];
-        //this.eventDate = splitEvent[1];
+        String[] splitEvent = trimmedEvent.split("@");
+        this.eventName = splitEvent[0].trim();
+        try {
+            this.eventDateString = splitEvent[1].trim();
+            DateFormat df = new SimpleDateFormat("dd/MM");
+            this.eventDate = df.parse(eventDateString);
+        }
+        catch (ParseException ex) {
+            throw new IllegalValueException(MESSAGE_EVENT_DATE_CONSTRAINTS);
+        }
+    }
+
+    public static String periodTillEvent() {
+        LocalDate eventLocalDate;
+        try {
+            DateTimeFormatter formatter =
+                    DateTimeFormatter.ofPattern("dd/MM");
+            eventLocalDate = LocalDate.parse(eventDateString, formatter);
+        }
+        catch (DateTimeParseException ex) {
+            System.out.printf(eventDateString + " is not parsable.");
+            throw ex;
+        }
+        ZoneId sgt = ZoneId.of("GMT+8");
+        LocalDate currentDate = LocalDate.now(sgt);
+        Period period = currentDate.until(eventLocalDate);
+        int days, months;
+        months = period.getMonths();
+        days = period.getDays();
+        return "Months: " + months + " Days: " + days;
     }
 
     /**
