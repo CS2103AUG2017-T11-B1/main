@@ -20,6 +20,8 @@ public interface ReadOnlyPerson {
     Email getEmail();
     ObjectProperty<Address> addressProperty();
     Address getAddress();
+    ObjectProperty<Event> eventProperty();
+    Event getEvent();
     ObjectProperty<UniqueTagList> tagProperty();
     Set<Tag> getTags();
 
@@ -47,6 +49,8 @@ public interface ReadOnlyPerson {
                 .append(getEmail())
                 .append(" Address: ")
                 .append(getAddress())
+                .append(" Event: ")
+                .append(getEvent())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
