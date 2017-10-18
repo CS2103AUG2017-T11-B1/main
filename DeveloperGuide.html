@@ -49,8 +49,9 @@ Adapted from AddressBook-Level4, by: <code>Team SE-EDU</code>      Since: <code>
 <li><a href="#event-feature">3.2. Event(feature)</a></li>
 <li><a href="#import-authentication-mechanism">3.3. Import &amp; authentication mechanism</a></li>
 <li><a href="#location">3.4. Location</a></li>
-<li><a href="#logging">3.5. Logging</a></li>
-<li><a href="#configuration">3.6. Configuration</a></li>
+<li><a href="#updateprofilepic-deleteprofilepic-mechanism">3.5. UpdateProfilePic/DeleteProfilePic mechanism</a></li>
+<li><a href="#logging">3.6. Logging</a></li>
+<li><a href="#configuration">3.7. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -910,7 +911,57 @@ its' own instance of this service. This service is provided to the <code>ImportC
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.5. Logging</a></h3>
+<h3 id="updateprofilepic-deleteprofilepic-mechanism"><a class="link" href="#updateprofilepic-deleteprofilepic-mechanism">3.5. UpdateProfilePic/DeleteProfilePic mechanism</a></h3>
+<div class="paragraph">
+<p>The UpdateProfilePic/DeleteProfilePic mechanism is facilitated by a <code>ProfilePic</code> class, which is a property class of the <code>Person</code> class. It supports the updating and deleting of profile pictures of each Person. These two commands inherit from <code>UndoableCommand</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>ProfilePic</code> essentially stores a <strong>valid</strong> <code>URL</code> of an image that will be displayed as the Person’s profile picture. Whenever a new Person is added, the Person’s <code>ProfilePic</code> property will be that of a default image. The command, <code>updateProfilePic</code> can then be called to change this property. When the command <code>deleteProfilePic</code> is called, the <code>ProfilePic</code> property of the selected Person will be changed back to the default profile picture.</p>
+</div>
+<div class="paragraph">
+<p>Like the other properties of the <code>Person</code> class, the <code>ProfilePic</code> property will also be saved to the chosen storage file.</p>
+</div>
+<div class="paragraph">
+<p>Both the <code>updateProfilePic</code> and the <code>deleteProfilePic</code> commands work by taking in the index of the chosen Person and updating this Person as necessary. The <code>updateProfilePic</code> command also takes in a URL of the image that the profile picture is to be changed to. This will cause the app to instantiate a new <code>ProfilePic</code> object and check if the URL is valid and if it is valid, the app will proceed to update the Person with the new profile picture, otherwise an IllegalValueException will be thrown. As for the <code>deleteProfilePic</code> command, once it is called, the app will instantiate a default <code>ProfilePic</code> object and update the Person chosen.</p>
+</div>
+<div class="paragraph">
+<p>Below are the sequence diagrams of each command to illustrate how they work:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/updateProfilePicSD.jpg" alt="updateProfilePicSD" width="200">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deleteProfilePicSD.jpg" alt="deleteProfilePicSD" width="200">
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.5.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>updateProfilePic</code><br>
+<strong>Alternative 1 (current choice):</strong> Add a new class that extends <code>UndoableCommand</code><br>
+<strong>Pros:</strong> The other properties of a <code>Person</code> can be quickly updated, using the <code>add</code> or <code>edit</code> commands, without waiting for an image to be loaded <br>
+<strong>Cons:</strong> Users have to remember another command.<br>
+<strong>Alternative 2:</strong> Just add the function to the <code>add</code> and <code>edit</code> commands<br>
+<strong>Pros:</strong> Users do not have to remember a new command<br>
+<strong>Cons:</strong> The image might take a while to load, so all the data takes longer to be updated</p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>deleteProfilePic</code><br>
+<strong>Alternative 1 (current choice):</strong> Add a new class that extends <code>UndoableCommand</code><br>
+<strong>Pros:</strong> A quick way to revert the profile picture back to default <br>
+<strong>Cons:</strong> updateProfilePic can technically do the same job, albeit slower.<br>
+<strong>Alternative 2:</strong> Not have this command at all<br>
+<strong>Pros:</strong> Lesser commands for the user to remember<br>
+<strong>Cons:</strong> The user might not know what the default image URL is</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="logging"><a class="link" href="#logging">3.6. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
@@ -948,7 +999,7 @@ its' own instance of this service. This service is provided to the <code>ImportC
 </div>
 </div>
 <div class="sect2">
-<h3 id="configuration"><a class="link" href="#configuration">3.6. Configuration</a></h3>
+<h3 id="configuration"><a class="link" href="#configuration">3.7. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2614,7 +2665,7 @@ Use case ends.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-18 17:58:09 +00:00
+Last updated 2017-10-18 20:11:53 +00:00
 </div>
 </div>
 </body>
