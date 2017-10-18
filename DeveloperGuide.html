@@ -47,9 +47,10 @@ Adapted from AddressBook-Level4, by: <code>Team SE-EDU</code>      Since: <code>
 <ul class="sectlevel2">
 <li><a href="#undo-redo-mechanism">3.1. Undo/Redo mechanism</a></li>
 <li><a href="#event-feature">3.2. Event(feature)</a></li>
-<li><a href="#location">3.3. Location</a></li>
-<li><a href="#logging">3.4. Logging</a></li>
-<li><a href="#configuration">3.5. Configuration</a></li>
+<li><a href="#import-authentication-mechanism">3.3. Import &amp; authentication mechanism</a></li>
+<li><a href="#location">3.4. Location</a></li>
+<li><a href="#logging">3.5. Logging</a></li>
+<li><a href="#configuration">3.6. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -83,7 +84,14 @@ Adapted from AddressBook-Level4, by: <code>Team SE-EDU</code>      Since: <code>
 <li><a href="#user-stories">Appendix B: User Stories</a></li>
 <li><a href="#use-cases">Appendix C: Use Cases</a>
 <ul class="sectlevel2">
-<li><a href="#use-case-undo-command">C.1. Use case: Undo command</a></li>
+<li><a href="#use-case-delete-person">C.1. Use case: Delete person</a></li>
+<li><a href="#use-case-undo-command">C.2. Use case: Undo command</a></li>
+<li><a href="#use-case-swap-persons">C.3. Use case: Swap Persons</a></li>
+<li><a href="#use-case-sort-command">C.4. Use case: Sort command</a></li>
+<li><a href="#use-case-delete-multiple-persons">C.5. Use case: Delete multiple persons</a></li>
+<li><a href="#use-case-import-existing-contacts-from-google">C.6. Use case: Import existing contacts from google</a></li>
+<li><a href="#use-case-add-person">C.7. Use case: Add person</a></li>
+<li><a href="#use-case-favourite-person">C.8. Use case: Favourite person</a></li>
 </ul>
 </li>
 <li><a href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></li>
@@ -803,7 +811,83 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="location"><a class="link" href="#location">3.3. Location</a></h3>
+<h3 id="import-authentication-mechanism"><a class="link" href="#import-authentication-mechanism">3.3. Import &amp; authentication mechanism</a></h3>
+<div class="sect3">
+<h4 id="description"><a class="link" href="#description">3.3.1. Description</a></h4>
+<div class="paragraph">
+<p>The import command uses <code>Google Contacts</code> as a source and performs the OAuth2 authentication protocol to retrieve
+and import a user&#8217;s contacts. This is done with the help of the inbuilt <code>BrowserPanel</code>,
+an instance of the <code>GoogleApiAuth</code> service, and the <code>GooglePersonConverterUtil</code> utility class.<br></p>
+</div>
+<div class="paragraph">
+<p>This mechanism requires cross-component interaction with the <code>BrowserPanel</code> of the <code>UI</code> component. This is handled in an event driven manner, as shown in the extensive sequence diagram below:<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/import_devguide.jpg" alt="import devguide" width="100%">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="roles-of-objects-introduced"><a class="link" href="#roles-of-objects-introduced">3.3.2. Roles of objects introduced</a></h4>
+<div class="paragraph">
+<p>Three main objects were introduced to fulfil the import and authentication functionality, their roles are described as such:</p>
+</div>
+<div class="sect4">
+<h5 id="importcommand"><a class="link" href="#importcommand">ImportCommand</a></h5>
+<div class="paragraph">
+<p>The <code>ImportCommand</code> is the main driver of this functionality. It maintains control over the flow of authentication and and conversion of Person objects.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="googleapiauth"><a class="link" href="#googleapiauth">GoogleApiAuth</a></h5>
+<div class="paragraph">
+<p>The <code>GoogleApiAuth</code> is a service used to facilitate the start to end of an OAuth 2 procedure with Google&#8217;s APIs. It maintains key client
+information, and provides on demand, authentication URLs, and also a GoogleCredential object. Each command intending to go through the OAuth2 procedure with Google&#8217;s APIs, is expected to maintain
+its' own instance of this service. This service is provided to the <code>ImportCommand</code>.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="googlepersonconverterutil"><a class="link" href="#googlepersonconverterutil">GooglePersonConverterUtil</a></h5>
+<div class="paragraph">
+<p>The <code>GooglePersonConverterUtil</code> is a utility object, providing the functionality of conversion between a Google <code>Person</code> and a DoC <code>Person</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="execution-flow"><a class="link" href="#execution-flow">3.3.3. Execution flow</a></h4>
+<div class="paragraph">
+<p>This is a summary of the steps in the execution flow:<br>
+<strong>1.</strong> An <code>ImportCommand</code> is triggered from the users' UI input, firing an event to the <code>BrowserPanel</code><br>
+<strong>2.</strong> The <code>BrowserPanel</code> detects the event and navigates to the authentication url provided by the <code>GoogleApiAuth</code> service<br>
+<strong>3.</strong> The user successfully authenticates and grants Google Contacts access permission to DoC, automatically redirecting the <code>BrowserPanel</code> to the success landing page(<a href="https://cs2103tdummyendpoint.herokuapp.com" class="bare">https://cs2103tdummyendpoint.herokuapp.com</a>)<br>
+<strong>4.</strong> The <code>BrowserPanel</code> detects the URL change to the success landing page, extracts the authentication code appended to the URL, and passes the authentication code to its' <code>GoogleApiAuth</code> service,
+ which then builds a <code>GoogleCredential</code> object from the it<br>
+<strong>5.</strong> Once completed, the <code>BrowserPanel</code> fires an event to the <code>ImportCommand</code><br>
+<strong>6.</strong> The <code>ImportCommand</code> detects the event and proceeds to build a <code>PeopleService</code> object using the <code>GoogleCredential</code> within its' <code>GoogleApiAuth</code> service<br>
+<strong>7.</strong> Finally, the <code>PeopleService</code> object fetches the list of Google <code>Person</code> from the users' Google Contacts, which are then converted to DoC <code>Person</code> objects<br>
+<strong>8.</strong> This converted list of DoC <code>Person</code> objects are then added to the <code>Model</code> component</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.3.4. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> How a successful authentication is detected<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1 (Chosen for security):</strong> Redirect to a hosted domain<br>
+<strong>Pros:</strong> The underlying <code>HTTP GET</code> is sent to a domain under DoC&#8217;s control &#8594; risk of authentication code leak is controlled<br>
+<strong>Cons:</strong> The BrowserPanel will display an error page if the hosted domain is down. However, the successful authentication will still be detected correctly</p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong> Redirect to an external domain, like <code><a href="https://contacts.google.com" class="bare">https://contacts.google.com</a></code><br>
+<strong>Pros:</strong> We are able to display the users' incoming <code>Google Contacts</code><br>
+<strong>Cons:</strong> The underlying <code>HTTP GET</code> containing the users' authentication code is sent to an external domain</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="location"><a class="link" href="#location">3.4. Location</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/Location.png" alt="Location" width="800">
@@ -826,7 +910,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.4. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.5. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
@@ -864,7 +948,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="configuration"><a class="link" href="#configuration">3.5. Configuration</a></h3>
+<h3 id="configuration"><a class="link" href="#configuration">3.6. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -1475,7 +1559,7 @@ Do take a look at the <a href="#storage-component">Design: Storage Component</a>
 <p>By creating this command, you will get a chance to learn how to implement a feature end-to-end, touching all major components of the app.</p>
 </div>
 <div class="sect3">
-<h4 id="description"><a class="link" href="#description">A.2.1. Description</a></h4>
+<h4 id="description-2"><a class="link" href="#description-2">A.2.1. Description</a></h4>
 <div class="paragraph">
 <p>Edits the remark for a person specified in the <code>INDEX</code>.<br>
 Format: <code>remark INDEX r/[REMARK]</code></p>
@@ -2032,7 +2116,8 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="paragraph">
 <p>(For all use cases below, the <strong>System</strong> is the <code>AddressBook</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
 </div>
-<h3 id="use-case-delete-person" class="discrete">Use case: Delete person</h3>
+<div class="sect2">
+<h3 id="use-case-delete-person"><a class="link" href="#use-case-delete-person">C.1. Use case: Delete person</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2088,8 +2173,9 @@ Use case ends.</p>
 <div class="paragraph">
 <p><strong>Extensions</strong></p>
 </div>
+</div>
 <div class="sect2">
-<h3 id="use-case-undo-command"><a class="link" href="#use-case-undo-command">C.1. Use case: Undo command</a></h3>
+<h3 id="use-case-undo-command"><a class="link" href="#use-case-undo-command">C.2. Use case: Undo command</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2138,7 +2224,9 @@ Use case ends.</p>
 </li>
 </ul>
 </div>
-<h3 id="use-case-swap-persons" class="discrete">Use case: Swap Persons</h3>
+</div>
+<div class="sect2">
+<h3 id="use-case-swap-persons"><a class="link" href="#use-case-swap-persons">C.3. Use case: Swap Persons</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2187,7 +2275,9 @@ Use case ends.</p>
 </li>
 </ul>
 </div>
-<h3 id="use-case-sort-command" class="discrete">Use case: Sort command</h3>
+</div>
+<div class="sect2">
+<h3 id="use-case-sort-command"><a class="link" href="#use-case-sort-command">C.4. Use case: Sort command</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2224,7 +2314,9 @@ Use case ends.</p>
 </li>
 </ol>
 </div>
-<h3 id="use-case-delete-multiple-persons" class="discrete">Use case: Delete multiple persons</h3>
+</div>
+<div class="sect2">
+<h3 id="use-case-delete-multiple-persons"><a class="link" href="#use-case-delete-multiple-persons">C.5. Use case: Delete multiple persons</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2273,7 +2365,9 @@ Use case ends.</p>
 </li>
 </ul>
 </div>
-<h3 id="use-case-import-existing-contacts-from-google" class="discrete">Use case: Import existing contacts from google</h3>
+</div>
+<div class="sect2">
+<h3 id="use-case-import-existing-contacts-from-google"><a class="link" href="#use-case-import-existing-contacts-from-google">C.6. Use case: Import existing contacts from google</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2321,7 +2415,9 @@ Use case ends.</p>
 </li>
 </ul>
 </div>
-<h3 id="use-case-add-person" class="discrete">Use case: Add person</h3>
+</div>
+<div class="sect2">
+<h3 id="use-case-add-person"><a class="link" href="#use-case-add-person">C.7. Use case: Add person</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2358,7 +2454,9 @@ Use case ends.</p>
 </li>
 </ul>
 </div>
-<h3 id="use-case-favourite-person" class="discrete">Use case: Favourite person</h3>
+</div>
+<div class="sect2">
+<h3 id="use-case-favourite-person"><a class="link" href="#use-case-favourite-person">C.8. Use case: Favourite person</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -2516,7 +2614,7 @@ Use case ends.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-18 17:34:49 +00:00
+Last updated 2017-10-18 17:58:09 +00:00
 </div>
 </div>
 </body>
