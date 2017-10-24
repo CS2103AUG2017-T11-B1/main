@@ -42,13 +42,13 @@ Adapted from AddressBook-Level4, by: <code>Team SE-EDU</code>      Since: <code>
 <li><a href="#finding-persons-by-name-and-tags-code-find-code">2.12. Finding persons by name and tags: <code>find</code></a></li>
 <li><a href="#help-code-help-code">2.13. Help : <code>help</code></a></li>
 <li><a href="#history-code-history-code">2.14. History : <code>history</code></a></li>
-<li><a href="#importing-persons-code-import-code">2.15. Importing persons: <code>import</code></a></li>
+<li><a href="#importing-contacts-code-import-code">2.15. Importing contacts: <code>import</code></a></li>
 <li><a href="#listing-all-persons-code-list-code">2.16. Listing all persons : <code>list</code></a></li>
-<li><a href="#location-of-a-person-code-location-code">2.17. Location of a person : <code>location</code></a></li>
+<li><a href="#location-of-a-contact-code-location-code">2.17. Location of a contact : <code>location</code></a></li>
 <li><a href="#redoing-the-previously-undone-command-code-redo-code">2.18. Redoing the previously undone command : <code>redo</code></a></li>
 <li><a href="#removing-tags-code-removetag-code">2.19. Removing tags: <code>removeTag</code></a></li>
 <li><a href="#saving-the-data">2.20. Saving the data</a></li>
-<li><a href="#selecting-a-person-code-select-code">2.21. Selecting a person : <code>select</code></a></li>
+<li><a href="#selecting-a-contact-code-select-code">2.21. Selecting a contact : <code>select</code></a></li>
 <li><a href="#undoing-previous-command-code-undo-code">2.22. Undoing previous command : <code>undo</code></a></li>
 <li><a href="#updating-a-person-s-profile-picture-code-updateprofilepic-code">2.23. Updating a person&#8217;s profile picture: <code>updateProfilePic</code></a></li>
 </ul>
@@ -521,67 +521,8 @@ red boxes in the picture above.</p>
 <div class="sect2">
 <h3 id="finding-persons-by-name-and-tags-code-find-code"><a class="link" href="#finding-persons-by-name-and-tags-code-find-code">2.12. Finding persons by name and tags: <code>find</code></a></h3>
 <div class="paragraph">
-<p>Finds persons whose names or tags contain any of the given keywords.<br>
-Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>The search is case insensitive. e.g <code>hans</code> will match <code>Hans</code></p>
-</li>
-<li>
-<p>The order of the keywords does not matter. e.g. <code>Hans Bo</code> will match <code>Bo Hans</code></p>
-</li>
-<li>
-<p>Only the name and tag is searched.</p>
-</li>
-<li>
-<p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
-</li>
-<li>
-<p>Persons matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Hans Bo</code> will return <code>Hans Gruber</code>, <code>Bo Yang</code></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>find John</code><br>
-Returns <code>john</code> and <code>John Doe</code></p>
-</li>
-<li>
-<p><code>find Betsy Tim John</code><br>
-Returns any person having names <code>Betsy</code>, <code>Tim</code>, or <code>John</code></p>
-</li>
-<li>
-<p><code>find Family</code><br>
-Returns any person having tag <code>Family</code></p>
-</li>
-<li>
-<p><code>find Family Friend Brother</code><br>
-Returns any person having tags <code>Family</code>, <code>Friend</code>, or <code>Brother</code></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="help-code-help-code"><a class="link" href="#help-code-help-code">2.13. Help : <code>help</code></a></h3>
-<div class="paragraph">
-<p>Format: <code>help</code></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="history-code-history-code"><a class="link" href="#history-code-history-code">2.14. History : <code>history</code></a></h3>
-<div class="paragraph">
-<p>Lists all the commands that you have entered in reverse chronological order.<br>
-Format: <code>history</code></p>
+<p>Lists all contacts whose name or tags matches any of the given search terms.<br>
+Format: <code>find TERM1 [MORE_TERMS]</code></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -590,18 +531,54 @@ Format: <code>history</code></p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<div class="paragraph">
-<p>Pressing the <kbd>&uarr;</kbd> and <kbd>&darr;</kbd> arrows will display the previous and next input respectively in the command box.</p>
-</div>
+* The search is case insensitive; e.g a search term of <code>hans</code> will match any contact name containing <code>Hans</code><br>
+ * Only full words will be matched; e.g a search term of <code>Han</code> will not match a contact name containing <code>Hans</code><br>
+ * Name of contacts can be matched partially; e.g a search term of <code>Han</code> will match the contact name <code>Han Solo</code>
 </td>
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p><strong>Picture Guide</strong></p>
+</div>
+<div class="paragraph">
+<p>&lt;PICTURE PENDING UI UPDATE&gt;</p>
+</div>
+<div class="paragraph">
+<p>As demonstrated by the picture guide above, entering the command <code>find Family han</code> displays all contacts with a tag or
+part of name, matching any search term.</p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="importing-persons-code-import-code"><a class="link" href="#importing-persons-code-import-code">2.15. Importing persons: <code>import</code></a></h3>
+<h3 id="help-code-help-code"><a class="link" href="#help-code-help-code">2.13. Help : <code>help</code></a></h3>
 <div class="paragraph">
-<p>Imports persons to DoC from Google Contacts<br>
+<p>Displays this document.<br>
+Format: <code>help</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="history-code-history-code"><a class="link" href="#history-code-history-code">2.14. History : <code>history</code></a></h3>
+<div class="paragraph">
+<p>Displays the history of commands you have entered, starting from the most recent one. <br>
+This feature can be accessed in two different ways:<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Display the history of commands on the status bar<br>
+Format: <code>history</code><br></p>
+</li>
+<li>
+<p>Paste previous commands directly to the command box<br>
+Format: the <kbd>&uarr;</kbd> and <kbd>&darr;</kbd> arrows will paste the previous and next input respectively into the command box</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="importing-contacts-code-import-code"><a class="link" href="#importing-contacts-code-import-code">2.15. Importing contacts: <code>import</code></a></h3>
+<div class="paragraph">
+<p>Imports contacts to DoC from Google Contacts.<br>
 Format: <code>import</code></p>
 </div>
 <div class="admonitionblock warning">
@@ -611,7 +588,7 @@ Format: <code>import</code></p>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Number of persons imported is limited to 1000<br>
+Number of contacts imported is limited to 1000<br>
 </td>
 </tr>
 </table>
@@ -632,20 +609,29 @@ Number of persons imported is limited to 1000<br>
 </div>
 <div class="paragraph">
 <p>You can enter your credentials and grant permission to DoC to access your Google contacts, as highlighted by the
-red boxes in the picture above</p>
+red boxes in the picture above.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="listing-all-persons-code-list-code"><a class="link" href="#listing-all-persons-code-list-code">2.16. Listing all persons : <code>list</code></a></h3>
 <div class="paragraph">
-<p>Shows a list of all persons in the address book.<br>
+<p>Display a list of all contacts currently stored in DoC.<br>
 Format: <code>list</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Picture guide</strong><br></p>
+</div>
+<div class="paragraph">
+<p>&lt;PENDING UI UPDATE&gt;<br></p>
+</div>
+<div class="paragraph">
+<p>As demonstrated in the picture guide, DoC will display a list of all contacts currently stored in DoC upon receiving the command <code>list</code>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="location-of-a-person-code-location-code"><a class="link" href="#location-of-a-person-code-location-code">2.17. Location of a person : <code>location</code></a></h3>
+<h3 id="location-of-a-contact-code-location-code"><a class="link" href="#location-of-a-contact-code-location-code">2.17. Location of a contact : <code>location</code></a></h3>
 <div class="paragraph">
-<p>Shows the address of the person in Google Maps.<br>
+<p>Shows the address of the contact in Google Maps.<br>
 Format: <code>location INDEX</code></p>
 </div>
 <div class="sidebarblock">
@@ -684,39 +670,25 @@ Format: <code>location INDEX</code></p>
 <div class="sect2">
 <h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">2.18. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
-<p>Reverses the most recent <code>undo</code> command.<br>
+<p>Reverses the most recent <code>undo</code> command, if any.<br>
 Format: <code>redo</code></p>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Picture guide</strong><br></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>delete 1</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>delete 1</code> command)<br></p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>redo</code><br>
-The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously.</p>
-</li>
-<li>
-<p><code>deleteE 1</code><br>
-<code>clear</code><br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>deleteE 1</code> command)<br>
-<code>redo</code> (reapplies the <code>deleteE 1</code> command)<br>
-<code>redo</code> (reapplies the <code>clear</code> command)<br></p>
-</li>
-</ul>
+<div class="paragraph">
+<p>&lt;PENDING UI UPDATE&gt;</p>
+</div>
+<div class="paragraph">
+<p>As demonstrated by the picture guide, a command of 'delete 1' is first entered, deleting the contact listed with an index of 1.
+An <code>undo</code> command is then entered, adding the deleted contact back to the list of contacts. Now, the <code>redo</code> command entered
+simply deletes the contact with an index of 1 again.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="removing-tags-code-removetag-code"><a class="link" href="#removing-tags-code-removetag-code">2.19. Removing tags: <code>removeTag</code></a></h3>
 <div class="paragraph">
-<p>Finds persons whose names or tags contain any of the given tag and removes that tag.<br>
+<p>Finds contacts whose names or tags contain any of the given tag and removes that tag.<br>
 Format: <code>removeTag KEYWORD</code></p>
 </div>
 <div class="sidebarblock">
@@ -754,55 +726,31 @@ Returns <code>john</code> and <code>John Doe</code> with Friend tag removed</p>
 <div class="sect2">
 <h3 id="saving-the-data"><a class="link" href="#saving-the-data">2.20. Saving the data</a></h3>
 <div class="paragraph">
-<p>Address book data are saved in the hard disk automatically after any command that changes the data.<br>
-There is no need to save manually.</p>
+<p>All additions, deletions, and changes performed on the contacts stored in DoC are saved automatically.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="selecting-a-person-code-select-code"><a class="link" href="#selecting-a-person-code-select-code">2.21. Selecting a person : <code>select</code></a></h3>
+<h3 id="selecting-a-contact-code-select-code"><a class="link" href="#selecting-a-contact-code-select-code">2.21. Selecting a contact : <code>select</code></a></h3>
 <div class="paragraph">
-<p>Selects the person identified by the index number used in the last person listing.<br>
-Format: <code>select INDEX</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Selects the person and loads the Google search page the person at the specified <code>INDEX</code>.</p>
-</li>
-<li>
-<p>The index refers to the index number shown in the most recent listing.</p>
-</li>
-<li>
-<p>The index <strong>must be a positive integer</strong> <code>1, 2, 3, &#8230;&#8203;</code></p>
-</li>
-</ul>
-</div>
-</div>
+<p>Selects the contact identified by the index number used in the last contact listing, and loads the Google search result of the contact.<br>
+Format: <code>select INDEX</code><br>
+Refer to the following picture guide on how you can retrieve the INDEX of a contact:<br></p>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Picture guide</strong></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>list</code><br>
-<code>select 2</code><br>
-Selects the 2nd person in the address book.</p>
-</li>
-<li>
-<p><code>find Betsy</code><br>
-<code>select 1</code><br>
-Selects the 1st person in the results of the <code>find</code> command.</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>&lt;PENDING UI UPDATE&gt;</p>
+</div>
+<div class="paragraph">
+<p>As demonstrated by the picture guide, you can first enter the command <code>list</code> to display a list of all contacts currently stored in DoC.
+The numbers highlighted in red in the picture are the indexes of each contact.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">2.22. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
-<p>Restores the address book to the state before the previous <em>undoable</em> command was executed.<br>
+<p>Reverses the changes made by the previous command entered.<br>
 Format: <code>undo</code></p>
 </div>
 <div class="admonitionblock note">
@@ -813,35 +761,21 @@ Format: <code>undo</code></p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Undoable commands: those commands that modify the address book&#8217;s content (<code>add</code>, <code>addE</code>, <code>delete</code>, <code>deleteE</code>, <code>edit</code>, <code>editE</code> and <code>clear</code>).</p>
+<p>Only these commmands are currently undoable: <code>add</code>, <code>addE</code>, <code>delete</code>, <code>deleteE</code>, <code>edit</code>, <code>editE</code> and <code>clear</code>.</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p><strong>Picture guide</strong></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>delete 1</code><br>
-<code>list</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
-</li>
-<li>
-<p><code>select 1</code><br>
-<code>list</code><br>
-<code>undo</code><br>
-The <code>undo</code> command fails as there are no undoable commands executed previously.</p>
-</li>
-<li>
-<p><code>deleteE 1</code><br>
-<code>clear</code><br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>deleteE 1</code> command)<br></p>
-</li>
-</ul>
+<div class="paragraph">
+<p>&lt;PENDING UI UPDATE&gt;<br></p>
+</div>
+<div class="paragraph">
+<p>As demonstrated by the picture guide, a command of <code>delete 1</code>, deletes the contact listed with an index of 1. A subsequent <code>undo</code> command,
+reverses the <code>delete 1</code> command by adding back the deleted contact.</p>
 </div>
 </div>
 <div class="sect2">
@@ -891,9 +825,13 @@ Updates the profile picture of the 2nd person to be the image at <code><a href="
 <div class="sect1">
 <h2 id="faq"><a class="link" href="#faq">3. FAQ</a></h2>
 <div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
 <div class="paragraph">
-<p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
-<strong>A</strong>: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.</p>
+<p><strong>How do I transfer my data to another Computer?</strong><br>
+Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.</p>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -979,7 +917,7 @@ e.g. <code>updateProfilePic 2 u/http://www.google.com/images/image.png</code><br
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-24 00:34:16 +00:00
+Last updated 2017-10-24 00:50:57 +00:00
 </div>
 </div>
 </body>
