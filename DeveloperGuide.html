@@ -47,7 +47,7 @@ Adapted from AddressBook-Level4, by: <code>Team SE-EDU</code>      Since: <code>
 <ul class="sectlevel2">
 <li><a href="#undo-redo-mechanism">3.1. Undo/Redo mechanism</a></li>
 <li><a href="#event-feature">3.2. Event(feature)</a></li>
-<li><a href="#import-authentication-mechanism">3.3. Import &amp; authentication mechanism</a></li>
+<li><a href="#oauth2-fulfilment-mechanism">3.3. OAuth2 fulfilment mechanism</a></li>
 <li><a href="#location">3.4. Location</a></li>
 <li><a href="#updateprofilepic-deleteprofilepic-mechanism">3.5. UpdateProfilePic/DeleteProfilePic mechanism</a></li>
 <li><a href="#logging">3.6. Logging</a></li>
@@ -812,62 +812,128 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="import-authentication-mechanism"><a class="link" href="#import-authentication-mechanism">3.3. Import &amp; authentication mechanism</a></h3>
+<h3 id="oauth2-fulfilment-mechanism"><a class="link" href="#oauth2-fulfilment-mechanism">3.3. OAuth2 fulfilment mechanism</a></h3>
 <div class="sect3">
-<h4 id="description"><a class="link" href="#description">3.3.1. Description</a></h4>
+<h4 id="summary"><a class="link" href="#summary">3.3.1. Summary</a></h4>
 <div class="paragraph">
-<p>The import command uses <code>Google Contacts</code> as a source and performs the OAuth2 authentication protocol to retrieve
-and import a user&#8217;s contacts. This is done with the help of the inbuilt <code>BrowserPanel</code>,
-an instance of the <code>GoogleApiAuth</code> service, and the <code>GooglePersonConverterUtil</code> utility class.<br></p>
+<p>A command structure has been set-up to fulfil all commands requiring an authentication process against the OAuth2 protocol.
+DoC currently has two such commands, namely, <code>import</code> and <code>export</code>, which requires this mechanism. This command structure has also been set-up to support possible future
+extensions.<br></p>
 </div>
 <div class="paragraph">
-<p>This mechanism requires cross-component interaction with the <code>BrowserPanel</code> of the <code>UI</code> component. This is handled in an event driven manner, as shown in the extensive sequence diagram below:<br></p>
+<p>The OAuth2 authentication process is fulfilled with the help of the inbuilt <code>BrowserPanel</code>. This requires cross-component communication,
+which is implemented in an event-driven manner.</p>
+</div>
+<div class="paragraph">
+<p>The following class diagram illustrates the structure of this mechanism, and its' current applications:<br></p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/import_devguide.jpg" alt="import devguide" width="100%">
+<img src="images/Oauth2ClassDiagram.png" alt="Oauth2ClassDiagram" width="100%">
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="roles-of-objects-introduced"><a class="link" href="#roles-of-objects-introduced">3.3.2. Roles of objects introduced</a></h4>
-<div class="paragraph">
-<p>Three main objects were introduced to fulfil the import and authentication functionality, their roles are described as such:</p>
-</div>
+<h4 id="current-usages"><a class="link" href="#current-usages">3.3.2. Current usages</a></h4>
 <div class="sect4">
-<h5 id="importcommand"><a class="link" href="#importcommand">ImportCommand</a></h5>
+<h5 id="import-contacts-to-doc-from-google-contacts"><a class="link" href="#import-contacts-to-doc-from-google-contacts">Import contacts to DoC from Google Contacts</a></h5>
 <div class="paragraph">
-<p>The <code>ImportCommand</code> is the main driver of this functionality. It maintains control over the flow of authentication and and conversion of Person objects.</p>
-</div>
-</div>
-<div class="sect4">
-<h5 id="googleapiauth"><a class="link" href="#googleapiauth">GoogleApiAuth</a></h5>
-<div class="paragraph">
-<p>The <code>GoogleApiAuth</code> is a service used to facilitate the start to end of an OAuth 2 procedure with Google&#8217;s APIs. It maintains key client
-information, and provides on demand, authentication URLs, and also a GoogleCredential object. Each command intending to go through the OAuth2 procedure with Google&#8217;s APIs, is expected to maintain
-its' own instance of this service. This service is provided to the <code>ImportCommand</code>.</p>
+<p>The <code>import</code> command uses <code>Google Contacts</code> as a source, and retrieves all of the authenticated users' Google Contacts.
+A conversion process is then executed with the help of the <code>GooglePersonConverterUtil</code>. The newly converted contacts are then stored
+to the <code>Model</code> component of DoC.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="googlepersonconverterutil"><a class="link" href="#googlepersonconverterutil">GooglePersonConverterUtil</a></h5>
+<h5 id="export-contacts-in-doc-to-google-contacts"><a class="link" href="#export-contacts-in-doc-to-google-contacts">Export contacts in DoC to Google Contacts</a></h5>
 <div class="paragraph">
-<p>The <code>GooglePersonConverterUtil</code> is a utility object, providing the functionality of conversion between a Google <code>Person</code> and a DoC <code>Person</code>.</p>
+<p>The <code>export</code> command converts all contacts currently stored in DoC, with the help of the <code>GooglePersonConverterUtil</code>,
+to instances of Googles' <code>Person</code> class. The newly converted contacts are then exported to the authenticated users' Google Contacts.</p>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="execution-flow"><a class="link" href="#execution-flow">3.3.3. Execution flow</a></h4>
+<h4 id="implementation-2"><a class="link" href="#implementation-2">3.3.3. Implementation</a></h4>
+<div class="paragraph">
+<p>The implementation of <code>import</code> and <code>export</code> are very similar. There are 3 sequential steps in the flow of execution, for both commands:<br>
+<strong>1.</strong> The user input of <code>import</code> or <code>export</code> is parsed by the <code>AddressBookParser</code>, and a new instance of an <code>ImportCommand</code> or <code>ExportCommand</code> is returned to the <code>LogicManager</code>,
+ which then calls the instances' <code>execute()</code> method<br>
+<strong>2.</strong> The execute() method of <code>import</code> and <code>export</code> then triggers the <strong>authentication process</strong> with the <code>BrowserPanel</code><br>
+<strong>3.</strong> Upon successful authentication on an <code>import</code> command, the <strong>HTTP request process</strong> is executed, followed by the  <strong>conversion process</strong>.
+The list of converted DoC <code>Person</code> objects are then added to the <code>Model</code> component.
+The order is exactly reversed for an <code>export</code> command</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Only the 3 bolded processes will be discussed in further detail as the process for step 1 is the same as all other commands in DoC.</pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="authentication-process"><a class="link" href="#authentication-process">Authentication process</a></h5>
+<div class="paragraph">
+<p>The authentication process is the more involved process of the 3. We can understand it better with the help of the following sequence diagram:<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AuthenticationSequenceDiagram.png" alt="AuthenticationSequenceDiagram" width="100%">
+</div>
+</div>
 <div class="paragraph">
 <p>This is a summary of the steps in the execution flow:<br>
-<strong>1.</strong> An <code>ImportCommand</code> is triggered from the users' UI input, firing an event to the <code>BrowserPanel</code><br>
-<strong>2.</strong> The <code>BrowserPanel</code> detects the event and navigates to the authentication url provided by the <code>GoogleApiAuth</code> service<br>
-<strong>3.</strong> The user successfully authenticates and grants Google Contacts access permission to DoC, automatically redirecting the <code>BrowserPanel</code> to the success landing page(<a href="https://cs2103tdummyendpoint.herokuapp.com" class="bare">https://cs2103tdummyendpoint.herokuapp.com</a>)<br>
-<strong>4.</strong> The <code>BrowserPanel</code> detects the URL change to the success landing page, extracts the authentication code appended to the URL, and passes the authentication code to its' <code>GoogleApiAuth</code> service,
- which then builds a <code>GoogleCredential</code> object from the it<br>
-<strong>5.</strong> Once completed, the <code>BrowserPanel</code> fires an event to the <code>ImportCommand</code><br>
-<strong>6.</strong> The <code>ImportCommand</code> detects the event and proceeds to build a <code>PeopleService</code> object using the <code>GoogleCredential</code> within its' <code>GoogleApiAuth</code> service<br>
-<strong>7.</strong> Finally, the <code>PeopleService</code> object fetches the list of Google <code>Person</code> from the users' Google Contacts, which are then converted to DoC <code>Person</code> objects<br>
-<strong>8.</strong> This converted list of DoC <code>Person</code> objects are then added to the <code>Model</code> component</p>
+<strong>1.</strong> The <code>execute()</code> method of the <code>ImportCommand</code> is called from the <code>LogicManager</code>, firing an <code>Oauth2BrowserRequestEvent</code> to the <code>BrowserPanel</code><br>
+<strong>2.</strong> The <code>BrowserPanel</code> handles this event and navigates to the <strong>authentication URL</strong>* provided by the event<br>
+<strong>3.</strong> The user successfully authenticates and grants DoC read permission of the users' Google Contacts<br>
+<strong>4.</strong> The <code>BrowserPanel</code> is redirected to the <strong>success URL</strong>*<br>
+<strong>4.</strong> The <code>BrowserPanel</code> detects the URL change to the <strong>success URL</strong>* and extracts the authentication code appended to the URL,
+this code is then attached to a <code>GoogleAuthenticationSuccessEvent</code> fired to the instance of <code>ImportCommand</code><br>
+<strong>5.</strong> The <code>ImportCommand</code> instance handles the <code>GoogleAuthenticationSuccessEvent</code> and creates the <code>GoogleCredential</code> object<br>
+<strong>6.</strong> The HTTP request process ensues:</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="http-request-process"><a class="link" href="#http-request-process">HTTP request process</a></h5>
+<div class="paragraph">
+<p>With the <code>GoogleCredential</code> object, we can now send HTTP requests quite easily using Google&#8217;s Java API client, specifically
+its <code>PeopleService</code> class. Its documentation can be found in the following url:<br>
+<a href="https://developers.google.com/resources/api-libraries/documentation/people/v1/java/latest/com/google/api/services/people/v1/PeopleService.html" class="bare">https://developers.google.com/resources/api-libraries/documentation/people/v1/java/latest/com/google/api/services/people/v1/PeopleService.html</a></p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="conversion-process"><a class="link" href="#conversion-process">Conversion process</a></h5>
+<div class="paragraph">
+<p>The conversion process is handled entirely by the <code>GooglePersonConverterUtil</code>. Note-worthy design decisions are listed as follows:<br>
+<strong>Google Person &#8594; DoC Person</strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Only Google <code>Person</code> objects with a non-null name, and a non-null phone number are accepted</p>
+</li>
+<li>
+<p>Google <code>Person</code> objects without an email or an address are given the constants <code>INVALID_EMAIL@INVALID.COM</code>, and
+<code>INVALID_ADDRESS PLEASE UPDATE THIS</code> respectively, in the resulting DoC <code>Person</code></p>
+</li>
+<li>
+<p>All DoC <code>Person</code> objects produced are given the tag <code>ImportedFromGoogle</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>DoC Person &#8594; Google Person</strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>DoC&#8217;s <code>Name</code>, <code>Phone</code>, <code>Email</code> and <code>Address</code> are added as native Google <code>Person</code> properties, with similar names. <code>Tag</code>
+objects are added under the Google <code>Person</code> object&#8217;s <code>UserDefined</code> property</p>
+</li>
+<li>
+<p><code>ProfilePic</code> cannot be exported due to Google Contact&#8217;s restrictions</p>
+</li>
+<li>
+<p>The produced Google <code>Person</code> objects are added to a contact group titled <code>Imported from DoC</code></p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -876,13 +942,13 @@ its' own instance of this service. This service is provided to the <code>ImportC
 <p><strong>Aspect:</strong> How a successful authentication is detected<br></p>
 </div>
 <div class="paragraph">
-<p><strong>Alternative 1 (Chosen for security):</strong> Redirect to a hosted domain<br>
+<p><strong>Alternative 1 (Chosen for security):</strong> Redirect to a hosted domain first, then redirect to a Google Contacts page<br>
 <strong>Pros:</strong> The underlying <code>HTTP GET</code> is sent to a domain under DoC&#8217;s control &#8594; risk of authentication code leak is controlled<br>
-<strong>Cons:</strong> The BrowserPanel will display an error page if the hosted domain is down. However, the successful authentication will still be detected correctly</p>
+<strong>Cons:</strong> The BrowserPanel may display an error page temporarily if the hosted domain is down, however this will not be noticeable if redirection occurs fast</p>
 </div>
 <div class="paragraph">
-<p><strong>Alternative 2:</strong> Redirect to an external domain, like <code><a href="https://contacts.google.com" class="bare">https://contacts.google.com</a></code><br>
-<strong>Pros:</strong> We are able to display the users' incoming <code>Google Contacts</code><br>
+<p><strong>Alternative 2:</strong> Redirect to a Google Contacts page immediately<br>
+<strong>Pros:</strong> No risk of an error page being display<br>
 <strong>Cons:</strong> The underlying <code>HTTP GET</code> containing the users' authentication code is sent to an external domain</p>
 </div>
 </div>
@@ -1610,7 +1676,7 @@ Do take a look at the <a href="#storage-component">Design: Storage Component</a>
 <p>By creating this command, you will get a chance to learn how to implement a feature end-to-end, touching all major components of the app.</p>
 </div>
 <div class="sect3">
-<h4 id="description-2"><a class="link" href="#description-2">A.2.1. Description</a></h4>
+<h4 id="description"><a class="link" href="#description">A.2.1. Description</a></h4>
 <div class="paragraph">
 <p>Edits the remark for a person specified in the <code>INDEX</code>.<br>
 Format: <code>remark INDEX r/[REMARK]</code></p>
@@ -2665,7 +2731,7 @@ Use case ends.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-24 00:31:02 +00:00
+Last updated 2017-10-24 00:34:16 +00:00
 </div>
 </div>
 </body>
