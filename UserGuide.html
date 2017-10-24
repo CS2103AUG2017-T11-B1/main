@@ -34,7 +34,7 @@ Adapted from AddressBook-Level4, by: <code>Team SE-EDU</code>      Since: <code>
 <li><a href="#deleting-a-contact-code-delete-code">2.4. Deleting a contact : <code>delete</code></a></li>
 <li><a href="#deleting-an-event-code-deletee-code">2.5. Deleting an event : <code>deleteE</code></a></li>
 <li><a href="#deleting-the-profile-picture-of-a-contact-code-deleteprofilepic-code">2.6. Deleting the profile picture of a contact : <code>deleteProfilePic</code></a></li>
-<li><a href="#editing-a-contact-code-edit-code">2.7. Editing a contact : <code>edit</code></a></li>
+<li><a href="#editing-a-person-code-edit-code">2.7. Editing a person : <code>edit</code></a></li>
 <li><a href="#editing-an-event-code-edite-code">2.8. Editing an event : <code>editE</code></a></li>
 <li><a href="#emailing-a-person-code-email-code">2.9. Emailing a person : <code>email</code></a></li>
 <li><a href="#exiting-the-program-code-exit-code">2.10. Exiting the program : <code>exit</code></a></li>
@@ -370,14 +370,25 @@ Deletes the profile picture of the 2nd contact in the address book.</p>
 </li>
 <li>
 <p><code>find Bobby</code><br>
-<code>delete 1</code><br>
-Deletes the profile picture of the 1st contact in the results of the <code>find</code> command.</p>
+<code>deleteProfilePic 1</code><br>
+Deletes the profile picture of the 1st person in the results of the <code>find</code> command.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>Picture Guide:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deleteProfilePicImageExample.jpg" alt="deleteProfilePicImageExample" width="1000">
+</div>
+</div>
+<div class="paragraph">
+<p>As shown in the picture above, after entering the <code>deleteProfilePic</code> command, the profile picture of the person at the specified index is reverted back to the default.</p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="editing-a-contact-code-edit-code"><a class="link" href="#editing-a-contact-code-edit-code">2.7. Editing a contact : <code>edit</code></a></h3>
+<h3 id="editing-a-person-code-edit-code"><a class="link" href="#editing-a-person-code-edit-code">2.7. Editing a person : <code>edit</code></a></h3>
 <div class="paragraph">
 <p>Edits an existing contact in the address book.<br>
 Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code></p>
@@ -870,6 +881,17 @@ Updates the profile picture of the 2nd person to be the image at <code><a href="
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>Picture Guide:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/updateProfilePicImageExample.jpg" alt="updateProfilePicImageExample" width="1000">
+</div>
+</div>
+<div class="paragraph">
+<p>As shown in the picture above, after entering the <code>updateProfilePic</code> command, the profile picture of the person at the specified index is updated to the image stored at the url specified.</p>
+</div>
 </div>
 </div>
 </div>
@@ -968,7 +990,7 @@ e.g. <code>updateProfilePic 2 u/http://www.google.com/images/image.png</code><br
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-24 01:21:18 +00:00
+Last updated 2017-10-24 01:23:39 +00:00
 </div>
 </div>
 </body>
