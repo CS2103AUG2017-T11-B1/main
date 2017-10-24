@@ -49,9 +49,10 @@ Adapted from AddressBook-Level4, by: <code>Team SE-EDU</code>      Since: <code>
 <li><a href="#event-feature">3.2. Event(feature)</a></li>
 <li><a href="#oauth2-fulfilment-mechanism">3.3. OAuth2 fulfilment mechanism</a></li>
 <li><a href="#location">3.4. Location</a></li>
-<li><a href="#updateprofilepic-deleteprofilepic-mechanism">3.5. UpdateProfilePic/DeleteProfilePic mechanism</a></li>
-<li><a href="#logging">3.6. Logging</a></li>
-<li><a href="#configuration">3.7. Configuration</a></li>
+<li><a href="#email">3.5. Email</a></li>
+<li><a href="#updateprofilepic-deleteprofilepic-mechanism">3.6. UpdateProfilePic/DeleteProfilePic mechanism</a></li>
+<li><a href="#logging">3.7. Logging</a></li>
+<li><a href="#configuration">3.8. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -742,10 +743,10 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>UndoableCommand</code><br>
-<strong>Alternative 1 (current choice):</strong> Add a new abstract method <code>executeUndoableCommand()</code><br>
+<strong>Alternative 1 (current choice):</strong> Add a new abstract method <code>executeUndoableCommand().</code><br>
 <strong>Pros:</strong> We will not lose any undone/redone functionality as it is now part of the default behaviour. Classes that deal with <code>Command</code> do not have to know that <code>executeUndoableCommand()</code> exist.<br>
 <strong>Cons:</strong> Hard for new developers to understand the template pattern.<br>
-<strong>Alternative 2:</strong> Just override <code>execute()</code><br>
+<strong>Alternative 2:</strong> Just override <code>execute().</code><br>
 <strong>Pros:</strong> Does not involve the template pattern, easier for new developers to understand.<br>
 <strong>Cons:</strong> Classes that inherit from <code>UndoableCommand</code> must remember to call <code>super.execute()</code>, or lose the ability to undo/redo.</p>
 </div>
@@ -773,10 +774,10 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <hr>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Data structure to support the undo/redo commands<br>
-<strong>Alternative 1 (current choice):</strong> Use separate stack for undo and redo<br>
+<strong>Alternative 1 (current choice):</strong> Use separate stack for undo and redo.<br>
 <strong>Pros:</strong> Easy to understand for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.<br>
 <strong>Cons:</strong> Logic is duplicated twice. For example, when a new command is executed, we must remember to update both <code>HistoryManager</code> and <code>UndoRedoStack</code>.<br>
-<strong>Alternative 2:</strong> Use <code>HistoryManager</code> for undo/redo<br>
+<strong>Alternative 2:</strong> Use <code>HistoryManager</code> for undo/redo.<br>
 <strong>Pros:</strong> We do not need to maintain a separate stack, and just reuse what is already in the codebase.<br>
 <strong>Cons:</strong> Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as <code>HistoryManager</code> now needs to do two different things.<br></p>
 </div>
@@ -802,12 +803,12 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <h4 id="design-consideration"><a class="link" href="#design-consideration">3.2.1. Design Consideration</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> How to implement adding of persons into the event&#8217;s person list<br>
-<strong>Alternative 1:</strong> Add by the name of person in the person list<br>
+<strong>Alternative 1 (current choice):</strong> Add by the index of person shown in the person list panel.<br>
+<strong>Pros:</strong> System only have to check for validity of index. Better performance compared to Alternative 2.<br>
+<strong>Cons:</strong> Requires user to refer to the person list panel before executing command to add person into event&#8217;s person list.<br>
+<strong>Alternative 2:</strong> Add by the name of person in the person list.<br>
 <strong>Pros:</strong> Easier for users to add using names, do not need to refer to the person list.<br>
-<strong>Cons:</strong> System have to check through the list to check if the person name exist in the current address book.<br>
-<strong>Alternative 2 (current choice):</strong> Add by the index of person shown in the person list panel<br>
-<strong>Pros:</strong> System only have to check for validity of index. Better performance compared to Alternative 1.<br>
-<strong>Cons:</strong> Requires user to refer to the person list panel before executing command to add person into event&#8217;s person list.<br></p>
+<strong>Cons:</strong> System have to check through the list to check if the person name exist in the current address book.</p>
 </div>
 </div>
 </div>
@@ -939,17 +940,13 @@ objects are added under the Google <code>Person</code> object&#8217;s <code>User
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.3.4. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> How a successful authentication is detected<br></p>
-</div>
-<div class="paragraph">
-<p><strong>Alternative 1 (Chosen for security):</strong> Redirect to a hosted domain first, then redirect to a Google Contacts page<br>
-<strong>Pros:</strong> The underlying <code>HTTP GET</code> is sent to a domain under DoC&#8217;s control &#8594; risk of authentication code leak is controlled<br>
-<strong>Cons:</strong> The BrowserPanel may display an error page temporarily if the hosted domain is down, however this will not be noticeable if redirection occurs fast</p>
-</div>
-<div class="paragraph">
-<p><strong>Alternative 2:</strong> Redirect to a Google Contacts page immediately<br>
-<strong>Pros:</strong> No risk of an error page being display<br>
-<strong>Cons:</strong> The underlying <code>HTTP GET</code> containing the users' authentication code is sent to an external domain</p>
+<p><strong>Aspect:</strong> How a successful authentication is detected<br>
+<strong>Alternative 1 (Chosen for security):</strong> Redirect to a hosted domain first, then redirect to a Google Contacts page.<br>
+<strong>Pros:</strong> The underlying <code>HTTP GET</code> is sent to a domain under DoC&#8217;s control &#8594; risk of authentication code leak is controlled.<br>
+<strong>Cons:</strong> The BrowserPanel may display an error page temporarily if the hosted domain is down, however this will not be noticeable if redirection occurs fast.
+<strong>Alternative 2:</strong> Redirect to a Google Contacts page immediately.<br>
+<strong>Pros:</strong> No risk of an error page being display.<br>
+<strong>Cons:</strong> The underlying <code>HTTP GET</code> containing the users' authentication code is sent to an external domain.</p>
 </div>
 </div>
 </div>
@@ -961,23 +958,53 @@ objects are added under the Google <code>Person</code> object&#8217;s <code>User
 </div>
 </div>
 <div class="paragraph">
-<p>As seen above, an event based approach is used to display the location of the person.</p>
+<p>As seen above, an event based approach is used to display the location of the person.
+Once the Address book parser identifies the user command as a valid location command, it will make use of the Google Event bus to transmit the event.
+The browser panel has subscribed for that particular event and therefore when the event is passed, the browser panel will pick it up and execute the function.
+This will eventually render the browser panel with Google Maps and a marker pointing at the address of the requested person.
+This rendering of Google Maps is done via calling the URL.</p>
 </div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.4.1. Design Considerations</a></h4>
 <div class="paragraph">
-<p>Once the Address book parser identifies the user command as a valid location command, it will make use of the Google Event bus to transmit the event.</p>
+<p><strong>Aspect:</strong> Implementation of <code>location</code><br>
+<strong>Alternative 1 (current choice):</strong> Add a new class that extends <code>Command</code> that uses the Google Maps URL<br>
+<strong>Pros:</strong> The map can be easily loaded without needing to call the GoogleMaps API <br>
+<strong>Cons:</strong> Only functions that can be sent via URL can be used.<br>
+<strong>Alternative 2:</strong> Make use of Google Maps API<br>
+<strong>Pros:</strong> More functions such as radius and many more could have been added<br>
+<strong>Cons:</strong> Take a longer time to load the map.</p>
 </div>
-<div class="paragraph">
-<p>The browser panel has subscribed for that particular event and therefore when the event is passed, the browser panel will pick it up and execute the function.</p>
-</div>
-<div class="paragraph">
-<p>This will eventually render the browser panel with Google Maps and a marker pointing at the address of the requested person.</p>
-</div>
-<div class="paragraph">
-<p>This rendering of Google Maps is done via calling the URL.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="updateprofilepic-deleteprofilepic-mechanism"><a class="link" href="#updateprofilepic-deleteprofilepic-mechanism">3.5. UpdateProfilePic/DeleteProfilePic mechanism</a></h3>
+<h3 id="email"><a class="link" href="#email">3.5. Email</a></h3>
+<div class="paragraph">
+<p>The <code>EmailCommand</code> is the main driver of this functionality. It links the logic in Addressbook and the content displayed on the Email browser.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/EmailSequenceDiagram.png" alt="EmailSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>As seen from the picture above, the <code>AddressParser</code> will be able to distinguish the email command and direct it to the <code>EmailCommandParser</code>. Over there the recipient, subject and the body from the command line input is identified. Once identified, the <code>execute</code> function is called. This function in the <code>EmailCommand</code> would call the <code>updateEmailRecipient</code> function in the Model. Once the fields are updated properly, the <code>EmailCommand</code> will call the desktop mail app and fill in the necessary details.</p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.5.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>email</code><br>
+<strong>Alternative 1 (current choice):</strong> Uses the inbuilt Email Application.<br>
+<strong>Pros:</strong> The email authentication is done by that Email Application. <br>
+<strong>Cons:</strong> A new application has to be opened.<br>
+<strong>Alternative 2:</strong> Make use of Gmail API.<br>
+<strong>Pros:</strong> Can be emailed from the browser panel itself.<br>
+<strong>Cons:</strong> The UI for Gmail is very poor.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="updateprofilepic-deleteprofilepic-mechanism"><a class="link" href="#updateprofilepic-deleteprofilepic-mechanism">3.6. UpdateProfilePic/DeleteProfilePic mechanism</a></h3>
 <div class="paragraph">
 <p>The UpdateProfilePic/DeleteProfilePic mechanism is facilitated by a <code>ProfilePic</code> class, which is a property class of the <code>Person</code> class. It supports the updating and deleting of profile pictures of each Person. These two commands inherit from <code>UndoableCommand</code>.</p>
 </div>
@@ -1004,30 +1031,30 @@ objects are added under the Google <code>Person</code> object&#8217;s <code>User
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.5.1. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.6.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>updateProfilePic</code><br>
-<strong>Alternative 1 (current choice):</strong> Add a new class that extends <code>UndoableCommand</code><br>
-<strong>Pros:</strong> The other properties of a <code>Person</code> can be quickly updated, using the <code>add</code> or <code>edit</code> commands, without waiting for an image to be loaded <br>
+<strong>Alternative 1 (current choice):</strong> Add a new class that extends <code>UndoableCommand</code>.<br>
+<strong>Pros:</strong> The other properties of a <code>Person</code> can be quickly updated, using the <code>add</code> or <code>edit</code> commands, without waiting for an image to be loaded. <br>
 <strong>Cons:</strong> Users have to remember another command.<br>
-<strong>Alternative 2:</strong> Just add the function to the <code>add</code> and <code>edit</code> commands<br>
-<strong>Pros:</strong> Users do not have to remember a new command<br>
-<strong>Cons:</strong> The image might take a while to load, so all the data takes longer to be updated</p>
+<strong>Alternative 2:</strong> Just add the function to the <code>add</code> and <code>edit</code> commands.<br>
+<strong>Pros:</strong> Users do not have to remember a new command.<br>
+<strong>Cons:</strong> The image might take a while to load, so all the data takes longer to be updated.</p>
 </div>
 <hr>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>deleteProfilePic</code><br>
-<strong>Alternative 1 (current choice):</strong> Add a new class that extends <code>UndoableCommand</code><br>
-<strong>Pros:</strong> A quick way to revert the profile picture back to default <br>
+<strong>Alternative 1 (current choice):</strong> Add a new class that extends <code>UndoableCommand</code>.<br>
+<strong>Pros:</strong> A quick way to revert the profile picture back to default. <br>
 <strong>Cons:</strong> updateProfilePic can technically do the same job, albeit slower.<br>
-<strong>Alternative 2:</strong> Not have this command at all<br>
-<strong>Pros:</strong> Lesser commands for the user to remember<br>
-<strong>Cons:</strong> The user might not know what the default image URL is</p>
+<strong>Alternative 2:</strong> Not have this command at all.<br>
+<strong>Pros:</strong> Lesser commands for the user to remember.<br>
+<strong>Cons:</strong> The user might not know what the default image URL is.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.6. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.7. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
@@ -1065,7 +1092,7 @@ objects are added under the Google <code>Person</code> object&#8217;s <code>User
 </div>
 </div>
 <div class="sect2">
-<h3 id="configuration"><a class="link" href="#configuration">3.7. Configuration</a></h3>
+<h3 id="configuration"><a class="link" href="#configuration">3.8. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2731,7 +2758,7 @@ Use case ends.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-24 01:03:25 +00:00
+Last updated 2017-10-24 01:21:18 +00:00
 </div>
 </div>
 </body>

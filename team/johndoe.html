@@ -207,10 +207,10 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>UndoableCommand</code><br>
-<strong>Alternative 1 (current choice):</strong> Add a new abstract method <code>executeUndoableCommand()</code><br>
+<strong>Alternative 1 (current choice):</strong> Add a new abstract method <code>executeUndoableCommand().</code><br>
 <strong>Pros:</strong> We will not lose any undone/redone functionality as it is now part of the default behaviour. Classes that deal with <code>Command</code> do not have to know that <code>executeUndoableCommand()</code> exist.<br>
 <strong>Cons:</strong> Hard for new developers to understand the template pattern.<br>
-<strong>Alternative 2:</strong> Just override <code>execute()</code><br>
+<strong>Alternative 2:</strong> Just override <code>execute().</code><br>
 <strong>Pros:</strong> Does not involve the template pattern, easier for new developers to understand.<br>
 <strong>Cons:</strong> Classes that inherit from <code>UndoableCommand</code> must remember to call <code>super.execute()</code>, or lose the ability to undo/redo.</p>
 </div>
@@ -238,10 +238,10 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <hr>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Data structure to support the undo/redo commands<br>
-<strong>Alternative 1 (current choice):</strong> Use separate stack for undo and redo<br>
+<strong>Alternative 1 (current choice):</strong> Use separate stack for undo and redo.<br>
 <strong>Pros:</strong> Easy to understand for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.<br>
 <strong>Cons:</strong> Logic is duplicated twice. For example, when a new command is executed, we must remember to update both <code>HistoryManager</code> and <code>UndoRedoStack</code>.<br>
-<strong>Alternative 2:</strong> Use <code>HistoryManager</code> for undo/redo<br>
+<strong>Alternative 2:</strong> Use <code>HistoryManager</code> for undo/redo.<br>
 <strong>Pros:</strong> We do not need to maintain a separate stack, and just reuse what is already in the codebase.<br>
 <strong>Cons:</strong> Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as <code>HistoryManager</code> now needs to do two different things.<br></p>
 </div>
@@ -283,7 +283,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-24 01:03:25 +00:00
+Last updated 2017-10-24 01:21:18 +00:00
 </div>
 </div>
 </body>
