@@ -38,18 +38,19 @@ Adapted from AddressBook-Level4, by: <code>Team SE-EDU</code>      Since: <code>
 <li><a href="#editing-an-event-code-edite-code">2.8. Editing an event : <code>editE</code></a></li>
 <li><a href="#emailing-a-person-code-email-code">2.9. Emailing a person : <code>email</code></a></li>
 <li><a href="#exiting-the-program-code-exit-code">2.10. Exiting the program : <code>exit</code></a></li>
-<li><a href="#finding-persons-by-name-and-tags-code-find-code">2.11. Finding persons by name and tags: <code>find</code></a></li>
-<li><a href="#help-code-help-code">2.12. Help : <code>help</code></a></li>
-<li><a href="#history-code-history-code">2.13. History : <code>history</code></a></li>
-<li><a href="#importing-persons-code-import-code">2.14. Importing persons: <code>import</code></a></li>
-<li><a href="#listing-all-persons-code-list-code">2.15. Listing all persons : <code>list</code></a></li>
-<li><a href="#location-of-a-person-code-location-code">2.16. Location of a person : <code>location</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">2.17. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#removing-tags-code-removetag-code">2.18. Removing tags: <code>removeTag</code></a></li>
-<li><a href="#saving-the-data">2.19. Saving the data</a></li>
-<li><a href="#selecting-a-person-code-select-code">2.20. Selecting a person : <code>select</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">2.21. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#updating-a-person-s-profile-picture-code-updateprofilepic-code">2.22. Updating a person&#8217;s profile picture: <code>updateProfilePic</code></a></li>
+<li><a href="#export-contacts-code-export-code">2.11. Export contacts: <code>export</code></a></li>
+<li><a href="#finding-persons-by-name-and-tags-code-find-code">2.12. Finding persons by name and tags: <code>find</code></a></li>
+<li><a href="#help-code-help-code">2.13. Help : <code>help</code></a></li>
+<li><a href="#history-code-history-code">2.14. History : <code>history</code></a></li>
+<li><a href="#importing-persons-code-import-code">2.15. Importing persons: <code>import</code></a></li>
+<li><a href="#listing-all-persons-code-list-code">2.16. Listing all persons : <code>list</code></a></li>
+<li><a href="#location-of-a-person-code-location-code">2.17. Location of a person : <code>location</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">2.18. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#removing-tags-code-removetag-code">2.19. Removing tags: <code>removeTag</code></a></li>
+<li><a href="#saving-the-data">2.20. Saving the data</a></li>
+<li><a href="#selecting-a-person-code-select-code">2.21. Selecting a person : <code>select</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">2.22. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#updating-a-person-s-profile-picture-code-updateprofilepic-code">2.23. Updating a person&#8217;s profile picture: <code>updateProfilePic</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">3. FAQ</a></li>
@@ -493,7 +494,32 @@ Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="finding-persons-by-name-and-tags-code-find-code"><a class="link" href="#finding-persons-by-name-and-tags-code-find-code">2.11. Finding persons by name and tags: <code>find</code></a></h3>
+<h3 id="export-contacts-code-export-code"><a class="link" href="#export-contacts-code-export-code">2.11. Export contacts: <code>export</code></a></h3>
+<div class="paragraph">
+<p>Export your contacts from DoC to Google Contacts.<br>
+Format: <code>export</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Steps</strong><br>
+<strong>1.</strong> Enter the <code>export</code> command<br>
+<strong>2.</strong> Log in to your Google account on the built-in browser<br>
+<strong>3.</strong> Grant permission to DoC to access your contacts<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Picture guide</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/importpic.png" alt="importpic" width="1000">
+</div>
+</div>
+<div class="paragraph">
+<p>You can enter your credentials and grant permission to DoC to access your Google contacts, as highlighted by the
+red boxes in the picture above.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="finding-persons-by-name-and-tags-code-find-code"><a class="link" href="#finding-persons-by-name-and-tags-code-find-code">2.12. Finding persons by name and tags: <code>find</code></a></h3>
 <div class="paragraph">
 <p>Finds persons whose names or tags contain any of the given keywords.<br>
 Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
@@ -546,13 +572,13 @@ Returns any person having tags <code>Family</code>, <code>Friend</code>, or <cod
 </div>
 </div>
 <div class="sect2">
-<h3 id="help-code-help-code"><a class="link" href="#help-code-help-code">2.12. Help : <code>help</code></a></h3>
+<h3 id="help-code-help-code"><a class="link" href="#help-code-help-code">2.13. Help : <code>help</code></a></h3>
 <div class="paragraph">
 <p>Format: <code>help</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="history-code-history-code"><a class="link" href="#history-code-history-code">2.13. History : <code>history</code></a></h3>
+<h3 id="history-code-history-code"><a class="link" href="#history-code-history-code">2.14. History : <code>history</code></a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.<br>
 Format: <code>history</code></p>
@@ -573,7 +599,7 @@ Format: <code>history</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="importing-persons-code-import-code"><a class="link" href="#importing-persons-code-import-code">2.14. Importing persons: <code>import</code></a></h3>
+<h3 id="importing-persons-code-import-code"><a class="link" href="#importing-persons-code-import-code">2.15. Importing persons: <code>import</code></a></h3>
 <div class="paragraph">
 <p>Imports persons to DoC from Google Contacts<br>
 Format: <code>import</code></p>
@@ -610,14 +636,14 @@ red boxes in the picture above</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-all-persons-code-list-code"><a class="link" href="#listing-all-persons-code-list-code">2.15. Listing all persons : <code>list</code></a></h3>
+<h3 id="listing-all-persons-code-list-code"><a class="link" href="#listing-all-persons-code-list-code">2.16. Listing all persons : <code>list</code></a></h3>
 <div class="paragraph">
 <p>Shows a list of all persons in the address book.<br>
 Format: <code>list</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="location-of-a-person-code-location-code"><a class="link" href="#location-of-a-person-code-location-code">2.16. Location of a person : <code>location</code></a></h3>
+<h3 id="location-of-a-person-code-location-code"><a class="link" href="#location-of-a-person-code-location-code">2.17. Location of a person : <code>location</code></a></h3>
 <div class="paragraph">
 <p>Shows the address of the person in Google Maps.<br>
 Format: <code>location INDEX</code></p>
@@ -656,7 +682,7 @@ Format: <code>location INDEX</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">2.17. Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">2.18. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.<br>
 Format: <code>redo</code></p>
@@ -688,7 +714,7 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="removing-tags-code-removetag-code"><a class="link" href="#removing-tags-code-removetag-code">2.18. Removing tags: <code>removeTag</code></a></h3>
+<h3 id="removing-tags-code-removetag-code"><a class="link" href="#removing-tags-code-removetag-code">2.19. Removing tags: <code>removeTag</code></a></h3>
 <div class="paragraph">
 <p>Finds persons whose names or tags contain any of the given tag and removes that tag.<br>
 Format: <code>removeTag KEYWORD</code></p>
@@ -726,14 +752,14 @@ Returns <code>john</code> and <code>John Doe</code> with Friend tag removed</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">2.19. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">2.20. Saving the data</a></h3>
 <div class="paragraph">
 <p>Address book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="selecting-a-person-code-select-code"><a class="link" href="#selecting-a-person-code-select-code">2.20. Selecting a person : <code>select</code></a></h3>
+<h3 id="selecting-a-person-code-select-code"><a class="link" href="#selecting-a-person-code-select-code">2.21. Selecting a person : <code>select</code></a></h3>
 <div class="paragraph">
 <p>Selects the person identified by the index number used in the last person listing.<br>
 Format: <code>select INDEX</code></p>
@@ -774,7 +800,7 @@ Selects the 1st person in the results of the <code>find</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">2.21. Undoing previous command : <code>undo</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">2.22. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Restores the address book to the state before the previous <em>undoable</em> command was executed.<br>
 Format: <code>undo</code></p>
@@ -819,7 +845,7 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </div>
 </div>
 <div class="sect2">
-<h3 id="updating-a-person-s-profile-picture-code-updateprofilepic-code"><a class="link" href="#updating-a-person-s-profile-picture-code-updateprofilepic-code">2.22. Updating a person&#8217;s profile picture: <code>updateProfilePic</code></a></h3>
+<h3 id="updating-a-person-s-profile-picture-code-updateprofilepic-code"><a class="link" href="#updating-a-person-s-profile-picture-code-updateprofilepic-code">2.23. Updating a person&#8217;s profile picture: <code>updateProfilePic</code></a></h3>
 <div class="paragraph">
 <p>Updates the profile picture of a person.<br>
 Format: <code>updateProfilePic INDEX [u/imageUrl]</code></p>
@@ -953,7 +979,7 @@ e.g. <code>updateProfilePic 2 u/http://www.google.com/images/image.png</code><br
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-23 18:32:28 +00:00
+Last updated 2017-10-24 00:31:02 +00:00
 </div>
 </div>
 </body>
