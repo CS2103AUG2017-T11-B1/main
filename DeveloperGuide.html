@@ -785,10 +785,10 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="sect2">
 <h3 id="event-feature"><a class="link" href="#event-feature">3.2. Event(feature)</a></h3>
 <div class="paragraph">
-<p>The event feature is implemented with similar logic as a person. The commands created for this feature are "addE", "editE" and "deleteE". As such, the methods from events are extended from the model.</p>
+<p>The <code>Event</code> feature is implemented with similar logic as a <code>Person</code>. The featured commands that modifies the address book include <code>addE</code>, <code>editE</code> and <code>deleteE</code>. As such, the methods from events are extended from <code>Model</code>.</p>
 </div>
 <div class="paragraph">
-<p>Commands such as clear, undo and redo will apply to the events in the list as these commands directly alter the address book on a higher level without calling person methods. Therefore, further coupling of these methods and event feature is not required.</p>
+<p>Commands such as <code>clear</code>, <code>undo</code> and <code>redo</code> will apply to the events in the list as these commands extends <code>UndoableCommand</code>. Therefore, further coupling of these user commands and event feature is not introduced.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -796,7 +796,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="paragraph">
-<p>As you can see from the diagram, the sub component of Event include a PersonList that fetches persons from the ReadOnlyPerson and add them into the list without any modification. In the Ui, upon clicking on the person tagged under an event, the logic will execute "select" command which will bring the user to the respective person in the person panel.</p>
+<p>As you can see from the diagram, the sub component of <code>Event</code> include a <code>PersonList</code> that fetches persons from the <code>ReadOnlyPerson</code> and add them into the list without any modification. In the Ui, upon clicking on the person tagged under an event, the logic will execute <code>select</code> command which will bring the user to the respective person in the person panel.</p>
 </div>
 <div class="sect3">
 <h4 id="design-consideration"><a class="link" href="#design-consideration">3.2.1. Design Consideration</a></h4>
@@ -982,7 +982,7 @@ objects are added under the Google <code>Person</code> object&#8217;s <code>User
 <p>The UpdateProfilePic/DeleteProfilePic mechanism is facilitated by a <code>ProfilePic</code> class, which is a property class of the <code>Person</code> class. It supports the updating and deleting of profile pictures of each Person. These two commands inherit from <code>UndoableCommand</code>.</p>
 </div>
 <div class="paragraph">
-<p><code>ProfilePic</code> essentially stores a <strong>valid</strong> <code>URL</code> of an image that will be displayed as the Person’s profile picture. Whenever a new Person is added, the Person’s <code>ProfilePic</code> property will be that of a default image. The command, <code>updateProfilePic</code> can then be called to change this property. When the command <code>deleteProfilePic</code> is called, the <code>ProfilePic</code> property of the selected Person will be changed back to the default profile picture.</p>
+<p><code>ProfilePic</code> essentially stores a <strong>valid</strong> <code>URL</code> of an image that will be displayed as the Person?s profile picture. Whenever a new Person is added, the Person?s <code>ProfilePic</code> property will be that of a default image. The command, <code>updateProfilePic</code> can then be called to change this property. When the command <code>deleteProfilePic</code> is called, the <code>ProfilePic</code> property of the selected Person will be changed back to the default profile picture.</p>
 </div>
 <div class="paragraph">
 <p>Like the other properties of the <code>Person</code> class, the <code>ProfilePic</code> property will also be saved to the chosen storage file.</p>
@@ -2731,7 +2731,7 @@ Use case ends.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-24 00:50:57 +00:00
+Last updated 2017-10-24 01:03:25 +00:00
 </div>
 </div>
 </body>
