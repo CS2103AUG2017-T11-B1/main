@@ -72,9 +72,16 @@ Format: `addE h/HEADER de/DESCRIPTION d/DATE`
 [TIP]
 The date must a valid date with format: year-month-day
 
-Examples:
+Example:
 
-* `addE h/Meeting de/Business meeting at work d/2017-11-20`
+* `addE h/Meeting de/Business meeting at in the afternoon at 2pm d/2017-11-20`
+
+**Picture guide**
+
+image::addEpic.png[width="750"]
+
+Your newly created event will be listed in the event panel and will be sorted based on its date. Thus, the earliest event will be displayed at the top of the panel.
+As shown in the guide above, yellow panel indicates an event upcoming in 2 or less days, Green panel indicates an event that have yet to come (more than 2 days) and Red panel indicates that the event is already overdue.
 
 === Clearing all entries : `clear`
 
