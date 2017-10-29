@@ -25,42 +25,64 @@ Adapted from AddressBook-Level4, by: <code>Team SE-EDU</code>      Since: <code>
 <div id="toc" class="toc">
 <div id="toctitle"></div>
 <ul class="sectlevel1">
-<li><a href="#quick-start">1. Quick Start</a></li>
-<li><a href="#features">2. Features</a>
+<li><a href="#introduction">1. Introduction</a></li>
+<li><a href="#getting-started">2. Getting started</a>
 <ul class="sectlevel2">
-<li><a href="#adding-a-contact-code-add-code">2.1. Adding a contact: <code>add</code></a></li>
-<li><a href="#adding-an-event-code-adde-code">2.2. Adding an event: <code>addE</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">2.3. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#deleting-a-contact-code-delete-code">2.4. Deleting a contact : <code>delete</code></a></li>
-<li><a href="#deleting-an-event-code-deletee-code">2.5. Deleting an event : <code>deleteE</code></a></li>
-<li><a href="#deleting-the-profile-picture-of-a-contact-code-deleteprofilepic-code">2.6. Deleting the profile picture of a contact : <code>deleteProfilePic</code></a></li>
-<li><a href="#editing-a-person-code-edit-code">2.7. Editing a person : <code>edit</code></a></li>
-<li><a href="#editing-an-event-code-edite-code">2.8. Editing an event : <code>editE</code></a></li>
-<li><a href="#emailing-a-person-code-email-code">2.9. Emailing a person : <code>email</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">2.10. Exiting the program : <code>exit</code></a></li>
-<li><a href="#export-contacts-code-export-code">2.11. Export contacts: <code>export</code></a></li>
-<li><a href="#finding-persons-by-name-and-tags-code-find-code">2.12. Finding persons by name and tags: <code>find</code></a></li>
-<li><a href="#help-code-help-code">2.13. Help : <code>help</code></a></li>
-<li><a href="#history-code-history-code">2.14. History : <code>history</code></a></li>
-<li><a href="#importing-contacts-code-import-code">2.15. Importing contacts: <code>import</code></a></li>
-<li><a href="#listing-all-persons-code-list-code">2.16. Listing all persons : <code>list</code></a></li>
-<li><a href="#location-of-a-contact-code-location-code">2.17. Location of a contact : <code>location</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">2.18. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#removing-tags-code-removetag-code">2.19. Removing tags: <code>removeTag</code></a></li>
-<li><a href="#saving-the-data">2.20. Saving the data</a></li>
-<li><a href="#selecting-a-contact-code-select-code">2.21. Selecting a contact : <code>select</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">2.22. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#updating-a-person-s-profile-picture-code-updateprofilepic-code">2.23. Updating a person&#8217;s profile picture: <code>updateProfilePic</code></a></li>
+<li><a href="#installation-guide">2.1. Installation guide</a></li>
+<li><a href="#interface-guide">2.2. Interface guide</a></li>
 </ul>
 </li>
-<li><a href="#faq">3. FAQ</a></li>
-<li><a href="#command-summary">4. Command Summary</a></li>
+<li><a href="#features">3. Features</a>
+<ul class="sectlevel2">
+<li><a href="#adding-a-contact-code-add-code">3.1. Adding a contact: <code>add</code></a></li>
+<li><a href="#adding-an-event-code-adde-code">3.2. Adding an event: <code>addE</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">3.3. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#deleting-a-contact-code-delete-code">3.4. Deleting a contact : <code>delete</code></a></li>
+<li><a href="#deleting-an-event-code-deletee-code">3.5. Deleting an event : <code>deleteE</code></a></li>
+<li><a href="#deleting-the-profile-picture-of-a-contact-code-deleteprofilepic-code">3.6. Deleting the profile picture of a contact : <code>deleteProfilePic</code></a></li>
+<li><a href="#editing-a-person-code-edit-code">3.7. Editing a person : <code>edit</code></a></li>
+<li><a href="#editing-an-event-code-edite-code">3.8. Editing an event : <code>editE</code></a></li>
+<li><a href="#emailing-a-person-code-email-code">3.9. Emailing a person : <code>email</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.10. Exiting the program : <code>exit</code></a></li>
+<li><a href="#export-contacts-code-export-code">3.11. Export contacts: <code>export</code></a></li>
+<li><a href="#finding-persons-by-name-and-tags-code-find-code">3.12. Finding persons by name and tags: <code>find</code></a></li>
+<li><a href="#help-code-help-code">3.13. Help : <code>help</code></a></li>
+<li><a href="#history-code-history-code">3.14. History : <code>history</code></a></li>
+<li><a href="#importing-contacts-code-import-code">3.15. Importing contacts: <code>import</code></a></li>
+<li><a href="#listing-all-persons-code-list-code">3.16. Listing all persons : <code>list</code></a></li>
+<li><a href="#location-of-a-contact-code-location-code">3.17. Location of a contact : <code>location</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.18. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#removing-tags-code-removetag-code">3.19. Removing tags: <code>removeTag</code></a></li>
+<li><a href="#saving-the-data">3.20. Saving the data</a></li>
+<li><a href="#selecting-a-contact-code-select-code">3.21. Selecting a contact : <code>select</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">3.22. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#updating-a-person-s-profile-picture-code-updateprofilepic-code">3.23. Updating a person&#8217;s profile picture: <code>updateProfilePic</code></a></li>
+</ul>
+</li>
+<li><a href="#faq">4. FAQ</a></li>
+<li><a href="#command-summary">5. Command summary</a></li>
 </ul>
 </div>
 </div>
 <div class="sect1">
-<h2 id="quick-start"><a class="link" href="#quick-start">1. Quick Start</a></h2>
+<h2 id="introduction"><a class="link" href="#introduction">1. Introduction</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Are you having trouble keeping track of important dates and events? Is there too much hassle
+in the current way you manage contacts? If these are problems that plague your everyday life, stress no further, for we&#8217;ve
+engineered a cure!</p>
+</div>
+<div class="paragraph">
+<p>DoC is here to remedy all your event tracking and contact management woes. Built as a Command Line Interface (CLI) application,
+DoC provides a speedy solution to manage event and contact information, with only just a few clicks on the keyboard.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="getting-started"><a class="link" href="#getting-started">2. Getting started</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="installation-guide"><a class="link" href="#installation-guide">2.1. Installation guide</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -80,54 +102,58 @@ This app will not work with earlier versions of Java 8.
 </div>
 </li>
 <li>
-<p>Download the latest <code>addressbook.jar</code> <a href="https://github.com/se-edu/addressbook-level4/releases">here</a>.</p>
+<p>Download the latest <code>DoC.jar</code> <a href="https://github.com/CS2103AUG2017-T11-B1/main/releases">here</a>.</p>
 </li>
 <li>
 <p>Copy the file to the folder you want to use as the home folder for your Address Book.</p>
 </li>
 <li>
 <p>Double-click the file to start the app. The GUI should appear in a few seconds.</p>
-<div class="imageblock">
-<div class="content">
-<img src="images/Ui.png" alt="Ui" width="790">
-</div>
-</div>
-</li>
-<li>
-<p>Type the command in the command box and press <kbd>Enter</kbd> to execute it.<br>
-e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> will open the help window.</p>
-</li>
-<li>
-<p>Some example commands you can try:</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong><code>list</code></strong> : lists all contacts</p>
-</li>
-<li>
-<p><strong><code>add</code></strong><code>n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01</code> : adds a contact named <code>John Doe</code> to the Address Book</p>
-</li>
-<li>
-<p><strong><code>addE</code></strong><code>h/Birthday de/John Doe&#8217;s 21st birthday party d/2017-12-20</code> : adds an event named <code>Birthday</code> to the Address Book</p>
-</li>
-<li>
-<p><strong><code>delete</code></strong><code>3</code> : deletes the 3rd contact shown in the current list</p>
-</li>
-<li>
-<p><strong><code>exit</code></strong> : exits the app</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Refer to the <a href="#features">Features</a> section below for details of each command.</p>
 </li>
 </ol>
 </div>
 </div>
+<div class="sect2">
+<h3 id="interface-guide"><a class="link" href="#interface-guide">2.2. Interface guide</a></h3>
+<div class="paragraph">
+<p>The following image highlights the 5 different components of DoC:<br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Ui.png" alt="Ui" width="100%">
+</div>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s how you can use them:<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Command box</strong><br>
+Type your desired command into the <code>Command box</code> and press <kbd>Enter</kbd> to execute it.<br>
+    e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> will open the help window.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Status panel</strong><br>
+The <code>Status panel</code> displays DoC&#8217;s feedback on your latest command.</p>
+</div>
+<div class="paragraph">
+<p><strong>Contacts panel</strong><br>
+The <code>Contacts panel</code> displays a list of your contacts stored by DoC. All your contacts will be displayed and listed alphabetically by default.
+Display customization can be achieved with commands <code>sort</code>, and <code>find</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Browser panel</strong><br>
+The <code>Browser panel</code> is DoC&#8217;s built-in browser that facilitates several cool features like the <code>location</code>, <code>email</code>, <code>import</code>
+and <code>export</code> feature.</p>
+</div>
+<div class="paragraph">
+<p><strong>Events panel</strong><br>
+The <code>Events panel</code> displays your recorded events in the order of most urgent, coming soon, and overdue.</p>
+</div>
+</div>
+</div>
 </div>
 <div class="sect1">
-<h2 id="features"><a class="link" href="#features">2. Features</a></h2>
+<h2 id="features"><a class="link" href="#features">3. Features</a></h2>
 <div class="sectionbody">
 <div class="exampleblock">
 <div class="content">
@@ -153,7 +179,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-contact-code-add-code"><a class="link" href="#adding-a-contact-code-add-code">2.1. Adding a contact: <code>add</code></a></h3>
+<h3 id="adding-a-contact-code-add-code"><a class="link" href="#adding-a-contact-code-add-code">3.1. Adding a contact: <code>add</code></a></h3>
 <div class="paragraph">
 <p>Adds a contact to the address book.<br>
 Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code></p>
@@ -191,7 +217,7 @@ A contact can have any number of tags (including 0)
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-an-event-code-adde-code"><a class="link" href="#adding-an-event-code-adde-code">2.2. Adding an event: <code>addE</code></a></h3>
+<h3 id="adding-an-event-code-adde-code"><a class="link" href="#adding-an-event-code-adde-code">3.2. Adding an event: <code>addE</code></a></h3>
 <div class="paragraph">
 <p>Adds an event to the address book.<br>
 Format: <code>addE h/HEADER de/DESCRIPTION d/DATE</code></p>
@@ -232,7 +258,7 @@ As shown in the guide above, yellow panel indicates an event upcoming in 2 or le
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">2.3. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.3. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries from the address book.<br>
 Format: <code>clear</code></p>
@@ -245,7 +271,7 @@ Format: <code>clear</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-contact-code-delete-code"><a class="link" href="#deleting-a-contact-code-delete-code">2.4. Deleting a contact : <code>delete</code></a></h3>
+<h3 id="deleting-a-contact-code-delete-code"><a class="link" href="#deleting-a-contact-code-delete-code">3.4. Deleting a contact : <code>delete</code></a></h3>
 <div class="paragraph">
 <p>Deletes the specified contact from the address book.<br>
 Format: <code>delete INDEX</code></p>
@@ -292,7 +318,7 @@ Deletes the 1st contact in the results of the <code>find</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-an-event-code-deletee-code"><a class="link" href="#deleting-an-event-code-deletee-code">2.5. Deleting an event : <code>deleteE</code></a></h3>
+<h3 id="deleting-an-event-code-deletee-code"><a class="link" href="#deleting-an-event-code-deletee-code">3.5. Deleting an event : <code>deleteE</code></a></h3>
 <div class="paragraph">
 <p>Deletes the specified event from the address book.<br>
 Format: <code>deleteE INDEX</code></p>
@@ -333,7 +359,7 @@ Deletes the 3rd event in the address book.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-the-profile-picture-of-a-contact-code-deleteprofilepic-code"><a class="link" href="#deleting-the-profile-picture-of-a-contact-code-deleteprofilepic-code">2.6. Deleting the profile picture of a contact : <code>deleteProfilePic</code></a></h3>
+<h3 id="deleting-the-profile-picture-of-a-contact-code-deleteprofilepic-code"><a class="link" href="#deleting-the-profile-picture-of-a-contact-code-deleteprofilepic-code">3.6. Deleting the profile picture of a contact : <code>deleteProfilePic</code></a></h3>
 <div class="paragraph">
 <p>Deletes the profile picture of the specified contact from the address book.<br>
 Format: <code>deleteProfilePic INDEX</code></p>
@@ -388,7 +414,7 @@ Deletes the profile picture of the 1st person in the results of the <code>find</
 </div>
 </div>
 <div class="sect2">
-<h3 id="editing-a-person-code-edit-code"><a class="link" href="#editing-a-person-code-edit-code">2.7. Editing a person : <code>edit</code></a></h3>
+<h3 id="editing-a-person-code-edit-code"><a class="link" href="#editing-a-person-code-edit-code">3.7. Editing a person : <code>edit</code></a></h3>
 <div class="paragraph">
 <p>Edits an existing contact in the address book.<br>
 Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code></p>
@@ -439,7 +465,7 @@ Edits the name of the 2nd contact to be <code>Betsy Crower</code> and clears all
 </div>
 </div>
 <div class="sect2">
-<h3 id="editing-an-event-code-edite-code"><a class="link" href="#editing-an-event-code-edite-code">2.8. Editing an event : <code>editE</code></a></h3>
+<h3 id="editing-an-event-code-edite-code"><a class="link" href="#editing-an-event-code-edite-code">3.8. Editing an event : <code>editE</code></a></h3>
 <div class="paragraph">
 <p>Edits an existing event in the address book.<br>
 Format: <code>editE INDEX [h/HEADER] [de/DESCRIPTION] [d/DATE]</code></p>
@@ -483,7 +509,7 @@ Edits the header and date of the 1st event to be <code>Birthday party</code> and
 </div>
 </div>
 <div class="sect2">
-<h3 id="emailing-a-person-code-email-code"><a class="link" href="#emailing-a-person-code-email-code">2.9. Emailing a person : <code>email</code></a></h3>
+<h3 id="emailing-a-person-code-email-code"><a class="link" href="#emailing-a-person-code-email-code">3.9. Emailing a person : <code>email</code></a></h3>
 <div class="paragraph">
 <p>Emails an existing person/ a group in the address book.<br>
 Format: <code>email [to/TO] [subject/SUBJECT] [body/BODY]</code></p>
@@ -549,14 +575,14 @@ Opens the default emailing client and adds Adam to the <code>to</code> field and
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">2.10. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.10. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="export-contacts-code-export-code"><a class="link" href="#export-contacts-code-export-code">2.11. Export contacts: <code>export</code></a></h3>
+<h3 id="export-contacts-code-export-code"><a class="link" href="#export-contacts-code-export-code">3.11. Export contacts: <code>export</code></a></h3>
 <div class="paragraph">
 <p>Export your contacts from DoC to Google Contacts.<br>
 Format: <code>export</code><br></p>
@@ -581,7 +607,7 @@ red boxes in the picture above.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="finding-persons-by-name-and-tags-code-find-code"><a class="link" href="#finding-persons-by-name-and-tags-code-find-code">2.12. Finding persons by name and tags: <code>find</code></a></h3>
+<h3 id="finding-persons-by-name-and-tags-code-find-code"><a class="link" href="#finding-persons-by-name-and-tags-code-find-code">3.12. Finding persons by name and tags: <code>find</code></a></h3>
 <div class="paragraph">
 <p>Lists all contacts whose name or tags matches any of the given search terms.<br>
 Format: <code>find TERM1 [MORE_TERMS]</code></p>
@@ -612,14 +638,14 @@ part of name, matching any search term.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="help-code-help-code"><a class="link" href="#help-code-help-code">2.13. Help : <code>help</code></a></h3>
+<h3 id="help-code-help-code"><a class="link" href="#help-code-help-code">3.13. Help : <code>help</code></a></h3>
 <div class="paragraph">
 <p>Displays this document.<br>
 Format: <code>help</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="history-code-history-code"><a class="link" href="#history-code-history-code">2.14. History : <code>history</code></a></h3>
+<h3 id="history-code-history-code"><a class="link" href="#history-code-history-code">3.14. History : <code>history</code></a></h3>
 <div class="paragraph">
 <p>Displays the history of commands you have entered, starting from the most recent one. <br>
 This feature can be accessed in two different ways:<br></p>
@@ -638,7 +664,7 @@ Format: the <kbd>&uarr;</kbd> and <kbd>&darr;</kbd> arrows will paste the previo
 </div>
 </div>
 <div class="sect2">
-<h3 id="importing-contacts-code-import-code"><a class="link" href="#importing-contacts-code-import-code">2.15. Importing contacts: <code>import</code></a></h3>
+<h3 id="importing-contacts-code-import-code"><a class="link" href="#importing-contacts-code-import-code">3.15. Importing contacts: <code>import</code></a></h3>
 <div class="paragraph">
 <p>Imports contacts to DoC from Google Contacts.<br>
 Format: <code>import</code></p>
@@ -675,7 +701,7 @@ red boxes in the picture above.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-all-persons-code-list-code"><a class="link" href="#listing-all-persons-code-list-code">2.16. Listing all persons : <code>list</code></a></h3>
+<h3 id="listing-all-persons-code-list-code"><a class="link" href="#listing-all-persons-code-list-code">3.16. Listing all persons : <code>list</code></a></h3>
 <div class="paragraph">
 <p>Display a list of all contacts currently stored in DoC.<br>
 Format: <code>list</code></p>
@@ -691,7 +717,7 @@ Format: <code>list</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="location-of-a-contact-code-location-code"><a class="link" href="#location-of-a-contact-code-location-code">2.17. Location of a contact : <code>location</code></a></h3>
+<h3 id="location-of-a-contact-code-location-code"><a class="link" href="#location-of-a-contact-code-location-code">3.17. Location of a contact : <code>location</code></a></h3>
 <div class="paragraph">
 <p>Shows the address of the contact in Google Maps.<br>
 Format: <code>location INDEX</code></p>
@@ -730,7 +756,7 @@ Format: <code>location INDEX</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">2.18. Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.18. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command, if any.<br>
 Format: <code>redo</code></p>
@@ -748,7 +774,7 @@ simply deletes the contact with an index of 1 again.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="removing-tags-code-removetag-code"><a class="link" href="#removing-tags-code-removetag-code">2.19. Removing tags: <code>removeTag</code></a></h3>
+<h3 id="removing-tags-code-removetag-code"><a class="link" href="#removing-tags-code-removetag-code">3.19. Removing tags: <code>removeTag</code></a></h3>
 <div class="paragraph">
 <p>Finds contacts whose names or tags contain any of the given tag and removes that tag.<br>
 Format: <code>removeTag KEYWORD</code></p>
@@ -786,13 +812,13 @@ Returns <code>john</code> and <code>John Doe</code> with Friend tag removed</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">2.20. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.20. Saving the data</a></h3>
 <div class="paragraph">
 <p>All additions, deletions, and changes performed on the contacts stored in DoC are saved automatically.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="selecting-a-contact-code-select-code"><a class="link" href="#selecting-a-contact-code-select-code">2.21. Selecting a contact : <code>select</code></a></h3>
+<h3 id="selecting-a-contact-code-select-code"><a class="link" href="#selecting-a-contact-code-select-code">3.21. Selecting a contact : <code>select</code></a></h3>
 <div class="paragraph">
 <p>Selects the contact identified by the index number used in the last contact listing, and loads the Google search result of the contact.<br>
 Format: <code>select INDEX</code><br>
@@ -810,7 +836,7 @@ The numbers highlighted in red in the picture are the indexes of each contact.</
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">2.22. Undoing previous command : <code>undo</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.22. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Reverses the changes made by the previous command entered.<br>
 Format: <code>undo</code></p>
@@ -841,7 +867,7 @@ reverses the <code>delete 1</code> command by adding back the deleted contact.</
 </div>
 </div>
 <div class="sect2">
-<h3 id="updating-a-person-s-profile-picture-code-updateprofilepic-code"><a class="link" href="#updating-a-person-s-profile-picture-code-updateprofilepic-code">2.23. Updating a person&#8217;s profile picture: <code>updateProfilePic</code></a></h3>
+<h3 id="updating-a-person-s-profile-picture-code-updateprofilepic-code"><a class="link" href="#updating-a-person-s-profile-picture-code-updateprofilepic-code">3.23. Updating a person&#8217;s profile picture: <code>updateProfilePic</code></a></h3>
 <div class="paragraph">
 <p>Updates the profile picture of a person.<br>
 Format: <code>updateProfilePic INDEX [u/imageUrl]</code></p>
@@ -896,7 +922,7 @@ Updates the profile picture of the 2nd person to be the image at <code><a href="
 </div>
 </div>
 <div class="sect1">
-<h2 id="faq"><a class="link" href="#faq">3. FAQ</a></h2>
+<h2 id="faq"><a class="link" href="#faq">4. FAQ</a></h2>
 <div class="sectionbody">
 <div class="sidebarblock">
 <div class="content">
@@ -909,7 +935,7 @@ Install the app in the other computer and overwrite the empty data file it creat
 </div>
 </div>
 <div class="sect1">
-<h2 id="command-summary"><a class="link" href="#command-summary">4. Command Summary</a></h2>
+<h2 id="command-summary"><a class="link" href="#command-summary">5. Command summary</a></h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -990,7 +1016,7 @@ e.g. <code>updateProfilePic 2 u/http://www.google.com/images/image.png</code><br
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-26 08:55:54 +00:00
+Last updated 2017-10-29 03:15:54 +00:00
 </div>
 </div>
 </body>
