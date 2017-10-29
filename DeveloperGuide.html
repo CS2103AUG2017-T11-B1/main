@@ -49,10 +49,11 @@ Adapted from AddressBook-Level4, by: <code>Team SE-EDU</code>      Since: <code>
 <li><a href="#undo-redo-mechanism">4.1. Undo/Redo mechanism</a></li>
 <li><a href="#event-feature">4.2. Event(feature)</a></li>
 <li><a href="#oauth2-fulfilment-mechanism">4.3. OAuth2 fulfilment mechanism</a></li>
-<li><a href="#location">4.4. Location</a></li>
-<li><a href="#email">4.5. Email</a></li>
-<li><a href="#updateprofilepic-deleteprofilepic-mechanism">4.6. UpdateProfilePic/DeleteProfilePic mechanism</a></li>
-<li><a href="#viewcount-tracking">4.7. ViewCount Tracking</a></li>
+<li><a href="#email">4.4. Email</a></li>
+<li><a href="#location">4.5. Location</a></li>
+<li><a href="#removetag">4.6. RemoveTag</a></li>
+<li><a href="#updateprofilepic-deleteprofilepic-mechanism">4.7. UpdateProfilePic/DeleteProfilePic mechanism</a></li>
+<li><a href="#viewcount-tracking">4.8. ViewCount Tracking</a></li>
 </ul>
 </li>
 <li><a href="#logging">5. Logging</a>
@@ -111,7 +112,7 @@ Adapted from AddressBook-Level4, by: <code>Team SE-EDU</code>      Since: <code>
 <h2 id="introduction"><a class="link" href="#introduction">1. Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The Directory of Contacts(DoC) allows you to manage your contacts and events all within a single app. This guide will help you get to know the more important functions of the app and how they are implemented. From this, you will be better equipped to navigate around the codebase and further enhance the app as required.</p>
+<p>The Directory of Contacts(DoC) allows you to manage your contacts and events all within a single app. This guide will help you get to know the more important functions of the app and how they were implemented. From this, you will be better equipped to navigate around the codebase and further enhance the app as required.</p>
 </div>
 </div>
 </div>
@@ -162,35 +163,35 @@ Do not disable them. If you have disabled them, go to <code>File</code> &gt; <co
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Fork this repo, and clone the fork to your computer</p>
+<p>Fork this repo, and clone the fork to your computer.</p>
 </li>
 <li>
-<p>Open IntelliJ (if you are not in the welcome screen, click <code>File</code> &gt; <code>Close Project</code> to close the existing project dialog first)</p>
+<p>Open IntelliJ (if you are not in the welcome screen, click <code>File</code> &gt; <code>Close Project</code> to close the existing project dialog first).</p>
 </li>
 <li>
-<p>Set up the correct JDK version for Gradle</p>
+<p>Set up the correct JDK version for Gradle.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Click <code>Configure</code> &gt; <code>Project Defaults</code> &gt; <code>Project Structure</code></p>
+<p>Click <code>Configure</code> &gt; <code>Project Defaults</code> &gt; <code>Project Structure</code>.</p>
 </li>
 <li>
-<p>Click <code>New&#8230;&#8203;</code> and find the directory of the JDK</p>
+<p>Click <code>New&#8230;&#8203;</code> and find the directory of the JDK.</p>
 </li>
 </ol>
 </div>
 </li>
 <li>
-<p>Click <code>Import Project</code></p>
+<p>Click <code>Import Project</code>.</p>
 </li>
 <li>
-<p>Locate the <code>build.gradle</code> file and select it. Click <code>OK</code></p>
+<p>Locate the <code>build.gradle</code> file and select it. Click <code>OK</code>.</p>
 </li>
 <li>
-<p>Click <code>Open as Project</code></p>
+<p>Click <code>Open as Project</code>.</p>
 </li>
 <li>
-<p>Click <code>OK</code> to accept the default settings</p>
+<p>Click <code>OK</code> to accept the default settings.</p>
 </li>
 <li>
 <p>Open a console and run the command <code>gradlew processResources</code> (Mac/Linux: <code>./gradlew processResources</code>). It should finish with the <code>BUILD SUCCESSFUL</code> message.<br>
@@ -204,7 +205,7 @@ This will generate all resources required by the application and tests.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Run the <code>seedu.address.MainApp</code> and try a few commands</p>
+<p>Run the <code>seedu.address.MainApp</code> and try a few commands.</p>
 </li>
 <li>
 <p><a href="#testing">Run the tests</a> to ensure they all pass.</p>
@@ -222,20 +223,20 @@ This will generate all resources required by the application and tests.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Go to <code>File</code> &gt; <code>Settings&#8230;&#8203;</code> (Windows/Linux), or <code>IntelliJ IDEA</code> &gt; <code>Preferences&#8230;&#8203;</code> (macOS)</p>
+<p>Go to <code>File</code> &gt; <code>Settings&#8230;&#8203;</code> (Windows/Linux), or <code>IntelliJ IDEA</code> &gt; <code>Preferences&#8230;&#8203;</code> (macOS).</p>
 </li>
 <li>
-<p>Select <code>Editor</code> &gt; <code>Code Style</code> &gt; <code>Java</code></p>
+<p>Select <code>Editor</code> &gt; <code>Code Style</code> &gt; <code>Java</code>.</p>
 </li>
 <li>
-<p>Click on the <code>Imports</code> tab to set the order</p>
+<p>Click on the <code>Imports</code> tab to set the order.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>For <code>Class count to use import with '*'</code> and <code>Names count to use static import with '*'</code>: Set to <code>999</code> to prevent IntelliJ from contracting the import statements</p>
+<p>For <code>Class count to use import with '*'</code> and <code>Names count to use static import with '*'</code>: Set to <code>999</code> to prevent IntelliJ from contracting the import statements.</p>
 </li>
 <li>
-<p>For <code>Import Layout</code>: The order is <code>import static all other imports</code>, <code>import java.*</code>, <code>import javax.*</code>, <code>import org.*</code>, <code>import com.*</code>, <code>import all other imports</code>. Add a <code>&lt;blank line&gt;</code> between each <code>import</code></p>
+<p>For <code>Import Layout</code>: The order is <code>import static all other imports</code>, <code>import java.*</code>, <code>import javax.*</code>, <code>import org.*</code>, <code>import com.*</code>, <code>import all other imports</code>. Add a <code>&lt;blank line&gt;</code> between each <code>import</code>.</p>
 </li>
 </ul>
 </div>
@@ -339,7 +340,7 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 <div class="ulist">
 <ul>
 <li>
-<p><code>EventsCenter</code> : This class (written using <a href="https://github.com/google/guava/wiki/EventBusExplained">Google&#8217;s Event Bus library</a>) is used by components to communicate with other components using events (i.e. a form of <em>Event Driven</em> design)</p>
+<p><code>EventsCenter</code> : This class (written using <a href="https://github.com/google/guava/wiki/EventBusExplained">Google&#8217;s Event Bus library</a>) is used by components to communicate with other components using events (i.e. a form of <em>Event Driven</em> design).</p>
 </li>
 <li>
 <p><code>LogsCenter</code> : Used by many classes to write log messages to the App&#8217;s log file.</p>
@@ -454,10 +455,10 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p><strong>API</strong> : <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/ui/Ui.java"><code>Ui.java</code></a></p>
 </div>
 <div class="paragraph">
-<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>PersonListPanel</code>, <code>StatusBarFooter</code>, <code>BrowserPanel</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
+<p>As shown from the diagram above, the UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>PersonListPanel</code>, <code>StatusBarFooter</code>, <code>BrowserPanel</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
 </div>
 <div class="paragraph">
-<p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
+<p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a>.</p>
 </div>
 <div class="paragraph">
 <p>The <code>UI</code> component,</p>
@@ -964,34 +965,7 @@ objects are added under the Google <code>Person</code> object&#8217;s <code>User
 </div>
 </div>
 <div class="sect2">
-<h3 id="location"><a class="link" href="#location">4.4. Location</a></h3>
-<div class="imageblock">
-<div class="content">
-<img src="images/Location.png" alt="Location" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>As seen above, an event based approach is used to display the location of the person.
-Once the Address book parser identifies the user command as a valid location command, it will make use of the Google Event bus to transmit the event.
-The browser panel has subscribed for that particular event and therefore when the event is passed, the browser panel will pick it up and execute the function.
-This will eventually render the browser panel with Google Maps and a marker pointing at the address of the requested person.
-This rendering of Google Maps is done via calling the URL.</p>
-</div>
-<div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.4.1. Design Considerations</a></h4>
-<div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of <code>location</code><br>
-<strong>Alternative 1 (current choice):</strong> Add a new class that extends <code>Command</code> that uses the Google Maps URL<br>
-<strong>Pros:</strong> The map can be easily loaded without needing to call the GoogleMaps API <br>
-<strong>Cons:</strong> Only functions that can be sent via URL can be used.<br>
-<strong>Alternative 2:</strong> Make use of Google Maps API<br>
-<strong>Pros:</strong> More functions such as radius and many more could have been added<br>
-<strong>Cons:</strong> Take a longer time to load the map.</p>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="email"><a class="link" href="#email">4.5. Email</a></h3>
+<h3 id="email"><a class="link" href="#email">4.4. Email</a></h3>
 <div class="paragraph">
 <p>The <code>EmailCommand</code> is the main driver of this functionality. It links the logic in Addressbook and the content displayed on the Email browser.</p>
 </div>
@@ -1001,10 +975,25 @@ This rendering of Google Maps is done via calling the URL.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>As seen from the picture above, the <code>AddressParser</code> will be able to distinguish the email command and direct it to the <code>EmailCommandParser</code>. Over there the recipient, subject and the body from the command line input is identified. Once identified, the <code>execute</code> function is called. This function in the <code>EmailCommand</code> would call the <code>updateEmailRecipient</code> function in the Model. Once the fields are updated properly, the <code>EmailCommand</code> will call the desktop mail app and fill in the necessary details.</p>
+<p>As seen from the picture above, the <code>AddressParser</code> will be able to distinguish the email command and direct it to the <code>EmailCommandParser</code>. Over there the recipient, subject and the body from the command line input is identified.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Note that the <code>EmailCommandParser</code> will raise a <code>ParseException</code> if the <code>to/</code> is not filled. The <code>subject</code> and <code>body</code> fields are not compulsory.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Once identified, the <code>execute</code> function is called. This function in the <code>EmailCommand</code> would call the <code>updateEmailRecipient</code> function in the Model. Once the fields are updated properly, the <code>EmailCommand</code> will call the desktop mail app and fill in the necessary details.</p>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.5.1. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.4.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>email</code><br>
 <strong>Alternative 1 (current choice):</strong> Uses the inbuilt Email Application.<br>
@@ -1012,12 +1001,93 @@ This rendering of Google Maps is done via calling the URL.</p>
 <strong>Cons:</strong> A new application has to be opened.<br>
 <strong>Alternative 2:</strong> Make use of Gmail API.<br>
 <strong>Pros:</strong> Can be emailed from the browser panel itself.<br>
-<strong>Cons:</strong> The UI for Gmail is very poor.</p>
+<strong>Cons:</strong> The UI for Gmail is very poor on <code>JavaFX WebView</code>.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="updateprofilepic-deleteprofilepic-mechanism"><a class="link" href="#updateprofilepic-deleteprofilepic-mechanism">4.6. UpdateProfilePic/DeleteProfilePic mechanism</a></h3>
+<h3 id="location"><a class="link" href="#location">4.5. Location</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/Location.png" alt="Location" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>As seen above, an event based approach is used to display the location of the person.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Note that the <code>LocationCommandParser</code> will raise a <code>ParseException</code> if the <code>INDEX</code> is not stated.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Once the Address book parser identifies the user command as a valid location command, it will make use of the Google Event bus to transmit the event.
+The browser panel has subscribed for that particular event and therefore when the event is passed, the browser panel will pick it up and execute the function.
+This will eventually render the browser panel with Google Maps and a marker pointing at the address of the requested person.
+This rendering of Google Maps is done via calling the URL.</p>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.5.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>location</code><br>
+<strong>Alternative 1 (current choice):</strong> Add a new class that extends <code>Command</code> that uses the Google Maps URL.<br>
+<strong>Pros:</strong> The map can be easily loaded without needing to call the GoogleMaps API. <br>
+<strong>Cons:</strong> Only functions that can be sent via URL can be used.<br>
+<strong>Alternative 2:</strong> Make use of Google Maps API.<br>
+<strong>Pros:</strong> More functions such as radius and many more could have been added.<br>
+<strong>Cons:</strong> Take a longer time to load the map.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="removetag"><a class="link" href="#removetag">4.6. RemoveTag</a></h3>
+<div class="paragraph">
+<p>The removeTag mechanism is facilitated by the RemovetagCommand class which is inherited from the
+<code>UndoableCommand</code> class. It removes the tag from all the contacts in the current list.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/EmailSequenceDiagram.png" alt="EmailSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>When the user executes the command removeTag, the RemoveTagCommandParser class will parse the tag and call the <code>RemoveTagCommand</code>. In <code>RemoveTagCommand</code> the <code>execute()</code> function is called.
+This will invoke the <code>removeTag</code> function that resides in the <code>LogicManager</code>, which will remove the specific tag from all the contacts and updates the storage.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Note that the <code>removeTag</code> function will raise a <code>CommandException</code> if the <code>tag</code> is not valid.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.6.1. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>removeTag</code><br>
+<strong>Alternative 1 (current choice):</strong> Directly removes the tag from all persons.<br>
+<strong>Pros:</strong> Easier as mulitple person are updated at one go. <br>
+<strong>Cons:</strong> It removes for everyone. If the tag only has to be removed from one person, the <code>edit</code> command has to be used.<br>
+<strong>Alternative 2:</strong> Usage of <code>edit</code> command to remove the tags.<br>
+<strong>Pros:</strong> One lesser command for the user to remember.<br>
+<strong>Cons:</strong> It is very tiring for the user to update each and everyone of the contacts in the contact list, if he decided to remove the tag from everyone.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="updateprofilepic-deleteprofilepic-mechanism"><a class="link" href="#updateprofilepic-deleteprofilepic-mechanism">4.7. UpdateProfilePic/DeleteProfilePic mechanism</a></h3>
 <div class="paragraph">
 <p>The UpdateProfilePic/DeleteProfilePic mechanism is facilitated by a <code>ProfilePic</code> class, which is a property class of the <code>Person</code> class. It supports the updating and deleting of profile pictures of each Person. These two commands inherit from <code>UndoableCommand</code>.</p>
 </div>
@@ -1044,7 +1114,7 @@ This rendering of Google Maps is done via calling the URL.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.6.1. Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.7.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>updateProfilePic</code><br>
 <strong>Alternative 1 (current choice):</strong> Add a new class that extends <code>UndoableCommand</code>.<br>
@@ -1067,7 +1137,7 @@ This rendering of Google Maps is done via calling the URL.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="viewcount-tracking"><a class="link" href="#viewcount-tracking">4.7. ViewCount Tracking</a></h3>
+<h3 id="viewcount-tracking"><a class="link" href="#viewcount-tracking">4.8. ViewCount Tracking</a></h3>
 <div class="paragraph">
 <p>The <code>viewCount</code> variable is a <code>private int</code> variable of the <code>Person</code> class. This variable is updated whenever a <code>PersonPanelSelectionChangedEvent</code> is raised. This means that whenever a <code>Person</code> is selected, whether by the <code>select</code> command or by clicking on the <code>PersonCard</code> on the UI, the <code>Person</code> associated with the selected <code>PersonCard</code> will have its <code>viewCount</code> variable incremented by 1.</p>
 </div>
@@ -1089,7 +1159,7 @@ This rendering of Google Maps is done via calling the URL.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.7.1. Design Considerations</a></h4>
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.8.1. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>viewCount</code><br>
 <strong>Alternative 1 (current choice):</strong> Add a new variable to the <code>Person</code> class.<br>
@@ -2831,7 +2901,7 @@ Use case ends.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-29 03:15:54 +00:00
+Last updated 2017-10-29 04:27:57 +00:00
 </div>
 </div>
 </body>
