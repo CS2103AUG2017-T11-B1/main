@@ -29,34 +29,14 @@ Adapted from AddressBook-Level4, by: <code>Team SE-EDU</code>      Since: <code>
 <li><a href="#getting-started">2. Getting started</a>
 <ul class="sectlevel2">
 <li><a href="#installation-guide">2.1. Installation guide</a></li>
-<li><a href="#interface-guide">2.2. Interface guide</a></li>
+<li><a href="#graphical-user-interface-guide">2.2. Graphical user interface guide</a></li>
 </ul>
 </li>
 <li><a href="#features">3. Features</a>
 <ul class="sectlevel2">
-<li><a href="#adding-a-contact-code-add-code">3.1. Adding a contact: <code>add</code></a></li>
-<li><a href="#adding-an-event-code-adde-code">3.2. Adding an event: <code>addE</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">3.3. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#deleting-a-contact-code-delete-code">3.4. Deleting a contact : <code>delete</code></a></li>
-<li><a href="#deleting-an-event-code-deletee-code">3.5. Deleting an event : <code>deleteE</code></a></li>
-<li><a href="#deleting-the-profile-picture-of-a-contact-code-deleteprofilepic-code">3.6. Deleting the profile picture of a contact : <code>deleteProfilePic</code></a></li>
-<li><a href="#editing-a-person-code-edit-code">3.7. Editing a person : <code>edit</code></a></li>
-<li><a href="#editing-an-event-code-edite-code">3.8. Editing an event : <code>editE</code></a></li>
-<li><a href="#emailing-a-person-code-email-code">3.9. Emailing a person : <code>email</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.10. Exiting the program : <code>exit</code></a></li>
-<li><a href="#export-contacts-code-export-code">3.11. Export contacts: <code>export</code></a></li>
-<li><a href="#finding-persons-by-name-and-tags-code-find-code">3.12. Finding persons by name and tags: <code>find</code></a></li>
-<li><a href="#help-code-help-code">3.13. Help : <code>help</code></a></li>
-<li><a href="#history-code-history-code">3.14. History : <code>history</code></a></li>
-<li><a href="#importing-contacts-code-import-code">3.15. Importing contacts: <code>import</code></a></li>
-<li><a href="#listing-all-persons-code-list-code">3.16. Listing all persons : <code>list</code></a></li>
-<li><a href="#location-of-a-contact-code-location-code">3.17. Location of a contact : <code>location</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.18. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#removing-tags-code-removetag-code">3.19. Removing tags: <code>removeTag</code></a></li>
-<li><a href="#saving-the-data">3.20. Saving the data</a></li>
-<li><a href="#selecting-a-contact-code-select-code">3.21. Selecting a contact : <code>select</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">3.22. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#updating-a-person-s-profile-picture-code-updateprofilepic-code">3.23. Updating a person&#8217;s profile picture: <code>updateProfilePic</code></a></li>
+<li><a href="#contact-features">3.1. Contact features</a></li>
+<li><a href="#event-features">3.2. Event features</a></li>
+<li><a href="#general-features">3.3. General features</a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -105,16 +85,16 @@ This app will not work with earlier versions of Java 8.
 <p>Download the latest <code>DoC.jar</code> <a href="https://github.com/CS2103AUG2017-T11-B1/main/releases">here</a>.</p>
 </li>
 <li>
-<p>Copy the file to the folder you want to use as the home folder for your Address Book.</p>
+<p>Copy the file to the folder you want to use as the home folder for DoC.</p>
 </li>
 <li>
-<p>Double-click the file to start the app. The GUI should appear in a few seconds.</p>
+<p>Double-click the file to start the app. The graphical user interface should appear in a few seconds.</p>
 </li>
 </ol>
 </div>
 </div>
 <div class="sect2">
-<h3 id="interface-guide"><a class="link" href="#interface-guide">2.2. Interface guide</a></h3>
+<h3 id="graphical-user-interface-guide"><a class="link" href="#graphical-user-interface-guide">2.2. Graphical user interface guide</a></h3>
 <div class="paragraph">
 <p>The following image highlights the 5 different components of DoC:<br></p>
 </div>
@@ -179,7 +159,12 @@ The <code>Events panel</code> displays your recorded events in the order of most
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-contact-code-add-code"><a class="link" href="#adding-a-contact-code-add-code">3.1. Adding a contact: <code>add</code></a></h3>
+<h3 id="contact-features"><a class="link" href="#contact-features">3.1. Contact features</a></h3>
+<div class="paragraph">
+<p>You can manage your contacts through the following commands:</p>
+</div>
+<div class="sect3">
+<h4 id="adding-a-contact-code-add-code"><a class="link" href="#adding-a-contact-code-add-code">3.1.1. Adding a contact: <code>add</code></a></h4>
 <div class="paragraph">
 <p>Adds a contact to the address book.<br>
 Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code></p>
@@ -210,211 +195,346 @@ A contact can have any number of tags (including 0)
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Picture guide</strong></p>
+<p><strong>Visual guide</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/addpic.png" alt="addpic" width="700">
+</div>
 </div>
 <div class="paragraph">
-<p>&lt;PICTURE GUIDE PENDING UI UPDATE&gt;</p>
+<p>As shown in the image above, after entering the <code>add</code> command in the example, the newly added contact will appear in the <code>Contacts panel</code></p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="adding-an-event-code-adde-code"><a class="link" href="#adding-an-event-code-adde-code">3.2. Adding an event: <code>addE</code></a></h3>
+<div class="sect3">
+<h4 id="updating-a-contact-s-profile-picture-code-updateprofilepic-code"><a class="link" href="#updating-a-contact-s-profile-picture-code-updateprofilepic-code">3.1.2. Updating a contact&#8217;s profile picture: <code>updateProfilePic</code></a></h4>
 <div class="paragraph">
-<p>Adds an event to the address book.<br>
-Format: <code>addE h/HEADER de/DESCRIPTION d/DATE</code></p>
+<p>Updates the profile picture of a contact.<br>
+Format: <code>updateProfilePic INDEX [u/imageUrl]</code></p>
 </div>
-<div class="admonitionblock tip">
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Updates the profile picture of the contact at the specified <code>INDEX</code>. The index refers to the index number shown in the last contact listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>The index must be valid as well</p>
+</li>
+<li>
+<p>The <code>imageUrl</code> must be a valid one. It should start with <code><a href="file:///" class="bare">file:///</a></code> for images stored locally</p>
+</li>
+<li>
+<p>Or a valid web URL for an image stored on the internet</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>updateProfilePic 1 u/file:///C:/Users/Bobby/image.jpg</code><br>
+Updates the profile picture of the 1st contact to be the image at <code><a href="file:///C:/Users/Bobby/image.jpg" class="bare">file:///C:/Users/Bobby/image.jpg</a></code><br></p>
+</li>
+<li>
+<p><code>updateProfilePic 2 u/http://www.google.com/images/image.png</code><br>
+Updates the profile picture of the 2nd contact to be the image at <code><a href="http://www.google.com/images/image.png" class="bare">http://www.google.com/images/image.png</a></code><br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Visual guide</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/updateProfilePicImageExample.jpg" alt="updateProfilePicImageExample" width="1000">
+</div>
+</div>
+<div class="paragraph">
+<p>As shown in the image above, after entering the <code>updateProfilePic</code> command, the profile picture of the contact at the specified index is updated to the image stored at the url specified.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="importing-contacts-code-import-code"><a class="link" href="#importing-contacts-code-import-code">3.1.3. Importing contacts: <code>import</code></a></h4>
+<div class="paragraph">
+<p>Imports contacts to DoC from Google Contacts.<br>
+Format: <code>import</code></p>
+</div>
+<div class="admonitionblock warning">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
+<i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-The date must a valid date with format: year-month-day
+Number of contacts imported is limited to 1000<br>
+This features requires Internet connection
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Example:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>addE h/Meeting de/Business meeting at in the afternoon at 2pm d/2017-11-20</code></p>
-</li>
-</ul>
+<p><strong>Steps</strong><br>
+<strong>1.</strong> Enter the <code>import</code> command<br>
+<strong>2.</strong> Log in to your Google account on the in-built browser<br>
+<strong>3.</strong> Grant permission to DoC to access your contacts<br></p>
 </div>
 <div class="paragraph">
-<p><strong>Picture guide</strong></p>
+<p><strong>Visual guide</strong></p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/addEpic.png" alt="addEpic" width="1000">
+<img src="images/importpic.png" alt="importpic" width="1000">
 </div>
 </div>
 <div class="paragraph">
-<p>Your newly created event will be listed in the event panel and will be sorted based on its date. Thus, the earliest event will be displayed at the top of the panel.
-As shown in the guide above, yellow panel indicates an event upcoming in 2 or less days, Green panel indicates an event that have yet to come (more than 2 days) and Red panel indicates that the event is already overdue.</p>
+<p>You can enter your credentials and grant permission to DoC to access your Google contacts, as highlighted by the
+red boxes in the picture above.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.3. Clearing all entries : <code>clear</code></a></h3>
+<div class="sect3">
+<h4 id="exporting-contacts-code-export-code"><a class="link" href="#exporting-contacts-code-export-code">3.1.4. Exporting contacts: <code>export</code></a></h4>
 <div class="paragraph">
-<p>Clears all entries from the address book.<br>
-Format: <code>clear</code></p>
+<p>Export your contacts from DoC to Google Contacts.<br>
+Format: <code>export</code><br></p>
 </div>
-<div class="paragraph">
-<p><strong>Picture guide</strong></p>
-</div>
-<div class="paragraph">
-<p>&lt;PICTURE GUIDE PENDING UI UPDATE&gt;</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="deleting-a-contact-code-delete-code"><a class="link" href="#deleting-a-contact-code-delete-code">3.4. Deleting a contact : <code>delete</code></a></h3>
-<div class="paragraph">
-<p>Deletes the specified contact from the address book.<br>
-Format: <code>delete INDEX</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Deletes the contact at the specified <code>INDEX</code>.</p>
-</li>
-<li>
-<p>The index refers to the index number shown in the most recent listing.</p>
-</li>
-<li>
-<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+This features requires Internet connection
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>list</code><br>
-<code>delete 2</code><br>
-Deletes the 2nd contact in the address book.</p>
-</li>
-<li>
-<p><code>find Betsy</code><br>
-<code>delete 1</code><br>
-Deletes the 1st contact in the results of the <code>find</code> command.</p>
-</li>
-</ul>
+<p><strong>Steps</strong><br>
+<strong>1.</strong> Enter the <code>export</code> command<br>
+<strong>2.</strong> Log in to your Google account on the built-in browser<br>
+<strong>3.</strong> Grant permission to DoC to access your contacts<br></p>
 </div>
 <div class="paragraph">
-<p><strong>Picture guide</strong></p>
-</div>
-<div class="paragraph">
-<p>&lt;PICTURE GUIDE PENDING UI UPDATE&gt;</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="deleting-an-event-code-deletee-code"><a class="link" href="#deleting-an-event-code-deletee-code">3.5. Deleting an event : <code>deleteE</code></a></h3>
-<div class="paragraph">
-<p>Deletes the specified event from the address book.<br>
-Format: <code>deleteE INDEX</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Deletes the event at the specified <code>INDEX</code>.</p>
-</li>
-<li>
-<p>The index refers to the index number shown in the most recent listing.</p>
-</li>
-<li>
-<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>deleteE 3</code><br>
-Deletes the 3rd event in the address book.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><strong>Picture guide</strong></p>
-</div>
-<div class="paragraph">
-<p>&lt;PICTURE GUIDE PENDING UI UPDATE&gt;</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="deleting-the-profile-picture-of-a-contact-code-deleteprofilepic-code"><a class="link" href="#deleting-the-profile-picture-of-a-contact-code-deleteprofilepic-code">3.6. Deleting the profile picture of a contact : <code>deleteProfilePic</code></a></h3>
-<div class="paragraph">
-<p>Deletes the profile picture of the specified contact from the address book.<br>
-Format: <code>deleteProfilePic INDEX</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Deletes the profile picture of the contact at the specified <code>INDEX</code>.</p>
-</li>
-<li>
-<p>The index refers to the index number shown in the most recent listing.</p>
-</li>
-<li>
-<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-<li>
-<p>The index must be valid as well.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>list</code><br>
-<code>deleteProfilePic 2</code><br>
-Deletes the profile picture of the 2nd contact in the address book.</p>
-</li>
-<li>
-<p><code>find Bobby</code><br>
-<code>deleteProfilePic 1</code><br>
-Deletes the profile picture of the 1st person in the results of the <code>find</code> command.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Picture Guide:</p>
+<p><strong>Visual guide</strong></p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/deleteProfilePicImageExample.jpg" alt="deleteProfilePicImageExample" width="1000">
+<img src="images/importpic.png" alt="importpic" width="1000">
 </div>
 </div>
 <div class="paragraph">
-<p>As shown in the picture above, after entering the <code>deleteProfilePic</code> command, the profile picture of the person at the specified index is reverted back to the default.</p>
+<p>You can enter your credentials and grant permission to DoC to access your Google contacts, as highlighted by the
+red boxes in the picture above.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="editing-a-person-code-edit-code"><a class="link" href="#editing-a-person-code-edit-code">3.7. Editing a person : <code>edit</code></a></h3>
+<div class="sect3">
+<h4 id="finding-contacts-by-name-and-tags-code-find-code"><a class="link" href="#finding-contacts-by-name-and-tags-code-find-code">3.1.5. Finding contacts by name and tags: <code>find</code></a></h4>
+<div class="paragraph">
+<p>Lists all contacts whose name or tags matches any of the given search terms.<br>
+Format: <code>find TERM1 [MORE_TERMS]</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+* The search is case insensitive; e.g a search term of <code>hans</code> will match any contact name containing <code>Hans</code><br>
+ * Only full words will be matched; e.g a search term of <code>Han</code> will not match a contact name containing <code>Hans</code><br>
+ * Name of contacts can be matched partially; e.g a search term of <code>Han</code> will match the contact name <code>Han Solo</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Visual guide</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/findpic.png" alt="findpic" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>As demonstrated by the image above, entering the command <code>find Family han</code> displays all contacts with a tag or
+part of name, matching any search term.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="listing-all-contacts-code-list-code"><a class="link" href="#listing-all-contacts-code-list-code">3.1.6. Listing all contacts : <code>list</code></a></h4>
+<div class="paragraph">
+<p>Display a list of all contacts currently stored in DoC.<br>
+Format: <code>list</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Visual guide</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/listpic.png" alt="listpic" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>As demonstrated in the image above, regardless of the current view in <code>Contacts panel</code>, DoC will display the list of all contacts currently stored in DoC upon receiving the command <code>list</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="selecting-a-contact-code-select-code"><a class="link" href="#selecting-a-contact-code-select-code">3.1.7. Selecting a contact : <code>select</code></a></h4>
+<div class="paragraph">
+<p>Selects the contact identified by the index number used in the last contact listing, and loads the Google search result of the contact.<br>
+Format: <code>select INDEX</code><br>
+Refer to the following picture guide on how you can retrieve the INDEX of a contact:<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Visual guide</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/selectpic.png" alt="selectpic" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>As demonstrated by the picture guide, you can first enter the command <code>list</code> to display a list of all contacts currently stored in DoC. After entering the <code>select</code> command, the Google search of the contact name will load up in the <code>Browser panel</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="emailing-contacts-code-email-code"><a class="link" href="#emailing-contacts-code-email-code">3.1.8. Emailing contacts : <code>email</code></a></h4>
+<div class="paragraph">
+<p>Emails an existing contact/ a group in the address book.<br>
+Format: <code>email [to/TO] [subject/SUBJECT] [body/BODY]</code></p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+This features requires Internet connection
+</td>
+</tr>
+</table>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Email <code>to</code> must be provided.</p>
+</li>
+<li>
+<p>Email <code>subject</code> and <code>body</code> is optional.</p>
+</li>
+<li>
+<p>Email <code>to</code> contains either the <code>contact&#8217;s name</code> or a <code>tag name</code>.</p>
+</li>
+<li>
+<p>Email <code>subject</code> contains the subject of the email.</p>
+</li>
+<li>
+<p>Email <code>body</code> contains the body of the email.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>email to/friends subject/SUBJECT body/BODY</code><br>
+Opens the default emailing client and adds all the contacts who has the tag <code>friends</code> into the <code>to</code> area,
+adds the <code>subject</code> as <code>SUBJECT</code> and <code>body</code> as <code>BODY</code> .</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Visual guide</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Email_UG.PNG" alt="Email UG" width="1000">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>email to/Adam</code><br>
+Opens the default emailing client and adds Adam to the <code>to</code> field and has the subject and body as null.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Visual guide</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Email_UG_1.PNG" alt="Email UG 1" width="1000">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="locating-a-contact-code-location-code"><a class="link" href="#locating-a-contact-code-location-code">3.1.9. Locating a contact : <code>location</code></a></h4>
+<div class="paragraph">
+<p>Shows the address of the contact in Google Maps.<br>
+Format: <code>location INDEX</code></p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+This features requires Internet connection
+</td>
+</tr>
+</table>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Shows the address of the contact at the specified <code>INDEX</code>. The index refers to the index number shown in the last contact listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>location 1</code><br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Visual guide</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Location_UG.PNG" alt="Location UG" width="1000">
+</div>
+</div>
+<div class="paragraph">
+<p>Shows the address of the 1st contact in Google Maps as shown above.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editing-a-contact-code-edit-code"><a class="link" href="#editing-a-contact-code-edit-code">3.1.10. Editing a contact : <code>edit</code></a></h4>
 <div class="paragraph">
 <p>Edits an existing contact in the address book.<br>
 Format: <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code></p>
@@ -458,14 +578,232 @@ Edits the name of the 2nd contact to be <code>Betsy Crower</code> and clears all
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Picture guide</strong></p>
+<p><strong>Visual guide</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/editpic.png" alt="editpic" width="700">
+</div>
 </div>
 <div class="paragraph">
-<p>&lt;PICTURE GUIDE PENDING UI UPDATE&gt;</p>
+<p>As you can see from the image above, the <code>edit</code> command from the example will edit the stated parameters of a contact.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="removing-tags-code-removetag-code"><a class="link" href="#removing-tags-code-removetag-code">3.1.11. Removing tags: <code>removeTag</code></a></h4>
+<div class="paragraph">
+<p>Finds contacts whose names or tags contain any of the given tag and removes that tag.<br>
+Format: <code>removeTag rm/INDEX t/TAG</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The search is case sensitive. e.g <code>family</code> will match <code>family</code></p>
+</li>
+<li>
+<p><code>rm/INDEX</code> is not compulsory. If not given, it will remove the tag from all contacts</p>
+</li>
+<li>
+<p>If <code>rm/INDEX</code> is stated, tags from those indexes in the current list will be removed</p>
+</li>
+<li>
+<p>Only tag is searched</p>
+</li>
+<li>
+<p>Only full words will be matched e.g. <code>Family</code> will not match <code>Families</code></p>
+</li>
+<li>
+<p>Contacts having that tag will be returned</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>removeTag t/Friend</code><br>
+Friend tag is removed from all contacts.</p>
+</li>
+<li>
+<p><code>removeTag rm/1 2 t/Friend</code><br>
+Friend tag is only removed from Index 1 and 2.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Visual guide</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/removeTagpic.png" alt="removeTagpic" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>As shown in the image above, the <code>removeTag</code> command will remove given <code>Tag</code> from all the appropriate contacts in Doc.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="deleting-the-profile-picture-of-a-contact-code-deleteprofilepic-code"><a class="link" href="#deleting-the-profile-picture-of-a-contact-code-deleteprofilepic-code">3.1.12. Deleting the profile picture of a contact : <code>deleteProfilePic</code></a></h4>
+<div class="paragraph">
+<p>Deletes the profile picture of the specified contact from the address book.<br>
+Format: <code>deleteProfilePic INDEX</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Deletes the profile picture of the contact at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the most recent listing.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>The index must be valid as well.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list</code><br>
+<code>deleteProfilePic 2</code><br>
+Deletes the profile picture of the 2nd contact in the address book.</p>
+</li>
+<li>
+<p><code>find Bobby</code><br>
+<code>deleteProfilePic 1</code><br>
+Deletes the profile picture of the 1st contact in the results of the <code>find</code> command.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Visual guide</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deleteProfilePicImageExample.jpg" alt="deleteProfilePicImageExample" width="1000">
+</div>
+</div>
+<div class="paragraph">
+<p>As shown in the picture above, after entering the <code>deleteProfilePic</code> command, the profile picture of the contact at the specified index is reverted back to the default.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="deleting-a-contact-code-delete-code"><a class="link" href="#deleting-a-contact-code-delete-code">3.1.13. Deleting a contact : <code>delete</code></a></h4>
+<div class="paragraph">
+<p>Deletes the specified contact from the address book.<br>
+Format: <code>delete INDEX</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Deletes the contact at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the most recent listing.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list</code><br>
+<code>delete 2</code><br>
+Deletes the 2nd contact in the address book.</p>
+</li>
+<li>
+<p><code>find Betsy</code><br>
+<code>delete 1</code><br>
+Deletes the 1st contact in the results of the <code>find</code> command.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Visual guide</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/deletepic.png" alt="deletepic" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>According to the image above, let&#8217;s say you want to delete the contact at index 3, enter the <code>delete</code> command and index to remove the contact from DoC.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="editing-an-event-code-edite-code"><a class="link" href="#editing-an-event-code-edite-code">3.8. Editing an event : <code>editE</code></a></h3>
+<h3 id="event-features"><a class="link" href="#event-features">3.2. Event features</a></h3>
+<div class="paragraph">
+<p>You can manage your events through the following commands:</p>
+</div>
+<div class="sect3">
+<h4 id="adding-an-event-code-adde-code"><a class="link" href="#adding-an-event-code-adde-code">3.2.1. Adding an event: <code>addE</code></a></h4>
+<div class="paragraph">
+<p>Adds an event to the address book.<br>
+Format: <code>addE h/HEADER de/DESCRIPTION d/DATE</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The date must a valid date with format: year-month-day
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>addE h/Meeting de/Business meeting at in the afternoon at 2pm d/2017-11-20</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Visual guide</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/addEpic.png" alt="addEpic" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>Your newly created event will be listed in the event panel and will be sorted based on its date. Thus, the earliest event will be displayed at the top of the panel.
+As shown in the guide above, yellow panel indicates an event upcoming in 2 or less days, Green panel indicates an event that have yet to come (more than 2 days) and Red panel indicates that the event is already overdue.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editing-an-event-code-edite-code"><a class="link" href="#editing-an-event-code-edite-code">3.2.2. Editing an event : <code>editE</code></a></h4>
 <div class="paragraph">
 <p>Edits an existing event in the address book.<br>
 Format: <code>editE INDEX [h/HEADER] [de/DESCRIPTION] [d/DATE]</code></p>
@@ -496,42 +834,41 @@ Format: <code>editE INDEX [h/HEADER] [de/DESCRIPTION] [d/DATE]</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>editE 1 h/Birthday party d/2017-06-12</code><br>
-Edits the header and date of the 1st event to be <code>Birthday party</code> and <code>2017-06-12</code> respectively.</p>
+<p><code>editE 3 h/Birthday party d/2017-10-30</code><br>
+Edits the header and date of the 1st event to be <code>Birthday party</code> and <code>2017-10-30</code> respectively.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Picture guide</strong></p>
+<p><strong>Visual guide</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/editEpic.png" alt="editEpic" width="700">
+</div>
 </div>
 <div class="paragraph">
-<p>&lt;PICTURE GUIDE PENDING UI UPDATE&gt;</p>
+<p>According to the image above, if you want to edit an <code>Event</code> at index 3 by changing the header and date, the result event will automatically sort itself in the <code>Events panel</code> based on the new date.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="emailing-a-person-code-email-code"><a class="link" href="#emailing-a-person-code-email-code">3.9. Emailing a person : <code>email</code></a></h3>
+<div class="sect3">
+<h4 id="deleting-an-event-code-deletee-code"><a class="link" href="#deleting-an-event-code-deletee-code">3.2.3. Deleting an event : <code>deleteE</code></a></h4>
 <div class="paragraph">
-<p>Emails an existing person/ a group in the address book.<br>
-Format: <code>email [to/TO] [subject/SUBJECT] [body/BODY]</code></p>
+<p>Deletes the specified event from the address book.<br>
+Format: <code>deleteE INDEX</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Email <code>to</code> must be provided.</p>
+<p>Deletes the event at the specified <code>INDEX</code>.</p>
 </li>
 <li>
-<p>Email <code>subject</code> and <code>body</code> is optional.</p>
+<p>The index refers to the index number shown in the most recent listing.</p>
 </li>
 <li>
-<p>Email <code>to</code> contains either the <code>person&#8217;s name</code> or a <code>tag name</code>.</p>
-</li>
-<li>
-<p>Email <code>subject</code> contains the subject of the email.</p>
-</li>
-<li>
-<p>Email <code>body</code> contains the body of the email.</p>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 </ul>
 </div>
@@ -543,109 +880,38 @@ Format: <code>email [to/TO] [subject/SUBJECT] [body/BODY]</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>email to/friends subject/SUBJECT body/BODY</code><br>
-Opens the default emailing client and adds all the person who has the tag <code>friends</code> into the <code>to</code> area,
-adds the <code>subject</code> as <code>SUBJECT</code> and <code>body</code> as <code>BODY</code> .</p>
+<p><code>deleteE 3</code><br>
+Deletes the 3rd event in the address book.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Picture guide</strong></p>
+<p><strong>Visual guide</strong></p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/Email_UG.PNG" alt="Email UG" width="1000">
+<img src="images/deleteEpic.png" alt="deleteEpic" width="700">
 </div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>email to/Adam</code><br>
-Opens the default emailing client and adds Adam to the <code>to</code> field and has the subject and body as null.</p>
-</li>
-</ul>
 </div>
 <div class="paragraph">
-<p><strong>Picture guide</strong></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/Email_UG_1.PNG" alt="Email UG 1" width="1000">
+<p>As shown on the image above, if you want to delete an overdue <code>Event</code>, simply key in the <code>deleteE</code> command stating the index and the event will be removed from DoC.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.10. Exiting the program : <code>exit</code></a></h3>
+<h3 id="general-features"><a class="link" href="#general-features">3.3. General features</a></h3>
 <div class="paragraph">
-<p>Exits the program.<br>
-Format: <code>exit</code></p>
+<p>These are commands that can be used in managing both contacts and events:</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="export-contacts-code-export-code"><a class="link" href="#export-contacts-code-export-code">3.11. Export contacts: <code>export</code></a></h3>
-<div class="paragraph">
-<p>Export your contacts from DoC to Google Contacts.<br>
-Format: <code>export</code><br></p>
-</div>
-<div class="paragraph">
-<p><strong>Steps</strong><br>
-<strong>1.</strong> Enter the <code>export</code> command<br>
-<strong>2.</strong> Log in to your Google account on the built-in browser<br>
-<strong>3.</strong> Grant permission to DoC to access your contacts<br></p>
-</div>
-<div class="paragraph">
-<p><strong>Picture guide</strong></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/importpic.png" alt="importpic" width="1000">
-</div>
-</div>
-<div class="paragraph">
-<p>You can enter your credentials and grant permission to DoC to access your Google contacts, as highlighted by the
-red boxes in the picture above.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="finding-persons-by-name-and-tags-code-find-code"><a class="link" href="#finding-persons-by-name-and-tags-code-find-code">3.12. Finding persons by name and tags: <code>find</code></a></h3>
-<div class="paragraph">
-<p>Lists all contacts whose name or tags matches any of the given search terms.<br>
-Format: <code>find TERM1 [MORE_TERMS]</code></p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-* The search is case insensitive; e.g a search term of <code>hans</code> will match any contact name containing <code>Hans</code><br>
- * Only full words will be matched; e.g a search term of <code>Han</code> will not match a contact name containing <code>Hans</code><br>
- * Name of contacts can be matched partially; e.g a search term of <code>Han</code> will match the contact name <code>Han Solo</code>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p><strong>Picture Guide</strong></p>
-</div>
-<div class="paragraph">
-<p>&lt;PICTURE PENDING UI UPDATE&gt;</p>
-</div>
-<div class="paragraph">
-<p>As demonstrated by the picture guide above, entering the command <code>find Family han</code> displays all contacts with a tag or
-part of name, matching any search term.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="help-code-help-code"><a class="link" href="#help-code-help-code">3.13. Help : <code>help</code></a></h3>
+<div class="sect3">
+<h4 id="help-code-help-code"><a class="link" href="#help-code-help-code">3.3.1. Help : <code>help</code></a></h4>
 <div class="paragraph">
 <p>Displays this document.<br>
 Format: <code>help</code></p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="history-code-history-code"><a class="link" href="#history-code-history-code">3.14. History : <code>history</code></a></h3>
+<div class="sect3">
+<h4 id="history-code-history-code"><a class="link" href="#history-code-history-code">3.3.2. History : <code>history</code></a></h4>
 <div class="paragraph">
 <p>Displays the history of commands you have entered, starting from the most recent one. <br>
 This feature can be accessed in two different ways:<br></p>
@@ -663,190 +929,8 @@ Format: the <kbd>&uarr;</kbd> and <kbd>&darr;</kbd> arrows will paste the previo
 </ul>
 </div>
 </div>
-<div class="sect2">
-<h3 id="importing-contacts-code-import-code"><a class="link" href="#importing-contacts-code-import-code">3.15. Importing contacts: <code>import</code></a></h3>
-<div class="paragraph">
-<p>Imports contacts to DoC from Google Contacts.<br>
-Format: <code>import</code></p>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-Number of contacts imported is limited to 1000<br>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p><strong>Steps</strong><br>
-<strong>1.</strong> Enter the <code>import</code> command<br>
-<strong>2.</strong> Log in to your Google account on the in-built browser<br>
-<strong>3.</strong> Grant permission to DoC to access your contacts<br></p>
-</div>
-<div class="paragraph">
-<p><strong>Picture guide</strong></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/importpic.png" alt="importpic" width="1000">
-</div>
-</div>
-<div class="paragraph">
-<p>You can enter your credentials and grant permission to DoC to access your Google contacts, as highlighted by the
-red boxes in the picture above.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="listing-all-persons-code-list-code"><a class="link" href="#listing-all-persons-code-list-code">3.16. Listing all persons : <code>list</code></a></h3>
-<div class="paragraph">
-<p>Display a list of all contacts currently stored in DoC.<br>
-Format: <code>list</code></p>
-</div>
-<div class="paragraph">
-<p><strong>Picture guide</strong><br></p>
-</div>
-<div class="paragraph">
-<p>&lt;PENDING UI UPDATE&gt;<br></p>
-</div>
-<div class="paragraph">
-<p>As demonstrated in the picture guide, DoC will display a list of all contacts currently stored in DoC upon receiving the command <code>list</code>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="location-of-a-contact-code-location-code"><a class="link" href="#location-of-a-contact-code-location-code">3.17. Location of a contact : <code>location</code></a></h3>
-<div class="paragraph">
-<p>Shows the address of the contact in Google Maps.<br>
-Format: <code>location INDEX</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Shows the address of the person at the specified <code>INDEX</code>. The index refers to the index number shown in the last person listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>location 1</code><br></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><strong>Picture guide</strong></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/Location_UG.PNG" alt="Location UG" width="1000">
-</div>
-</div>
-<div class="paragraph">
-<p>Shows the address of the 1st person in Google Maps as shown above.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.18. Redoing the previously undone command : <code>redo</code></a></h3>
-<div class="paragraph">
-<p>Reverses the most recent <code>undo</code> command, if any.<br>
-Format: <code>redo</code></p>
-</div>
-<div class="paragraph">
-<p><strong>Picture guide</strong><br></p>
-</div>
-<div class="paragraph">
-<p>&lt;PENDING UI UPDATE&gt;</p>
-</div>
-<div class="paragraph">
-<p>As demonstrated by the picture guide, a command of 'delete 1' is first entered, deleting the contact listed with an index of 1.
-An <code>undo</code> command is then entered, adding the deleted contact back to the list of contacts. Now, the <code>redo</code> command entered
-simply deletes the contact with an index of 1 again.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="removing-tags-code-removetag-code"><a class="link" href="#removing-tags-code-removetag-code">3.19. Removing tags: <code>removeTag</code></a></h3>
-<div class="paragraph">
-<p>Finds contacts whose names or tags contain any of the given tag and removes that tag.<br>
-Format: <code>removeTag rm/INDEX t/TAG</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>The search is case sensitive. e.g <code>family</code> will match <code>family</code></p>
-</li>
-<li>
-<p><code>rm/INDEX</code> is not compulsory. If not given, it will remove the tag from all contacts.</p>
-</li>
-<li>
-<p>If <code>rm/INDEX</code> is stated, tags from those indexes in the current list will be removed.</p>
-</li>
-<li>
-<p>Only tag is searched.</p>
-</li>
-<li>
-<p>Only full words will be matched e.g. <code>Family</code> will not match <code>Families</code></p>
-</li>
-<li>
-<p>Persons having that tag will be returned</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>removeTag t/Friend</code><br>
-Friend tag is removed from all contacts.</p>
-</li>
-<li>
-<p><code>removeTag rm/1 2 t/Friend</code><br>
-Friend tag is only removed from Index 1 and 2.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.20. Saving the data</a></h3>
-<div class="paragraph">
-<p>All additions, deletions, and changes performed on the contacts stored in DoC are saved automatically.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="selecting-a-contact-code-select-code"><a class="link" href="#selecting-a-contact-code-select-code">3.21. Selecting a contact : <code>select</code></a></h3>
-<div class="paragraph">
-<p>Selects the contact identified by the index number used in the last contact listing, and loads the Google search result of the contact.<br>
-Format: <code>select INDEX</code><br>
-Refer to the following picture guide on how you can retrieve the INDEX of a contact:<br></p>
-</div>
-<div class="paragraph">
-<p><strong>Picture guide</strong></p>
-</div>
-<div class="paragraph">
-<p>&lt;PENDING UI UPDATE&gt;</p>
-</div>
-<div class="paragraph">
-<p>As demonstrated by the picture guide, you can first enter the command <code>list</code> to display a list of all contacts currently stored in DoC.
-The numbers highlighted in red in the picture are the indexes of each contact.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.22. Undoing previous command : <code>undo</code></a></h3>
+<div class="sect3">
+<h4 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.3.3. Undoing previous command : <code>undo</code></a></h4>
 <div class="paragraph">
 <p>Reverses the changes made by the previous command entered.<br>
 Format: <code>undo</code></p>
@@ -866,67 +950,57 @@ Format: <code>undo</code></p>
 </table>
 </div>
 <div class="paragraph">
-<p><strong>Picture guide</strong></p>
-</div>
-<div class="paragraph">
-<p>&lt;PENDING UI UPDATE&gt;<br></p>
-</div>
-<div class="paragraph">
-<p>As demonstrated by the picture guide, a command of <code>delete 1</code>, deletes the contact listed with an index of 1. A subsequent <code>undo</code> command,
-reverses the <code>delete 1</code> command by adding back the deleted contact.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="updating-a-person-s-profile-picture-code-updateprofilepic-code"><a class="link" href="#updating-a-person-s-profile-picture-code-updateprofilepic-code">3.23. Updating a person&#8217;s profile picture: <code>updateProfilePic</code></a></h3>
-<div class="paragraph">
-<p>Updates the profile picture of a person.<br>
-Format: <code>updateProfilePic INDEX [u/imageUrl]</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Updates the profile picture of the person at the specified <code>INDEX</code>. The index refers to the index number shown in the last person listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-<li>
-<p>The index must be valid as well</p>
-</li>
-<li>
-<p>The <code>imageUrl</code> must be a valid one. It should start with <code><a href="file:///" class="bare">file:///</a></code> for images stored locally</p>
-</li>
-<li>
-<p>Or a valid web URL for an image stored on the internet</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>updateProfilePic 1 u/file:///C:/Users/Bobby/image.jpg</code><br>
-Updates the profile picture of the 1st person to be the image at <code><a href="file:///C:/Users/Bobby/image.jpg" class="bare">file:///C:/Users/Bobby/image.jpg</a></code><br></p>
-</li>
-<li>
-<p><code>updateProfilePic 2 u/http://www.google.com/images/image.png</code><br>
-Updates the profile picture of the 2nd person to be the image at <code><a href="http://www.google.com/images/image.png" class="bare">http://www.google.com/images/image.png</a></code><br></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Picture Guide:</p>
+<p><strong>Visual guide</strong></p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/updateProfilePicImageExample.jpg" alt="updateProfilePicImageExample" width="1000">
+<img src="images/undoPic.png" alt="undoPic" width="700">
 </div>
 </div>
 <div class="paragraph">
-<p>As shown in the picture above, after entering the <code>updateProfilePic</code> command, the profile picture of the person at the specified index is updated to the image stored at the url specified.</p>
+<p>As demonstrated by the image above, <code>history</code> command shows us that you have deleted the contact listed with an index of 2. A subsequent <code>undo</code> command,
+reverses the <code>delete 2</code> command by adding back the deleted contact.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.3.4. Redoing the previously undone command : <code>redo</code></a></h4>
+<div class="paragraph">
+<p>Reverses the most recent <code>undo</code> command, if any.<br>
+Format: <code>redo</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Visual guide</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/redoPic.png" alt="redoPic" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>As demonstrated by the image above, a command of 'delete 2' is first entered, deleting the contact listed with an index of 2.
+An <code>undo</code> command is then entered, adding the deleted contact back to the list of contacts. Now, the <code>redo</code> command entered
+simply deletes the contact with an index of 2 again.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.3.5. Clearing all entries : <code>clear</code></a></h4>
+<div class="paragraph">
+<p>Clears all entries from the address book.<br>
+Format: <code>clear</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="saving-the-data"><a class="link" href="#saving-the-data">3.3.6. Saving the data</a></h4>
+<div class="paragraph">
+<p>All additions, deletions, and changes performed on the contacts stored in DoC are saved automatically.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.3.7. Exiting the program : <code>exit</code></a></h4>
+<div class="paragraph">
+<p>Exits the program.<br>
+Format: <code>exit</code></p>
+</div>
 </div>
 </div>
 </div>
@@ -1026,7 +1100,7 @@ e.g. <code>updateProfilePic 2 u/http://www.google.com/images/image.png</code><br
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-30 05:17:41 +00:00
+Last updated 2017-10-30 07:59:17 +00:00
 </div>
 </div>
 </body>
