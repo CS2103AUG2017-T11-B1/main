@@ -47,7 +47,7 @@ Adapted from AddressBook-Level4, by: <code>Team SE-EDU</code>      Since: <code>
 <li><a href="#implementation">4. Implementation</a>
 <ul class="sectlevel2">
 <li><a href="#undo-redo-mechanism">4.1. Undo/Redo mechanism</a></li>
-<li><a href="#event-feature">4.2. Event(feature)</a></li>
+<li><a href="#event-class-mechanism">4.2. Event class mechanism</a></li>
 <li><a href="#oauth2-fulfilment-mechanism">4.3. OAuth2 fulfilment mechanism</a></li>
 <li><a href="#email">4.4. Email</a></li>
 <li><a href="#location">4.5. Location</a></li>
@@ -446,7 +446,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <h3 id="ui-component"><a class="link" href="#ui-component">3.2. UI component</a></h3>
 <div class="imageblock">
 <div class="content">
-<img src="images/UiClassDiagram.png" alt="UiClassDiagram" width="800">
+<img src="images/UiClassDiagram.PNG" alt="UiClassDiagram" width="800">
 </div>
 </div>
 <div class="paragraph">
@@ -456,7 +456,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p><strong>API</strong> : <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/ui/Ui.java"><code>Ui.java</code></a></p>
 </div>
 <div class="paragraph">
-<p>As shown from the diagram above, the UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>PersonListPanel</code>, <code>StatusBarFooter</code>, <code>BrowserPanel</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
+<p>As shown from the diagram above, the UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>PersonListPanel</code>, <code>EventListPanel</code>, <code>StatusBarFooter</code>, <code>BrowserPanel</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
 </div>
 <div class="paragraph">
 <p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a>.</p>
@@ -532,7 +532,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <h3 id="model-component"><a class="link" href="#model-component">3.4. Model component</a></h3>
 <div class="imageblock">
 <div class="content">
-<img src="images/ModelClassDiagram.png" alt="ModelClassDiagram" width="800">
+<img src="images/ModelClassDiagram.PNG" alt="ModelClassDiagram" width="800">
 </div>
 </div>
 <div class="paragraph">
@@ -553,7 +553,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p>stores the Address Book data.</p>
 </li>
 <li>
-<p>exposes an unmodifiable <code>ObservableList&lt;ReadOnlyPerson&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
+<p>exposes an unmodifiable <code>ObservableList&lt;ReadOnlyPerson&gt;</code> and <code>ObservableList&lt;ReadOnlyEvent&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
 </li>
 <li>
 <p>does not depend on any of the other three components.</p>
@@ -565,7 +565,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <h3 id="storage-component"><a class="link" href="#storage-component">3.5. Storage component</a></h3>
 <div class="imageblock">
 <div class="content">
-<img src="images/StorageClassDiagram.png" alt="StorageClassDiagram" width="800">
+<img src="images/StorageClassDiagram.PNG" alt="StorageClassDiagram" width="800">
 </div>
 </div>
 <div class="paragraph">
@@ -799,25 +799,98 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="event-feature"><a class="link" href="#event-feature">4.2. Event(feature)</a></h3>
+<h3 id="event-class-mechanism"><a class="link" href="#event-class-mechanism">4.2. Event class mechanism</a></h3>
+<div class="sect3">
+<h4 id="summary"><a class="link" href="#summary">4.2.1. Summary</a></h4>
 <div class="paragraph">
-<p>The <code>Event</code> feature is implemented with similar logic as a <code>Person</code>. The featured commands that modifies the address book include <code>addE</code>, <code>editE</code> and <code>deleteE</code>. As such, the methods from events are extended from <code>Model</code>.</p>
+<p>The <code>Event</code> class, which is located inside <code>model</code>, is implemented with similar logic as <code>Person</code> class. We have introduced three commands that modifies the address book: <code>addE</code>, <code>editE</code> and <code>deleteE</code>, which extends <code>UndoableCommand</code>.
+An <code>Event</code> consist of three sub-components: <code>Header</code>, <code>Desc</code> and <code>EventDate</code>. Commands such as <code>clear</code>, <code>undo</code> and <code>redo</code> can be used to alter events in the list as they deal with code that directly modifies the address book.</p>
 </div>
 <div class="paragraph">
-<p>Commands such as <code>clear</code>, <code>undo</code> and <code>redo</code> will apply to the events in the list as these commands extends <code>UndoableCommand</code>. Therefore, further coupling of these user commands and event feature is not introduced.</p>
+<p>The <code>EventPanel</code> is incorporated into the address book <code>MainWindow</code> to display all the events inside the internal list using <code>ObservableList&lt;ReadOnlyEvent&gt;</code>. This process will be explained later on under the section <code>Event card</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="event-methods"><a class="link" href="#event-methods">4.2.2. Event methods</a></h4>
+<div class="paragraph">
+<p>As stated in the summary, the <code>Event</code> class contains three main methods: <code>addE</code>, <code>editE</code> and <code>deleteE</code>.
+The execution flow is similar for all three methods on a higher level. We can demonstrate how different levels of components communicate with one another by referring to an example of <code>addE</code> command in the following sequence diagram.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/EventPersonModelClassDiagram.png" alt="EventPersonModelClassDiagram" width="800">
+<img src="images/AddEventDiagram.PNG" alt="AddEventDiagram" width="800">
 </div>
 </div>
-<div class="paragraph">
-<p>As you can see from the diagram, the sub component of <code>Event</code> include a <code>PersonList</code> that fetches persons from the <code>ReadOnlyPerson</code> and add them into the list without any modification. In the Ui, upon clicking on the person tagged under an event, the logic will execute <code>select</code> command which will bring the user to the respective person in the person panel.</p>
 </div>
 <div class="sect3">
-<h4 id="design-consideration"><a class="link" href="#design-consideration">4.2.1. Design Consideration</a></h4>
+<h4 id="exceptions"><a class="link" href="#exceptions">4.2.3. Exceptions</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> How to implement adding of persons into the event&#8217;s person list<br>
+<p>When the user input an event command with its parameters, the validity of the command word is checked inside the <code>AddressBookParser</code>. Next, the presence of the parameter prefixes is checked inside <code>AddEventCommandParser</code>.
+An appropriate <code>ParseException</code> will be thrown if the command word or prefixes are incorrect.</p>
+</div>
+<div class="paragraph">
+<p>Before modifying the list of events inside the address book, the system may throw exceptions due to some invalid parameters. Here are the possible exceptions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>EventNotFoundException</code>: This exception can be thrown by <code>editE</code> and <code>deleteE</code> command when the an invalid event index is provided by the user. The index needs to be within the size of the event list at the current state of the address book.</p>
+</li>
+<li>
+<p><code>DuplicateEventException</code>: This exception can be thrown by <code>addE</code> and <code>editE</code> command. The system will first create an <code>Event</code> object with the input parameters, compare the object to all events residing in the event list and throw this exception if there is a duplicate found.</p>
+</li>
+<li>
+<p><code>DateTimeParseException</code>: This exception can be thrown by <code>addE</code> and <code>editE</code> command when the input <code>EventDate</code> parameter is not a valid date. The date format and validity of date is checked inside the <code>Event</code> class like this:<br></p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>public EventDate(String eventDate) throws IllegalValueException {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    try {
+        eventLocalDate = LocalDate.parse(eventDate, formatter);
+    } catch (DateTimeParseException ex) {
+        // ... throw message ...
+    }
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="event-card"><a class="link" href="#event-card">4.2.4. Event card</a></h4>
+<div class="paragraph">
+<p>The <code>EventCard</code> class extends <code>UiPart&lt;Region&gt;</code> to represent a distinct part of the UI. The object properties of every event is assigned to a label held by an <code>EventCard</code>. The graphic scene is then constructed with the appropriate <code>FXML</code> files created to support the display of all events.</p>
+</div>
+<div class="sect4">
+<h5 id="design-implementation"><a class="link" href="#design-implementation">Design implementation</a></h5>
+<div class="paragraph">
+<p>When the user starts the <code>MainApp</code>, the system calls the <code>UiManager</code> to create a new <code>MainWindow</code> and fills it with <code>EventListPanel</code> and other components. The displayed events are created by <code>UniqueEventList</code> and the binding of individual UI elements to the <code>EventCard</code> ensures that any changes to the parameter will be displayed in the <code>EventListPanel</code>.
+The sequence diagram below illustrates the interaction between the <code>EventCard</code> and the <code>UiManager</code>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/EventCardDiagram.PNG" alt="EventCardDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>The events on the <code>EventListPanel</code> is sorted based on <code>EventDate</code>. An event that is coming soon will appear at the top and events with later dates will be further down the list. Expired events will be pushed to the bottom of the list.
+This sorting algorithm is introduced in <code>EventDateComparator</code> which implements <code>Comparator&lt;Event&gt;</code>.</p>
+</div>
+<div class="paragraph">
+<p>The events follow a certain colored background based on its urgency. The visual guide below describes the color code used:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/EventColorDiagram.png" alt="EventColorDiagram" width="600">
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-consideration-for-future-enhancement"><a class="link" href="#design-consideration-for-future-enhancement">4.2.5. Design Consideration for future enhancement</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> How to implement adding of persons into an <code>Event</code> using a person list parameter<br>
 <strong>Alternative 1 (current choice):</strong> Add by the index of person shown in the person list panel.<br>
 <strong>Pros:</strong> System only have to check for validity of index. Better performance compared to Alternative 2.<br>
 <strong>Cons:</strong> Requires user to refer to the person list panel before executing command to add person into event&#8217;s person list.<br>
@@ -830,7 +903,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="sect2">
 <h3 id="oauth2-fulfilment-mechanism"><a class="link" href="#oauth2-fulfilment-mechanism">4.3. OAuth2 fulfilment mechanism</a></h3>
 <div class="sect3">
-<h4 id="summary"><a class="link" href="#summary">4.3.1. Summary</a></h4>
+<h4 id="summary-2"><a class="link" href="#summary-2">4.3.1. Summary</a></h4>
 <div class="paragraph">
 <p>A command structure has been set-up to fulfil all commands requiring an authentication process against the OAuth2 protocol.
 DoC currently has two such commands, namely, <code>import</code> and <code>export</code>, which requires this mechanism. This command structure has also been set-up to support possible future
@@ -2936,7 +3009,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-30 08:00:19 +00:00
+Last updated 2017-10-31 05:30:38 +00:00
 </div>
 </div>
 </body>
