@@ -1195,13 +1195,19 @@ This will invoke the <code>updateFilteredPersonList</code> function that resides
 <p>The UpdateProfilePic/DeleteProfilePic mechanism is facilitated by a <code>ProfilePic</code> class, which is a property class of the <code>Person</code> class. It supports the updating and deleting of profile pictures of each Person. These two commands inherit from <code>UndoableCommand</code>.</p>
 </div>
 <div class="paragraph">
-<p><code>ProfilePic</code> essentially stores a <strong>valid</strong> <code>URL</code> of an image that will be displayed as the Person?s profile picture. Whenever a new Person is added, the Person?s <code>ProfilePic</code> property will be that of a default image. The command, <code>updateProfilePic</code> can then be called to change this property. When the command <code>deleteProfilePic</code> is called, the <code>ProfilePic</code> property of the selected Person will be changed back to the default profile picture.</p>
+<p><code>ProfilePic</code> essentially stores a <strong>valid</strong> <code>URL</code> of an image that will be displayed as the <code>Person</code> 's profile picture. Whenever a new <code>Person</code> is added, the <code>Person</code> 's <code>ProfilePic</code> property will be that of a default image. The command: <code>updateProfilePic</code> can then be called to change this property. When the command <code>deleteProfilePic</code> is called, the <code>ProfilePic</code> property of the selected <code>Person</code> will be changed back to the default profile picture.</p>
 </div>
 <div class="paragraph">
-<p>Like the other properties of the <code>Person</code> class, the <code>ProfilePic</code> property will also be saved to the chosen storage file.</p>
+<p>Like the other properties of the <code>Person</code> class, the <code>ProfilePic</code> property will also be saved to the chosen storage file. If the image that is referred to by the <code>ProfilePic</code> is moved or deleted, the <code>ProfilePic</code> will reset back to the image of the default profile picture.</p>
 </div>
 <div class="paragraph">
-<p>Both the <code>updateProfilePic</code> and the <code>deleteProfilePic</code> commands work by taking in the index of the chosen Person and updating this Person as necessary. The <code>updateProfilePic</code> command also takes in a URL of the image that the profile picture is to be changed to. This will cause the app to instantiate a new <code>ProfilePic</code> object and check if the URL is valid and if it is valid, the app will proceed to update the Person with the new profile picture, otherwise an IllegalValueException will be thrown. As for the <code>deleteProfilePic</code> command, once it is called, the app will instantiate a default <code>ProfilePic</code> object and update the Person chosen.</p>
+<p>The <code>updateProfilePic</code>  command works by taking in the index of the chosen <code>Person</code> and updating this <code>Person</code> according to the <code>ProfilePic</code> given. To do so, the <code>updateProfilePic</code> command takes in a URL of the image that the profile picture is to be changed to. This will cause the app to instantiate a new <code>ProfilePic</code> object and check if the URL is valid and if it is valid, the app will proceed to update the Person with the new profile picture, otherwise an IllegalValueException will be thrown.</p>
+</div>
+<div class="paragraph">
+<p>In addition, the image will be downloaded into a local directory called: <code>ProfilePics</code> that is generated when the app initializes. This directory is created in the same directory as the <code>src</code> directory.</p>
+</div>
+<div class="paragraph">
+<p>The <code>deleteProfilePic</code> command works by taking in the index of the chosen <code>Person</code> and updating the <code>ProfilePic</code> property of the chosen <code>Person</code> to the default profile picture.</p>
 </div>
 <div class="paragraph">
 <p>Below are the sequence diagrams of each command to illustrate how they work:</p>
@@ -3009,7 +3015,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-31 05:30:38 +00:00
+Last updated 2017-10-31 05:45:17 +00:00
 </div>
 </div>
 </body>
