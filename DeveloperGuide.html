@@ -21,9 +21,8 @@
 <p>By: <code>CS2103AUG2017-T11-B1</code>      Since: <code>Sep 2017</code><br>
 Adapted from AddressBook-Level4, by: <code>Team SE-EDU</code>      Since: <code>Jun 2016</code>      Licence: <code>MIT</code></p>
 </div>
-</div>
 <div id="toc" class="toc">
-<div id="toctitle"></div>
+<div id="toctitle" class="title"></div>
 <ul class="sectlevel1">
 <li><a href="#introduction">1. Introduction</a></li>
 <li><a href="#setting-up">2. Setting up</a>
@@ -31,7 +30,14 @@ Adapted from AddressBook-Level4, by: <code>Team SE-EDU</code>      Since: <code>
 <li><a href="#prerequisites">2.1. Prerequisites</a></li>
 <li><a href="#setting-up-the-project-in-your-computer">2.2. Setting up the project in your computer</a></li>
 <li><a href="#verifying-the-setup">2.3. Verifying the setup</a></li>
-<li><a href="#configurations-to-do-before-writing-code">2.4. Configurations to do before writing code</a></li>
+<li><a href="#configurations-to-do-before-writing-code">2.4. Configurations to do before writing code</a>
+<ul class="sectlevel3">
+<li><a href="#configuring-the-coding-style">2.4.1. Configuring the coding style</a></li>
+<li><a href="#updating-documentation-to-match-your-fork">2.4.2. Updating documentation to match your fork</a></li>
+<li><a href="#setting-up-ci">2.4.3. Setting up CI</a></li>
+<li><a href="#getting-started-with-coding">2.4.4. Getting started with coding</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#design">3. Design</a>
@@ -46,21 +52,78 @@ Adapted from AddressBook-Level4, by: <code>Team SE-EDU</code>      Since: <code>
 </li>
 <li><a href="#implementation">4. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#undo-redo-mechanism">4.1. Undo/Redo mechanism</a></li>
-<li><a href="#event-class-mechanism">4.2. Event class mechanism</a></li>
-<li><a href="#oauth2-fulfilment-mechanism">4.3. OAuth2 fulfilment mechanism</a></li>
-<li><a href="#email">4.4. Email</a></li>
-<li><a href="#location">4.5. Location</a></li>
-<li><a href="#removetag">4.6. RemoveTag</a></li>
-<li><a href="#find">4.7. Find</a></li>
-<li><a href="#updateprofilepic-deleteprofilepic-mechanism">4.8. UpdateProfilePic/DeleteProfilePic mechanism</a></li>
-<li><a href="#viewcount-tracking">4.9. ViewCount Tracking</a></li>
-<li><a href="#unknown-input-parsing">4.10. Unknown input parsing</a></li>
+<li><a href="#undo-redo-mechanism">4.1. Undo/Redo mechanism</a>
+<ul class="sectlevel3">
+<li><a href="#overview">4.1.1. Overview</a></li>
+<li><a href="#design-considerations">4.1.2. Design Considerations</a></li>
+</ul>
+</li>
+<li><a href="#event-class-mechanism">4.2. Event class mechanism</a>
+<ul class="sectlevel3">
+<li><a href="#summary">4.2.1. Summary</a></li>
+<li><a href="#event-methods">4.2.2. Event methods</a></li>
+<li><a href="#exceptions">4.2.3. Exceptions</a></li>
+<li><a href="#event-card">4.2.4. Event card</a></li>
+<li><a href="#design-consideration-for-future-enhancement">4.2.5. Design Consideration for future enhancement</a></li>
+</ul>
+</li>
+<li><a href="#oauth2-fulfilment-mechanism">4.3. OAuth2 fulfilment mechanism</a>
+<ul class="sectlevel3">
+<li><a href="#overview-2">4.3.1. Overview</a></li>
+<li><a href="#current-usages">4.3.2. Current usages</a></li>
+<li><a href="#execution-flow">4.3.3. Execution flow</a></li>
+<li><a href="#design-considerations-2">4.3.4. Design Considerations</a></li>
+</ul>
+</li>
+<li><a href="#email">4.4. Email</a>
+<ul class="sectlevel3">
+<li><a href="#overview-3">4.4.1. Overview</a></li>
+<li><a href="#design-considerations-3">4.4.2. Design Considerations</a></li>
+</ul>
+</li>
+<li><a href="#location">4.5. Location</a>
+<ul class="sectlevel3">
+<li><a href="#overview-4">4.5.1. Overview</a></li>
+<li><a href="#design-considerations-4">4.5.2. Design Considerations</a></li>
+</ul>
+</li>
+<li><a href="#removetag">4.6. RemoveTag</a>
+<ul class="sectlevel3">
+<li><a href="#overview-5">4.6.1. Overview</a></li>
+<li><a href="#design-considerations-5">4.6.2. Design Considerations</a></li>
+</ul>
+</li>
+<li><a href="#find">4.7. Find</a>
+<ul class="sectlevel3">
+<li><a href="#overview-6">4.7.1. Overview</a></li>
+<li><a href="#design-considerations-6">4.7.2. Design Considerations</a></li>
+</ul>
+</li>
+<li><a href="#updateprofilepic-deleteprofilepic-mechanism">4.8. UpdateProfilePic/DeleteProfilePic mechanism</a>
+<ul class="sectlevel3">
+<li><a href="#overview-7">4.8.1. Overview</a></li>
+<li><a href="#design-considerations-7">4.8.2. Design Considerations</a></li>
+</ul>
+</li>
+<li><a href="#viewcount-tracking">4.9. ViewCount Tracking</a>
+<ul class="sectlevel3">
+<li><a href="#overview-8">4.9.1. Overview</a></li>
+<li><a href="#design-considerations-8">4.9.2. Design Considerations</a></li>
+</ul>
+</li>
+<li><a href="#unknown-input-parsing">4.10. Unknown input parsing</a>
+<ul class="sectlevel3">
+<li><a href="#overview-9">4.10.1. Overview</a></li>
+<li><a href="#execution-flow-2">4.10.2. Execution flow</a></li>
+<li><a href="#design-considerations-9">4.10.3. Design considerations</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#logging">5. Logging</a>
 <ul class="sectlevel2">
-<li><a href="#configuration">5.1. Configuration</a></li>
+<li><a href="#overview-10">5.1. Overview</a></li>
+<li><a href="#configuration">5.2. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">6. Documentation</a>
@@ -88,7 +151,13 @@ Adapted from AddressBook-Level4, by: <code>Team SE-EDU</code>      Since: <code>
 <li><a href="#suggested-programming-tasks-to-get-started">Appendix A: Suggested Programming Tasks to Get Started</a>
 <ul class="sectlevel2">
 <li><a href="#improving-each-component">A.1. Improving each component</a></li>
-<li><a href="#creating-a-new-command-code-remark-code">A.2. Creating a new command: <code>remark</code></a></li>
+<li><a href="#creating-a-new-command-code-remark-code">A.2. Creating a new command: <code>remark</code></a>
+<ul class="sectlevel3">
+<li><a href="#description">A.2.1. Description</a></li>
+<li><a href="#step-by-step-instructions">A.2.2. Step-by-step Instructions</a></li>
+<li><a href="#full-solution">A.2.3. Full Solution</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#user-stories">Appendix B: User Stories</a></li>
@@ -109,12 +178,14 @@ Adapted from AddressBook-Level4, by: <code>Team SE-EDU</code>      Since: <code>
 <li><a href="#product-survey">Appendix F: Product Survey</a></li>
 </ul>
 </div>
+<div style="page-break-after: always;"></div>
+</div>
 </div>
 <div class="sect1">
 <h2 id="introduction"><a class="link" href="#introduction">1. Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The Directory of Contacts(DoC) allows you to manage your contacts and events all within a single app. This guide will help you get to know the more important functions of the app and how they were implemented. From this, you will be better equipped to navigate around the codebase and further enhance the app as required.</p>
+<p>The Directory of Contacts (DoC) allows you to manage your contacts and events all within a single app. This guide will help you get to know the more important functions of the app and how they were implemented. From this, you will be better equipped to navigate around the codebase and further enhance the app as required.</p>
 </div>
 </div>
 </div>
@@ -171,14 +242,14 @@ Do not disable them. If you have disabled them, go to <code>File</code> &gt; <co
 <p>Open IntelliJ (if you are not in the welcome screen, click <code>File</code> &gt; <code>Close Project</code> to close the existing project dialog first).</p>
 </li>
 <li>
-<p>Set up the correct JDK version for Gradle.</p>
+<p>Set up the correct JDK version for Gradle by:</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Click <code>Configure</code> &gt; <code>Project Defaults</code> &gt; <code>Project Structure</code>.</p>
+<p>Clicking <code>Configure</code> &gt; <code>Project Defaults</code> &gt; <code>Project Structure</code>.</p>
 </li>
 <li>
-<p>Click <code>New&#8230;&#8203;</code> and find the directory of the JDK.</p>
+<p>Clicking <code>New&#8230;&#8203;</code> and find the directory of the JDK.</p>
 </li>
 </ol>
 </div>
@@ -220,7 +291,7 @@ This will generate all resources required by the application and tests.</p>
 <div class="sect3">
 <h4 id="configuring-the-coding-style"><a class="link" href="#configuring-the-coding-style">2.4.1. Configuring the coding style</a></h4>
 <div class="paragraph">
-<p>This project follows <a href="https://github.com/oss-generic/process/blob/master/docs/CodingStandards.md">oss-generic coding standards</a>. IntelliJ&#8217;s default style is mostly compliant with ours but it uses a different import order from ours. To rectify,</p>
+<p>This project follows <a href="https://github.com/oss-generic/process/blob/master/docs/CodingStandards.md">oss-generic coding standards</a>. IntelliJ&#8217;s default style is mostly compliant with ours but it uses a different import order from ours. To rectify:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -231,7 +302,7 @@ This will generate all resources required by the application and tests.</p>
 <p>Select <code>Editor</code> &gt; <code>Code Style</code> &gt; <code>Java</code>.</p>
 </li>
 <li>
-<p>Click on the <code>Imports</code> tab to set the order.</p>
+<p>Click on the <code>Imports</code> tab to set the order as such:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -270,11 +341,12 @@ This will generate all resources required by the application and tests.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Having both Travis and AppVeyor ensures your App works on both Unix-based platforms and Windows-based platforms (Travis is Unix-based and AppVeyor is Windows-based)
+Having both Travis and AppVeyor ensures your App works on both Unix-based platforms and Windows-based platforms (Travis is Unix-based and AppVeyor is Windows-based).
 </td>
 </tr>
 </table>
 </div>
+<div style="page-break-after: always;"></div>
 </div>
 <div class="sect3">
 <h4 id="getting-started-with-coding"><a class="link" href="#getting-started-with-coding">2.4.4. Getting started with coding</a></h4>
@@ -306,7 +378,7 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 2.1.1 : Architecture Diagram</em></p>
+<p><em>Figure 3.1.1: Architecture Diagram</em></p>
 </div>
 <div class="paragraph">
 <p>The <strong><em>Architecture Diagram</em></strong> given above explains the high-level design of the App. Given below is a quick overview of each component.</p>
@@ -323,8 +395,9 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 </tr>
 </table>
 </div>
+<div style="page-break-after: always;"></div>
 <div class="paragraph">
-<p><code>Main</code> has only one class called <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/MainApp.java"><code>MainApp</code></a>. It is responsible for,</p>
+<p><code>Main</code> has only one class called <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/MainApp.java"><code>MainApp</code></a>. It is responsible for the following:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -332,12 +405,15 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 <p>At app launch: Initializes the components in the correct sequence, and connects them up with each other.</p>
 </li>
 <li>
+<p>At change in selected contact: Increases the <code>viewCount</code> of the selected contact by one and updates the <code>Model</code>.</p>
+</li>
+<li>
 <p>At shut down: Shuts down the components and invokes cleanup method where necessary.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p><a href="#common-classes"><strong><code>Commons</code></strong></a> represents a collection of classes used by multiple other components. Two of those classes play important roles at the architecture level.</p>
+<p><a href="#common-classes"><strong><code>Commons</code></strong></a> represents a collection of classes used by multiple other components. Two of those classes that play important roles at the architecture level are as follows:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -345,20 +421,20 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 <p><code>EventsCenter</code> : This class (written using <a href="https://github.com/google/guava/wiki/EventBusExplained">Google&#8217;s Event Bus library</a>) is used by components to communicate with other components using events (i.e. a form of <em>Event Driven</em> design).</p>
 </li>
 <li>
-<p><code>LogsCenter</code> : Used by many classes to write log messages to the App&#8217;s log file.</p>
+<p><code>LogsCenter</code> : This class is used by many classes to write log messages to the App&#8217;s log file.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The rest of the App consists of four components.</p>
+<p>The rest of the App consists of the following four components:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="#ui-component"><strong><code>UI</code></strong></a> : The UI of the App.</p>
+<p><a href="#ui-component"><strong><code>UI</code></strong></a> : Displays the UI of the App.</p>
 </li>
 <li>
-<p><a href="#logic-component"><strong><code>Logic</code></strong></a> : The command executor.</p>
+<p><a href="#logic-component"><strong><code>Logic</code></strong></a> : Executes the commands.</p>
 </li>
 <li>
 <p><a href="#model-component"><strong><code>Model</code></strong></a> : Holds the data of the App in-memory.</p>
@@ -369,7 +445,7 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 </ul>
 </div>
 <div class="paragraph">
-<p>Each of the four components</p>
+<p>Each of the four components does the following:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -381,8 +457,9 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 </li>
 </ul>
 </div>
+<div style="page-break-after: always;"></div>
 <div class="paragraph">
-<p>For example, the <code>Logic</code> component (see the class diagram given below) defines it&#8217;s API in the <code>Logic.java</code> interface and exposes its functionality using the <code>LogicManager.java</code> class.</p>
+<p>For example, the <code>Logic</code> component (see the class diagram given below) defines its API in the <code>Logic.java</code> interface and exposes its functionality using the <code>LogicManager.java</code> class.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -390,7 +467,7 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 2.1.2 : Class Diagram of the Logic Component</em></p>
+<p><em>Figure 3.1.2: Class Diagram of the Logic Component</em></p>
 </div>
 <h4 id="events-driven-nature-of-the-design" class="discrete">Events-Driven nature of the design</h4>
 <div class="paragraph">
@@ -402,7 +479,7 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 2.1.3a : Component interactions for <code>delete 1</code> command (part 1)</em></p>
+<p><em>Figure 3.1.3a: Component interactions for <code>delete 1</code> command (part 1)</em></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -416,6 +493,7 @@ Note how the <code>Model</code> simply raises a <code>AddressBookChangedEvent</c
 </tr>
 </table>
 </div>
+<div style="page-break-after: always;"></div>
 <div class="paragraph">
 <p>The diagram below shows how the <code>EventsCenter</code> reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.</p>
 </div>
@@ -425,7 +503,7 @@ Note how the <code>Model</code> simply raises a <code>AddressBookChangedEvent</c
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 2.1.3b : Component interactions for <code>delete 1</code> command (part 2)</em></p>
+<p><em>Figure 3.1.3b: Component interactions for <code>delete 1</code> command (part 2)</em></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -442,6 +520,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <div class="paragraph">
 <p>The sections below give more details of each component.</p>
 </div>
+<div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
 <h3 id="ui-component"><a class="link" href="#ui-component">3.2. UI component</a></h3>
@@ -451,7 +530,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 2.2.1 : Structure of the UI Component</em></p>
+<p><em>Figure 3.2.1: Structure of the UI Component</em></p>
 </div>
 <div class="paragraph">
 <p><strong>API</strong> : <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/ui/Ui.java"><code>Ui.java</code></a></p>
@@ -463,7 +542,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a>.</p>
 </div>
 <div class="paragraph">
-<p>The <code>UI</code> component,</p>
+<p>The <code>UI</code> component:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -487,7 +566,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 2.3.1 : Structure of the Logic Component</em></p>
+<p><em>Figure 3.3.1: Structure of the Logic Component</em></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -495,11 +574,18 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 2.3.2 : Structure of Commands in the Logic Component. This diagram shows finer details concerning <code>XYZCommand</code> and <code>Command</code> in Figure 2.3.1</em></p>
+<p><em>Figure 3.3.2: Structure of Commands in the Logic Component. This diagram shows finer details concerning <code>XYZCommand</code> and <code>Command</code> in Figure 3.3.1</em></p>
 </div>
+<div class="paragraph">
+<p>The above two diagrams show the structure of the <code>Logic</code> component and the structure of the commands in the <code>Logic</code> component.</p>
+</div>
+<div style="page-break-after: always;"></div>
 <div class="paragraph">
 <p><strong>API</strong> :
 <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/logic/Logic.java"><code>Logic.java</code></a></p>
+</div>
+<div class="paragraph">
+<p>When the user inputs a command, the <code>Logic</code> component takes these steps:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -510,7 +596,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p>This results in a <code>Command</code> object which is executed by the <code>LogicManager</code>.</p>
 </li>
 <li>
-<p>The command execution can affect the <code>Model</code> (e.g. adding a person) and/or raise events.</p>
+<p>The command execution can affect the <code>Model</code> (e.g. adding a <code>Person</code>) and/or raise events.</p>
 </li>
 <li>
 <p>The result of the command execution is encapsulated as a <code>CommandResult</code> object which is passed back to the <code>Ui</code>.</p>
@@ -526,8 +612,9 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 2.3.1 : Interactions Inside the Logic Component for the <code>delete 1</code> Command</em></p>
+<p><em>Figure 3.3.3: Interactions Inside the Logic Component for the <code>delete 1</code> Command</em></p>
 </div>
+<div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
 <h3 id="model-component"><a class="link" href="#model-component">3.4. Model component</a></h3>
@@ -537,13 +624,13 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 2.4.1 : Structure of the Model Component</em></p>
+<p><em>Figure 3.4.1: Structure of the Model Component</em></p>
 </div>
 <div class="paragraph">
 <p><strong>API</strong> : <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/model/Model.java"><code>Model.java</code></a></p>
 </div>
 <div class="paragraph">
-<p>The <code>Model</code>,</p>
+<p>As shown in the diagram above, the <code>Model</code>:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -561,6 +648,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </li>
 </ul>
 </div>
+<div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
 <h3 id="storage-component"><a class="link" href="#storage-component">3.5. Storage component</a></h3>
@@ -570,13 +658,13 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 2.5.1 : Structure of the Storage Component</em></p>
+<p><em>Figure 3.5.1: Structure of the Storage Component</em></p>
 </div>
 <div class="paragraph">
 <p><strong>API</strong> : <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/storage/Storage.java"><code>Storage.java</code></a></p>
 </div>
 <div class="paragraph">
-<p>The <code>Storage</code> component,</p>
+<p>As shown in the diagram above, the <code>Storage</code> component:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -594,6 +682,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <div class="paragraph">
 <p>Classes used by multiple components are in the <code>seedu.addressbook.commons</code> package.</p>
 </div>
+<div style="page-break-after: always;"></div>
 </div>
 </div>
 </div>
@@ -605,6 +694,8 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 <div class="sect2">
 <h3 id="undo-redo-mechanism"><a class="link" href="#undo-redo-mechanism">4.1. Undo/Redo mechanism</a></h3>
+<div class="sect3">
+<h4 id="overview"><a class="link" href="#overview">4.1.1. Overview</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by an <code>UndoRedoStack</code>, which resides inside <code>LogicManager</code>. It supports undoing and redoing of commands that modifies the state of the address book (e.g. <code>add</code>, <code>edit</code>). Such commands will inherit from <code>UndoableCommand</code>.</p>
 </div>
@@ -617,8 +708,12 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </div>
 <div class="paragraph">
+<p><em>Figure 4.1.1: Inheritance Diagram for Commands</em></p>
+</div>
+<div class="paragraph">
 <p>As you can see from the diagram, <code>UndoableCommand</code> adds an extra layer between the abstract <code>Command</code> class and concrete commands that can be undone, such as the <code>DeleteCommand</code>. Note that extra tasks need to be done when executing a command in an <em>undoable</em> way, such as saving the state of the address book before execution. <code>UndoableCommand</code> contains the high-level algorithm for those extra tasks while the child classes implements the details of how to execute the specific command. Note that this technique of putting the high-level algorithm in the parent class and lower-level steps of the algorithm in child classes is also known as the <a href="https://www.tutorialspoint.com/design_pattern/template_pattern.htm">template pattern</a>.</p>
 </div>
+<div style="page-break-after: always;"></div>
 <div class="paragraph">
 <p>Commands that are not undoable are implemented this way:</p>
 </div>
@@ -658,7 +753,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p>Suppose that the user has just launched the application. The <code>UndoRedoStack</code> will be empty at the beginning.</p>
 </div>
 <div class="paragraph">
-<p>The user executes a new <code>UndoableCommand</code>, <code>delete 5</code>, to delete the 5th person in the address book. The current state of the address book is saved before the <code>delete 5</code> command executes. The <code>delete 5</code> command will then be pushed onto the <code>undoStack</code> (the current state is saved together with the command).</p>
+<p>The user executes a new <code>UndoableCommand</code>, <code>delete 5</code>, to delete the 5th contact in the address book. The current state of the address book is saved before the <code>delete 5</code> command executes. The <code>delete 5</code> command will then be pushed onto the <code>undoStack</code> (the current state is saved together with the command) (See Figure 4.1.2a).</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -666,12 +761,18 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </div>
 </div>
 <div class="paragraph">
-<p>As the user continues to use the program, more commands are added into the <code>undoStack</code>. For example, the user may execute <code>add n/David &#8230;&#8203;</code> to add a new person.</p>
+<p><em>Figure 4.1.2a: Mechanism of UndoRedo Stack (Part 1)</em></p>
+</div>
+<div class="paragraph">
+<p>As the user continues to use the program, more commands are added into the <code>undoStack</code>. For example, the user may execute <code>add n/David &#8230;&#8203;</code> to add a new contact, as shown in the diagram below.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/UndoRedoNewCommand1StackDiagram.png" alt="UndoRedoNewCommand1StackDiagram" width="800">
 </div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.1.2b: Mechanism of UndoRedo Stack (Part 2)</em></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -686,15 +787,18 @@ If a command fails its execution, it will not be pushed to the <code>UndoRedoSta
 </table>
 </div>
 <div class="paragraph">
-<p>The user now decides that adding the person was a mistake, and decides to undo that action using <code>undo</code>.</p>
+<p>The user now decides that adding the contact was a mistake, and decides to undo that action using <code>undo</code>.</p>
 </div>
 <div class="paragraph">
-<p>We will pop the most recent command out of the <code>undoStack</code> and push it back to the <code>redoStack</code>. We will restore the address book to the state before the <code>add</code> command executed.</p>
+<p>We will pop the most recent command out of the <code>undoStack</code> and push it back to the <code>redoStack</code>. We will restore the address book to the state before the <code>add</code> command executed, as can be seen in the diagram below.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/UndoRedoExecuteUndoStackDiagram.png" alt="UndoRedoExecuteUndoStackDiagram" width="800">
 </div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.1.2c: Mechanism of UndoRedo Stack (Part 3)</em></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -708,6 +812,7 @@ If the <code>undoStack</code> is empty, then there are no other commands left to
 </tr>
 </table>
 </div>
+<div style="page-break-after: always;"></div>
 <div class="paragraph">
 <p>The following sequence diagram shows how the undo operation works:</p>
 </div>
@@ -715,6 +820,9 @@ If the <code>undoStack</code> is empty, then there are no other commands left to
 <div class="content">
 <img src="images/UndoRedoSequenceDiagram.png" alt="UndoRedoSequenceDiagram" width="800">
 </div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.1.3: Sequence Diagram for UndoRedo Mechanism</em></p>
 </div>
 <div class="paragraph">
 <p>The redo does the exact opposite (pops from <code>redoStack</code>, push to <code>undoStack</code>, and restores the address book to the state after the command is executed).</p>
@@ -732,7 +840,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </table>
 </div>
 <div class="paragraph">
-<p>The user now decides to execute a new command, <code>clear</code>. As before, <code>clear</code> will be pushed into the <code>undoStack</code>. This time the <code>redoStack</code> is no longer empty. It will be purged as it no longer make sense to redo the <code>add n/David</code> command (this is the behavior that most modern desktop applications follow).</p>
+<p>The user now decides to execute a new command, <code>clear</code>. As before, <code>clear</code> will be pushed into the <code>undoStack</code>. This time the <code>redoStack</code> is no longer empty. It will be purged as it no longer make sense to redo the <code>add n/David</code> command (this is the behavior that most modern desktop applications follow) (See Figure 4.1.4).</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -740,12 +848,18 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="paragraph">
-<p>Commands that are not undoable are not added into the <code>undoStack</code>. For example, <code>list</code>, which inherits from <code>Command</code> rather than <code>UndoableCommand</code>, will not be added after execution:</p>
+<p><em>Figure 4.1.4: UndoRedo Stack After Clear Command</em></p>
+</div>
+<div class="paragraph">
+<p>Commands that are not undoable are not added into the <code>undoStack</code>. For example, <code>list</code>, which inherits from <code>Command</code> rather than <code>UndoableCommand</code>, will not be added after execution as shown in the following diagram:</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/UndoRedoNewCommand3StackDiagram.png" alt="UndoRedoNewCommand3StackDiagram" width="800">
 </div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.1.5: UndoRedo Stack After List Command</em></p>
 </div>
 <div class="paragraph">
 <p>The following activity diagram summarize what happens inside the <code>UndoRedoStack</code> when a user executes a new command:</p>
@@ -755,47 +869,90 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <img src="images/UndoRedoActivityDiagram.png" alt="UndoRedoActivityDiagram" width="200">
 </div>
 </div>
+<div class="paragraph">
+<p><em>Figure 4.1.6: UndoRedo Activity Diagram</em></p>
+</div>
+</div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">4.1.1. Design Considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">4.1.2. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of <code>UndoableCommand</code><br>
-<strong>Alternative 1 (current choice):</strong> Add a new abstract method <code>executeUndoableCommand().</code><br>
-<strong>Pros:</strong> We will not lose any undone/redone functionality as it is now part of the default behaviour. Classes that deal with <code>Command</code> do not have to know that <code>executeUndoableCommand()</code> exist.<br>
-<strong>Cons:</strong> Hard for new developers to understand the template pattern.<br>
-<strong>Alternative 2:</strong> Just override <code>execute().</code><br>
-<strong>Pros:</strong> Does not involve the template pattern, easier for new developers to understand.<br>
-<strong>Cons:</strong> Classes that inherit from <code>UndoableCommand</code> must remember to call <code>super.execute()</code>, or lose the ability to undo/redo.</p>
+<p><strong>Aspect:</strong> Implementation of <code>UndoableCommand</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Chosen Implementation:</strong><br>
+Add a new abstract method <code>executeUndoableCommand().</code><br>
+<strong>Pros:</strong><br>
+We will not lose any undone/redone functionality as it is now part of the default behaviour. Classes that deal with <code>Command</code> do not have to know that <code>executeUndoableCommand()</code> exist.<br>
+<strong>Cons:</strong><br>
+Hard for new developers to understand the template pattern.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative:</strong><br>
+Just override <code>execute().</code><br>
+<strong>Pros:</strong><br>
+Does not involve the template pattern, easier for new developers to understand.<br>
+<strong>Cons:</strong><br>
+Classes that inherit from <code>UndoableCommand</code> must remember to call <code>super.execute()</code>, or lose the ability to undo/redo.</p>
 </div>
 <hr>
 <div class="paragraph">
-<p><strong>Aspect:</strong> How undo &amp; redo executes<br>
-<strong>Alternative 1 (current choice):</strong> Saves the entire address book.<br>
-<strong>Pros:</strong> Easy to implement.<br>
-<strong>Cons:</strong> May have performance issues in terms of memory usage.<br>
-<strong>Alternative 2:</strong> Individual command knows how to undo/redo by itself.<br>
-<strong>Pros:</strong> Will use less memory (e.g. for <code>delete</code>, just save the person being deleted).<br>
-<strong>Cons:</strong> We must ensure that the implementation of each individual command are correct.</p>
+<p><strong>Aspect:</strong> How undo &amp; redo executes<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Chosen Implementation:</strong><br>
+Saves the entire address book.<br>
+<strong>Pros:</strong><br>
+Easy to implement.<br>
+<strong>Cons:</strong><br>
+May have performance issues in terms of memory usage.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative:</strong><br>
+Individual command knows how to undo/redo by itself.<br>
+<strong>Pros:</strong><br>
+Will use less memory (e.g. for <code>delete</code>, just save the contact being deleted).<br>
+<strong>Cons:</strong><br>
+ We must ensure that the implementation of each individual command are correct.</p>
 </div>
 <hr>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Type of commands that can be undone/redone<br>
-<strong>Alternative 1 (current choice):</strong> Only include commands that modifies the address book (<code>add</code>, <code>clear</code>, <code>edit</code>).<br>
-<strong>Pros:</strong> We only revert changes that are hard to change back (the view can easily be re-modified as no data are lost).<br>
-<strong>Cons:</strong> User might think that undo also applies when the list is modified (undoing filtering for example), only to realize that it does not do that, after executing <code>undo</code>.<br>
-<strong>Alternative 2:</strong> Include all commands.<br>
-<strong>Pros:</strong> Might be more intuitive for the user.<br>
-<strong>Cons:</strong> User have no way of skipping such commands if he or she just want to reset the state of the address book and not the view.<br>
-<strong>Additional Info:</strong> See our discussion  <a href="https://github.com/se-edu/addressbook-level4/issues/390#issuecomment-298936672">here</a>.</p>
+<p><strong>Aspect:</strong> Type of commands that can be undone/redone<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Chosen Implementation:</strong> Only include commands that modifies the address book (<code>add</code>, <code>clear</code>, <code>edit</code>).<br>
+<strong>Pros:</strong><br>
+We only revert changes that are hard to change back (the view can easily be re-modified as no data are lost).<br>
+<strong>Cons:</strong><br>
+User might think that undo also applies when the list is modified (undoing filtering for example), only to realize that it does not do that, after executing <code>undo</code>.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative:</strong> Include all commands.<br>
+<strong>Pros:</strong><br>
+Might be more intuitive for the user.<br>
+<strong>Cons:</strong><br>
+User have no way of skipping such commands if he or she just want to reset the state of the address book and not the view.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Additional Info:</strong> See our discussion  <a href="https://github.com/se-edu/addressbook-level4/issues/390#issuecomment-298936672">here</a>.</p>
 </div>
 <hr>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Data structure to support the undo/redo commands<br>
-<strong>Alternative 1 (current choice):</strong> Use separate stack for undo and redo.<br>
-<strong>Pros:</strong> Easy to understand for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.<br>
-<strong>Cons:</strong> Logic is duplicated twice. For example, when a new command is executed, we must remember to update both <code>HistoryManager</code> and <code>UndoRedoStack</code>.<br>
-<strong>Alternative 2:</strong> Use <code>HistoryManager</code> for undo/redo.<br>
-<strong>Pros:</strong> We do not need to maintain a separate stack, and just reuse what is already in the codebase.<br>
-<strong>Cons:</strong> Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as <code>HistoryManager</code> now needs to do two different things.<br></p>
+<p><strong>Aspect:</strong> Data structure to support the undo/redo commands<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Chosen Implementation:</strong><br>
+Use separate stack for undo and redo.<br>
+<strong>Pros:</strong><br>
+Easy to understand for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.<br>
+<strong>Cons:</strong><br>
+Logic is duplicated twice. For example, when a new command is executed, we must remember to update both <code>HistoryManager</code> and <code>UndoRedoStack</code>.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative:</strong> Use <code>HistoryManager</code> for undo/redo.<br>
+<strong>Pros:</strong><br>
+We do not need to maintain a separate stack, and just reuse what is already in the codebase.<br>
+<strong>Cons:</strong><br>
+Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as <code>HistoryManager</code> now needs to do two different things.<br></p>
 </div>
 </div>
 </div>
@@ -804,7 +961,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <div class="sect3">
 <h4 id="summary"><a class="link" href="#summary">4.2.1. Summary</a></h4>
 <div class="paragraph">
-<p>The <code>Event</code> class, which is located inside <code>model</code>, is implemented with similar logic as <code>Person</code> class. We have introduced three commands that modifies the address book: <code>addE</code>, <code>editE</code> and <code>deleteE</code>, which extends <code>UndoableCommand</code>.
+<p>The <code>Event</code> class, which is located inside <code>Model</code>, is implemented with similar logic as <code>Person</code> class. We have introduced three commands that modifies the address book: <code>addE</code>, <code>editE</code> and <code>deleteE</code>, which extends <code>UndoableCommand</code>.
 An <code>Event</code> consist of three sub-components: <code>Header</code>, <code>Desc</code> and <code>EventDate</code>. Commands such as <code>clear</code>, <code>undo</code> and <code>redo</code> can be used to alter events in the list as they deal with code that directly modifies the address book.</p>
 </div>
 <div class="paragraph">
@@ -815,12 +972,15 @@ An <code>Event</code> consist of three sub-components: <code>Header</code>, <cod
 <h4 id="event-methods"><a class="link" href="#event-methods">4.2.2. Event methods</a></h4>
 <div class="paragraph">
 <p>As stated in the summary, the <code>Event</code> class contains three main methods: <code>addE</code>, <code>editE</code> and <code>deleteE</code>.
-The execution flow is similar for all three methods on a higher level. We can demonstrate how different levels of components communicate with one another by referring to an example of <code>addE</code> command in the following sequence diagram.</p>
+The execution flow is similar for all three methods on a higher level. We can demonstrate how different levels of components communicate with one another by referring to an example of <code>addE</code> command in the following sequence diagram:</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/AddEventDiagram.PNG" alt="AddEventDiagram" width="800">
 </div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.2.1: AddEvent Sequence Diagram</em></p>
 </div>
 </div>
 <div class="sect3">
@@ -857,6 +1017,7 @@ An appropriate <code>ParseException</code> will be thrown if the command word or
 }</pre>
 </div>
 </div>
+<div style="page-break-after: always;"></div>
 </div>
 <div class="sect3">
 <h4 id="event-card"><a class="link" href="#event-card">4.2.4. Event card</a></h4>
@@ -875,9 +1036,13 @@ The sequence diagram below illustrates the interaction between the <code>EventCa
 </div>
 </div>
 <div class="paragraph">
+<p><em>Figure 4.2.2: EventCard Interaction Sequence Diagram</em></p>
+</div>
+<div class="paragraph">
 <p>The events on the <code>EventListPanel</code> is sorted based on <code>EventDate</code>. An event that is coming soon will appear at the top and events with later dates will be further down the list. Expired events will be pushed to the bottom of the list.
 This sorting algorithm is introduced in <code>EventDateComparator</code> which implements <code>Comparator&lt;Event&gt;</code>.</p>
 </div>
+<div style="page-break-after: always;"></div>
 <div class="paragraph">
 <p>The events follow a certain colored background based on its urgency. The visual guide below describes the color code used:</p>
 </div>
@@ -886,25 +1051,37 @@ This sorting algorithm is introduced in <code>EventDateComparator</code> which i
 <img src="images/EventColorDiagram.png" alt="EventColorDiagram" width="600">
 </div>
 </div>
+<div class="paragraph">
+<p><em>Figure 4.2.3: Event Colour Diagram</em></p>
+</div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-consideration-for-future-enhancement"><a class="link" href="#design-consideration-for-future-enhancement">4.2.5. Design Consideration for future enhancement</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> How to implement adding of persons into an <code>Event</code> using a person list parameter<br>
-<strong>Alternative 1 (current choice):</strong> Add by the index of person shown in the person list panel.<br>
-<strong>Pros:</strong> System only have to check for validity of index. Better performance compared to Alternative 2.<br>
-<strong>Cons:</strong> Requires user to refer to the person list panel before executing command to add person into event&#8217;s person list.<br>
-<strong>Alternative 2:</strong> Add by the name of person in the person list.<br>
-<strong>Pros:</strong> Easier for users to add using names, do not need to refer to the person list.<br>
-<strong>Cons:</strong> System have to check through the list to check if the person name exist in the current address book.</p>
+<p><strong>Aspect:</strong> How to implement adding of contacts into an <code>Event</code> using a <code>Person</code> list parameter<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Chosen Implementation:</strong><br>
+Add by the index of contact shown in the <code>PersonListPanel</code>.<br>
+<strong>Pros:</strong><br>
+System only have to check for validity of index. Better performance compared to Alternative.<br>
+<strong>Cons:</strong><br>
+Requires user to refer to the <code>PersonListPanel</code> before executing command to add contact into event&#8217;s <code>Person</code> list.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative:</strong> Add by the name of contact in the <code>Person</code> list.<br>
+<strong>Pros:</strong><br>
+Easier for users to add using names, do not need to refer to the <code>Person</code> list.<br>
+<strong>Cons:</strong><br>
+System have to check through the list to check if the contact&#8217;s name exist in the current address book.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="oauth2-fulfilment-mechanism"><a class="link" href="#oauth2-fulfilment-mechanism">4.3. OAuth2 fulfilment mechanism</a></h3>
 <div class="sect3">
-<h4 id="overview"><a class="link" href="#overview">4.3.1. Overview</a></h4>
+<h4 id="overview-2"><a class="link" href="#overview-2">4.3.1. Overview</a></h4>
 <div class="paragraph">
 <p>A command structure has been set-up to fulfil all commands requiring an authentication process against the OAuth2 protocol.
 DoC currently only has two such commands, namely, <code>import</code> and <code>export</code>, which require this mechanism. Thus, it is noteworthy
@@ -927,13 +1104,16 @@ which is implemented in an event-driven manner.</p>
 <img src="images/Oauth2ClassDiagram.PNG" alt="Oauth2ClassDiagram" width="800">
 </div>
 </div>
+<div class="paragraph">
+<p><em>Figure 4.3.1 OAuth2 Class Diagram</em></p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="current-usages"><a class="link" href="#current-usages">4.3.2. Current usages</a></h4>
 <div class="sect4">
 <h5 id="import-contacts-to-doc-from-google-contacts"><a class="link" href="#import-contacts-to-doc-from-google-contacts">Import contacts to DoC from Google Contacts</a></h5>
 <div class="paragraph">
-<p>The <code>import</code> command uses <code>Google Contacts</code> as a source, and retrieves all of the authenticated user&#8217;s Google contacts.
+<p>The <code>import</code> command uses <code>Google Contacts</code> as a source, and retrieves all of the authenticated user&#8217;s Google Contacts.
 This comes in the form of a list of Google&#8217;s <code>Person</code> objects, which are then converted to DoC <code>Person</code> objects with the
 help of the <code>GooglePersonConverterUtil</code> class. The newly converted contacts are then stored
 to the <code>Model</code> component of DoC.</p>
@@ -945,6 +1125,7 @@ to the <code>Model</code> component of DoC.</p>
 <p>The <code>export</code> command converts all contacts currently stored in DoC, with the help of the <code>GooglePersonConverterUtil</code> class,
 to a list of Google&#8217;s <code>Person</code> class objects. The newly converted contacts are then exported to the authenticated users' Google Contacts.</p>
 </div>
+<div style="page-break-after: always;"></div>
 </div>
 </div>
 <div class="sect3">
@@ -962,7 +1143,7 @@ for the <code>import</code> command:<br></p>
 which then calls the instance&#8217;s <code>execute()</code> method. This is also known as the <strong>input parsing process</strong>.<br></p>
 </li>
 <li>
-<p>The <code>execute()</code> method of <code>import</code> and <code>export</code> then triggers the <strong>authentication process</strong> with the <code>BrowserPanel</code><br></p>
+<p>The <code>execute()</code> method of <code>import</code> and <code>export</code> then triggers the <strong>authentication process</strong> with the <code>BrowserPanel</code>.<br></p>
 </li>
 <li>
 <p>Upon successful authentication on an <code>import</code> command, the <strong>HTTP request process</strong> is executed, fetching a list.
@@ -991,6 +1172,10 @@ and has been previously illustrated in section 3.3: Logic component.</p>
 <img src="images/import_export_parallel.png" alt="import export parallel" width="80%">
 </div>
 </div>
+<div class="paragraph">
+<p><em>Figure 4.3.2: Execution Flow of Import and Export Commands</em></p>
+</div>
+<div style="page-break-after: always;"></div>
 </div>
 <div class="sect4">
 <h5 id="authentication-process"><a class="link" href="#authentication-process">Authentication process</a></h5>
@@ -1001,6 +1186,9 @@ and has been previously illustrated in section 3.3: Logic component.</p>
 <div class="content">
 <img src="images/AuthenticationSequenceDiagram.png" alt="AuthenticationSequenceDiagram" width="800">
 </div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.3.3: Authentication Sequence Diagram</em></p>
 </div>
 <div class="paragraph">
 <p>This is a summary of the steps in the <strong>authentication process</strong>:</p>
@@ -1086,7 +1274,7 @@ object is added as a Google <code>Person</code> object&#8217;s <code>UserDefined
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.3.4. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> How a successful authentication is handled.<br></p>
+<p><strong>Aspect:</strong> How a successful authentication is handled<br></p>
 </div>
 <div class="paragraph">
 <p><strong>Chosen implementation:</strong><br>
@@ -1096,7 +1284,7 @@ redirect to a Google Contacts page.<br>
 <strong>Pros:</strong><br>
 The underlying <code>HTTP GET</code> is sent to a domain under DoC&#8217;s control, reducing the risk of authentication token leak.<br>
 <strong>Cons:</strong><br>
-The BrowserPanel may display an error page temporarily if the hosted domain is down, however this will not be noticeable if redirection occurs fast.<br></p>
+The <code>BrowserPanel</code> may display an error page temporarily if the hosted domain is down, however this will not be noticeable if redirection occurs fast.<br></p>
 </div>
 <div class="paragraph">
 <p><strong>Alternative:</strong><br>
@@ -1108,14 +1296,14 @@ The underlying <code>HTTP GET</code> containing the authentication token is sent
 </div>
 <hr>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Duplication handling.<br></p>
+<p><strong>Aspect:</strong> Duplication handling<br></p>
 </div>
 <div class="paragraph">
 <p><strong>Chosen implementation:</strong><br>
 Do not perform any duplication checks in the implementation of the <code>export</code> command.<br>
 <strong>Pros:</strong><br>
 We avoid the overhead of having to first import all the user&#8217;s Google contacts, storing them temporarily, then checking them against
-DoC&#8217;s Model component to sieve out non-duplicates.<br>
+DoC&#8217;s <code>Model</code> component to sieve out non-duplicates.<br>
 <strong>Cons:</strong><br>
 Multiple calls of the <code>export</code> command will result in duplicates being created on the user&#8217;s Google contacts.<br></p>
 </div>
@@ -1141,10 +1329,13 @@ in this current version of DoC, due to the following redeeming factors:</p>
 </li>
 </ul>
 </div>
+<div style="page-break-after: always;"></div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="email"><a class="link" href="#email">4.4. Email</a></h3>
+<div class="sect3">
+<h4 id="overview-3"><a class="link" href="#overview-3">4.4.1. Overview</a></h4>
 <div class="paragraph">
 <p>The <code>EmailCommand</code> is the main driver of this functionality. It links the logic in Addressbook and the content displayed on the Email browser.</p>
 </div>
@@ -1152,6 +1343,9 @@ in this current version of DoC, due to the following redeeming factors:</p>
 <div class="content">
 <img src="images/EmailSequenceDiagram.png" alt="EmailSequenceDiagram" width="800">
 </div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.4.1: Email Sequence Diagram</em></p>
 </div>
 <div class="paragraph">
 <p>As seen from the picture above, the <code>AddressParser</code> will be able to distinguish the email command and direct it to the <code>EmailCommandParser</code>. Over there the recipient, subject and the body from the command line input is identified.</p>
@@ -1171,28 +1365,44 @@ Note that the <code>EmailCommandParser</code> will raise a <code>ParseException<
 <div class="paragraph">
 <p>Once identified, the <code>execute</code> function is called. This function in the <code>EmailCommand</code> would call the <code>updateEmailRecipient</code> function in the Model. Once the fields are updated properly, the <code>EmailCommand</code> will call the desktop mail app and fill in the necessary details.</p>
 </div>
+<div style="page-break-after: always;"></div>
+</div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.4.1. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.4.2. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of <code>email</code><br>
-<strong>Alternative 1 (current choice):</strong> Uses the inbuilt Email Application.<br>
-<strong>Pros:</strong> The email authentication is done by that Email Application. <br>
-<strong>Cons:</strong> A new application has to be opened.<br>
-<strong>Alternative 2:</strong> Make use of Gmail API.<br>
-<strong>Pros:</strong> Can be emailed from the browser panel itself.<br>
-<strong>Cons:</strong> The UI for GMail is very poor on <code>JavaFX WebView</code>.</p>
+<p><strong>Aspect:</strong> Implementation of <code>Email</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Chosen Implementation:</strong><br>
+Uses the inbuilt Email Application.<br>
+<strong>Pros:</strong><br>
+The email authentication is done by that Email Application. <br>
+<strong>Cons:</strong><br>
+A new application has to be opened.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative:</strong> Make use of Gmail API.<br>
+<strong>Pros:</strong><br>
+Can be emailed from the browser panel itself.<br>
+<strong>Cons:</strong><br>
+The UI for GMail is very poor on <code>JavaFX WebView</code>.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="location"><a class="link" href="#location">4.5. Location</a></h3>
+<div class="sect3">
+<h4 id="overview-4"><a class="link" href="#overview-4">4.5.1. Overview</a></h4>
 <div class="imageblock">
 <div class="content">
 <img src="images/Location.png" alt="Location" width="800">
 </div>
 </div>
 <div class="paragraph">
-<p>As seen above, an event based approach is used to display the location of the person.</p>
+<p><em>Figure 4.5.1: Location Sequence Diagram</em></p>
+</div>
+<div class="paragraph">
+<p>As seen in the above diagram, an event based approach is used to display the location of the contact.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1209,24 +1419,37 @@ Note that the <code>LocationCommandParser</code> will raise a <code>ParseExcepti
 <div class="paragraph">
 <p>Once the Address book parser identifies the user command as a valid location command, it will make use of the Google Event bus to transmit the event.
 The browser panel has subscribed for that particular event and therefore when the event is passed, the browser panel will pick it up and execute the function.
-This will eventually render the browser panel with Google Maps and a marker pointing at the address of the requested person.
+This will eventually render the browser panel with Google Maps and a marker pointing at the address of the requested contact.
 This rendering of Google Maps is done via calling the URL.</p>
 </div>
-<div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.5.1. Design Considerations</a></h4>
-<div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of <code>location</code><br>
-<strong>Alternative 1 (current choice):</strong> Add a new class that extends <code>Command</code> that uses the Google Maps URL.<br>
-<strong>Pros:</strong> The map can be easily loaded without needing to call the GoogleMaps API. <br>
-<strong>Cons:</strong> Only functions that can be sent via URL can be used.<br>
-<strong>Alternative 2:</strong> Make use of Google Maps API.<br>
-<strong>Pros:</strong> More functions such as radius and many more could have been added.<br>
-<strong>Cons:</strong> Take a longer time to load the map.</p>
 </div>
+<div class="sect3">
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.5.2. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>location</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Chosen Implementation:</strong><br>
+Add a new class that extends <code>Command</code> that uses the Google Maps URL.<br>
+<strong>Pros:</strong><br>
+The map can be easily loaded without needing to call the GoogleMaps API. <br>
+<strong>Cons:</strong><br>
+Only functions that can be sent via URL can be used.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative:</strong> Make use of Google Maps API.<br>
+<strong>Pros:</strong><br>
+More functions such as radius and many more could have been added.<br>
+<strong>Cons:</strong><br>
+Take a longer time to load the map.</p>
+</div>
+<div style="page-break-after: always;"></div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="removetag"><a class="link" href="#removetag">4.6. RemoveTag</a></h3>
+<div class="sect3">
+<h4 id="overview-5"><a class="link" href="#overview-5">4.6.1. Overview</a></h4>
 <div class="paragraph">
 <p>The removeTag mechanism is facilitated by the <code>RemoveTagCommand</code> class which is inherited from the
 <code>UndoableCommand</code> class. If the indexes are not stated, the particular tag is removed from all contacts.
@@ -1238,7 +1461,10 @@ Else, only those chosen indexes has its tag removed. All the indexes are based o
 </div>
 </div>
 <div class="paragraph">
-<p>As shown above, when the user executes the command <code>removeTag</code>, the <code>RemoveTagCommandParser</code> class will parse the tag and indexes if given, then call the <code>RemoveTagCommand</code>. In <code>RemoveTagCommand</code> the <code>execute()</code> function is called.
+<p><em>Figure 4.6.1: RemoveTag Sequence Diagram</em></p>
+</div>
+<div class="paragraph">
+<p>As shown in the diagram above, when the user executes the command <code>removeTag</code>, the <code>RemoveTagCommandParser</code> class will parse the tag and indexes if given, then call the <code>RemoveTagCommand</code>. In <code>RemoveTagCommand</code> the <code>execute()</code> function is called.
 This will invoke the <code>removeTag</code> function that resides in the <code>LogicManager</code>, which will remove the specific tag from specific or all contacts based on the call made by the user. This changes will then be updated and stored.</p>
 </div>
 <div class="admonitionblock note">
@@ -1253,21 +1479,36 @@ Note that the <code>removeTag</code> function will raise a <code>CommandExceptio
 </tr>
 </table>
 </div>
+</div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.6.1. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.6.2. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of <code>removeTag</code><br>
-<strong>Alternative 1 (current choice):</strong> Directly removes a certain tag from specified or all contacts.<br>
-<strong>Pros:</strong> Easier as multiple person are updated at one go. <br>
-<strong>Cons:</strong> It only can remove one tag at a time. If more tags has to be removed from multiple contacts, this function has to be called more times depending on the number of the tags that has to be removed.<br>
-<strong>Alternative 2:</strong> Usage of <code>edit</code> command to remove the tags.<br>
-<strong>Pros:</strong> One lesser command for the user to remember.<br>
-<strong>Cons:</strong> It is very tiring for the user to update each and everyone of the contacts in the contact list, if he decided to remove the tag from everyone.</p>
+<p><strong>Aspect:</strong> Implementation of <code>removeTag</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Chosen Implementation:</strong><br>
+Directly removes a certain tag from specified or all contacts.</p>
+</div>
+<div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p><strong>Pros:</strong><br>
+Easier as multiple contacts are updated at one go. <br>
+<strong>Cons:</strong><br>
+It only can remove one tag at a time. If more tags has to be removed from multiple contacts, this function has to be called more times depending on the number of the tags that has to be removed.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative:</strong> Usage of <code>edit</code> command to remove the tags.<br>
+<strong>Pros:</strong><br>
+One lesser command for the user to remember.<br>
+<strong>Cons:</strong><br>
+It is very tiring for the user to update each and everyone of the contacts in the contact list, if he decided to remove the tag from everyone.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="find"><a class="link" href="#find">4.7. Find</a></h3>
+<div class="sect3">
+<h4 id="overview-6"><a class="link" href="#overview-6">4.7.1. Overview</a></h4>
 <div class="paragraph">
 <p>The <code>FindCommand</code> class is inherited from the
 <code>Command</code> class.It allows the user to search his contacts either by the name of the contact or by the tag of the contact.</p>
@@ -1278,41 +1519,56 @@ Note that the <code>removeTag</code> function will raise a <code>CommandExceptio
 </div>
 </div>
 <div class="paragraph">
-<p>As shown above, when the user executes the command <code>find</code>, the <code>FindCommandParser</code> class will parse the user&#8217;s input, then call the <code>FindCommand</code>. In <code>FindCommand</code> the <code>execute()</code> function is called.
+<p><em>Figure 4.7.1: Find Sequence Diagram</em></p>
+</div>
+<div class="paragraph">
+<p>As shown in the diagram above, when the user executes the command <code>find</code>, the <code>FindCommandParser</code> class will parse the user&#8217;s input, then call the <code>FindCommand</code>. In <code>FindCommand</code> the <code>execute()</code> function is called.
 This will invoke the <code>updateFilteredPersonList</code> function that resides in the <code>LogicManager</code>, which will filter the contacts based on their name and tag that matches the call made by the user. This changes will then be updated on the <code>PersonalListPanel</code>.</p>
 </div>
+</div>
 <div class="sect3">
-<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.7.1. Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.7.2. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of <code>find</code><br>
-<strong>Alternative 1 (current choice):</strong> Directly find contacts based on both name and tag.<br>
-<strong>Pros:</strong> One function that can be used to search by name and tag. <br>
-<strong>Cons:</strong> If name and tag are similar, the contacts with both the same name and tag will be shown.<br>
-<strong>Alternative 2:</strong> Having two functions. One for find by name and another for find by tags.<br>
-<strong>Pros:</strong> Easier to find a person by name or by tag, if both name and tag have similar Strings.<br>
-<strong>Cons:</strong> Extra command for the user to remember.</p>
+<p><strong>Aspect:</strong> Implementation of <code>find</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Chosen Implementation:</strong><br>
+Directly find contacts based on both name and tag.<br>
+<strong>Pros:</strong><br>
+One function that can be used to search by name and tag. <br>
+<strong>Cons:</strong><br>
+If name and tag are similar, the contacts with both the same name and tag will be shown.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative:</strong> Having two functions. One for find by name and another for find by tags.<br>
+<strong>Pros:</strong><br>
+Easier to find a person by name or by tag, if both name and tag have similar Strings.<br>
+<strong>Cons:</strong><br>
+Extra command for the user to remember.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="updateprofilepic-deleteprofilepic-mechanism"><a class="link" href="#updateprofilepic-deleteprofilepic-mechanism">4.8. UpdateProfilePic/DeleteProfilePic mechanism</a></h3>
+<div class="sect3">
+<h4 id="overview-7"><a class="link" href="#overview-7">4.8.1. Overview</a></h4>
 <div class="paragraph">
-<p>The UpdateProfilePic/DeleteProfilePic mechanism is facilitated by a <code>ProfilePic</code> class, which is a property class of the <code>Person</code> class. It supports the updating and deleting of profile pictures of each Person. These two commands inherit from <code>UndoableCommand</code>.</p>
+<p>The UpdateProfilePic/DeleteProfilePic mechanism is facilitated by a <code>ProfilePic</code> class, which is a property class of the <code>Person</code> class. It supports the updating and deleting of profile pictures of each contact. These two commands inherit from <code>Command</code>.</p>
 </div>
 <div class="paragraph">
-<p><code>ProfilePic</code> essentially stores a <strong>valid</strong> <code>URL</code> of an image that will be displayed as the <code>Person</code> 's profile picture. Whenever a new <code>Person</code> is added, the <code>Person</code> 's <code>ProfilePic</code> property will be that of a default image. The command: <code>updateProfilePic</code> can then be called to change this property. When the command <code>deleteProfilePic</code> is called, the <code>ProfilePic</code> property of the selected <code>Person</code> will be changed back to the default profile picture.</p>
+<p><code>ProfilePic</code> essentially stores a <strong>valid</strong> <code>URL</code> of an image that will be displayed as the contacts&#8217;s profile picture. Whenever a new contact is added, the contact&#8217;s <code>ProfilePic</code> property will be set to that of a default image. The command: <code>updateProfilePic</code> can then be called to change this property. When the command <code>deleteProfilePic</code> is called, the <code>ProfilePic</code> property of the selected contact will be changed back to the default profile picture.</p>
 </div>
 <div class="paragraph">
 <p>Like the other properties of the <code>Person</code> class, the <code>ProfilePic</code> property will also be saved to the chosen storage file. If the image that is referred to by the <code>ProfilePic</code> is moved or deleted, the <code>ProfilePic</code> will reset back to the image of the default profile picture.</p>
 </div>
 <div class="paragraph">
-<p>The <code>updateProfilePic</code>  command works by taking in the index of the chosen <code>Person</code> and updating this <code>Person</code> according to the <code>ProfilePic</code> given. To do so, the <code>updateProfilePic</code> command takes in a URL of the image that the profile picture is to be changed to. This will cause the app to instantiate a new <code>ProfilePic</code> object and check if the URL is valid and if it is valid, the app will proceed to update the Person with the new profile picture, otherwise an IllegalValueException will be thrown.</p>
+<p>The <code>updateProfilePic</code>  command works by taking in the index of the chosen contact and updating this contact according to the <code>ProfilePic</code> given. To do so, the <code>updateProfilePic</code> command takes in a URL of the image that the profile picture is to be changed to. This will cause the app to instantiate a new <code>ProfilePic</code> object and check if the URL is valid and if it is valid, the app will proceed to update the contact with the new profile picture, otherwise an IllegalValueException will be thrown.</p>
 </div>
 <div class="paragraph">
-<p>In addition, the image will be downloaded into a local directory called: <code>ProfilePics</code> that is generated when the app initializes. This directory is created in the same directory as the <code>src</code> directory.</p>
+<p>In addition, the image will be downloaded into a local folder called: <code>ProfilePics/</code> that is generated when the app initializes. This folder is created in the same folder as the <code>src</code> folder.</p>
 </div>
 <div class="paragraph">
-<p>The <code>deleteProfilePic</code> command works by taking in the index of the chosen <code>Person</code> and updating the <code>ProfilePic</code> property of the chosen <code>Person</code> to the default profile picture.</p>
+<p>The <code>deleteProfilePic</code> command works by taking in the index of the chosen contact and updating the <code>ProfilePic</code> property of the chosen contact to the default profile picture.</p>
 </div>
 <div class="paragraph">
 <p>Below are the sequence diagrams of each command to illustrate how they work:</p>
@@ -1322,48 +1578,95 @@ This will invoke the <code>updateFilteredPersonList</code> function that resides
 <img src="images/updateProfilePicSD.jpg" alt="updateProfilePicSD" width="800">
 </div>
 </div>
+<div class="paragraph">
+<p><em>Figure 4.8.1: UpdateProfilePic Sequence Diagram</em></p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/deleteProfilePicSD.jpg" alt="deleteProfilePicSD" width="800">
 </div>
 </div>
-<div class="sect3">
-<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.8.1. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of <code>updateProfilePic</code><br>
-<strong>Alternative 1 (current choice):</strong> Add a new class that extends <code>UndoableCommand</code>.<br>
-<strong>Pros:</strong> The other properties of a <code>Person</code> can be quickly updated, using the <code>add</code> or <code>edit</code> commands, without waiting for an image to be loaded. <br>
-<strong>Cons:</strong> Users have to remember another command.<br>
-<strong>Alternative 2:</strong> Just add the function to the <code>add</code> and <code>edit</code> commands.<br>
-<strong>Pros:</strong> Users do not have to remember a new command.<br>
-<strong>Cons:</strong> The image might take a while to load, so all the data takes longer to be updated.</p>
+<p><em>Figure 4.8.2: DeleteProfilePic Sequence Diagram</em></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.8.2. Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>updateProfilePic</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Chosen Implementation:</strong><br>
+Add a new class that extends <code>Command</code>.<br>
+<strong>Pros:</strong><br>
+The other properties of a contact can be quickly updated, using the <code>add</code> or <code>edit</code> commands, without waiting for an image to be loaded. <br>
+<strong>Cons:</strong><br>
+Users have to remember another command.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative:</strong> Just add the function to the <code>add</code> and <code>edit</code> commands.<br>
+<strong>Pros:</strong><br>
+Users do not have to remember a new command.<br>
+<strong>Cons:</strong><br>
+The image might take a while to load, so all the data takes longer to be updated.</p>
 </div>
 <hr>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of <code>deleteProfilePic</code><br>
-<strong>Alternative 1 (current choice):</strong> Add a new class that extends <code>UndoableCommand</code>.<br>
-<strong>Pros:</strong> A quick way to revert the profile picture back to default. <br>
-<strong>Cons:</strong> updateProfilePic can technically do the same job, albeit slower.<br>
-<strong>Alternative 2:</strong> Not have this command at all.<br>
-<strong>Pros:</strong> Lesser commands for the user to remember.<br>
-<strong>Cons:</strong> The user might not know what the default image URL is.</p>
+<p><strong>Aspect:</strong> Implementation of <code>deleteProfilePic</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Chosen Implementation:</strong><br>
+Add a new class that extends <code>Command</code>.<br>
+<strong>Pros:</strong><br>
+A quick way to revert the profile picture back to default. <br>
+<strong>Cons:</strong><br>
+Redundant as it is a special case of <code>updateProfilePic</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative:</strong> Not have this command at all.<br>
+<strong>Pros:</strong><br>
+Lesser commands for the user to remember.<br>
+<strong>Cons:</strong><br>
+The user might not know what the default image URL is.</p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Storage of images of profile pictures<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Chosen Implementation:</strong><br>
+Store the images in a local folder: <code>ProfilePics/</code>.<br>
+<strong>Pros:</strong><br>
+After the initial download, subsequent retrieval of image for display can be done without visible lag and if the original image gets deleted or moved, the profile picture can still be displayed. <br>
+<strong>Cons:</strong><br>
+Initial download may cause a visible lag and freeze the UI for some time.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative:</strong> Not store the images<br>
+<strong>Pros:</strong><br>
+No space requirement to store the images locally<br>
+<strong>Cons:</strong><br>
+There might be a visible lag every time an image is displayed as a profile picture, if the image is too big and on the internet.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="viewcount-tracking"><a class="link" href="#viewcount-tracking">4.9. ViewCount Tracking</a></h3>
+<div class="sect3">
+<h4 id="overview-8"><a class="link" href="#overview-8">4.9.1. Overview</a></h4>
 <div class="paragraph">
-<p>The <code>viewCount</code> variable is a <code>private int</code> variable of the <code>Person</code> class. This variable is updated whenever a <code>PersonPanelSelectionChangedEvent</code> is raised. This means that whenever a <code>Person</code> is selected, whether by the <code>select</code> command or by clicking on the <code>PersonCard</code> on the UI, the <code>Person</code> associated with the selected <code>PersonCard</code> will have its <code>viewCount</code> variable incremented by 1.</p>
+<p>The <code>viewCount</code> variable is a <code>private int</code> variable of the <code>Person</code> class. This variable is updated whenever a <code>PersonPanelSelectionChangedEvent</code> is raised. This means that whenever a contact is selected, whether by the <code>select</code> command or by clicking on the <code>PersonCard</code> on the UI, the contact associated with the selected <code>PersonCard</code> will have its <code>viewCount</code> variable incremented by 1.</p>
 </div>
 <div class="paragraph">
-<p>To listen for the <code>PersonPanelSelectionChangedEvent</code>, a listener is placed in the <code>MainApp</code> object, which ensures that the <code>Model</code> associated to it is updated with the right <code>Person</code> that has its <code>viewCount</code> updated.</p>
+<p>To listen for the <code>PersonPanelSelectionChangedEvent</code>, a listener is placed in the <code>MainApp</code> object, which ensures that the <code>Model</code> associated to it is updated with the right <code>Person</code> object that has its <code>viewCount</code> updated.</p>
 </div>
 <div class="paragraph">
-<p>As the <code>viewCount</code> is not displayed on the UI, when this variable of a <code>Person</code> is updated, no <code>AddressBookChangedEvent</code> is raised, so the UI will not be refreshed unnecessarily.</p>
+<p>As the <code>viewCount</code> is not displayed on the UI, when this variable of a contact is updated, no <code>AddressBookChangedEvent</code> is raised, so the UI will not be refreshed unnecessarily.</p>
 </div>
 <div class="paragraph">
 <p>Right before the app closes, the app will sort the <code>Person</code> objects in the <code>AddressBook</code> such that the <code>Person</code> objects will be displayed from highest <code>viewCount</code> to lowest.</p>
 </div>
+<div style="page-break-after: always;"></div>
 <div class="paragraph">
 <p>Below is the sequence diagram for how the <code>viewCount</code> object is updated:</p>
 </div>
@@ -1372,46 +1675,83 @@ This will invoke the <code>updateFilteredPersonList</code> function that resides
 <img src="images/updateViewCountSD.png" alt="updateViewCountSD" width="800">
 </div>
 </div>
+<div class="paragraph">
+<p><em>Figure 4.9.1: UpdateViewCount Sequence Diagram</em></p>
+</div>
+</div>
 <div class="sect3">
-<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">4.9.1. Design Considerations</a></h4>
+<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">4.9.2. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of <code>viewCount</code><br>
-<strong>Alternative 1 (current choice):</strong> Add a new variable to the <code>Person</code> class.<br>
-<strong>Pros:</strong> No extra classes have to be created and it is clear which <code>Person</code> has a <code>viewCount</code> of what value.<br>
-<strong>Cons:</strong> The <code>Model</code> has to be updated every time a new <code>PersonCard</code> is selected.<br>
-<strong>Alternative 2:</strong> Track all the <code>viewCount</code> in a separate file or class.<br>
-<strong>Pros:</strong> <code>Model</code> does not need to be updated and no existing class will be changed.<br>
-<strong>Cons:</strong> File IO will be required for the saving of the list or the list has to be converted into XML and stored with the rest of the data is <code>addressbook.xml</code>.</p>
+<p><strong>Aspect:</strong> Implementation of <code>viewCount</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Chosen Implementation:</strong><br>
+Add a new variable to the <code>Person</code> class.<br>
+<strong>Pros:</strong><br>
+No extra classes have to be created and it is clear which <code>Person</code> has a <code>viewCount</code> of what value.<br>
+<strong>Cons:</strong><br>
+The <code>Model</code> has to be updated every time a new <code>PersonCard</code> is selected.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative:</strong> Track all the <code>viewCount</code> in a separate file or class.<br>
+<strong>Pros:</strong><br>
+<code>Model</code> does not need to be updated and no existing class will be changed.<br>
+<strong>Cons:</strong><br>
+File IO will be required for the saving of the list or the list has to be converted into XML and stored with the rest of the data is <code>addressbook.xml</code>.</p>
+</div>
+<hr>
+<div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Updating of <code>Model</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Chosen Implementation:</strong><br>
+Update <code>Model</code> without raising <code>AddressBookChangedEvent</code>.<br>
+<strong>Pros:</strong><br></p>
+</div>
+<div class="paragraph">
+<p>No unnecessary refreshing of the UI.    <br>
+<strong>Cons:</strong><br>
+The <code>viewCount</code> variable of each <code>Person</code> is only saved to <code>addressbook.xml</code> only when the app stops or when the next <code>AddressBookChangedEvent</code> is raised.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative:</strong> Update <code>Model</code> normally.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Pros:</strong><br>
+The <code>addressbook.xml</code> file is always updated once any value is changed.<br>
+<strong>Cons:</strong><br>
+The UI will be refreshed unnecessarily, which may cause a visible lag if large image files are reloaded.</p>
 </div>
 <hr>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Updating of <code>Model</code><br>
-<strong>Alternative 1 (current choice):</strong> Update <code>Model</code> without raising <code>AddressBookChangedEvent</code>.<br>
-<strong>Pros:</strong> No unnecessary refreshing of the UI<br>
-<strong>Cons:</strong> The <code>viewCount</code> variable of each <code>Person</code> is only saved to <code>addressbook.xml</code> only when the app stops or when the next <code>AddressBookChangedEvent</code> is raised.<br>
-<strong>Alternative 2:</strong> Update <code>Model</code> normally<br>
-<strong>Pros:</strong> The <code>addressbook.xml</code> file is always updated once any value is changed.<br>
-<strong>Cons:</strong> The UI will be refreshed unnecessarily, which may cause a visible lag if large image files are reloaded.</p>
+<p><strong>Aspect:</strong> Sorting by <code>viewCount</code><br></p>
 </div>
-<hr>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Sorting by <code>viewCount</code><br>
-<strong>Alternative 1 (current choice):</strong> Sort right before app stops.<br>
-<strong>Pros:</strong> When app is started the next time, it can be started immediately, without having to perform the sort.<br>
-<strong>Cons:</strong> The app might lag a bit when stopping.<br>
-<strong>Alternative 2:</strong> Sort right before app starts.<br>
-<strong>Pros:</strong> The app will stop quickly.<br>
-<strong>Cons:</strong> The app will take a while to start.<br>
+<p><strong>Chosen Implementation:</strong><br>
+Sort right before app stops.<br>
+<strong>Pros:</strong><br>
+When app is started the next time, it can be started immediately, without having to perform the sort.<br>
+<strong>Cons:</strong><br>
+The app might lag a bit when stopping.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative:</strong> Sort right before app starts.<br>
+<strong>Pros:</strong><br>
+The app will stop quickly.<br>
+<strong>Cons:</strong><br>
+The app will take a while to start.<br>
 <strong>Alternative 3:</strong> Whenever a viewCount is changed.<br>
 <strong>Pros:</strong> The app will always show the updated order.<br>
 <strong>Cons:</strong> The app will lag slightly each time a <code>PersonCard</code> is selected.</p>
 </div>
+<div style="page-break-after: always;"></div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="unknown-input-parsing"><a class="link" href="#unknown-input-parsing">4.10. Unknown input parsing</a></h3>
 <div class="sect3">
-<h4 id="overview-2"><a class="link" href="#overview-2">4.10.1. Overview</a></h4>
+<h4 id="overview-9"><a class="link" href="#overview-9">4.10.1. Overview</a></h4>
 <div class="paragraph">
 <p>To enhance user experience, a similarity-matching mechanism is employed to detect and parse unknown user input, matching them
 to probable system-recognized commands.
@@ -1482,6 +1822,9 @@ with this enhancement in place:</p>
 </div>
 </div>
 <div class="paragraph">
+<p><em>Figure 4.10.1: ParseCommand Activity Diagram</em></p>
+</div>
+<div class="paragraph">
 <p>As shown in the diagram above, actions enclosed in a green box are the enhancements applied to the original <code>AddressBookParser</code>,
 for the purpose of this mechanism.</p>
 </div>
@@ -1520,7 +1863,7 @@ The user would have to type more for each command.</p>
 </div>
 <hr>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Parsing user response after a suggestion is prompted.<br></p>
+<p><strong>Aspect:</strong> Parsing user response after a suggestion is prompted<br></p>
 </div>
 <div class="paragraph">
 <p><strong>Chosen implementation:</strong><br>
@@ -1545,6 +1888,7 @@ An extra step is presented to the user on a wrong match, affecting the user&#821
 <p><strong>Note:</strong> In our chosen implementation, we mitigate the mentioned cons by including explicit instructions in the suggestion prompt,
 that a response is only required if the user accepts the match.</p>
 </div>
+<div style="page-break-after: always;"></div>
 </div>
 </div>
 </div>
@@ -1552,8 +1896,10 @@ that a response is only required if the user accepts the match.</p>
 <div class="sect1">
 <h2 id="logging"><a class="link" href="#logging">5. Logging</a></h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="overview-10"><a class="link" href="#overview-10">5.1. Overview</a></h3>
 <div class="paragraph">
-<p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
+<p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations, as such:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1564,12 +1910,12 @@ that a response is only required if the user accepts the match.</p>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
 </li>
 <li>
-<p>Currently log messages are output through: <code>Console</code> and to a <code>.log</code> file.</p>
+<p>The log messages are currently output through: <code>Console</code> and to a <code>.log</code> file.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Logging Levels</strong></p>
+<p><strong>Logging Levels:</strong></p>
 </div>
 <div class="ulist">
 <ul>
@@ -1587,11 +1933,13 @@ that a response is only required if the user accepts the match.</p>
 </li>
 </ul>
 </div>
+</div>
 <div class="sect2">
-<h3 id="configuration"><a class="link" href="#configuration">5.1. Configuration</a></h3>
+<h3 id="configuration"><a class="link" href="#configuration">5.2. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
+<div style="page-break-after: always;"></div>
 </div>
 </div>
 </div>
@@ -1632,12 +1980,12 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <p>We use <a href="https://www.google.com/chrome/browser/desktop/">Google Chrome</a> for converting documentation to PDF format, as Chrome&#8217;s PDF engine preserves hyperlinks used in webpages.</p>
 </div>
 <div class="paragraph">
-<p>Here are the steps to convert the project documentation files to PDF format.</p>
+<p>Here are the steps to convert the project documentation files to PDF format:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Follow the instructions in <a href="UsingGradle.html#rendering-asciidoc-files">UsingGradle.adoc</a> to convert the AsciiDoc files in the <code>docs/</code> directory to HTML format.</p>
+<p>Follow the instructions in <a href="UsingGradle.html#rendering-asciidoc-files">UsingGradle.adoc</a> to convert the AsciiDoc files in the <code>docs/</code> folder to HTML format.</p>
 </li>
 <li>
 <p>Go to your generated HTML files in the <code>build/docs</code> folder, right click on them and select <code>Open with</code> &#8594; <code>Google Chrome</code>.</p>
@@ -1646,7 +1994,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <p>Within Chrome, click on the <code>Print</code> option in Chrome&#8217;s menu.</p>
 </li>
 <li>
-<p>Set the destination to <code>Save as PDF</code>, then click <code>Save</code> to save a copy of the file in PDF format. For best results, use the settings indicated in the screenshot below.</p>
+<p>Set the destination to <code>Save as PDF</code>, then click <code>Save</code> to save a copy of the file in PDF format. For best results, use the settings indicated in the screenshot on the next page.</p>
 </li>
 </ol>
 </div>
@@ -1656,7 +2004,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 5.6.1 : Saving documentation as PDF files in Chrome</em></p>
+<p><em>Figure 6.3.1 : Saving documentation as PDF files in Chrome</em></p>
 </div>
 </div>
 </div>
@@ -1694,6 +2042,7 @@ The most reliable way to run tests is the 3rd one. The first two methods might f
 </li>
 </ul>
 </div>
+<div style="page-break-after: always;"></div>
 <div class="paragraph">
 <p><strong>Method 2: Using Gradle</strong></p>
 </div>
@@ -1731,10 +2080,10 @@ See <a href="UsingGradle.html">UsingGradle.adoc</a> for more info on how to run 
 <div class="paragraph">
 <p>We have two types of tests:</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
-<p><strong>GUI Tests</strong> - These are tests involving the GUI. They include,</p>
+<p><strong>GUI Tests</strong> - These are tests involving the GUI. They include:</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
@@ -1747,7 +2096,7 @@ See <a href="UsingGradle.html">UsingGradle.adoc</a> for more info on how to run 
 </div>
 </li>
 <li>
-<p><strong>Non-GUI Tests</strong> - These are tests not involving the GUI. They include,</p>
+<p><strong>Non-GUI Tests</strong> - These are tests not involving the GUI. They include:</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
@@ -1765,8 +2114,9 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 </ol>
 </div>
 </li>
-</ol>
+</ul>
 </div>
+<div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
 <h3 id="troubleshooting-testing"><a class="link" href="#troubleshooting-testing">7.3. Troubleshooting Testing</a></h3>
@@ -1830,6 +2180,7 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 a. Include those libraries in the repo (this bloats the repo size).<br>
 b. Require developers to download those libraries manually (this creates extra work for developers).</p>
 </div>
+<div style="page-break-after: always;"></div>
 </div>
 </div>
 </div>
@@ -2204,6 +2555,7 @@ Do take a look at the <a href="#storage-component">Design: Storage Component</a>
 <p>Edits the remark for a person specified in the <code>INDEX</code>.<br>
 Format: <code>remark INDEX r/[REMARK]</code></p>
 </div>
+<div style="page-break-after: always;"></div>
 <div class="paragraph">
 <p>Examples:</p>
 </div>
@@ -2327,6 +2679,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="paragraph">
 <p>We have to properly encapsulate the remark in our <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/main/java/seedu/address/model/person/ReadOnlyPerson.java"><code>ReadOnlyPerson</code></a> class. Instead of just using a <code>String</code>, let&#8217;s follow the conventional class structure that the codebase already uses by adding a <code>Remark</code> class.</p>
 </div>
+<div style="page-break-after: always;"></div>
 <div class="paragraph">
 <p><strong>Main:</strong></p>
 </div>
@@ -2837,6 +3190,7 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ol>
 </div>
+<div style="page-break-after: always;"></div>
 <div class="paragraph">
 <p><strong>Extensions</strong></p>
 </div>
@@ -3259,7 +3613,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-31 15:12:58 +00:00
+Last updated 2017-10-31 22:35:03 +00:00
 </div>
 </div>
 </body>
