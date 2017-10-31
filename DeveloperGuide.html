@@ -55,6 +55,7 @@ Adapted from AddressBook-Level4, by: <code>Team SE-EDU</code>      Since: <code>
 <li><a href="#find">4.7. Find</a></li>
 <li><a href="#updateprofilepic-deleteprofilepic-mechanism">4.8. UpdateProfilePic/DeleteProfilePic mechanism</a></li>
 <li><a href="#viewcount-tracking">4.9. ViewCount Tracking</a></li>
+<li><a href="#unknown-input-parsing">4.10. Unknown input parsing</a></li>
 </ul>
 </li>
 <li><a href="#logging">5. Logging</a>
@@ -903,11 +904,16 @@ This sorting algorithm is introduced in <code>EventDateComparator</code> which i
 <div class="sect2">
 <h3 id="oauth2-fulfilment-mechanism"><a class="link" href="#oauth2-fulfilment-mechanism">4.3. OAuth2 fulfilment mechanism</a></h3>
 <div class="sect3">
-<h4 id="summary-2"><a class="link" href="#summary-2">4.3.1. Summary</a></h4>
+<h4 id="overview"><a class="link" href="#overview">4.3.1. Overview</a></h4>
 <div class="paragraph">
 <p>A command structure has been set-up to fulfil all commands requiring an authentication process against the OAuth2 protocol.
-DoC currently has two such commands, namely, <code>import</code> and <code>export</code>, which requires this mechanism. This command structure has also been set-up to support possible future
-extensions.<br></p>
+DoC currently only has two such commands, namely, <code>import</code> and <code>export</code>, which require this mechanism. Thus, it is noteworthy
+that this implementation was built for the express purpose of future extension.</p>
+</div>
+<div class="paragraph">
+<p>An exciting possibility is an integration with Facebook, for automated
+retrieval of extensive contact and event information. For example, we can populate a users' contact list on DoC, with his
+Facebook friend list, which can include information on their birth dates, gender, and even their public profile pictures.</p>
 </div>
 <div class="paragraph">
 <p>The OAuth2 authentication process is fulfilled with the help of the inbuilt <code>BrowserPanel</code>. This requires cross-component communication,
@@ -927,39 +933,69 @@ which is implemented in an event-driven manner.</p>
 <div class="sect4">
 <h5 id="import-contacts-to-doc-from-google-contacts"><a class="link" href="#import-contacts-to-doc-from-google-contacts">Import contacts to DoC from Google Contacts</a></h5>
 <div class="paragraph">
-<p>The <code>import</code> command uses <code>Google Contacts</code> as a source, and retrieves all of the authenticated users' Google Contacts.
-A conversion process is then executed with the help of the <code>GooglePersonConverterUtil</code>. The newly converted contacts are then stored
+<p>The <code>import</code> command uses <code>Google Contacts</code> as a source, and retrieves all of the authenticated user&#8217;s Google contacts.
+This comes in the form of a list of Google&#8217;s <code>Person</code> objects, which are then converted to DoC <code>Person</code> objects with the
+help of the <code>GooglePersonConverterUtil</code> class. The newly converted contacts are then stored
 to the <code>Model</code> component of DoC.</p>
 </div>
 </div>
 <div class="sect4">
 <h5 id="export-contacts-in-doc-to-google-contacts"><a class="link" href="#export-contacts-in-doc-to-google-contacts">Export contacts in DoC to Google Contacts</a></h5>
 <div class="paragraph">
-<p>The <code>export</code> command converts all contacts currently stored in DoC, with the help of the <code>GooglePersonConverterUtil</code>,
-to instances of Googles' <code>Person</code> class. The newly converted contacts are then exported to the authenticated users' Google Contacts.</p>
+<p>The <code>export</code> command converts all contacts currently stored in DoC, with the help of the <code>GooglePersonConverterUtil</code> class,
+to a list of Google&#8217;s <code>Person</code> class objects. The newly converted contacts are then exported to the authenticated users' Google Contacts.</p>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="implementation-2"><a class="link" href="#implementation-2">4.3.3. Implementation</a></h4>
+<h4 id="execution-flow"><a class="link" href="#execution-flow">4.3.3. Execution flow</a></h4>
+<div class="sect4">
+<h5 id="explanation"><a class="link" href="#explanation">Explanation</a></h5>
 <div class="paragraph">
-<p>The implementation of <code>import</code> and <code>export</code> are very similar. There are 3 sequential steps in the flow of execution, for both commands:<br>
-<strong>1.</strong> The user input of <code>import</code> or <code>export</code> is parsed by the <code>AddressBookParser</code>, and a new instance of an <code>ImportCommand</code> or <code>ExportCommand</code> is returned to the <code>LogicManager</code>,
- which then calls the instances' <code>execute()</code> method<br>
-<strong>2.</strong> The execute() method of <code>import</code> and <code>export</code> then triggers the <strong>authentication process</strong> with the <code>BrowserPanel</code><br>
-<strong>3.</strong> Upon successful authentication on an <code>import</code> command, the <strong>HTTP request process</strong> is executed, followed by the  <strong>conversion process</strong>.
-The list of converted DoC <code>Person</code> objects are then added to the <code>Model</code> component.
-The order is exactly reversed for an <code>export</code> command</p>
+<p>The implementation of both the <code>import</code> and <code>export</code> commands are very similar. These are the 5 sequential steps in the flow of execution
+for the <code>import</code> command:<br></p>
 </div>
-<div class="literalblock">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The user input of <code>import</code> or <code>export</code> is parsed by the <code>AddressBookParser</code>, and a new instance of an <code>ImportCommand</code> or <code>ExportCommand</code> is returned to the <code>LogicManager</code>,
+which then calls the instance&#8217;s <code>execute()</code> method. This is also known as the <strong>input parsing process</strong>.<br></p>
+</li>
+<li>
+<p>The <code>execute()</code> method of <code>import</code> and <code>export</code> then triggers the <strong>authentication process</strong> with the <code>BrowserPanel</code><br></p>
+</li>
+<li>
+<p>Upon successful authentication on an <code>import</code> command, the <strong>HTTP request process</strong> is executed, fetching a list.
+of the authenticated user&#8217;s Google Contacts from Google&#8217;s servers.<br></p>
+</li>
+<li>
+<p>The <strong>conversion process</strong> then converts this list to a list of DoC <code>Person</code> objects.<br></p>
+</li>
+<li>
+<p>The list of converted DoC <code>Person</code> objects are then added to the <code>Model</code> component.<br></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Note:</strong> We will not discuss the <strong>input parsing process</strong> in further detail, as it is common to all commands in DoC,
+and has been previously illustrated in section 3.3: Logic component.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="summary-2"><a class="link" href="#summary-2">Summary</a></h5>
+<div class="paragraph">
+<p>The following diagram summarizes the execution flow and illustrates the parallel between the <code>import</code> and <code>export</code> commands:</p>
+</div>
+<div class="imageblock">
 <div class="content">
-<pre>Only the 3 bolded processes will be discussed in further detail as the process for step 1 is the same as all other commands in DoC.</pre>
+<img src="images/import_export_parallel.png" alt="import export parallel" width="80%">
+</div>
 </div>
 </div>
 <div class="sect4">
 <h5 id="authentication-process"><a class="link" href="#authentication-process">Authentication process</a></h5>
 <div class="paragraph">
-<p>The authentication process is the more involved process of the 3. We can understand it better with the help of the following sequence diagram:<br></p>
+<p>The <strong>authentication process</strong> is the more involved process of the 3. We can understand it better with the help of the following sequence diagram for the <code>import</code> command:<br></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -967,42 +1003,64 @@ The order is exactly reversed for an <code>export</code> command</p>
 </div>
 </div>
 <div class="paragraph">
-<p>This is a summary of the steps in the execution flow:<br>
-<strong>1.</strong> The <code>execute()</code> method of the <code>ImportCommand</code> is called from the <code>LogicManager</code>, firing an <code>Oauth2BrowserRequestEvent</code> to the <code>BrowserPanel</code><br>
-<strong>2.</strong> The <code>BrowserPanel</code> handles this event and navigates to the <strong>authentication URL</strong>* provided by the event<br>
-<strong>3.</strong> The user successfully authenticates and grants DoC read permission of the users' Google Contacts<br>
-<strong>4.</strong> The <code>BrowserPanel</code> is redirected to the <strong>success URL</strong>*<br>
-<strong>4.</strong> The <code>BrowserPanel</code> detects the URL change to the <strong>success URL</strong>* and extracts the authentication code appended to the URL,
-this code is then attached to a <code>GoogleAuthenticationSuccessEvent</code> fired to the instance of <code>ImportCommand</code><br>
-<strong>5.</strong> The <code>ImportCommand</code> instance handles the <code>GoogleAuthenticationSuccessEvent</code> and creates the <code>GoogleCredential</code> object<br>
-<strong>6.</strong> The HTTP request process ensues:</p>
+<p>This is a summary of the steps in the <strong>authentication process</strong>:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The <code>execute()</code> method of the <code>ImportCommand</code> is called from the <code>LogicManager</code>, firing an <code>Oauth2BrowserRequestEvent</code> to the <code>BrowserPanel</code>.<br></p>
+</li>
+<li>
+<p>The <code>BrowserPanel</code> handles this event and navigates to the <strong>authentication URL</strong>* provided by the event.<br></p>
+</li>
+<li>
+<p>The user successfully authenticates and grants DoC read permission of the users' Google Contacts.<br></p>
+</li>
+<li>
+<p>The <code>BrowserPanel</code> is redirected to the <strong>success URL</strong>*.<br></p>
+</li>
+<li>
+<p>The <code>BrowserPanel</code> detects the URL change to the <strong>success URL</strong>* and extracts the authentication code appended to the URL,
+this code is then attached to a <code>GoogleAuthenticationSuccessEvent</code> fired to the instance of <code>ImportCommand</code>.<br></p>
+</li>
+<li>
+<p>The <code>ImportCommand</code> instance handles the <code>GoogleAuthenticationSuccessEvent</code> and creates the <code>GoogleCredential</code> object.<br></p>
+</li>
+<li>
+<p>The <strong>HTTP request process</strong> ensues.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Note:</strong> The <strong>authentication URL</strong>* is generated by Google&#8217;s <code>oauth2</code> client library. Choice of <strong>success URL</strong>* is discussed
+later, under design considerations.</p>
 </div>
 </div>
 <div class="sect4">
 <h5 id="http-request-process"><a class="link" href="#http-request-process">HTTP request process</a></h5>
 <div class="paragraph">
-<p>With the <code>GoogleCredential</code> object, we can now send HTTP requests quite easily using Google&#8217;s Java API client, specifically
-its <code>PeopleService</code> class. Its documentation can be found in the following url:<br>
+<p>With the <code>GoogleCredential</code> object generated at the end of the <strong>authentication process</strong>, we can now send HTTP requests
+to the Google People API easily using Google&#8217;s Java API client, specifically it&#8217;s <code>PeopleService</code> class. Its documentation can be found in the following url:<br>
 <a href="https://developers.google.com/resources/api-libraries/documentation/people/v1/java/latest/com/google/api/services/people/v1/PeopleService.html" class="bare">https://developers.google.com/resources/api-libraries/documentation/people/v1/java/latest/com/google/api/services/people/v1/PeopleService.html</a></p>
 </div>
 </div>
 <div class="sect4">
 <h5 id="conversion-process"><a class="link" href="#conversion-process">Conversion process</a></h5>
 <div class="paragraph">
-<p>The conversion process is handled entirely by the <code>GooglePersonConverterUtil</code>. Note-worthy design decisions are listed as follows:<br>
+<p>The conversion process is handled entirely by the <code>GooglePersonConverterUtil</code>. Noteworthy design decisions are listed as follows:<br>
 <strong>Google Person &#8594; DoC Person</strong><br></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Only Google <code>Person</code> objects with a non-null name, and a non-null phone number are accepted</p>
+<p>All Google <code>Person</code> objects with a null name or a null phone number are discarded.</p>
 </li>
 <li>
-<p>Google <code>Person</code> objects without an email or an address are given the constants <code>INVALID_EMAIL@INVALID.COM</code>, and
-<code>INVALID_ADDRESS PLEASE UPDATE THIS</code> respectively, in the resulting DoC <code>Person</code></p>
+<p>Google <code>Person</code> objects without an email or an address are given the placeholder constants <code>INVALID_EMAIL@INVALID.COM</code>, and
+<code>INVALID_ADDRESS PLEASE UPDATE THIS</code> respectively, in the resulting DoC <code>Person</code>.</p>
 </li>
 <li>
-<p>All DoC <code>Person</code> objects produced are given the tag <code>ImportedFromGoogle</code></p>
+<p>All DoC <code>Person</code> objects produced are given the tag <code>ImportedFromGoogle</code>.</p>
 </li>
 </ul>
 </div>
@@ -1012,14 +1070,14 @@ its <code>PeopleService</code> class. Its documentation can be found in the foll
 <div class="ulist">
 <ul>
 <li>
-<p>DoC&#8217;s <code>Name</code>, <code>Phone</code>, <code>Email</code> and <code>Address</code> are added as native Google <code>Person</code> properties, with similar names. <code>Tag</code>
-objects are added under the Google <code>Person</code> object&#8217;s <code>UserDefined</code> property</p>
+<p>DoC&#8217;s <code>Name</code>, <code>Phone</code>, <code>Email</code> and <code>Address</code> objects are added as native Google <code>Person</code> attributes, with similar names while the <code>Tag</code>
+object is added as a Google <code>Person</code> object&#8217;s <code>UserDefined</code> attribute.</p>
 </li>
 <li>
-<p><code>ProfilePic</code> cannot be exported due to Google Contact&#8217;s restrictions</p>
+<p><code>ProfilePic</code> cannot be exported due to Google Contact&#8217;s restrictions.</p>
 </li>
 <li>
-<p>The produced Google <code>Person</code> objects are added to a contact group titled <code>Imported from DoC</code></p>
+<p>The produced Google <code>Person</code> objects are added to a contact group titled <code>Imported from DoC</code> on <code>Google Contacts</code>.</p>
 </li>
 </ul>
 </div>
@@ -1028,13 +1086,60 @@ objects are added under the Google <code>Person</code> object&#8217;s <code>User
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.3.4. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> How a successful authentication is detected<br>
-<strong>Alternative 1 (Chosen for security):</strong> Redirect to a hosted domain first, then redirect to a Google Contacts page.<br>
-<strong>Pros:</strong> The underlying <code>HTTP GET</code> is sent to a domain under DoC&#8217;s control &#8594; risk of authentication code leak is controlled.<br>
-<strong>Cons:</strong> The BrowserPanel may display an error page temporarily if the hosted domain is down, however this will not be noticeable if redirection occurs fast.<br>
-<strong>Alternative 2:</strong> Redirect to a Google Contacts page immediately.<br>
-<strong>Pros:</strong> No risk of an error page being display.<br>
-<strong>Cons:</strong> The underlying <code>HTTP GET</code> containing the users' authentication code is sent to an external domain.</p>
+<p><strong>Aspect:</strong> How a successful authentication is handled.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Chosen implementation:</strong><br>
+Use a hosted domain as the redirection URL for a successful authentication. This hosted domain will be the designated
+<strong>success URL</strong>* the <code>BrowserPanel</code> listens for. After the authentication token is extracted from the URL, we then
+redirect to a Google Contacts page.<br>
+<strong>Pros:</strong><br>
+The underlying <code>HTTP GET</code> is sent to a domain under DoC&#8217;s control, reducing the risk of authentication token leak.<br>
+<strong>Cons:</strong><br>
+The BrowserPanel may display an error page temporarily if the hosted domain is down, however this will not be noticeable if redirection occurs fast.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative:</strong><br>
+Redirect to a Google Contacts page immediately.<br>
+<strong>Pros:</strong><br>
+No risk of an error page being display.<br>
+<strong>Cons:</strong><br>
+The underlying <code>HTTP GET</code> containing the authentication token is sent to an external domain.</p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Duplication handling.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Chosen implementation:</strong><br>
+Do not perform any duplication checks in the implementation of the <code>export</code> command.<br>
+<strong>Pros:</strong><br>
+We avoid the overhead of having to first import all the user&#8217;s Google contacts, storing them temporarily, then checking them against
+DoC&#8217;s Model component to sieve out non-duplicates.<br>
+<strong>Cons:</strong><br>
+Multiple calls of the <code>export</code> command will result in duplicates being created on the user&#8217;s Google contacts.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative:</strong><br>
+Implement a way to track changes within DoC&#8217;s <code>Model</code> component, or a way to record export history. <br>
+<strong>Pros:</strong><br>
+We now can choose to export only modified or new <code>Person</code> objects in DoC.<br>
+<strong>Cons:</strong><br>
+Cross-checking is still required against a user&#8217;s Google contacts, as they can be modified externally.</p>
+</div>
+<div class="paragraph">
+<p><strong>Note:</strong> While the current choice may affect user experience, it is not app-breaking, and it is the compromise chosen
+in this current version of DoC, due to the following redeeming factors:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Google Contacts automatically flags possible duplicates, and offers a quick merging service.</p>
+</li>
+<li>
+<p>Contacts exported from DoC will be added to a designated "ImportedFromGoogle" contact group, and can be filtered out on Google Contacts easily.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -1300,6 +1405,145 @@ This will invoke the <code>updateFilteredPersonList</code> function that resides
 <strong>Alternative 3:</strong> Whenever a viewCount is changed.<br>
 <strong>Pros:</strong> The app will always show the updated order.<br>
 <strong>Cons:</strong> The app will lag slightly each time a <code>PersonCard</code> is selected.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="unknown-input-parsing"><a class="link" href="#unknown-input-parsing">4.10. Unknown input parsing</a></h3>
+<div class="sect3">
+<h4 id="overview-2"><a class="link" href="#overview-2">4.10.1. Overview</a></h4>
+<div class="paragraph">
+<p>To enhance user experience, a similarity-matching mechanism is employed to detect and parse unknown user input, matching them
+to probable system-recognized commands.
+The Levenshtein distance is used as a metric to measure similarity.</p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s a brief explanation of this metric:<br></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>The Levenshtein distance between two strings, is the minimum number of insertion, deletion or
+substitution operations required to transform one string to the other.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This mechanism is achieved with an enhancement on the original <code>AddressBookParser</code>, and the introduction of a new class, <code>UnknownCommand</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="execution-flow-2"><a class="link" href="#execution-flow-2">4.10.2. Execution flow</a></h4>
+<div class="sect4">
+<h5 id="explanation-2"><a class="link" href="#explanation-2">Explanation</a></h5>
+<div class="paragraph">
+<p>When a unknown input is entered, the <code>AddressBookParser</code> instantiates an <code>UnknownCommand</code> object with this input.
+The 'AddressBookParser' then calls the <code>suggestionFound()</code> method of this instance. This method proceeds to match the unknown input against
+a list of system-recognized command words. If a match is found, we instantiate the suggested command within the <code>UnknownCommand</code> object,
+and prompt the user for a response. If the user accepts the suggestion, we retrieve the instance of the suggested command and execute it.</p>
+</div>
+<div class="paragraph">
+<p><strong>Note:</strong><br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If the minimum Levenshtein distance is shared by two matches, the lexicographically smaller match will be chosen.</p>
+</li>
+<li>
+<p>We reject any unknown input, whose <code>commandWord</code> exceeds the maximum acceptable length. This number is chosen based on the set
+maximum acceptable Levenshtein distance and the length of the longest system-recognized <code>commandWord</code> in DoC:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>maximum acceptable length = length of longest system-recognized `commandWord` + maximum acceptable Levenshtein distance
+
+Current state of DoC: 18 = 16 + 2</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If a match is found and the input contains invalid parameters, we do not prompt the user for a response. Instead we prompt
+the user with an invalid command format message, and a format guideline on the matched command.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="summary-3"><a class="link" href="#summary-3">Summary</a></h5>
+<div class="paragraph">
+<p>The following activity diagram illustrates the the execution flow of the <code>parseCommand()</code> method, of the <code>AddressBookParser</code>,
+with this enhancement in place:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ParseCommandActivityDiagram.png" alt="ParseCommandActivityDiagram" width="100%">
+</div>
+</div>
+<div class="paragraph">
+<p>As shown in the diagram above, actions enclosed in a green box are the enhancements applied to the original <code>AddressBookParser</code>,
+for the purpose of this mechanism.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">4.10.3. Design considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Choice of acceptable Levenshtein distance<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Chosen implementation:</strong><br>
+The maximum acceptable Levenshtein distance is set to 2, as the shortest command in DoC is only 3 characters long.<br>
+<strong>Pros:</strong><br>
+The similarity matching will be more likely to yield relevant result, than if the Levenshtein distance were to be set at 3 or higher.
+For example, the Levenshtein distance between 'add' and 'hey' is 3.<br>
+<strong>Cons:</strong><br>
+Typos on longer commands have a higher propensity to produce a string with a Levenshtein distance of more than 2.
+These cannot be detected with this implementation.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1:</strong><br>
+Set a maximum acceptable Levenshtein distance of 3 or higher.<br>
+<strong>Pros:</strong><br>
+Stronger similarity matching capabilities.<br>
+<strong>Cons:</strong><br>
+Random user input might yield positive matches.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong><br>
+Lengthen sytem-recognized command words.<br>
+<strong>Pros:</strong><br>
+We can set a higher maximum acceptable Levenshtein distance without the cons mentioned in  alternative 1.<br>
+<strong>Cons:</strong><br>
+The user would have to type more for each command.</p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Parsing user response after a suggestion is prompted.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Chosen implementation:</strong><br>
+DoC prompts the user for a response of "yes" or "y", which executes the suggested command. Upon any another response,
+the system discards the suggested command and begins the parsing process again.<br>
+<strong>Pros:</strong><br>
+If the mechanism has wrongly matched an unknown input, the user can simply ignore the suggestion prompt and continue without
+further action.<br>
+<strong>Cons:</strong><br>
+The user might infer that a response of "no" or "n" is required to reject the suggestion, and enters an input accordingly.
+This may begin a loop that proceeds ad infinitum.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 1:</strong><br>
+DoC prompts the user for a response of "no" or "n" to indicate rejection.<br>
+<strong>Pros:</strong><br>
+The handling would be more intuitive to the user.<br>
+<strong>Cons:</strong><br>
+An extra step is presented to the user on a wrong match, affecting the user&#8217;s experience.</p>
+</div>
+<div class="paragraph">
+<p><strong>Note:</strong> In our chosen implementation, we mitigate the mentioned cons by including explicit instructions in the suggestion prompt,
+that a response is only required if the user accepts the match.</p>
 </div>
 </div>
 </div>
@@ -3015,7 +3259,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-31 09:57:19 +00:00
+Last updated 2017-10-31 12:00:10 +00:00
 </div>
 </div>
 </body>
