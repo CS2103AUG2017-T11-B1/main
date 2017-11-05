@@ -54,7 +54,7 @@ Adapted from AddressBook-Level4, by: <code>Team SE-EDU</code>      Since: <code>
 <li><a href="#listing-all-contacts-code-list-code">1.10. Listing all contacts : <code>list</code></a></li>
 <li><a href="#selecting-a-contact-code-select-code">1.11. Selecting a contact : <code>select</code></a></li>
 <li><a href="#emailing-contacts-code-email-code">1.12. Emailing contacts : <code>email</code></a></li>
-<li><a href="#locating-a-contact-code-location-code">1.13. Locating a contact : <code>location</code></a></li>
+<li><a href="#locating-a-contact-code-map-code">1.13. Locating a contact : <code>map</code></a></li>
 </ul>
 </li>
 <li><a href="#event-features">2. Event features</a>
@@ -760,10 +760,12 @@ Opens the default emailing client and adds Adam to the <code>to</code> field and
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
-<h3 id="locating-a-contact-code-location-code"><a class="link" href="#locating-a-contact-code-location-code">1.13. Locating a contact : <code>location</code></a></h3>
+<h3 id="locating-a-contact-code-map-code"><a class="link" href="#locating-a-contact-code-map-code">1.13. Locating a contact : <code>map</code></a></h3>
 <div class="paragraph">
-<p>Shows the address of the contact in Google Maps.<br>
-Format: <code>location INDEX</code></p>
+<p>Shows the address of the contact or the directions from one location to another in Google Maps.<br>
+If <code>map</code> is followed by only one INDEX, then the address of the contact in that particular index will be shown.<br>
+If <code>map</code> is followed by more than one INDEX, then the directions from one place to another will be shown.<br>
+Format: <code>map INDEXES</code></p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -794,7 +796,7 @@ This features requires Internet connection
 <div class="ulist">
 <ul>
 <li>
-<p><code>location 1</code><br></p>
+<p><code>map 1</code><br></p>
 </li>
 </ul>
 </div>
@@ -1135,8 +1137,9 @@ e.g. <code>find James Jake</code></p>
 <p><strong>List</strong> : <code>list</code></p>
 </li>
 <li>
-<p><strong>Location</strong> : <code>location INDEX</code><br>
-e.g.<code>select 2</code></p>
+<p><strong>Map</strong> : <code>map INDEX</code><br>
+e.g. <code>map 1</code><br>
+e.g. <code>map 1 2 3</code></p>
 </li>
 <li>
 <p><strong>Redo</strong> : <code>redo</code></p>
@@ -1201,7 +1204,7 @@ e.g. <code>updateProfilePic 2 u/http://www.google.com/images/image.png</code><br
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-01 19:57:40 +00:00
+Last updated 2017-11-05 16:25:11 +00:00
 </div>
 </div>
 </body>
