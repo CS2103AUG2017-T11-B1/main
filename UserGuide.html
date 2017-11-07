@@ -211,7 +211,7 @@ Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;<
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-A contact can have any number of tags (including 0)
+A contact can have any number of tags (including 0).
 </td>
 </tr>
 </table>
@@ -239,7 +239,7 @@ A contact can have any number of tags (including 0)
 </div>
 </div>
 <div class="paragraph">
-<p>As shown in the image above, after entering the <code>add</code> command in the example, the newly added contact will appear in the <code>Contacts panel</code></p>
+<p>As shown in the image above, after entering the <code>add</code> command in the example, the newly added contact will appear in the <code>Contacts panel</code>.</p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -311,22 +311,19 @@ Format: <code>removeTag rm/INDEX t/TAG</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>The search is case sensitive. e.g <code>family</code> will match <code>family</code></p>
+<p>The search is case sensitive. e.g <code>family</code> will match <code>family</code>.</p>
 </li>
 <li>
-<p><code>rm/INDEX</code> is not compulsory. If not given, it will remove the tag from all contacts</p>
+<p>The input for <code>rm/INDEX</code> is not compulsory. If not given, it will remove the tag from all contacts.</p>
 </li>
 <li>
-<p>If <code>rm/INDEX</code> is stated, tags from those indexes in the current list will be removed</p>
+<p>If <code>rm/INDEX</code> is stated, tags from those indexes in the current list will be removed.</p>
 </li>
 <li>
-<p>Only tag is searched</p>
+<p>Matching only occurs only for full words e.g. <code>Family</code> will not match <code>Families</code>.</p>
 </li>
 <li>
-<p>Only full words will be matched e.g. <code>Family</code> will not match <code>Families</code></p>
-</li>
-<li>
-<p>Contacts having that tag will be returned</p>
+<p>Contacts having that tag will be returned.</p>
 </li>
 </ul>
 </div>
@@ -374,13 +371,7 @@ Format: <code>updateProfilePic INDEX [u/imageUrl]</code></p>
 <p>Updates the profile picture of the contact at the specified <code>INDEX</code>. The index refers to the index number shown in the last contact listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
 </li>
 <li>
-<p>The index must be valid as well</p>
-</li>
-<li>
-<p>The <code>imageUrl</code> must be a valid one. It should start with <code><a href="file:///" class="bare">file:///</a></code> for images stored locally</p>
-</li>
-<li>
-<p>Or a valid web URL for an image stored on the internet</p>
+<p>The <code>imageUrl</code> must be a valid one. It should start with <code><a href="file:///" class="bare">file:///</a></code> for images stored locally or a valid web URL for an image stored on the internet.</p>
 </li>
 </ul>
 </div>
@@ -405,11 +396,11 @@ If the image used as a profile picture of a particular contact gets moved or del
 <ul>
 <li>
 <p><code>updateProfilePic 1 u/file:///C:/Users/Bobby/image.jpg</code><br>
-Updates the profile picture of the 1st contact to be the image at <code><a href="file:///C:/Users/Bobby/image.jpg" class="bare">file:///C:/Users/Bobby/image.jpg</a></code><br></p>
+Updates the profile picture of the 1st contact to be the image at <code><a href="file:///C:/Users/Bobby/image.jpg" class="bare">file:///C:/Users/Bobby/image.jpg</a></code>.<br></p>
 </li>
 <li>
 <p><code>updateProfilePic 2 u/http://www.google.com/images/image.png</code><br>
-Updates the profile picture of the 2nd contact to be the image at <code><a href="http://www.google.com/images/image.png" class="bare">http://www.google.com/images/image.png</a></code><br></p>
+Updates the profile picture of the 2nd contact to be the image at <code><a href="http://www.google.com/images/image.png" class="bare">http://www.google.com/images/image.png</a></code>.<br></p>
 </li>
 </ul>
 </div>
@@ -445,9 +436,6 @@ Format: <code>deleteProfilePic INDEX</code></p>
 </li>
 <li>
 <p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-<li>
-<p>The index must be valid as well.</p>
 </li>
 </ul>
 </div>
@@ -550,17 +538,17 @@ Format: <code>import</code></p>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Number of contacts imported is limited to 1000<br>
-This features requires Internet connection
+Number of contacts imported is limited to 1000.<br>
+This features requires Internet connection.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
 <p><strong>Steps</strong><br>
-<strong>1.</strong> Enter the <code>import</code> command, and wait for the <code>Browser panel</code> to navigate to Google&#8217;s login page<br>
-<strong>2.</strong> Log in to your Google account on the <code>Browser panel</code><br>
-<strong>3.</strong> Grant permission to DoC to access your contacts<br></p>
+<strong>1.</strong> Enter the <code>import</code> command, and wait for the <code>Browser panel</code> to navigate to Google&#8217;s login page.<br>
+<strong>2.</strong> Log in to your Google account on the <code>Browser panel</code>.<br>
+<strong>3.</strong> Grant permission to DoC to access your contacts.<br></p>
 </div>
 <div class="paragraph">
 <p><strong>Visual guide</strong></p>
@@ -589,16 +577,16 @@ Format: <code>export</code><br></p>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-This features requires Internet connection
+This features requires Internet connection.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
 <p><strong>Steps</strong><br>
-<strong>1.</strong> Enter the <code>export</code> command, and wait for the 'Browser panel' to navigate to Google&#8217;s login page+
-<strong>2.</strong> Log in to your Google account on the <code>Browser panel</code><br>
-<strong>3.</strong> Grant permission to DoC to access your contacts<br></p>
+<strong>1.</strong> Enter the <code>export</code> command, and wait for the 'Browser panel' to navigate to Google&#8217;s login page.<br>
+<strong>2.</strong> Log in to your Google account on the <code>Browser panel</code>.<br>
+<strong>3.</strong> Grant permission to DoC to access your contacts.<br></p>
 </div>
 <div class="paragraph">
 <p><strong>Visual guide</strong></p>
@@ -627,9 +615,9 @@ Format: <code>find TERM1 [MORE_TERMS]</code></p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-* The search is case insensitive; e.g a search term of <code>hans</code> will match any contact name containing <code>Hans</code><br>
- * Only full words will be matched; e.g a search term of <code>Han</code> will not match a contact name containing <code>Hans</code><br>
- * Name of contacts can be matched partially; e.g a search term of <code>Han</code> will match the contact name <code>Han Solo</code>
+The search is case insensitive; e.g a search term of <code>hans</code> will match any contact name containing <code>Hans</code>.<br>
+Only full words will be matched; e.g a search term of <code>Han</code> will not match a contact name containing <code>Hans</code>.<br>
+Name of contacts can be matched partially; e.g a search term of <code>Han</code> will match the contact name <code>Han Solo</code>.
 </td>
 </tr>
 </table>
@@ -651,7 +639,7 @@ part of name, matching any search term.</p>
 <div class="sect2">
 <h3 id="listing-all-contacts-code-list-code"><a class="link" href="#listing-all-contacts-code-list-code">1.10. Listing all contacts : <code>list</code></a></h3>
 <div class="paragraph">
-<p>Display a list of all contacts currently stored in DoC.<br>
+<p>Displays a list of all contacts currently stored in DoC.<br>
 Format: <code>list</code></p>
 </div>
 <div class="paragraph">
@@ -700,7 +688,7 @@ Format: <code>email [to/TO] [subject/SUBJECT] [body/BODY]</code></p>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-This features requires Internet connection
+This features requires Internet connection.
 </td>
 </tr>
 </table>
@@ -729,16 +717,12 @@ This features requires Internet connection
 </div>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p>Example:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
+<div class="paragraph">
 <p><code>email to/friends subject/SUBJECT body/BODY</code><br>
 Opens the default emailing client and adds all the contacts who has the tag <code>friends</code> into the <code>to</code> area,
-adds the <code>subject</code> as <code>SUBJECT</code> and <code>body</code> as <code>BODY</code> .</p>
-</li>
-</ul>
+adds the <code>subject</code> as <code>SUBJECT</code> and <code>body</code> as <code>BODY</code>.</p>
 </div>
 <div style="page-break-after: always;"></div>
 <div class="paragraph">
@@ -791,14 +775,10 @@ This features requires Internet connection
 </div>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p>Example:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
+<div class="paragraph">
 <p><code>map 1</code><br></p>
-</li>
-</ul>
 </div>
 <div class="paragraph">
 <p><strong>Visual guide</strong></p>
@@ -834,18 +814,21 @@ Format: <code>addE h/HEADER de/DESCRIPTION d/DATE</code></p>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-The date must a valid date with format: year-month-day
+The date must be a valid with the format: year-month-day (yyyy-MM-dd).
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Example:</p>
+<p>Examples:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p><code>addE h/Meeting de/Business meeting at in the afternoon at 2pm d/2017-11-20</code></p>
+</li>
+<li>
+<p><code>addE h/Birthday de/John Doe&#8217;s 21st bd celebration d/2018-02-05</code></p>
 </li>
 </ul>
 </div>
@@ -860,7 +843,7 @@ The date must a valid date with format: year-month-day
 </div>
 <div class="paragraph">
 <p>Your newly created event will be listed in the event panel and will be sorted based on its date. Thus, the earliest event will be displayed at the top of the panel.
-As shown in the guide above, yellow panel indicates an event upcoming in 2 or less days, Green panel indicates an event that have yet to come (more than 2 days) and Red panel indicates that the event is already overdue.</p>
+As shown in the guide above, the yellow panel indicates that an event upcoming in 2 or less days, the green panel indicates that an event that have yet to come (more than 2 days) and the red panel indicates that the event is already overdue.</p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -869,6 +852,18 @@ As shown in the guide above, yellow panel indicates an event upcoming in 2 or le
 <div class="paragraph">
 <p>Edits an existing event in DoC.<br>
 Format: <code>editE INDEX [h/HEADER] [de/DESCRIPTION] [d/DATE]</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The date must be a valid with the format: year-month-day (yyyy-MM-dd).
+</td>
+</tr>
+</table>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -891,15 +886,11 @@ Format: <code>editE INDEX [h/HEADER] [de/DESCRIPTION] [d/DATE]</code></p>
 </div>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p>Example:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
+<div class="paragraph">
 <p><code>editE 3 h/Birthday party d/2017-10-30</code><br>
 Edits the header and date of the 1st event to be <code>Birthday party</code> and <code>2017-10-30</code> respectively.</p>
-</li>
-</ul>
 </div>
 <div class="paragraph">
 <p><strong>Visual guide</strong></p>
@@ -910,7 +901,7 @@ Edits the header and date of the 1st event to be <code>Birthday party</code> and
 </div>
 </div>
 <div class="paragraph">
-<p>According to the image above, if you want to edit an <code>Event</code> at index 3 by changing the header and date, the result event will automatically sort itself in the <code>Events panel</code> based on the new date.</p>
+<p>According to the image above, if you want to edit an <code>Event</code> at index 3 by changing the header and date, the edited event will be automatically sorted in the <code>Events panel</code> based on the new date.</p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -938,15 +929,11 @@ Format: <code>deleteE INDEX</code></p>
 </div>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p>Example:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
+<div class="paragraph">
 <p><code>deleteE 3</code><br>
 Deletes the 3rd event in DoC.</p>
-</li>
-</ul>
 </div>
 <div class="paragraph">
 <p><strong>Visual guide</strong></p>
@@ -992,12 +979,12 @@ This feature can be accessed in two different ways:<br></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Display the history of commands on the status bar<br>
+<p>Displays the history of commands on the status bar.<br>
 Format: <code>history</code><br></p>
 </li>
 <li>
-<p>Paste previous commands directly to the command box<br>
-Format: the <kbd>&uarr;</kbd> and <kbd>&darr;</kbd> arrows will paste the previous and next input respectively into the command box</p>
+<p>Paste previous commands directly to the command box.<br>
+Format: the <kbd>&uarr;</kbd> and <kbd>&darr;</kbd> arrows will paste the previous and next input respectively into the command box.</p>
 </li>
 </ul>
 </div>
@@ -1118,6 +1105,9 @@ e.g. <code>edit 2 n/James Lee e/jameslee@example.com</code></p>
 e.g. <code>editE 2 h/Party d/2018-01-12</code><br></p>
 </li>
 <li>
+<p><strong>Exit</strong> : <code>exit</code><br></p>
+</li>
+<li>
 <p><strong>Export</strong> : <code>export</code><br></p>
 </li>
 <li>
@@ -1204,7 +1194,7 @@ e.g. <code>updateProfilePic 2 u/http://www.google.com/images/image.png</code><br
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-06 08:40:17 +00:00
+Last updated 2017-11-07 17:01:27 +00:00
 </div>
 </div>
 </body>
