@@ -1085,7 +1085,7 @@ System have to check through the list to check if the contact&#8217;s name exist
 <div class="paragraph">
 <p>A command structure has been set-up to fulfil all commands requiring an authentication process against the OAuth2 protocol.
 DoC currently only has two such commands, namely, <code>import</code> and <code>export</code>, which require this mechanism. Thus, it is noteworthy
-that this implementation was built for the express purpose of future extension.</p>
+that this implementation has been built for the express purpose of future extension.</p>
 </div>
 <div class="paragraph">
 <p>An exciting possibility is an integration with Facebook, for automated
@@ -1228,7 +1228,7 @@ later, under design considerations.</p>
 <h5 id="http-request-process"><a class="link" href="#http-request-process">HTTP request process</a></h5>
 <div class="paragraph">
 <p>With the <code>GoogleCredential</code> object generated at the end of the <strong>authentication process</strong>, we can now send HTTP requests
-to the Google People API easily using Google&#8217;s Java API client, specifically it&#8217;s <code>PeopleService</code> class. Its documentation can be found in the following url:<br>
+to the Google People API easily using Google&#8217;s Java API client, specifically its' <code>PeopleService</code> class. Its documentation can be found in the following url:<br>
 <a href="https://developers.google.com/resources/api-libraries/documentation/people/v1/java/latest/com/google/api/services/people/v1/PeopleService.html" class="bare">https://developers.google.com/resources/api-libraries/documentation/people/v1/java/latest/com/google/api/services/people/v1/PeopleService.html</a></p>
 </div>
 </div>
@@ -1835,10 +1835,10 @@ for the purpose of this mechanism.</p>
 </div>
 <div class="paragraph">
 <p><strong>Chosen implementation:</strong><br>
-The maximum acceptable Levenshtein distance is set to 2, as the shortest command in DoC is only 3 characters long.<br>
+Set the maximum acceptable Levenshtein distance to 1 less than the length of the shortest command in DoC, which is currently 3.<br>
 <strong>Pros:</strong><br>
-The similarity matching will be more likely to yield relevant result, than if the Levenshtein distance were to be set at 3 or higher.
-For example, the Levenshtein distance between 'add' and 'hey' is 3.<br>
+The similarity matching will be more likely to yield relevant result, than if the Levenshtein distance were to be set at the length of the shortest command in DoC or higher.
+For example, the current shortest command in DoC is 'add' with a length of 3. If were to set the maximum acceptable Levenshtein distance to 3, any random 3 letter sequence would be matched successfully.<br>
 <strong>Cons:</strong><br>
 Typos on longer commands have a higher propensity to produce a string with a Levenshtein distance of more than 2.
 These cannot be detected with this implementation.<br></p>
@@ -3611,7 +3611,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-08 03:57:58 +00:00
+Last updated 2017-11-08 03:58:01 +00:00
 </div>
 </div>
 </body>
