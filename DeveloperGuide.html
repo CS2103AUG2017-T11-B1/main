@@ -1102,11 +1102,31 @@ which is implemented in an event-driven manner.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/Oauth2ClassDiagram.PNG" alt="Oauth2ClassDiagram" width="800">
+<img src="images/Oauth2ClassDiagram.PNG" alt="Oauth2ClassDiagram" width="100%">
 </div>
 </div>
 <div class="paragraph">
 <p><em>Figure 4.3.1 OAuth2 Class Diagram</em></p>
+</div>
+<div class="paragraph">
+<p>An important requirement for all child classes of the <code>Oauth2Command</code> structure, is a valid <code>commandType</code> string of the format:
+<code>SERVICEPROVIDER_functionality</code>. This is to allow quick identification in token extraction methods, as different service providers will append
+the authentication token differently.</p>
+</div>
+<div class="paragraph">
+<p>This is enforced in the constructor of the <code>Oauth2Command</code> class, and can be seen from the following code snippet:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>protected Oauth2Command(String inputType)  {
+    if (!inputTypeValid(inputType)) {
+        assert true : "Child classes of Oauth2Command must provide a valid command type in the
+            format: SERVICEPROVIDER_functionality";
+    }
+    commandType = inputType;
+    commandCompleted = false;
+}</pre>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -1826,6 +1846,59 @@ with this enhancement in place:</p>
 <div class="paragraph">
 <p>As shown in the diagram above, actions enclosed in a green box are the enhancements applied to the original <code>AddressBookParser</code>,
 for the purpose of this mechanism.</p>
+</div>
+<div class="paragraph">
+<p>To better understand the underlying logic of this enhancement, you can refer to the following code snippets:<br></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>if (correctionPrompted) {
+    if (userAcceptsSuggestion(commandWord)) {
+        Command suggestedCommand = unknownCommand.getSuggestedCommand();
+        resetCorrectionChecker();
+        return suggestedCommand;
+    } else {
+        resetCorrectionChecker();
+    }
+}
+.
+.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As shown in the snippet above, once a correction has been prompted, the prompting mechanism will be reset one command later
+even if we do not receive a positive response from the user. This means that we only offer the user one window of
+opportunity to accept the suggestion.</p>
+</div>
+<div class="paragraph">
+<p>Responses that are not recognized in the <code>userAcceptsSuggestion(commandWord)</code> method, will be parsed as regular input. This means that we do
+not require a negative response to a correction prompt.</p>
+</div>
+<div class="paragraph">
+<p>Processing of unknown user input, is performed in the default case of the following switch:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>.
+.
+switch (commandWord) {
+    .
+    .
+    default:
+        unknownCommand = new UnknownCommand(commandWord, arguments);
+        if (unknownCommand.suggestionFound()) {
+            correctionPrompted = true;
+            return unknownCommand;
+        } else {
+            unknownCommand = null;
+        }
+        throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As shown in the snippet above, when a possible match is found, we set the boolean <code>correctionPrompted</code> to <code>true</code>, to begin checking for a
+response to our prompt, which is shown in the previous code snippet.</p>
 </div>
 </div>
 </div>
@@ -3612,7 +3685,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-08 10:49:04 +00:00
+Last updated 2017-11-08 12:11:59 +00:00
 </div>
 </div>
 </body>
