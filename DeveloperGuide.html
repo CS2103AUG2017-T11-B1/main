@@ -56,66 +56,61 @@ Adapted from AddressBook-Level4, by: <code>Team SE-EDU</code>      Since: <code>
 <ul class="sectlevel3">
 <li><a href="#overview">4.1.1. Overview</a></li>
 <li><a href="#design-considerations">4.1.2. Design Considerations</a></li>
+<li><a href="#event-methods">4.1.3. Event methods</a></li>
+<li><a href="#exceptions">4.1.4. Exceptions</a></li>
+<li><a href="#event-card">4.1.5. Event card</a></li>
+<li><a href="#design-considerations-2">4.1.6. Design Considerations</a></li>
 </ul>
 </li>
-<li><a href="#event-class-mechanism">4.2. Event class mechanism</a>
+<li><a href="#oauth2-fulfilment-mechanism">4.2. OAuth2 fulfilment mechanism</a>
 <ul class="sectlevel3">
-<li><a href="#summary">4.2.1. Summary</a></li>
-<li><a href="#event-methods">4.2.2. Event methods</a></li>
-<li><a href="#exceptions">4.2.3. Exceptions</a></li>
-<li><a href="#event-card">4.2.4. Event card</a></li>
-<li><a href="#design-considerations-2">4.2.5. Design Considerations</a></li>
+<li><a href="#overview-2">4.2.1. Overview</a></li>
+<li><a href="#current-usages">4.2.2. Current usages</a></li>
+<li><a href="#execution-flow">4.2.3. Execution flow</a></li>
+<li><a href="#design-considerations-3">4.2.4. Design Considerations</a></li>
 </ul>
 </li>
-<li><a href="#oauth2-fulfilment-mechanism">4.3. OAuth2 fulfilment mechanism</a>
+<li><a href="#email">4.3. Email</a>
 <ul class="sectlevel3">
-<li><a href="#overview-2">4.3.1. Overview</a></li>
-<li><a href="#current-usages">4.3.2. Current usages</a></li>
-<li><a href="#execution-flow">4.3.3. Execution flow</a></li>
-<li><a href="#design-considerations-3">4.3.4. Design Considerations</a></li>
+<li><a href="#overview-3">4.3.1. Overview</a></li>
+<li><a href="#design-considerations-4">4.3.2. Design Considerations</a></li>
 </ul>
 </li>
-<li><a href="#email">4.4. Email</a>
+<li><a href="#map">4.4. Map</a>
 <ul class="sectlevel3">
-<li><a href="#overview-3">4.4.1. Overview</a></li>
-<li><a href="#design-considerations-4">4.4.2. Design Considerations</a></li>
+<li><a href="#overview-4">4.4.1. Overview</a></li>
+<li><a href="#design-considerations-5">4.4.2. Design Considerations</a></li>
 </ul>
 </li>
-<li><a href="#map">4.5. Map</a>
+<li><a href="#removetag">4.5. RemoveTag</a>
 <ul class="sectlevel3">
-<li><a href="#overview-4">4.5.1. Overview</a></li>
-<li><a href="#design-considerations-5">4.5.2. Design Considerations</a></li>
+<li><a href="#overview-5">4.5.1. Overview</a></li>
+<li><a href="#design-considerations-6">4.5.2. Design Considerations</a></li>
 </ul>
 </li>
-<li><a href="#removetag">4.6. RemoveTag</a>
+<li><a href="#find">4.6. Find</a>
 <ul class="sectlevel3">
-<li><a href="#overview-5">4.6.1. Overview</a></li>
-<li><a href="#design-considerations-6">4.6.2. Design Considerations</a></li>
+<li><a href="#overview-6">4.6.1. Overview</a></li>
+<li><a href="#design-considerations-7">4.6.2. Design Considerations</a></li>
 </ul>
 </li>
-<li><a href="#find">4.7. Find</a>
+<li><a href="#updateprofilepic-deleteprofilepic-mechanism">4.7. UpdateProfilePic/DeleteProfilePic mechanism</a>
 <ul class="sectlevel3">
-<li><a href="#overview-6">4.7.1. Overview</a></li>
-<li><a href="#design-considerations-7">4.7.2. Design Considerations</a></li>
+<li><a href="#overview-7">4.7.1. Overview</a></li>
+<li><a href="#design-considerations-8">4.7.2. Design Considerations</a></li>
 </ul>
 </li>
-<li><a href="#updateprofilepic-deleteprofilepic-mechanism">4.8. UpdateProfilePic/DeleteProfilePic mechanism</a>
+<li><a href="#viewcount-tracking">4.8. ViewCount Tracking</a>
 <ul class="sectlevel3">
-<li><a href="#overview-7">4.8.1. Overview</a></li>
-<li><a href="#design-considerations-8">4.8.2. Design Considerations</a></li>
+<li><a href="#overview-8">4.8.1. Overview</a></li>
+<li><a href="#design-considerations-9">4.8.2. Design Considerations</a></li>
 </ul>
 </li>
-<li><a href="#viewcount-tracking">4.9. ViewCount Tracking</a>
+<li><a href="#unknown-input-parsing">4.9. Unknown input parsing</a>
 <ul class="sectlevel3">
-<li><a href="#overview-8">4.9.1. Overview</a></li>
-<li><a href="#design-considerations-9">4.9.2. Design Considerations</a></li>
-</ul>
-</li>
-<li><a href="#unknown-input-parsing">4.10. Unknown input parsing</a>
-<ul class="sectlevel3">
-<li><a href="#overview-9">4.10.1. Overview</a></li>
-<li><a href="#execution-flow-2">4.10.2. Execution flow</a></li>
-<li><a href="#design-considerations-10">4.10.3. Design considerations</a></li>
+<li><a href="#overview-9">4.9.1. Overview</a></li>
+<li><a href="#execution-flow-2">4.9.2. Execution flow</a></li>
+<li><a href="#design-considerations-10">4.9.3. Design considerations</a></li>
 </ul>
 </li>
 </ul>
@@ -952,16 +947,10 @@ Logic is duplicated twice. For example, when a new command is executed, we must 
 <strong>Pros:</strong><br>
 We do not need to maintain a separate stack, and just reuse what is already in the codebase.<br>
 <strong>Cons:</strong><br>
-Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as <code>HistoryManager</code> now needs to do two different things.<br></p>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="event-class-mechanism"><a class="link" href="#event-class-mechanism">4.2. Event class mechanism</a></h3>
-<div class="sect3">
-<h4 id="summary"><a class="link" href="#summary">4.2.1. Summary</a></h4>
-<div class="paragraph">
-<p>The <code>Event</code> class, which is located inside <code>Model</code>, is implemented with similar logic as <code>Person</code> class. We have introduced three commands that modifies the address book: <code>addE</code>, <code>editE</code> and <code>deleteE</code>, which extends <code>UndoableCommand</code>.
+Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as <code>HistoryManager</code> now needs to do two different things.<br>
+=== Event class mechanism
+==== Summary
+The <code>Event</code> class, which is located inside <code>Model</code>, is implemented with similar logic as <code>Person</code> class. We have introduced three commands that modifies the address book: <code>addE</code>, <code>editE</code> and <code>deleteE</code>, which extends <code>UndoableCommand</code>.
 An <code>Event</code> consist of three sub-components: <code>Header</code>, <code>Desc</code> and <code>EventDate</code>. Commands such as <code>clear</code>, <code>undo</code> and <code>redo</code> can be used to alter events in the list as they deal with code that directly modifies the address book.</p>
 </div>
 <div class="paragraph">
@@ -969,7 +958,7 @@ An <code>Event</code> consist of three sub-components: <code>Header</code>, <cod
 </div>
 </div>
 <div class="sect3">
-<h4 id="event-methods"><a class="link" href="#event-methods">4.2.2. Event methods</a></h4>
+<h4 id="event-methods"><a class="link" href="#event-methods">4.1.3. Event methods</a></h4>
 <div class="paragraph">
 <p>As stated in the summary, the <code>Event</code> class contains three main methods: <code>addE</code>, <code>editE</code> and <code>deleteE</code>.
 The execution flow is similar for all three methods on a higher level. We can demonstrate how different levels of components communicate with one another by referring to an example of <code>addE</code> command in the following sequence diagram:</p>
@@ -984,7 +973,7 @@ The execution flow is similar for all three methods on a higher level. We can de
 </div>
 </div>
 <div class="sect3">
-<h4 id="exceptions"><a class="link" href="#exceptions">4.2.3. Exceptions</a></h4>
+<h4 id="exceptions"><a class="link" href="#exceptions">4.1.4. Exceptions</a></h4>
 <div class="paragraph">
 <p>When the user input an event command with its parameters, the validity of the command word is checked inside the <code>AddressBookParser</code>. Next, the presence of the parameter prefixes is checked inside <code>AddEventCommandParser</code>.
 An appropriate <code>ParseException</code> will be thrown if the command word or prefixes are incorrect.</p>
@@ -1021,7 +1010,7 @@ An appropriate <code>ParseException</code> will be thrown if the command word or
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect3">
-<h4 id="event-card"><a class="link" href="#event-card">4.2.4. Event card</a></h4>
+<h4 id="event-card"><a class="link" href="#event-card">4.1.5. Event card</a></h4>
 <div class="paragraph">
 <p>The <code>EventCard</code> class extends <code>UiPart&lt;Region&gt;</code> to represent a distinct part of the UI. The object properties of every event is assigned to a label held by an <code>EventCard</code>. The graphic scene is then constructed with the appropriate <code>FXML</code> files created to support the display of all events.</p>
 </div>
@@ -1058,7 +1047,7 @@ This sorting algorithm is introduced in <code>EventDateComparator</code> which i
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.2.5. Design Considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.1.6. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect(future enhancement):</strong> How to implement adding/tagging of contacts into an <code>Event</code> using a <code>Person</code> list parameter<br></p>
 </div>
@@ -1080,9 +1069,9 @@ System have to check through the list to check if the contact&#8217;s name exist
 </div>
 </div>
 <div class="sect2">
-<h3 id="oauth2-fulfilment-mechanism"><a class="link" href="#oauth2-fulfilment-mechanism">4.3. OAuth2 fulfilment mechanism</a></h3>
+<h3 id="oauth2-fulfilment-mechanism"><a class="link" href="#oauth2-fulfilment-mechanism">4.2. OAuth2 fulfilment mechanism</a></h3>
 <div class="sect3">
-<h4 id="overview-2"><a class="link" href="#overview-2">4.3.1. Overview</a></h4>
+<h4 id="overview-2"><a class="link" href="#overview-2">4.2.1. Overview</a></h4>
 <div class="paragraph">
 <p>A command structure has been set-up to fulfil all commands requiring an authentication process against the OAuth2 protocol.
 DoC currently only has two such commands, namely, <code>import</code> and <code>export</code>, which require this mechanism. Thus, it is noteworthy
@@ -1130,7 +1119,7 @@ the authentication token differently.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="current-usages"><a class="link" href="#current-usages">4.3.2. Current usages</a></h4>
+<h4 id="current-usages"><a class="link" href="#current-usages">4.2.2. Current usages</a></h4>
 <div class="sect4">
 <h5 id="import-contacts-to-doc-from-google-contacts"><a class="link" href="#import-contacts-to-doc-from-google-contacts">Import contacts to DoC from Google Contacts</a></h5>
 <div class="paragraph">
@@ -1150,7 +1139,7 @@ to a list of Google&#8217;s <code>Person</code> class objects. The newly convert
 </div>
 </div>
 <div class="sect3">
-<h4 id="execution-flow"><a class="link" href="#execution-flow">4.3.3. Execution flow</a></h4>
+<h4 id="execution-flow"><a class="link" href="#execution-flow">4.2.3. Execution flow</a></h4>
 <div class="sect4">
 <h5 id="explanation"><a class="link" href="#explanation">Explanation</a></h5>
 <div class="paragraph">
@@ -1184,7 +1173,7 @@ and has been previously illustrated in section 3.3: Logic component.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="summary-2"><a class="link" href="#summary-2">Summary</a></h5>
+<h5 id="summary"><a class="link" href="#summary">Summary</a></h5>
 <div class="paragraph">
 <p>The following diagram summarizes the execution flow and illustrates the parallel between the <code>import</code> and <code>export</code> commands:</p>
 </div>
@@ -1293,7 +1282,7 @@ object is added as a Google <code>Person</code> object&#8217;s <code>UserDefined
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.3.4. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.2.4. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> How a successful authentication is handled<br></p>
 </div>
@@ -1354,9 +1343,9 @@ in this current version of DoC, due to the following redeeming factors:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="email"><a class="link" href="#email">4.4. Email</a></h3>
+<h3 id="email"><a class="link" href="#email">4.3. Email</a></h3>
 <div class="sect3">
-<h4 id="overview-3"><a class="link" href="#overview-3">4.4.1. Overview</a></h4>
+<h4 id="overview-3"><a class="link" href="#overview-3">4.3.1. Overview</a></h4>
 <div class="paragraph">
 <p>The <code>EmailCommand</code> is the main driver of this functionality. It links the logic in Addressbook and the content displayed on the Email browser.</p>
 </div>
@@ -1389,7 +1378,7 @@ Note that the <code>EmailCommandParser</code> will raise a <code>ParseException<
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.4.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.3.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>Email</code><br></p>
 </div>
@@ -1411,9 +1400,9 @@ The UI for GMail is very poor on <code>JavaFX WebView</code>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="map"><a class="link" href="#map">4.5. Map</a></h3>
+<h3 id="map"><a class="link" href="#map">4.4. Map</a></h3>
 <div class="sect3">
-<h4 id="overview-4"><a class="link" href="#overview-4">4.5.1. Overview</a></h4>
+<h4 id="overview-4"><a class="link" href="#overview-4">4.4.1. Overview</a></h4>
 <div class="imageblock">
 <div class="content">
 <img src="images/Location.png" alt="Location" width="800">
@@ -1446,7 +1435,7 @@ This rendering of Google Maps is done via calling the URL.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.5.2. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.4.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>map</code><br></p>
 </div>
@@ -1469,9 +1458,9 @@ Take a longer time to load the map.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="removetag"><a class="link" href="#removetag">4.6. RemoveTag</a></h3>
+<h3 id="removetag"><a class="link" href="#removetag">4.5. RemoveTag</a></h3>
 <div class="sect3">
-<h4 id="overview-5"><a class="link" href="#overview-5">4.6.1. Overview</a></h4>
+<h4 id="overview-5"><a class="link" href="#overview-5">4.5.1. Overview</a></h4>
 <div class="paragraph">
 <p>The removeTag mechanism is facilitated by the <code>RemoveTagCommand</code> class which is inherited from the
 <code>UndoableCommand</code> class. If the indexes are not stated, the particular tag is removed from all contacts.
@@ -1503,7 +1492,7 @@ Note that the <code>removeTag</code> function will raise a <code>CommandExceptio
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.6.2. Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.5.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>removeTag</code><br></p>
 </div>
@@ -1525,9 +1514,9 @@ It is very tiring for the user to update each and everyone of the contacts in th
 </div>
 </div>
 <div class="sect2">
-<h3 id="find"><a class="link" href="#find">4.7. Find</a></h3>
+<h3 id="find"><a class="link" href="#find">4.6. Find</a></h3>
 <div class="sect3">
-<h4 id="overview-6"><a class="link" href="#overview-6">4.7.1. Overview</a></h4>
+<h4 id="overview-6"><a class="link" href="#overview-6">4.6.1. Overview</a></h4>
 <div class="paragraph">
 <p>The <code>FindCommand</code> class is inherited from the
 <code>Command</code> class.It allows the user to search his contacts either by the name of the contact or by the tag of the contact.</p>
@@ -1546,7 +1535,7 @@ This will invoke the <code>updateFilteredPersonList</code> function that resides
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.7.2. Design Considerations</a></h4>
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.6.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>find</code><br></p>
 </div>
@@ -1568,9 +1557,9 @@ Extra command for the user to remember.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="updateprofilepic-deleteprofilepic-mechanism"><a class="link" href="#updateprofilepic-deleteprofilepic-mechanism">4.8. UpdateProfilePic/DeleteProfilePic mechanism</a></h3>
+<h3 id="updateprofilepic-deleteprofilepic-mechanism"><a class="link" href="#updateprofilepic-deleteprofilepic-mechanism">4.7. UpdateProfilePic/DeleteProfilePic mechanism</a></h3>
 <div class="sect3">
-<h4 id="overview-7"><a class="link" href="#overview-7">4.8.1. Overview</a></h4>
+<h4 id="overview-7"><a class="link" href="#overview-7">4.7.1. Overview</a></h4>
 <div class="paragraph">
 <p>The UpdateProfilePic/DeleteProfilePic mechanism is facilitated by a <code>ProfilePic</code> class, which is a property class of the <code>Person</code> class. It supports the updating and deleting of profile pictures of each contact. These two commands inherit from <code>Command</code>.</p>
 </div>
@@ -1610,7 +1599,7 @@ Extra command for the user to remember.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">4.8.2. Design Considerations</a></h4>
+<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">4.7.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>updateProfilePic</code><br></p>
 </div>
@@ -1670,9 +1659,9 @@ There might be a visible lag every time an image is displayed as a profile pictu
 </div>
 </div>
 <div class="sect2">
-<h3 id="viewcount-tracking"><a class="link" href="#viewcount-tracking">4.9. ViewCount Tracking</a></h3>
+<h3 id="viewcount-tracking"><a class="link" href="#viewcount-tracking">4.8. ViewCount Tracking</a></h3>
 <div class="sect3">
-<h4 id="overview-8"><a class="link" href="#overview-8">4.9.1. Overview</a></h4>
+<h4 id="overview-8"><a class="link" href="#overview-8">4.8.1. Overview</a></h4>
 <div class="paragraph">
 <p>The <code>viewCount</code> variable is a <code>private int</code> variable of the <code>Person</code> class. This variable is updated whenever a <code>PersonPanelSelectionChangedEvent</code> is raised. This means that whenever a contact is selected, whether by the <code>select</code> command or by clicking on the <code>PersonCard</code> on the UI, the contact associated with the selected <code>PersonCard</code> will have its <code>viewCount</code> variable incremented by 1.</p>
 </div>
@@ -1699,7 +1688,7 @@ There might be a visible lag every time an image is displayed as a profile pictu
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">4.9.2. Design Considerations</a></h4>
+<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">4.8.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>viewCount</code><br></p>
 </div>
@@ -1768,9 +1757,9 @@ The app will take a while to start.<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="unknown-input-parsing"><a class="link" href="#unknown-input-parsing">4.10. Unknown input parsing</a></h3>
+<h3 id="unknown-input-parsing"><a class="link" href="#unknown-input-parsing">4.9. Unknown input parsing</a></h3>
 <div class="sect3">
-<h4 id="overview-9"><a class="link" href="#overview-9">4.10.1. Overview</a></h4>
+<h4 id="overview-9"><a class="link" href="#overview-9">4.9.1. Overview</a></h4>
 <div class="paragraph">
 <p>To enhance user experience, a similarity-matching mechanism is employed to detect and parse unknown user input, matching them
 to probable system-recognized commands.
@@ -1790,7 +1779,7 @@ substitution operations required to transform one string to the other.</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="execution-flow-2"><a class="link" href="#execution-flow-2">4.10.2. Execution flow</a></h4>
+<h4 id="execution-flow-2"><a class="link" href="#execution-flow-2">4.9.2. Execution flow</a></h4>
 <div class="sect4">
 <h5 id="explanation-2"><a class="link" href="#explanation-2">Explanation</a></h5>
 <div class="paragraph">
@@ -1830,7 +1819,7 @@ the user with an invalid command format message, and a format guideline on the m
 </div>
 </div>
 <div class="sect4">
-<h5 id="summary-3"><a class="link" href="#summary-3">Summary</a></h5>
+<h5 id="summary-2"><a class="link" href="#summary-2">Summary</a></h5>
 <div class="paragraph">
 <p>The following activity diagram illustrates the the execution flow of the <code>parseCommand()</code> method, of the <code>AddressBookParser</code>,
 with this enhancement in place:</p>
@@ -1903,7 +1892,7 @@ response to our prompt, which is shown in the previous code snippet.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-10"><a class="link" href="#design-considerations-10">4.10.3. Design considerations</a></h4>
+<h4 id="design-considerations-10"><a class="link" href="#design-considerations-10">4.9.3. Design considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Choice of acceptable Levenshtein distance<br></p>
 </div>
@@ -3685,7 +3674,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-08 16:18:28 +00:00
+Last updated 2017-11-08 17:55:13 +00:00
 </div>
 </div>
 </body>

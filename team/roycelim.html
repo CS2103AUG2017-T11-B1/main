@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.3">
+<title>Royce Lim - Project Portfolio</title>
+<link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Royce Lim - Project Portfolio</h1>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="project-directory-of-contacts-doc"><a class="link" href="#project-directory-of-contacts-doc">Project: Directory of Contacts (DoC)</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>DoC is a desktop contact and event managing application. It is built as an enhancement on top of the original <code>Addressbook-level4</code>
+by <code>Team SE-EDU</code>, which can be found here: <a href="https://github.com/se-edu/addressbook-level4" class="bare">https://github.com/se-edu/addressbook-level4</a>. This project was built as part of the software engineering
+module <code>CS2103T</code> offered by the School of Computing in the National University of Singapore.</p>
+</div>
+<div class="paragraph">
+<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103AUG2017-T11-B1/main/blob/master/collated/main/royceljh.md">Functional code</a>] [<a href="https://github.com/CS2103AUG2017-T11-B1/main/blob/master/collated/test/royceljh.md">Test code</a>]</p>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-code-event-code-feature-to-manage-upcoming-events"><a class="link" href="#enhancement-added-code-event-code-feature-to-manage-upcoming-events">Enhancement Added: <code>Event</code> feature to manage upcoming events</a></h3>
+<div class="sect3">
+<h4 id="external-behavior"><a class="link" href="#external-behavior">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="event-features"><a class="link" href="#event-features">Event features</a></h3>
+<div class="paragraph">
+<p>You can manage your events through the following commands:</p>
+</div>
+<div class="sect3">
+<h4 id="adding-an-event-code-adde-code"><a class="link" href="#adding-an-event-code-adde-code">Adding an event: <code>addE</code></a></h4>
+<div class="paragraph">
+<p>Adds an event to DoC.<br>
+Format: <code>addE h/HEADER de/DESCRIPTION d/DATE</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Quick note:</strong></p>
+</div>
+<div class="paragraph">
+<p>The date must a valid date with format: year-month-day.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>addE h/Meeting de/Business meeting at in the afternoon at 2pm d/2017-11-20</code></p>
+</li>
+<li>
+<p><code>addE h/Birthday de/John Doe&#8217;s 21st bd celebration d/2018-02-05</code></p>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p><strong>Visual guide:</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/addEpic.png" alt="addEpic" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>Your newly created event will be listed in the event panel and will be sorted based on its date. Thus, the earliest event will be displayed at the top of the panel.
+As shown in the guide above, the yellow panel indicates that an event upcoming in 2 or less days, the green panel indicates that an event that have yet to come (more than 2 days) and the red panel indicates that the event is already overdue.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect3">
+<h4 id="editing-an-event-code-edite-code"><a class="link" href="#editing-an-event-code-edite-code">Editing an event : <code>editE</code></a></h4>
+<div class="paragraph">
+<p>Edits an existing event in DoC.<br>
+Format: <code>editE INDEX [h/HEADER] [de/DESCRIPTION] [d/DATE]</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Quick notes:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Edits the event at the specified <code>INDEX</code>. The index refers to the index number shown in the last event listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>At least one of the optional fields must be provided.</p>
+</li>
+<li>
+<p>The date must a valid date with the format: year-month-day (yyyy-MM-dd).</p>
+</li>
+<li>
+<p>Existing values will be updated to the input values.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="paragraph">
+<p><code>editE 3 h/Birthday party d/2017-10-30</code><br>
+Edits the header and date of the 1st event to be <code>Birthday party</code> and <code>2017-10-30</code> respectively.</p>
+</div>
+<div class="paragraph">
+<p><strong>Visual guide:</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/editEpic.png" alt="editEpic" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>According to the image above, if you want to edit an <code>Event</code> at index 3 by changing the header and date, the edited event will be automatically sorted in the <code>Events panel</code> based on the new date.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect3">
+<h4 id="deleting-an-event-code-deletee-code"><a class="link" href="#deleting-an-event-code-deletee-code">Deleting an event : <code>deleteE</code></a></h4>
+<div class="paragraph">
+<p>Deletes the specified event from DoC.<br>
+Format: <code>deleteE INDEX</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Quick notes:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Deletes the event at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the most recent listing.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="paragraph">
+<p><code>deleteE 3</code><br>
+Deletes the 3rd event in DoC.</p>
+</div>
+<div class="paragraph">
+<p><strong>Visual guide:</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/deleteEpic.png" alt="deleteEpic" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>As shown on the image above, if you want to delete an overdue <code>Event</code>, simply key in the <code>deleteE</code> command stating the index and the event will be removed from DoC.</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+<div class="sect3">
+<h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
+<div class="paragraph">
+<p>The added layer of event management helps to improve the user&#8217;s experience. This feature allows DoC to manage two of the most fundamental aspects of the user&#8217;s daily life.
+That is, to keep track both contacts and tasks and have access to either within the same platform. For busy individuals, this eliminates the trouble of switching between their contact list and calendar as DoC display both scenes in one
+and provides a better notification system. All events are sorted based on their allocated dates and sets a color to every event&#8217;s background and displays a different color based on the urgency of an event.
+This added improvement aims to provide convenience when it comes to planning upcoming tasks/events.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="event-class-mechanism"><a class="link" href="#event-class-mechanism">Event class mechanism</a></h3>
+<div class="sect3">
+<h4 id="summary"><a class="link" href="#summary">Summary</a></h4>
+<div class="paragraph">
+<p>The <code>Event</code> class, which is located inside <code>Model</code>, is implemented with similar logic as <code>Person</code> class. We have introduced three commands that modifies the address book: <code>addE</code>, <code>editE</code> and <code>deleteE</code>, which extends <code>UndoableCommand</code>.
+An <code>Event</code> consist of three sub-components: <code>Header</code>, <code>Desc</code> and <code>EventDate</code>. Commands such as <code>clear</code>, <code>undo</code> and <code>redo</code> can be used to alter events in the list as they deal with code that directly modifies the address book.</p>
+</div>
+<div class="paragraph">
+<p>The <code>EventPanel</code> is incorporated into the address book <code>MainWindow</code> to display all the events inside the internal list using <code>ObservableList&lt;ReadOnlyEvent&gt;</code>. This process will be explained later on under the section <code>Event card</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="event-methods"><a class="link" href="#event-methods">Event methods</a></h4>
+<div class="paragraph">
+<p>As stated in the summary, the <code>Event</code> class contains three main methods: <code>addE</code>, <code>editE</code> and <code>deleteE</code>.
+The execution flow is similar for all three methods on a higher level. We can demonstrate how different levels of components communicate with one another by referring to an example of <code>addE</code> command in the following sequence diagram:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AddEventDiagram.PNG" alt="AddEventDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.2.1: AddEvent Sequence Diagram</em></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="exceptions"><a class="link" href="#exceptions">Exceptions</a></h4>
+<div class="paragraph">
+<p>When the user input an event command with its parameters, the validity of the command word is checked inside the <code>AddressBookParser</code>. Next, the presence of the parameter prefixes is checked inside <code>AddEventCommandParser</code>.
+An appropriate <code>ParseException</code> will be thrown if the command word or prefixes are incorrect.</p>
+</div>
+<div class="paragraph">
+<p>Before modifying the list of events inside the address book, the system may throw exceptions due to some invalid parameters. Here are the possible exceptions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>EventNotFoundException</code>: This exception can be thrown by <code>editE</code> and <code>deleteE</code> command when the an invalid event index is provided by the user. The index needs to be within the size of the event list at the current state of the address book.</p>
+</li>
+<li>
+<p><code>DuplicateEventException</code>: This exception can be thrown by <code>addE</code> and <code>editE</code> command. The system will first create an <code>Event</code> object with the input parameters, compare the object to all events residing in the event list and throw this exception if there is a duplicate found.</p>
+</li>
+<li>
+<p><code>DateTimeParseException</code>: This exception can be thrown by <code>addE</code> and <code>editE</code> command when the input <code>EventDate</code> parameter is not a valid date. The date&#8217;s format and validity is checked inside the <code>Event</code> class like this:<br></p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>public EventDate(String eventDate) throws IllegalValueException {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd")
+                    .withResolverStyle(ResolverStyle.STRICT);
+    try {
+        eventLocalDate = LocalDate.parse(eventDate, formatter);
+    } catch (DateTimeParseException ex) {
+        // ... throw message ...
+    }
+}</pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect3">
+<h4 id="event-card"><a class="link" href="#event-card">Event card</a></h4>
+<div class="paragraph">
+<p>The <code>EventCard</code> class extends <code>UiPart&lt;Region&gt;</code> to represent a distinct part of the UI. The object properties of every event is assigned to a label held by an <code>EventCard</code>. The graphic scene is then constructed with the appropriate <code>FXML</code> files created to support the display of all events.</p>
+</div>
+<div class="sect4">
+<h5 id="design-implementation"><a class="link" href="#design-implementation">Design implementation</a></h5>
+<div class="paragraph">
+<p>When the user starts the <code>MainApp</code>, the system calls the <code>UiManager</code> to create a new <code>MainWindow</code> and fills it with <code>EventListPanel</code> and other components. The displayed events are created by <code>UniqueEventList</code> and the binding of individual UI elements to the <code>EventCard</code> ensures that any changes to the parameter will be displayed in the <code>EventListPanel</code>.
+The sequence diagram below illustrates the interaction between the <code>EventCard</code> and the <code>UiManager</code>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/EventCardDiagram.PNG" alt="EventCardDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.2.2: EventCard Interaction Sequence Diagram</em></p>
+</div>
+<div class="paragraph">
+<p>The events on the <code>EventListPanel</code> is sorted based on <code>EventDate</code>. An event that is coming soon will appear at the top and events with later dates will be further down the list. Expired events will be pushed to the bottom of the list.
+This sorting algorithm is introduced in <code>EventDateComparator</code> which implements <code>Comparator&lt;Event&gt;</code>.</p>
+</div>
+<div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p>The events follow a certain colored background based on its urgency. The visual guide below describes the color code used:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/EventColorDiagram.png" alt="EventColorDiagram" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.2.3: Event Colour Diagram</em></p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect(future enhancement):</strong> How to implement adding/tagging of contacts into an <code>Event</code> using a <code>Person</code> list parameter<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Chosen Implementation:</strong><br>
+Add by the index of contact shown in the <code>PersonListPanel</code>.<br>
+<strong>Pros:</strong><br>
+System only have to check for validity of index. Better performance compared to Alternative.<br>
+<strong>Cons:</strong><br>
+Requires user to refer to the <code>PersonListPanel</code> before executing command to add contact into event&#8217;s <code>Person</code> list.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative:</strong> Add by the name of contact in the <code>Person</code> list.<br>
+<strong>Pros:</strong><br>
+Easier for users to add using names, do not need to refer to the <code>Person</code> list.<br>
+<strong>Cons:</strong><br>
+System have to check through the list to check if the contact&#8217;s name exist in the current address book.</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-proposed-tagging-of-contacts-into-events"><a class="link" href="#enhancement-proposed-tagging-of-contacts-into-events">Enhancement Proposed: Tagging of contacts into events</a></h3>
+<div class="paragraph">
+<p>The ability to tag contacts to an event can further enhance user&#8217;s experience with our product. Both features compliment one another as users can
+view an event and check for its involved personnel so that they can contact them by using the contact list in DoC. With an email feature created by one of our developers,
+the whole process tie in together when a user is able schedule an event, tags the intended contacts and email them with minimal command words.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="other-contributions"><a class="link" href="#other-contributions">Other contributions</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Performed acceptance testing in a separate team’s (<a href="https://github.com/CS2103AUG2017-F11-B2/main">F11-B2</a>) project
+and raised issues for bugs discovered (Issues <a href="https://github.com/CS2103AUG2017-F11-B2/main/issues/104">#104</a>, <a href="https://github.com/CS2103AUG2017-F11-B2/main/issues/105">#105</a>,
+ <a href="https://github.com/CS2103AUG2017-F11-B2/main/issues/107">#107</a>, <a href="https://github.com/CS2103AUG2017-F11-B2/main/issues/110">#110</a>, <a href="https://github.com/CS2103AUG2017-F11-B2/main/issues/113">#113</a>).</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2017-11-08 17:55:13 +00:00
+</div>
+</div>
+</body>
+</html>
