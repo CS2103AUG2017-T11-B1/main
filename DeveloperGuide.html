@@ -64,7 +64,7 @@ Adapted from AddressBook-Level4, by: <code>Team SE-EDU</code>      Since: <code>
 <li><a href="#event-methods">4.2.2. Event methods</a></li>
 <li><a href="#exceptions">4.2.3. Exceptions</a></li>
 <li><a href="#event-card">4.2.4. Event card</a></li>
-<li><a href="#design-consideration-for-future-enhancement">4.2.5. Design Consideration for future enhancement</a></li>
+<li><a href="#design-considerations-2">4.2.5. Design Considerations</a></li>
 </ul>
 </li>
 <li><a href="#oauth2-fulfilment-mechanism">4.3. OAuth2 fulfilment mechanism</a>
@@ -72,50 +72,50 @@ Adapted from AddressBook-Level4, by: <code>Team SE-EDU</code>      Since: <code>
 <li><a href="#overview-2">4.3.1. Overview</a></li>
 <li><a href="#current-usages">4.3.2. Current usages</a></li>
 <li><a href="#execution-flow">4.3.3. Execution flow</a></li>
-<li><a href="#design-considerations-2">4.3.4. Design Considerations</a></li>
+<li><a href="#design-considerations-3">4.3.4. Design Considerations</a></li>
 </ul>
 </li>
 <li><a href="#email">4.4. Email</a>
 <ul class="sectlevel3">
 <li><a href="#overview-3">4.4.1. Overview</a></li>
-<li><a href="#design-considerations-3">4.4.2. Design Considerations</a></li>
+<li><a href="#design-considerations-4">4.4.2. Design Considerations</a></li>
 </ul>
 </li>
 <li><a href="#map">4.5. Map</a>
 <ul class="sectlevel3">
 <li><a href="#overview-4">4.5.1. Overview</a></li>
-<li><a href="#design-considerations-4">4.5.2. Design Considerations</a></li>
+<li><a href="#design-considerations-5">4.5.2. Design Considerations</a></li>
 </ul>
 </li>
 <li><a href="#removetag">4.6. RemoveTag</a>
 <ul class="sectlevel3">
 <li><a href="#overview-5">4.6.1. Overview</a></li>
-<li><a href="#design-considerations-5">4.6.2. Design Considerations</a></li>
+<li><a href="#design-considerations-6">4.6.2. Design Considerations</a></li>
 </ul>
 </li>
 <li><a href="#find">4.7. Find</a>
 <ul class="sectlevel3">
 <li><a href="#overview-6">4.7.1. Overview</a></li>
-<li><a href="#design-considerations-6">4.7.2. Design Considerations</a></li>
+<li><a href="#design-considerations-7">4.7.2. Design Considerations</a></li>
 </ul>
 </li>
 <li><a href="#updateprofilepic-deleteprofilepic-mechanism">4.8. UpdateProfilePic/DeleteProfilePic mechanism</a>
 <ul class="sectlevel3">
 <li><a href="#overview-7">4.8.1. Overview</a></li>
-<li><a href="#design-considerations-7">4.8.2. Design Considerations</a></li>
+<li><a href="#design-considerations-8">4.8.2. Design Considerations</a></li>
 </ul>
 </li>
 <li><a href="#viewcount-tracking">4.9. ViewCount Tracking</a>
 <ul class="sectlevel3">
 <li><a href="#overview-8">4.9.1. Overview</a></li>
-<li><a href="#design-considerations-8">4.9.2. Design Considerations</a></li>
+<li><a href="#design-considerations-9">4.9.2. Design Considerations</a></li>
 </ul>
 </li>
 <li><a href="#unknown-input-parsing">4.10. Unknown input parsing</a>
 <ul class="sectlevel3">
 <li><a href="#overview-9">4.10.1. Overview</a></li>
 <li><a href="#execution-flow-2">4.10.2. Execution flow</a></li>
-<li><a href="#design-considerations-9">4.10.3. Design considerations</a></li>
+<li><a href="#design-considerations-10">4.10.3. Design considerations</a></li>
 </ul>
 </li>
 </ul>
@@ -1001,14 +1001,15 @@ An appropriate <code>ParseException</code> will be thrown if the command word or
 <p><code>DuplicateEventException</code>: This exception can be thrown by <code>addE</code> and <code>editE</code> command. The system will first create an <code>Event</code> object with the input parameters, compare the object to all events residing in the event list and throw this exception if there is a duplicate found.</p>
 </li>
 <li>
-<p><code>DateTimeParseException</code>: This exception can be thrown by <code>addE</code> and <code>editE</code> command when the input <code>EventDate</code> parameter is not a valid date. The date format and validity of date is checked inside the <code>Event</code> class like this:<br></p>
+<p><code>DateTimeParseException</code>: This exception can be thrown by <code>addE</code> and <code>editE</code> command when the input <code>EventDate</code> parameter is not a valid date. The date&#8217;s format and validity is checked inside the <code>Event</code> class like this:<br></p>
 </li>
 </ul>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre>public EventDate(String eventDate) throws IllegalValueException {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd")
+                    .withResolverStyle(ResolverStyle.STRICT);
     try {
         eventLocalDate = LocalDate.parse(eventDate, formatter);
     } catch (DateTimeParseException ex) {
@@ -1057,9 +1058,9 @@ This sorting algorithm is introduced in <code>EventDateComparator</code> which i
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-consideration-for-future-enhancement"><a class="link" href="#design-consideration-for-future-enhancement">4.2.5. Design Consideration for future enhancement</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.2.5. Design Considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> How to implement adding of contacts into an <code>Event</code> using a <code>Person</code> list parameter<br></p>
+<p><strong>Aspect(future enhancement):</strong> How to implement adding/tagging of contacts into an <code>Event</code> using a <code>Person</code> list parameter<br></p>
 </div>
 <div class="paragraph">
 <p><strong>Chosen Implementation:</strong><br>
@@ -1272,7 +1273,7 @@ object is added as a Google <code>Person</code> object&#8217;s <code>UserDefined
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">4.3.4. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.3.4. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> How a successful authentication is handled<br></p>
 </div>
@@ -1368,7 +1369,7 @@ Note that the <code>EmailCommandParser</code> will raise a <code>ParseException<
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.4.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.4.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>Email</code><br></p>
 </div>
@@ -1425,7 +1426,7 @@ This rendering of Google Maps is done via calling the URL.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.5.2. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.5.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>map</code><br></p>
 </div>
@@ -1482,7 +1483,7 @@ Note that the <code>removeTag</code> function will raise a <code>CommandExceptio
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.6.2. Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.6.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>removeTag</code><br></p>
 </div>
@@ -1525,7 +1526,7 @@ This will invoke the <code>updateFilteredPersonList</code> function that resides
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.7.2. Design Considerations</a></h4>
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.7.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>find</code><br></p>
 </div>
@@ -1589,7 +1590,7 @@ Extra command for the user to remember.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.8.2. Design Considerations</a></h4>
+<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">4.8.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>updateProfilePic</code><br></p>
 </div>
@@ -1678,7 +1679,7 @@ There might be a visible lag every time an image is displayed as a profile pictu
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">4.9.2. Design Considerations</a></h4>
+<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">4.9.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>viewCount</code><br></p>
 </div>
@@ -1829,7 +1830,7 @@ for the purpose of this mechanism.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">4.10.3. Design considerations</a></h4>
+<h4 id="design-considerations-10"><a class="link" href="#design-considerations-10">4.10.3. Design considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Choice of acceptable Levenshtein distance<br></p>
 </div>
@@ -3611,7 +3612,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-08 09:35:48 +00:00
+Last updated 2017-11-08 10:49:04 +00:00
 </div>
 </div>
 </body>
