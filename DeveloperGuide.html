@@ -1666,13 +1666,52 @@ There might be a visible lag every time an image is displayed as a profile pictu
 <p>The <code>viewCount</code> variable is a <code>private int</code> variable of the <code>Person</code> class. This variable is updated whenever a <code>PersonPanelSelectionChangedEvent</code> is raised. This means that whenever a contact is selected, whether by the <code>select</code> command or by clicking on the <code>PersonCard</code> on the UI, the contact associated with the selected <code>PersonCard</code> will have its <code>viewCount</code> variable incremented by 1.</p>
 </div>
 <div class="paragraph">
-<p>To listen for the <code>PersonPanelSelectionChangedEvent</code>, a listener is placed in the <code>MainApp</code> object, which ensures that the <code>Model</code> associated to it is updated with the right <code>Person</code> object that has its <code>viewCount</code> updated.</p>
+<p>To listen for the <code>PersonPanelSelectionChangedEvent</code>, a listener is placed in the <code>MainApp</code> object, which ensures that the <code>Model</code> associated to it is updated with the right <code>Person</code> object that has its <code>viewCount</code> updated. (See code snippet below)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="type">void</span> handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+    logger.info(LogsCenter.getEventHandlingLogMessage(event));
+    <span class="keyword">if</span> (event.getNewSelection().person != <span class="predefined-constant">null</span>) {
+        Person personSelected = <span class="keyword">new</span> Person(event.getNewSelection().person);
+        personSelected.setViewCount(personSelected.getViewCount() + <span class="integer">1</span>);
+        <span class="keyword">try</span> {
+            model.updatePerson(event.getNewSelection().person, personSelected);
+        } <span class="keyword">catch</span> (DuplicatePersonException dpe) {
+            <span class="keyword">assert</span> <span class="predefined-constant">false</span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">Impossible to be duplicate</span><span class="delimiter">&quot;</span></span>;
+        } <span class="keyword">catch</span> (PersonNotFoundException pnfe) {
+            <span class="keyword">assert</span> <span class="predefined-constant">false</span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">Impossible not to be found</span><span class="delimiter">&quot;</span></span>;
+        }
+    }
+}</code></pre>
+</div>
 </div>
 <div class="paragraph">
 <p>As the <code>viewCount</code> is not displayed on the UI, when this variable of a contact is updated, no <code>AddressBookChangedEvent</code> is raised, so the UI will not be refreshed unnecessarily.</p>
 </div>
 <div class="paragraph">
-<p>Right before the app closes, the app will sort the <code>Person</code> objects in the <code>AddressBook</code> such that the <code>Person</code> objects will be displayed from highest <code>viewCount</code> to lowest.</p>
+<p>Right before the app closes, the app will sort the <code>Person</code> objects in the <code>AddressBook</code> such that the <code>Person</code> objects will be displayed from highest <code>viewCount</code> to lowest. (See code snippet below)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">void</span> sortByViewCount() {
+    AddressBook addressBookToSort = <span class="keyword">new</span> AddressBook(addressBook);
+    ObservableList&lt;ReadOnlyPerson&gt; listToSort = addressBookToSort.getPersonList();
+    <span class="predefined-type">ArrayList</span>&lt;ReadOnlyPerson&gt; listToSortedCopy = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;&gt;();
+    <span class="keyword">for</span> (ReadOnlyPerson r : listToSort) {
+        listToSortedCopy.add(r);
+    }
+    <span class="predefined-type">Collections</span>.sort(listToSortedCopy, <span class="keyword">new</span> ViewCountComparator());
+
+    <span class="keyword">try</span> {
+        addressBookToSort.setPersons(listToSortedCopy);
+    } <span class="keyword">catch</span> (DuplicatePersonException dpe) {
+        <span class="keyword">assert</span> <span class="predefined-constant">false</span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">Impossible to be duplicate</span><span class="delimiter">&quot;</span></span>;
+    }
+
+    resetData(addressBookToSort);
+}</code></pre>
+</div>
 </div>
 <div style="page-break-after: always;"></div>
 <div class="paragraph">
@@ -3674,7 +3713,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-09 00:48:26 +00:00
+Last updated 2017-11-09 00:56:22 +00:00
 </div>
 </div>
 </body>

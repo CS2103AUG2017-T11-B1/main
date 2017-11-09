@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.3">
+<title>Soon Wei Jun - Project Portfolio</title>
+<link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Soon Wei Jun - Project Portfolio</h1>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="project-directory-of-contacts-doc"><a class="link" href="#project-directory-of-contacts-doc">Project: Directory of Contacts (DoC)</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>DoC is a desktop contact and event managing application. It is built as an enhancement on top of the original <code>Addressbook-level4</code>
+by <code>Team SE-EDU</code>, which can be found here: <a href="https://github.com/se-edu/addressbook-level4" class="bare">https://github.com/se-edu/addressbook-level4</a>. This project was built as part of the software engineering
+module <code>CS2103T</code> offered by the School of Computing in the National University of Singapore.</p>
+</div>
+<div class="paragraph">
+<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103AUG2017-T11-B1/main/blob/master/collated/main/soonwj.md">Functional code</a>][<a href="https://github.com/CS2103AUG2017-T11-B1/main/blob/master/collated/test/soonwj.md">Test code</a>]</p>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-updateprofilepic-deleteprofilepic"><a class="link" href="#enhancement-added-updateprofilepic-deleteprofilepic">Enhancement Added: UpdateProfilePic / DeleteProfilePic</a></h3>
+<div class="sect3">
+<h4 id="external-behavior"><a class="link" href="#external-behavior">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="updating-a-contact-s-profile-picture-code-updateprofilepic-code"><a class="link" href="#updating-a-contact-s-profile-picture-code-updateprofilepic-code">Updating a contact&#8217;s profile picture: <code>updateProfilePic</code></a></h4>
+<div class="paragraph">
+<p>Updates the profile picture of a contact.<br>
+Format: <code>updateProfilePic INDEX [u/imageUrl]</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Quick notes:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Updates the profile picture of the contact at the specified <code>INDEX</code>. The index refers to the index number shown in the last contact listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>The index must be valid.</p>
+</li>
+<li>
+<p>The <code>imageUrl</code> must be a valid one. It should start with <code><a href="file:///" class="bare">file:///</a></code> for images stored locally, or a valid web URL for an image stored on the internet.</p>
+</li>
+<li>
+<p>If the image used as a profile picture of a particular contact gets moved or deleted, the profile picture of that contact will be changed back to the default one.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>updateProfilePic 1 u/file:///C:/Users/Bobby/image.jpg</code><br>
+Updates the profile picture of the 1st contact to be the image at <code><a href="file:///C:/Users/Bobby/image.jpg" class="bare">file:///C:/Users/Bobby/image.jpg</a></code>.<br></p>
+</li>
+<li>
+<p><code>updateProfilePic 2 u/http://www.google.com/images/image.png</code><br>
+Updates the profile picture of the 2nd contact to be the image at <code><a href="http://www.google.com/images/image.png" class="bare">http://www.google.com/images/image.png</a></code>.<br></p>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p><strong>Visual guide:</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/updateProfilePicImageExample.jpg" alt="updateProfilePicImageExample" width="1000">
+</div>
+</div>
+<div class="paragraph">
+<p>As shown in the image above, after entering the <code>updateProfilePic</code> command, the profile picture of the contact at the specified index is updated to the image stored at the url specified.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect3">
+<h4 id="deleting-the-profile-picture-of-a-contact-code-deleteprofilepic-code"><a class="link" href="#deleting-the-profile-picture-of-a-contact-code-deleteprofilepic-code">Deleting the profile picture of a contact : <code>deleteProfilePic</code></a></h4>
+<div class="paragraph">
+<p>Deletes the profile picture of the specified contact from DoC.<br>
+Format: <code>deleteProfilePic INDEX</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Quick notes:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Deletes the profile picture of the contact at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the most recent listing.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list</code><br>
+<code>deleteProfilePic 2</code><br>
+Deletes the profile picture of the 2nd contact in the DoC.</p>
+</li>
+<li>
+<p><code>find Bobby</code><br>
+<code>deleteProfilePic 1</code><br>
+Deletes the profile picture of the 1st contact in the results of the <code>find</code> command.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Visual guide:</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/deleteProfilePicImageExample.jpg" alt="deleteProfilePicImageExample" width="1000">
+</div>
+</div>
+<div class="paragraph">
+<p>As shown in the image above, after entering the <code>deleteProfilePic</code> command, the profile picture of the contact at the specified index is reverted back to the default.</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+<div class="sect3">
+<h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
+<div class="paragraph">
+<p>With the addition of a profile picture to the contacts, it becomes easier to recognise which contact is which at one glance. This also aids to differentiating contacts with the same name.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="updateprofilepic-deleteprofilepic-mechanism"><a class="link" href="#updateprofilepic-deleteprofilepic-mechanism">UpdateProfilePic/DeleteProfilePic mechanism</a></h3>
+<div class="sect3">
+<h4 id="overview"><a class="link" href="#overview">Overview</a></h4>
+<div class="paragraph">
+<p>The UpdateProfilePic/DeleteProfilePic mechanism is facilitated by a <code>ProfilePic</code> class, which is a property class of the <code>Person</code> class. It supports the updating and deleting of profile pictures of each contact. These two commands inherit from <code>Command</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>ProfilePic</code> essentially stores a <strong>valid</strong> <code>URL</code> of an image that will be displayed as the contacts&#8217;s profile picture. Whenever a new contact is added, the contact&#8217;s <code>ProfilePic</code> property will be set to that of a default image. The command: <code>updateProfilePic</code> can then be called to change this property. When the command <code>deleteProfilePic</code> is called, the <code>ProfilePic</code> property of the selected contact will be changed back to the default profile picture.</p>
+</div>
+<div class="paragraph">
+<p>Like the other properties of the <code>Person</code> class, the <code>ProfilePic</code> property will also be saved to the chosen storage file. If the image that is referred to by the <code>ProfilePic</code> is moved or deleted, the <code>ProfilePic</code> will reset back to the image of the default profile picture.</p>
+</div>
+<div class="paragraph">
+<p>The <code>updateProfilePic</code>  command works by taking in the index of the chosen contact and updating this contact according to the <code>ProfilePic</code> given. To do so, the <code>updateProfilePic</code> command takes in a URL of the image that the profile picture is to be changed to. This will cause the app to instantiate a new <code>ProfilePic</code> object and check if the URL is valid and if it is valid, the app will proceed to update the contact with the new profile picture, otherwise an IllegalValueException will be thrown.</p>
+</div>
+<div class="paragraph">
+<p>In addition, the image will be downloaded into a local folder called: <code>ProfilePics/</code> that is generated when the app initializes. This folder is created in the same folder as the <code>src</code> folder.</p>
+</div>
+<div class="paragraph">
+<p>The <code>deleteProfilePic</code> command works by taking in the index of the chosen contact and updating the <code>ProfilePic</code> property of the chosen contact to the default profile picture.</p>
+</div>
+<div class="paragraph">
+<p>Below are the sequence diagrams of each command to illustrate how they work:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/updateProfilePicSD.jpg" alt="updateProfilePicSD" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.8.1: UpdateProfilePic Sequence Diagram</em></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/deleteProfilePicSD.jpg" alt="deleteProfilePicSD" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.8.2: DeleteProfilePic Sequence Diagram</em></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>updateProfilePic</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Chosen Implementation:</strong><br>
+Add a new class that extends <code>Command</code>.<br>
+<strong>Pros:</strong><br>
+The other properties of a contact can be quickly updated, using the <code>add</code> or <code>edit</code> commands, without waiting for an image to be loaded. <br>
+<strong>Cons:</strong><br>
+Users have to remember another command.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative:</strong> Just add the function to the <code>add</code> and <code>edit</code> commands.<br>
+<strong>Pros:</strong><br>
+Users do not have to remember a new command.<br>
+<strong>Cons:</strong><br>
+The image might take a while to load, so all the data takes longer to be updated.</p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>deleteProfilePic</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Chosen Implementation:</strong><br>
+Add a new class that extends <code>Command</code>.<br>
+<strong>Pros:</strong><br>
+A quick way to revert the profile picture back to default. <br>
+<strong>Cons:</strong><br>
+Redundant as it is a special case of <code>updateProfilePic</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative:</strong> Not have this command at all.<br>
+<strong>Pros:</strong><br>
+Lesser commands for the user to remember.<br>
+<strong>Cons:</strong><br>
+The user might not know what the default image URL is.</p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Storage of images of profile pictures<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Chosen Implementation:</strong><br>
+Store the images in a local folder: <code>ProfilePics/</code>.<br>
+<strong>Pros:</strong><br>
+After the initial download, subsequent retrieval of image for display can be done without visible lag and if the original image gets deleted or moved, the profile picture can still be displayed. <br>
+<strong>Cons:</strong><br>
+Initial download may cause a visible lag and freeze the UI for some time.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative:</strong> Not store the images<br>
+<strong>Pros:</strong><br>
+No space requirement to store the images locally<br>
+<strong>Cons:</strong><br>
+There might be a visible lag every time an image is displayed as a profile picture, if the image is too big and on the internet.</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-viewcount-tracking"><a class="link" href="#enhancement-added-viewcount-tracking">Enhancement Added: ViewCount Tracking</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-2"><a class="link" href="#external-behavior-2">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p>At next start up of the app, the address book is sorted by the viewCount of each contact, from highest to lowest.</p>
+</div>
+<hr>
+</div>
+<div class="sect3">
+<h4 id="justification-2"><a class="link" href="#justification-2">Justification</a></h4>
+<div class="paragraph">
+<p>This keeps the contacts that the user selects the most at the top for increased convenience for the user.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="viewcount-tracking"><a class="link" href="#viewcount-tracking">ViewCount Tracking</a></h3>
+<div class="sect3">
+<h4 id="overview-2"><a class="link" href="#overview-2">Overview</a></h4>
+<div class="paragraph">
+<p>The <code>viewCount</code> variable is a <code>private int</code> variable of the <code>Person</code> class. This variable is updated whenever a <code>PersonPanelSelectionChangedEvent</code> is raised. This means that whenever a contact is selected, whether by the <code>select</code> command or by clicking on the <code>PersonCard</code> on the UI, the contact associated with the selected <code>PersonCard</code> will have its <code>viewCount</code> variable incremented by 1.</p>
+</div>
+<div class="paragraph">
+<p>To listen for the <code>PersonPanelSelectionChangedEvent</code>, a listener is placed in the <code>MainApp</code> object, which ensures that the <code>Model</code> associated to it is updated with the right <code>Person</code> object that has its <code>viewCount</code> updated. (See code snippet below)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="type">void</span> handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+    logger.info(LogsCenter.getEventHandlingLogMessage(event));
+    <span class="keyword">if</span> (event.getNewSelection().person != <span class="predefined-constant">null</span>) {
+        Person personSelected = <span class="keyword">new</span> Person(event.getNewSelection().person);
+        personSelected.setViewCount(personSelected.getViewCount() + <span class="integer">1</span>);
+        <span class="keyword">try</span> {
+            model.updatePerson(event.getNewSelection().person, personSelected);
+        } <span class="keyword">catch</span> (DuplicatePersonException dpe) {
+            <span class="keyword">assert</span> <span class="predefined-constant">false</span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">Impossible to be duplicate</span><span class="delimiter">&quot;</span></span>;
+        } <span class="keyword">catch</span> (PersonNotFoundException pnfe) {
+            <span class="keyword">assert</span> <span class="predefined-constant">false</span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">Impossible not to be found</span><span class="delimiter">&quot;</span></span>;
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As the <code>viewCount</code> is not displayed on the UI, when this variable of a contact is updated, no <code>AddressBookChangedEvent</code> is raised, so the UI will not be refreshed unnecessarily.</p>
+</div>
+<div class="paragraph">
+<p>Right before the app closes, the app will sort the <code>Person</code> objects in the <code>AddressBook</code> such that the <code>Person</code> objects will be displayed from highest <code>viewCount</code> to lowest. (See code snippet below)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">void</span> sortByViewCount() {
+    AddressBook addressBookToSort = <span class="keyword">new</span> AddressBook(addressBook);
+    ObservableList&lt;ReadOnlyPerson&gt; listToSort = addressBookToSort.getPersonList();
+    <span class="predefined-type">ArrayList</span>&lt;ReadOnlyPerson&gt; listToSortedCopy = <span class="keyword">new</span> <span class="predefined-type">ArrayList</span>&lt;&gt;();
+    <span class="keyword">for</span> (ReadOnlyPerson r : listToSort) {
+        listToSortedCopy.add(r);
+    }
+    <span class="predefined-type">Collections</span>.sort(listToSortedCopy, <span class="keyword">new</span> ViewCountComparator());
+
+    <span class="keyword">try</span> {
+        addressBookToSort.setPersons(listToSortedCopy);
+    } <span class="keyword">catch</span> (DuplicatePersonException dpe) {
+        <span class="keyword">assert</span> <span class="predefined-constant">false</span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">Impossible to be duplicate</span><span class="delimiter">&quot;</span></span>;
+    }
+
+    resetData(addressBookToSort);
+}</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p>Below is the sequence diagram for how the <code>viewCount</code> object is updated:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/updateViewCountSD.png" alt="updateViewCountSD" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.9.1: UpdateViewCount Sequence Diagram</em></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>viewCount</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Chosen Implementation:</strong><br>
+Add a new variable to the <code>Person</code> class.<br>
+<strong>Pros:</strong><br>
+No extra classes have to be created and it is clear which <code>Person</code> has a <code>viewCount</code> of what value.<br>
+<strong>Cons:</strong><br>
+The <code>Model</code> has to be updated every time a new <code>PersonCard</code> is selected.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative:</strong> Track all the <code>viewCount</code> in a separate file or class.<br>
+<strong>Pros:</strong><br>
+<code>Model</code> does not need to be updated and no existing class will be changed.<br>
+<strong>Cons:</strong><br>
+File IO will be required for the saving of the list or the list has to be converted into XML and stored with the rest of the data is <code>addressbook.xml</code>.</p>
+</div>
+<hr>
+<div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Updating of <code>Model</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Chosen Implementation:</strong><br>
+Update <code>Model</code> without raising <code>AddressBookChangedEvent</code>.<br>
+<strong>Pros:</strong><br></p>
+</div>
+<div class="paragraph">
+<p>No unnecessary refreshing of the UI.    <br>
+<strong>Cons:</strong><br>
+The <code>viewCount</code> variable of each <code>Person</code> is only saved to <code>addressbook.xml</code> only when the app stops or when the next <code>AddressBookChangedEvent</code> is raised.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative:</strong> Update <code>Model</code> normally.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Pros:</strong><br>
+The <code>addressbook.xml</code> file is always updated once any value is changed.<br>
+<strong>Cons:</strong><br>
+The UI will be refreshed unnecessarily, which may cause a visible lag if large image files are reloaded.</p>
+</div>
+<hr>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Sorting by <code>viewCount</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Chosen Implementation:</strong><br>
+Sort right before app stops.<br>
+<strong>Pros:</strong><br>
+When app is started the next time, it can be started immediately, without having to perform the sort.<br>
+<strong>Cons:</strong><br>
+The app might lag a bit when stopping.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative:</strong> Sort right before app starts.<br>
+<strong>Pros:</strong><br>
+The app will stop quickly.<br>
+<strong>Cons:</strong><br>
+The app will take a while to start.<br>
+<strong>Alternative 3:</strong> Whenever a viewCount is changed.<br>
+<strong>Pros:</strong> The app will always show the updated order.<br>
+<strong>Cons:</strong> The app will lag slightly each time a <code>PersonCard</code> is selected.</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-proposed-display-the-viewcount-for-each-contact"><a class="link" href="#enhancement-proposed-display-the-viewcount-for-each-contact">Enhancement Proposed: Display the viewCount for each contact</a></h3>
+<div class="sect3">
+<h4 id="external-behaviour"><a class="link" href="#external-behaviour">External behaviour</a></h4>
+<div class="paragraph">
+<p>The viewCount of each contact will be displayed on its <code>PersonCard</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="justification-3"><a class="link" href="#justification-3">Justification</a></h4>
+<div class="paragraph">
+<p>This allows the user to see how many times he or she has selected each of his contacts and this may serve as a reminder that there are contacts the user has not contacted in a while.</p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="other-contributions"><a class="link" href="#other-contributions">Other contributions</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Performed acceptance testing of a separate team&#8217;s (<a href="https://github.com/CS2103AUG2017-T16-B1/main">T16-B1</a>) project, and raised issues for bugs discovered
+(Issues <a href="https://github.com/CS2103AUG2017-T16-B1/main/issues/154">#154</a>, <a href="https://github.com/CS2103AUG2017-T16-B1/main/issues/156">#156</a>).</p>
+</li>
+<li>
+<p>Made minor changes to UI (Pull Request <a href="https://github.com/CS2103AUG2017-T11-B1/main/pull/3">#3</a>)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2017-11-09 00:56:22 +00:00
+</div>
+</div>
+</body>
+</html>
