@@ -52,25 +52,21 @@ Adapted from AddressBook-Level4, by: <code>Team SE-EDU</code>      Since: <code>
 <li><a href="#selecting-a-contact-code-select-code">3.3.3. Selecting a contact : <code>select</code></a></li>
 <li><a href="#emailing-contacts-code-email-code">3.3.4. Emailing contacts : <code>email</code></a></li>
 <li><a href="#locating-a-contact-code-map-code">3.3.5. Locating a contact : <code>map</code></a></li>
+<li><a href="#adding-an-event-code-adde-code">3.3.6. Adding an event: <code>addE</code></a></li>
+<li><a href="#editing-an-event-code-edite-code">3.3.7. Editing an event : <code>editE</code></a></li>
+<li><a href="#deleting-an-event-code-deletee-code">3.3.8. Deleting an event : <code>deleteE</code></a></li>
 </ul>
 </li>
-<li><a href="#event-features">3.4. Event features</a>
+<li><a href="#general-features">3.4. General features</a>
 <ul class="sectlevel3">
-<li><a href="#adding-an-event-code-adde-code">3.4.1. Adding an event: <code>addE</code></a></li>
-<li><a href="#editing-an-event-code-edite-code">3.4.2. Editing an event : <code>editE</code></a></li>
-<li><a href="#deleting-an-event-code-deletee-code">3.4.3. Deleting an event : <code>deleteE</code></a></li>
-</ul>
-</li>
-<li><a href="#general-features">3.5. General features</a>
-<ul class="sectlevel3">
-<li><a href="#clearing-all-entries-code-clear-code">3.5.1. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#getting-help-code-help-code">3.5.2. Getting help : <code>help</code></a></li>
-<li><a href="#displaying-history-code-history-code">3.5.3. Displaying history : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">3.5.4. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.5.5. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.5.6. Exiting the program : <code>exit</code></a></li>
-<li><a href="#accepting-suggested-commands">3.5.7. Accepting suggested commands</a></li>
-<li><a href="#saving-the-data">3.5.8. Saving the data</a></li>
+<li><a href="#clearing-all-entries-code-clear-code">3.4.1. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#getting-help-code-help-code">3.4.2. Getting help : <code>help</code></a></li>
+<li><a href="#displaying-history-code-history-code">3.4.3. Displaying history : <code>history</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">3.4.4. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.4.5. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.4.6. Exiting the program : <code>exit</code></a></li>
+<li><a href="#accepting-suggested-commands">3.4.7. Accepting suggested commands</a></li>
+<li><a href="#saving-the-data">3.4.8. Saving the data</a></li>
 </ul>
 </li>
 </ul>
@@ -824,10 +820,18 @@ Format: <code>email [to/TO] [subject/SUBJECT] [body/BODY]</code></p>
 <div class="paragraph">
 <p>Example:</p>
 </div>
-<div class="paragraph">
+<div class="ulist">
+<ul>
+<li>
+<p><code>email to/Adam</code><br>
+Opens the default emailing client and adds Adam to the <code>to</code> field and has the subject and body as null.</p>
+</li>
+<li>
 <p><code>email to/friends subject/SUBJECT body/BODY</code><br>
 Opens the default emailing client and adds all the contacts who has the tag <code>friends</code> into the <code>to</code> area,
-adds the <code>subject</code> as <code>SUBJECT</code> and <code>body</code> as <code>BODY</code>.</p>
+adds the <code>subject</code> as <code>SUBJECT</code> and <code>body</code> as <code>BODY</code>. Please refer to the visual guide attached below.</p>
+</li>
+</ul>
 </div>
 <div style="page-break-after: always;"></div>
 <div class="paragraph">
@@ -837,14 +841,6 @@ adds the <code>subject</code> as <code>SUBJECT</code> and <code>body</code> as <
 <div class="content">
 <img src="images/Email_UG.PNG" alt="Email UG" width="1000">
 </div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>email to/Adam</code><br>
-Opens the default emailing client and adds Adam to the <code>to</code> field and has the subject and body as null.</p>
-</li>
-</ul>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -899,18 +895,14 @@ Format: <code>map INDEXES</code></p>
 </div>
 </div>
 <div class="paragraph">
-<p>Shows the address of the 1st contact in Google Maps as shown above.</p>
+<p>Shows the address of the 1st contact in Google Maps as shown above.
+&lt;&lt;&lt;
+=== Event features
+You can manage your events through the following commands:</p>
 </div>
-<div style="page-break-after: always;"></div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="event-features"><a class="link" href="#event-features">3.4. Event features</a></h3>
-<div class="paragraph">
-<p>You can manage your events through the following commands:</p>
 </div>
 <div class="sect3">
-<h4 id="adding-an-event-code-adde-code"><a class="link" href="#adding-an-event-code-adde-code">3.4.1. Adding an event: <code>addE</code></a></h4>
+<h4 id="adding-an-event-code-adde-code"><a class="link" href="#adding-an-event-code-adde-code">3.3.6. Adding an event: <code>addE</code></a></h4>
 <div class="paragraph">
 <p>Adds an event to DoC.<br>
 Format: <code>addE h/HEADER de/DESCRIPTION d/DATE</code></p>
@@ -961,7 +953,7 @@ As shown in the guide above, the yellow panel indicates that an event upcoming i
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect3">
-<h4 id="editing-an-event-code-edite-code"><a class="link" href="#editing-an-event-code-edite-code">3.4.2. Editing an event : <code>editE</code></a></h4>
+<h4 id="editing-an-event-code-edite-code"><a class="link" href="#editing-an-event-code-edite-code">3.3.7. Editing an event : <code>editE</code></a></h4>
 <div class="paragraph">
 <p>Edits an existing event in DoC.<br>
 Format: <code>editE INDEX [h/HEADER] [de/DESCRIPTION] [d/DATE]</code></p>
@@ -1017,7 +1009,7 @@ Edits the header and date of the 1st event to be <code>Birthday party</code> and
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect3">
-<h4 id="deleting-an-event-code-deletee-code"><a class="link" href="#deleting-an-event-code-deletee-code">3.4.3. Deleting an event : <code>deleteE</code></a></h4>
+<h4 id="deleting-an-event-code-deletee-code"><a class="link" href="#deleting-an-event-code-deletee-code">3.3.8. Deleting an event : <code>deleteE</code></a></h4>
 <div class="paragraph">
 <p>Deletes the specified event from DoC.<br>
 Format: <code>deleteE INDEX</code></p>
@@ -1071,26 +1063,26 @@ Deletes the 3rd event in DoC.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="general-features"><a class="link" href="#general-features">3.5. General features</a></h3>
+<h3 id="general-features"><a class="link" href="#general-features">3.4. General features</a></h3>
 <div class="paragraph">
 <p>The following commands and features are not specific to contacts or events, and can be used system-wide:</p>
 </div>
 <div class="sect3">
-<h4 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.5.1. Clearing all entries : <code>clear</code></a></h4>
+<h4 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.4.1. Clearing all entries : <code>clear</code></a></h4>
 <div class="paragraph">
 <p>Clears all entries from DoC.<br>
 Format: <code>clear</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="getting-help-code-help-code"><a class="link" href="#getting-help-code-help-code">3.5.2. Getting help : <code>help</code></a></h4>
+<h4 id="getting-help-code-help-code"><a class="link" href="#getting-help-code-help-code">3.4.2. Getting help : <code>help</code></a></h4>
 <div class="paragraph">
 <p>Displays this document.<br>
 Format: <code>help</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="displaying-history-code-history-code"><a class="link" href="#displaying-history-code-history-code">3.5.3. Displaying history : <code>history</code></a></h4>
+<h4 id="displaying-history-code-history-code"><a class="link" href="#displaying-history-code-history-code">3.4.3. Displaying history : <code>history</code></a></h4>
 <div class="paragraph">
 <p>Displays the history of commands you have entered, starting from the most recent one. <br>
 This feature can be accessed in two different ways:<br></p>
@@ -1109,7 +1101,7 @@ Format: the <kbd>&uarr;</kbd> and <kbd>&darr;</kbd> arrows will paste the previo
 </div>
 </div>
 <div class="sect3">
-<h4 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.5.4. Undoing previous command : <code>undo</code></a></h4>
+<h4 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.4.4. Undoing previous command : <code>undo</code></a></h4>
 <div class="paragraph">
 <p>Reverses the changes made by the previous command entered.<br>
 Format: <code>undo</code></p>
@@ -1147,7 +1139,7 @@ reverses the <code>delete 2</code> command by adding back the deleted contact.</
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect3">
-<h4 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.5.5. Redoing the previously undone command : <code>redo</code></a></h4>
+<h4 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.4.5. Redoing the previously undone command : <code>redo</code></a></h4>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command, if any.<br>
 Format: <code>redo</code></p>
@@ -1168,14 +1160,14 @@ simply deletes the contact with an index of 2 again.</p>
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect3">
-<h4 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.5.6. Exiting the program : <code>exit</code></a></h4>
+<h4 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.4.6. Exiting the program : <code>exit</code></a></h4>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="accepting-suggested-commands"><a class="link" href="#accepting-suggested-commands">3.5.7. Accepting suggested commands</a></h4>
+<h4 id="accepting-suggested-commands"><a class="link" href="#accepting-suggested-commands">3.4.7. Accepting suggested commands</a></h4>
 <div class="paragraph">
 <p>DoC is forgiving when it comes to mistyped commands. When DoC detects a typo in your input, it will automatically try to match it
 to a known command, and prompt you accordingly.</p>
@@ -1195,7 +1187,7 @@ and continue with another command.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="saving-the-data"><a class="link" href="#saving-the-data">3.5.8. Saving the data</a></h4>
+<h4 id="saving-the-data"><a class="link" href="#saving-the-data">3.4.8. Saving the data</a></h4>
 <div class="paragraph">
 <p>All additions, deletions, and changes performed on the contacts stored in DoC are saved automatically.</p>
 </div>
@@ -1349,7 +1341,7 @@ e.g. <code>updateProfilePic 2 u/http://www.google.com/images/image.png</code><br
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-09 00:56:22 +00:00
+Last updated 2017-11-09 02:49:18 +00:00
 </div>
 </div>
 </body>

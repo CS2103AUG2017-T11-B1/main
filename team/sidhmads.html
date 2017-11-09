@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.3">
+<title>Siddharth Madhavan - Project Portfolio</title>
+<link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Siddharth Madhavan - Project Portfolio</h1>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="project-directory-of-contacts-doc"><a class="link" href="#project-directory-of-contacts-doc">Project: Directory of Contacts (DoC)</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>DoC is a desktop contact and event managing application. It is built as an enhancement on top of the original <code>Addressbook-level4</code>
+by <code>Team SE-EDU</code>, which can be found here: <a href="https://github.com/se-edu/addressbook-level4" class="bare">https://github.com/se-edu/addressbook-level4</a>. This project was built as part of the software engineering
+module <code>CS2103T</code> offered by the School of Computing in the National University of Singapore.</p>
+</div>
+<div class="paragraph">
+<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103AUG2017-T11-B1/main/blob/master/collated/main/sidhmads.md">Functional code</a>][<a href="https://github.com/CS2103AUG2017-T11-B1/main/blob/master/collated/test/sidhmads.md">Test code</a>]</p>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-code-removetag-code-command-to-assist-the-user-in-mass-removal-of-tags"><a class="link" href="#enhancement-added-code-removetag-code-command-to-assist-the-user-in-mass-removal-of-tags">Enhancement Added: <code>RemoveTag</code> Command to assist the User in mass removal of tags</a></h3>
+<div class="sect3">
+<h4 id="external-behavior"><a class="link" href="#external-behavior">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="removing-tags-code-removetag-code"><a class="link" href="#removing-tags-code-removetag-code">Removing tags: <code>removeTag</code></a></h4>
+<div class="paragraph">
+<p>Finds contacts whose names or tags contain any of the given tag and removes that tag.<br>
+Format: <code>removeTag rm/INDEX t/TAG</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Quick notes:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The search is case sensitive. e.g <code>family</code> will match <code>family</code>.</p>
+</li>
+<li>
+<p><code>rm/INDEX</code> is not compulsory. If not given, it will remove the tag from all contacts.</p>
+</li>
+<li>
+<p>If <code>rm/INDEX</code> is stated, tags from those indexes in the current list will be removed.</p>
+</li>
+<li>
+<p>Only full words will be matched e.g. <code>Family</code> will not match <code>Families</code>.</p>
+</li>
+<li>
+<p>Contacts having that tag will be returned.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>removeTag t/Friend</code><br>
+Friend tag is removed from all contacts.</p>
+</li>
+<li>
+<p><code>removeTag rm/1 2 t/Friend</code><br>
+Friend tag is only removed from Index 1 and 2.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Visual guide:</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/removeTagpic.png" alt="removeTagpic" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>As shown in the image above, the <code>removeTag</code> command will remove given <code>Tag</code> from all the appropriate contacts in Doc.</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+<div class="sect3">
+<h4 id="justification"><a class="link" href="#justification">Justification</a></h4>
+<div class="paragraph">
+<p>The <code>RemoveTag</code> feature was built to enhance user experience. There would be instances where the User would need to remove a particular tag from everyone,
+or from a group of people. This function <code>RemoveTag</code> assist them in doing so. Without the presence of this command, the User would have to painstakingly
+edit each and every other contact that has to be modified manually.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="removetag"><a class="link" href="#removetag">RemoveTag</a></h3>
+<div class="sect3">
+<h4 id="overview"><a class="link" href="#overview">Overview</a></h4>
+<div class="paragraph">
+<p>The removeTag mechanism is facilitated by the <code>RemoveTagCommand</code> class which is inherited from the
+<code>UndoableCommand</code> class. If the indexes are not stated, the particular tag is removed from all contacts.
+Else, only those chosen indexes has its tag removed. All the indexes are based on the current list.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/RemoveTagSequenceDiagram.png" alt="RemoveTagSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.6.1: RemoveTag Sequence Diagram</em></p>
+</div>
+<div class="paragraph">
+<p>As shown in the diagram above, when the user executes the command <code>removeTag</code>, the <code>RemoveTagCommandParser</code> class will parse the tag and indexes if given, then call the <code>RemoveTagCommand</code>. In <code>RemoveTagCommand</code> the <code>execute()</code> function is called.
+This will invoke the <code>removeTag</code> function that resides in the <code>LogicManager</code>, which will remove the specific tag from specific or all contacts based on the call made by the user. This changes will then be updated and stored.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Note that the <code>removeTag</code> function will raise a <code>CommandException</code> if the <code>tag</code> is not valid.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>removeTag</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Chosen Implementation:</strong><br>
+Directly removes a certain tag from specified or all contacts.<br>
+<strong>Pros:</strong><br>
+Easier as multiple contacts are updated at one go. <br>
+<strong>Cons:</strong><br>
+It only can remove one tag at a time. If more tags has to be removed from multiple contacts, this function has to be called more times depending on the number of the tags that has to be removed.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative:</strong> Usage of <code>edit</code> command to remove the tags.<br>
+<strong>Pros:</strong><br>
+One lesser command for the user to remember.<br>
+<strong>Cons:</strong><br>
+It is very tiring for the user to update each and everyone of the contacts in the contact list, if he decided to remove the tag from everyone.</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-code-find-code-command-that-can-search-by-both-the-name-and-the-tag-of-the-person"><a class="link" href="#enhancement-added-code-find-code-command-that-can-search-by-both-the-name-and-the-tag-of-the-person">Enhancement Added: <code>Find</code> Command that can search by both the Name and the Tag of the person</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-2"><a class="link" href="#external-behavior-2">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="finding-contacts-by-name-and-tags-code-find-code"><a class="link" href="#finding-contacts-by-name-and-tags-code-find-code">Finding contacts by name and tags: <code>find</code></a></h4>
+<div class="paragraph">
+<p>Lists all contacts whose name or tags matches any of the given search terms.<br>
+Format: <code>find TERM1 [MORE_TERMS]</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Quick notes:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The search is case insensitive; e.g a search term of <code>hans</code> will match any contact name containing <code>Hans</code>.</p>
+</li>
+<li>
+<p>Only full words will be matched; e.g a search term of <code>Han</code> will not match a contact name containing <code>Hans</code>.</p>
+</li>
+<li>
+<p>Name of contacts can be matched partially; e.g a search term of <code>Han</code> will match the contact name <code>Han Solo</code>.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Visual guide:</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/findpic.png" alt="findpic" width="700">
+</div>
+</div>
+<div class="paragraph">
+<p>As demonstrated by the image above, entering the command <code>find Family han</code> displays all contacts with a tag or
+part of name, matching any search term.</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+<div class="sect3">
+<h4 id="justification-2"><a class="link" href="#justification-2">Justification</a></h4>
+<div class="paragraph">
+<p>This enhancement was built to improve user experience, through the implementation of a smarter find command.
+With this command, contacts can be found based on their <code>Tags</code> and <code>Names</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-code-email-code-command-to-assist-the-user-in-mass-emailing"><a class="link" href="#enhancement-added-code-email-code-command-to-assist-the-user-in-mass-emailing">Enhancement Added: <code>Email</code> Command to assist the User in mass emailing</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-3"><a class="link" href="#external-behavior-3">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="emailing-contacts-code-email-code"><a class="link" href="#emailing-contacts-code-email-code">Emailing contacts : <code>email</code></a></h4>
+<div class="paragraph">
+<p>Emails an existing contact/ a group in the DoC.<br>
+Format: <code>email [to/TO] [subject/SUBJECT] [body/BODY]</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Quick notes:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Email <code>to</code> must be provided.</p>
+</li>
+<li>
+<p>Email <code>subject</code> and <code>body</code> is optional.</p>
+</li>
+<li>
+<p>Email <code>to</code> contains either the <code>contact&#8217;s name</code> or a <code>tag name</code>.</p>
+</li>
+<li>
+<p>Email <code>subject</code> contains the subject of the email.</p>
+</li>
+<li>
+<p>Email <code>body</code> contains the body of the email.</p>
+</li>
+<li>
+<p>This feature requires an internet connection.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>email to/Adam</code><br>
+Opens the default emailing client and adds Adam to the <code>to</code> field and has the subject and body as null.</p>
+</li>
+<li>
+<p><code>email to/friends subject/SUBJECT body/BODY</code><br>
+Opens the default emailing client and adds all the contacts who has the tag <code>friends</code> into the <code>to</code> area,
+adds the <code>subject</code> as <code>SUBJECT</code> and <code>body</code> as <code>BODY</code>. Please refer to the visual guide attached below.</p>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p><strong>Visual guide:</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Email_UG.PNG" alt="Email UG" width="1000">
+</div>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+<div class="sect3">
+<h4 id="justification-3"><a class="link" href="#justification-3">Justification</a></h4>
+<div class="paragraph">
+<p>The <code>Email</code> feature  was built to reduce the workload on the User. The <code>Email</code> Command will allow user to email by <code>Tag</code>. Simply put,
+when the User selects <code>Email Friends</code>, all the contacts with the <code>Friends</code> tag will be added to the recipient list automatically.
+This feature will also work in tandem with the <code>Events</code> feature. When an <code>Event</code> is due, the user can immediately email the
+necessary contacts in a jiffy.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-3"><a class="link" href="#implementation-3">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="email"><a class="link" href="#email">Email</a></h3>
+<div class="sect3">
+<h4 id="overview-2"><a class="link" href="#overview-2">Overview</a></h4>
+<div class="paragraph">
+<p>The <code>EmailCommand</code> is the main driver of this functionality. It links the logic in Addressbook and the content displayed on the Email browser.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/EmailSequenceDiagram.png" alt="EmailSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.4.1: Email Sequence Diagram</em></p>
+</div>
+<div class="paragraph">
+<p>As seen from the picture above, the <code>AddressParser</code> will be able to distinguish the email command and direct it to the <code>EmailCommandParser</code>. Over there the recipient, subject and the body from the command line input is identified.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Note that the <code>EmailCommandParser</code> will raise a <code>ParseException</code> if the <code>to/</code> is not filled. The <code>subject</code> and <code>body</code> fields are not compulsory.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Once identified, the <code>execute</code> function is called. This function in the <code>EmailCommand</code> would call the <code>updateEmailRecipient</code> function in the Model. Once the fields are updated properly, the <code>EmailCommand</code> will call the desktop mail app and fill in the necessary details.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>Email</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Chosen Implementation:</strong><br>
+Uses the inbuilt Email Application.<br>
+<strong>Pros:</strong><br>
+The email authentication is done by that Email Application. <br>
+<strong>Cons:</strong><br>
+A new application has to be opened.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative:</strong> Make use of Gmail API.<br>
+<strong>Pros:</strong><br>
+Can be emailed from the browser panel itself.<br>
+<strong>Cons:</strong><br>
+The UI for GMail is very poor on <code>JavaFX WebView</code>.</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-added-code-map-code-command-to-assist-the-user-in-finding-the-location-of-a-contact-and-the-directions-from-one-place-to-another"><a class="link" href="#enhancement-added-code-map-code-command-to-assist-the-user-in-finding-the-location-of-a-contact-and-the-directions-from-one-place-to-another">Enhancement Added: <code>Map</code> Command to assist the User in finding the location of a Contact and the directions from one place to another</a></h3>
+<div class="sect3">
+<h4 id="external-behavior-4"><a class="link" href="#external-behavior-4">External behavior</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: User Guide]</mark></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="locating-a-contact-code-map-code"><a class="link" href="#locating-a-contact-code-map-code">Locating a contact : <code>map</code></a></h4>
+<div class="paragraph">
+<p>Shows the address of the contact or the directions from one location to another in Google Maps.<br>
+Format: <code>map INDEXES</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Quick notes:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If <code>map</code> is followed by only one INDEX, then the address of the contact in that particular index will be shown.</p>
+</li>
+<li>
+<p>If <code>map</code> is followed by more than one INDEX, then the directions from one place to another will be shown.</p>
+</li>
+<li>
+<p>This features requires Internet connection.</p>
+</li>
+<li>
+<p>Shows the address of the contact at the specified <code>INDEX</code>. The index refers to the index number shown in the last contact listing. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="paragraph">
+<p><code>map 1</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Visual guide:</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Location_UG.PNG" alt="Location UG" width="1000">
+</div>
+</div>
+<div class="paragraph">
+<p>Shows the address of the 1st contact in Google Maps as shown above.</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+<div class="sect3">
+<h4 id="justification-4"><a class="link" href="#justification-4">Justification</a></h4>
+<div class="paragraph">
+<p>The <code>Map</code> feature  was built to show the contact&#8217;s location to the User. The User can also determine the route from
+one contact&#8217;s location to the next. This will help the User plan his activities better.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-4"><a class="link" href="#implementation-4">Implementation</a></h4>
+<hr>
+<div class="paragraph">
+<p><mark>Start of Extract [from: Developer Guide]</mark></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="map"><a class="link" href="#map">Map</a></h3>
+<div class="sect3">
+<h4 id="overview-3"><a class="link" href="#overview-3">Overview</a></h4>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Location.png" alt="Location" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.5.1: Location Sequence Diagram</em></p>
+</div>
+<div class="paragraph">
+<p>As seen in the above diagram, an event based approach is used to display information on the Browser Panel.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Note that the <code>LocationCommandParser</code> will raise a <code>ParseException</code> if the <code>INDEX</code> is not stated.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Once the Address book parser identifies the user command as a valid location command, it will make use of the Google Event bus to transmit the event.
+The browser panel has subscribed for that particular event and therefore when the event is passed, the browser panel will pick it up and execute the function.
+If the there is only one INDEX, This will eventually render the browser panel with Google Maps and a marker pointing at the address of the requested contact.
+If there would be more than one INDEX present, then the direction from one place to another will be shown by the Google Maps.
+This rendering of Google Maps is done via calling the URL.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>map</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Chosen Implementation:</strong><br>
+Add a new class that extends <code>Command</code> that uses the Google Maps URL.<br>
+<strong>Pros:</strong><br>
+The map can be easily loaded without needing to call the GoogleMaps API. <br>
+<strong>Cons:</strong><br>
+Only functions that can be sent via URL can be used.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative:</strong> Make use of Google Maps API.<br>
+<strong>Pros:</strong><br>
+More functions such as radius and many more could have been added.<br>
+<strong>Cons:</strong><br>
+Take a longer time to load the map.</p>
+</div>
+<div class="paragraph">
+<p><mark>End of Extract</mark></p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enhancement-proposed-facebook-integration"><a class="link" href="#enhancement-proposed-facebook-integration">Enhancement Proposed: Facebook Integration</a></h3>
+<div class="sect3">
+<h4 id="external-behaviour"><a class="link" href="#external-behaviour">External behaviour</a></h4>
+<hr>
+</div>
+<div class="sect3">
+<h4 id="justification-5"><a class="link" href="#justification-5">Justification</a></h4>
+<div class="paragraph">
+<p>In today&#8217;s modernised era, social media has taken over the world. A message sent by Facebook messenger would be quickly read than that compared to an email.
+Not only that, I am also planning on integrating the events created on our platform with the Facebook events and auto tagging the relevant parties directly on Facebook.
+This would reduce the possibility of someone missing out on the event.</p>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect2">
+<h3 id="other-contributions"><a class="link" href="#other-contributions">Other contributions</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Performed acceptance testing of a separate team&#8217;s (<a href="https://github.com/CS2103AUG2017-T16-B1/main">T10-B2</a>) project, and raised issues for bugs discovered
+(Issues <a href="https://github.com/CS2103AUG2017-T10-B2/main/issues/81">#81</a>).</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2017-11-09 02:49:18 +00:00
+</div>
+</div>
+</body>
+</html>
