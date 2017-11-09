@@ -266,21 +266,21 @@ An appropriate <code>ParseException</code> will be thrown if the command word or
 <p><code>DuplicateEventException</code>: This exception can be thrown by <code>addE</code> and <code>editE</code> command. The system will first create an <code>Event</code> object with the input parameters, compare the object to all events residing in the event list and throw this exception if there is a duplicate found.</p>
 </li>
 <li>
-<p><code>DateTimeParseException</code>: This exception can be thrown by <code>addE</code> and <code>editE</code> command when the input <code>EventDate</code> parameter is not a valid date. The date&#8217;s format and validity is checked inside the <code>Event</code> class like this:<br></p>
+<p><code>DateTimeParseException</code>: This exception can be thrown by <code>addE</code> and <code>editE</code> command when the input <code>EventDate</code> parameter is not a valid date. The date&#8217;s format and validity is checked inside the <code>Event</code> class like this:</p>
 </li>
 </ul>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>public EventDate(String eventDate) throws IllegalValueException {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd")
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> EventDate(<span class="predefined-type">String</span> eventDate) <span class="directive">throws</span> IllegalValueException {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern(<span class="string"><span class="delimiter">&quot;</span><span class="content">yyyy-mm-dd</span><span class="delimiter">&quot;</span></span>)
                     .withResolverStyle(ResolverStyle.STRICT);
-    try {
+    <span class="keyword">try</span> {
         eventLocalDate = LocalDate.parse(eventDate, formatter);
-    } catch (DateTimeParseException ex) {
-        // ... throw message ...
+    } <span class="keyword">catch</span> (DateTimeParseException ex) {
+        <span class="comment">// ... throw message ...</span>
     }
-}</pre>
+}</code></pre>
 </div>
 </div>
 <div style="page-break-after: always;"></div>
@@ -373,7 +373,7 @@ and raised issues for bugs discovered (Issues <a href="https://github.com/CS2103
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-09 16:08:09 +00:00
+Last updated 2017-11-09 16:17:36 +00:00
 </div>
 </div>
 </body>

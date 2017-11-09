@@ -142,6 +142,34 @@ Else, only those chosen indexes has its tag removed. All the indexes are based o
 <p>As shown in the diagram above, when the user executes the command <code>removeTag</code>, the <code>RemoveTagCommandParser</code> class will parse the tag and indexes if given, then call the <code>RemoveTagCommand</code>. In <code>RemoveTagCommand</code> the <code>execute()</code> function is called.
 This will invoke the <code>removeTag</code> function that resides in the <code>LogicManager</code>, which will remove the specific tag from specific or all contacts based on the call made by the user. This changes will then be updated and stored.</p>
 </div>
+<div class="paragraph">
+<p>The main logic behind <code>RemoveTagCommand</code> happens in the <code>ModelManager</code>. A brief overview of that code is shown below.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">void</span> removeTag(ObservableList&lt;ReadOnlyPerson&gt; persons, <span class="predefined-type">Set</span>&lt;Tag&gt; tag)
+        <span class="directive">throws</span> PersonNotFoundException, IllegalValueException {
+    <span class="type">int</span> counter = <span class="integer">0</span>; <span class="comment">// to help in determining if the tag is valid</span>
+
+    <span class="comment">// if an empty list of persons is provided, it is assumed to removeTags from everyone</span>
+    <span class="keyword">if</span> (persons.isEmpty()) {
+        persons.setAll(addressBook.getPersonList());
+    }
+    <span class="keyword">for</span> (ReadOnlyPerson person : persons) {
+        <span class="comment">// only executed if the contact has that particular tag present</span>
+        <span class="keyword">if</span> (!<span class="predefined-type">Collections</span>.disjoint(person.getTags(), tag)) {
+            <span class="comment">// ... logic to removeTags from the respective contacts ...</span>
+            counter ++;
+        }
+    }
+
+    <span class="comment">// to check if the tag is valid</span>
+    <span class="keyword">if</span> (counter == <span class="integer">0</span>) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalValueException(<span class="string"><span class="delimiter">&quot;</span><span class="content">The Tag is invalid!</span><span class="delimiter">&quot;</span></span>);
+    }
+}</code></pre>
+</div>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -149,7 +177,7 @@ This will invoke the <code>removeTag</code> function that resides in the <code>L
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Note that the <code>removeTag</code> function will raise a <code>CommandException</code> if the <code>tag</code> is not valid.
+Note that the <code>removeTag</code> function will raise a <code>IllegalValueException</code> if the <code>tag</code> is not valid. This is shown in the above code snippet.
 </td>
 </tr>
 </table>
@@ -390,6 +418,31 @@ Note that the <code>EmailCommandParser</code> will raise a <code>ParseException<
 <div class="paragraph">
 <p>Once identified, the <code>execute</code> function is called. This function in the <code>EmailCommand</code> would call the <code>updateEmailRecipient</code> function in the Model. Once the fields are updated properly, the <code>EmailCommand</code> will call the desktop mail app and fill in the necessary details.</p>
 </div>
+<div class="paragraph">
+<p>The code below shows the link between the Java Application and the Desktop Mail App.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="type">void</span> sendEmail(<span class="predefined-type">String</span> emailTo) <span class="directive">throws</span> <span class="exception">ParseException</span> {
+    <span class="keyword">if</span> (emailTo.equalsIgnoreCase(<span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>)) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">Invalid recipient email.</span><span class="delimiter">&quot;</span></span>);
+    }
+    Desktop desktop = Desktop.getDesktop();
+    <span class="predefined-type">String</span> url = <span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>;
+    <span class="predefined-type">URI</span> mailTo;
+
+    <span class="comment">// the calling of the desktop mail app happens here</span>
+    <span class="keyword">try</span> {
+        url = <span class="string"><span class="delimiter">&quot;</span><span class="content">mailTo:</span><span class="delimiter">&quot;</span></span> + emailTo + <span class="string"><span class="delimiter">&quot;</span><span class="content">?subject=</span><span class="delimiter">&quot;</span></span> + <span class="local-variable">this</span>.subject
+                + <span class="string"><span class="delimiter">&quot;</span><span class="content">&amp;body=</span><span class="delimiter">&quot;</span></span> + <span class="local-variable">this</span>.body;
+        mailTo = <span class="keyword">new</span> <span class="predefined-type">URI</span>(url);
+        desktop.mail(mailTo);
+    }
+
+    <span class="comment">// ... catches the possible errors and throws the appropriate exceptions</span>
+}</code></pre>
+</div>
+</div>
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect3">
@@ -531,8 +584,24 @@ Note that the <code>LocationCommandParser</code> will raise a <code>ParseExcepti
 <p>Once the Address book parser identifies the user command as a valid location command, it will make use of the Google Event bus to transmit the event.
 The browser panel has subscribed for that particular event and therefore when the event is passed, the browser panel will pick it up and execute the function.
 If the there is only one INDEX, This will eventually render the browser panel with Google Maps and a marker pointing at the address of the requested contact.
-If there would be more than one INDEX present, then the direction from one place to another will be shown by the Google Maps.
-This rendering of Google Maps is done via calling the URL.</p>
+If there would be more than one INDEX present, then the direction from one place to another will be shown by the Google Maps.</p>
+</div>
+<div class="paragraph">
+<p>This rendering of Google Maps is done via calling the URL over in <code>BrowserPanel</code> as shown in the code snippet below.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">private</span> <span class="type">void</span> loadPersonLocation(<span class="predefined-type">List</span>&lt;ReadOnlyPerson&gt; person) {
+        <span class="comment">// determines if it is either a location url or a route url based on the input</span>
+        <span class="predefined-type">String</span> url = (person.size() == <span class="integer">1</span>) ? GOOGLE_MAPS_URL_PLACE : GOOGLE_MAPS_URL_DIR;
+        <span class="predefined-type">String</span> result = <span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>;
+        <span class="keyword">for</span> (ReadOnlyPerson ppl: person) {
+            <span class="comment">// ... logic to add the addresses to the result string ...</span>
+        }
+        <span class="comment">// loads the Google Map with the appropriate URL</span>
+        loadPage(url + result);
+    }</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -593,7 +662,7 @@ This would reduce the possibility of someone missing out on the event.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-09 16:08:09 +00:00
+Last updated 2017-11-09 16:17:36 +00:00
 </div>
 </div>
 </body>
