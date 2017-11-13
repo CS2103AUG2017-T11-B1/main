@@ -17,6 +17,11 @@
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="images/DoC_coverpage.png" alt="DoC coverpage" width="100%">
+</div>
+</div>
 <div class="paragraph">
 <p>By: <code>CS2103AUG2017-T11-B1</code>      Since: <code>Sep 2017</code><br>
 Adapted from AddressBook-Level4, by: <code>Team SE-EDU</code>      Since: <code>Jun 2016</code>      Licence: <code>MIT</code></p>
@@ -177,7 +182,6 @@ Adapted from AddressBook-Level4, by: <code>Team SE-EDU</code>      Since: <code>
 <li><a href="#product-survey">Appendix F: Product survey</a></li>
 </ul>
 </div>
-<div style="page-break-after: always;"></div>
 </div>
 </div>
 <div class="sect1">
@@ -402,7 +406,6 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 </tr>
 </table>
 </div>
-<div style="page-break-after: always;"></div>
 <div class="paragraph">
 <p><code>Main</code> has only one class called <a href="https://github.com/CS2103AUG2017-T11-B1/main/tree/master/src/main/java/seedu/address/MainApp.java"><code>MainApp</code></a>. It is responsible for the following:</p>
 </div>
@@ -464,7 +467,6 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 </li>
 </ul>
 </div>
-<div style="page-break-after: always;"></div>
 <div class="paragraph">
 <p>For example, the <code>Logic</code> component (see the class diagram given below) defines its API in the <code>Logic.java</code> interface and exposes its functionality using the <code>LogicManager.java</code> class.</p>
 </div>
@@ -527,7 +529,6 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <div class="paragraph">
 <p>The sections below give more details of each of the four components mentioned above.</p>
 </div>
-<div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
 <h3 id="ui-component"><a class="link" href="#ui-component">3.2. UI component</a></h3>
@@ -586,7 +587,6 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <div class="paragraph">
 <p>The above two diagrams show the structure of the <code>Logic</code> component and the structure of the commands in the <code>Logic</code> component.</p>
 </div>
-<div style="page-break-after: always;"></div>
 <div class="paragraph">
 <p><strong>API</strong> :
 <a href="https://github.com/CS2103AUG2017-T11-B1/main/tree/master/src/main/java/seedu/address/logic/Logic.java"><code>Logic.java</code></a></p>
@@ -655,7 +655,6 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </li>
 </ul>
 </div>
-<div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
 <h3 id="storage-component"><a class="link" href="#storage-component">3.5. Storage component</a></h3>
@@ -683,7 +682,6 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 </li>
 </ul>
 </div>
-<div style="page-break-after: always;"></div>
 </div>
 </div>
 </div>
@@ -714,7 +712,6 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <div class="paragraph">
 <p>As you can see in the diagram, <code>UndoableCommand</code> adds an extra layer between the abstract <code>Command</code> class and concrete commands that can be undone, such as the <code>DeleteCommand</code>. Note that extra tasks need to be done when executing a command in an <em>undoable</em> way, such as saving the state of the address book before execution. <code>UndoableCommand</code> contains the high-level algorithm for those extra tasks while the child classes implements the details of how to execute the specific command. Note that this technique of putting the high-level algorithm in the parent class and lower-level steps of the algorithm in child classes is also known as the <a href="https://www.tutorialspoint.com/design_pattern/template_pattern.htm">template pattern</a>.</p>
 </div>
-<div style="page-break-after: always;"></div>
 <div class="paragraph">
 <p>Commands that are not undoable are implemented this way:</p>
 </div>
@@ -728,6 +725,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 }</code></pre>
 </div>
 </div>
+<div style="page-break-after: always;"></div>
 <div class="paragraph">
 <p>With the extra layer, the commands that are undoable are implemented this way:</p>
 </div>
@@ -813,7 +811,6 @@ If the <code>undoStack</code> is empty, then there are no other commands left to
 </tr>
 </table>
 </div>
-<div style="page-break-after: always;"></div>
 <div class="paragraph">
 <p>The following sequence diagram shows how the undo operation works:</p>
 </div>
@@ -841,7 +838,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </table>
 </div>
 <div class="paragraph">
-<p>The user now decides to execute a new command, <code>clear</code>. As before, <code>clear</code> will be pushed onto the <code>undoStack</code>. This time the <code>redoStack</code> is no longer empty. It will be purged as it no longer make sense to redo the <code>add n/David</code> command (this is the behavior that most modern desktop applications follow) (See Figure 4.1.4).</p>
+<p>The user now decides to execute a new command, <code>clear</code>. As before, <code>clear</code> will be pushed onto the <code>undoStack</code>. This time the <code>redoStack</code> is no longer empty. It will be purged as it no longer make sense to redo the <code>add n/David</code> command (this is the behavior that most modern desktop applications follow) (See Figure 4.1.4 on the next page).</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -931,8 +928,11 @@ Confusion for user, as user might think that undo also applies when the list is 
 <p><strong>Alternative:</strong><br>
 Include all commands.<br>
 <strong>Pros:</strong><br>
-Might be more intuitive for the user.<br>
-<strong>Cons:</strong><br>
+Might be more intuitive for the user.</p>
+</div>
+<div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p><strong>Cons:</strong><br>
 No way of skipping such commands if user just wants to reset the state of the address book and not the view.<br></p>
 </div>
 <div class="paragraph">
@@ -972,6 +972,7 @@ Requires dealing with commands that have already been undone: We must remember t
 <div class="paragraph">
 <p>The <code>EventPanel</code> is incorporated into the <code>MainWindow</code> of the DoC to display all the events inside the internal list using <code>ObservableList&lt;ReadOnlyEvent&gt;</code>. This process will be explained later on under the section <code>Event card</code>.</p>
 </div>
+<div style="page-break-after: always;"></div>
 </div>
 <div class="sect3">
 <h4 id="event-methods"><a class="link" href="#event-methods">4.2.2. Event methods</a></h4>
@@ -1250,6 +1251,7 @@ this code is then attached to a <code>GoogleAuthenticationSuccessEvent</code> fi
 <p><strong>Note:</strong> The <strong>authentication URL</strong>* is generated by Google&#8217;s <code>oauth2</code> client library. Choice of <strong>success URL</strong>* is discussed
 later, under design considerations.</p>
 </div>
+<div style="page-break-after: always;"></div>
 </div>
 <div class="sect4">
 <h5 id="http-request-process"><a class="link" href="#http-request-process">HTTP request process</a></h5>
@@ -1332,6 +1334,7 @@ that they are performed on a separate background thread. To achieve this, we mak
 importBackgroundService.start();</code></pre>
 </div>
 </div>
+<div style="page-break-after: always;"></div>
 </div>
 </div>
 <div class="sect3">
@@ -1402,7 +1405,7 @@ Create a new background thread for every <code>Import</code> and <code>Export</c
 <strong>Pros:</strong><br>
 Easier implementation as we do not need to manage the call stack of the background threads created.<br>
 <strong>Cons:</strong><br>
-A race condition might occur, and there is a possibility of the user entering multiple back-to-back <code>Import</code> and <code>Export</code> commands,
+Possible occurrence of race condition, and there is a possibility of the user entering multiple back-to-back <code>Import</code> and <code>Export</code> commands,
 which will cause the app to crash from the number of threads created.</p>
 </div>
 <div class="paragraph">
@@ -1420,7 +1423,6 @@ commands currently require such a service.</p>
 be the alternative mentioned above. The choice of either will depend on the number of new features
 requiring such a service as mentioned in the alternative, as DoC progress to <code>v2.0</code>.</p>
 </div>
-<div style="page-break-after: always;"></div>
 </div>
 </div>
 <div class="sect2">
@@ -1485,7 +1487,6 @@ Note that the <code>EmailCommandParser</code> will raise a <code>ParseException<
 }</code></pre>
 </div>
 </div>
-<div style="page-break-after: always;"></div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.4.2. Design considerations</a></h4>
@@ -1508,6 +1509,7 @@ Can be emailed from the browser panel itself.<br>
 <strong>Cons:</strong><br>
 UI for GMail is very poor on <code>JavaFX WebView</code>.</p>
 </div>
+<div style="page-break-after: always;"></div>
 </div>
 </div>
 <div class="sect2">
@@ -1582,7 +1584,6 @@ More functions such as radius and many more could have been added.<br>
 <strong>Cons:</strong><br>
 Takes a longer time to load the map.</p>
 </div>
-<div style="page-break-after: always;"></div>
 </div>
 </div>
 <div class="sect2">
@@ -1606,8 +1607,9 @@ However, if the indexes are stated, only those chosen indexes have the tag remov
 <p>As shown in the diagram above, when the user executes the command <code>removeTag</code>, the <code>RemoveTagCommandParser</code> class will parse the tag and indexes if given, then call the <code>RemoveTagCommand</code>. In <code>RemoveTagCommand</code> the <code>execute()</code> function is called.
 This will invoke the <code>removeTag</code> function that resides in the <code>LogicManager</code>, which will remove the specific tag from specific or all contacts based on the call made by the user. These changes will then be updated and stored.</p>
 </div>
+<div style="page-break-after: always;"></div>
 <div class="paragraph">
-<p>The main logic behind <code>RemoveTagCommand</code> happens in the <code>ModelManager</code>. A brief overview of that code is shown below.</p>
+<p>The main logic behind <code>RemoveTagCommand</code> happens in the <code>ModelManager</code>. A brief overview of that code is shown below:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1668,6 +1670,7 @@ One lesser command for the user to remember.<br>
 <strong>Cons:</strong><br>
 Very tiring for the user to update each and every one of the contacts in the contact list, if he decides to remove the tag from everyone.</p>
 </div>
+<div style="page-break-after: always;"></div>
 </div>
 </div>
 <div class="sect2">
@@ -1680,7 +1683,7 @@ Very tiring for the user to update each and every one of the contacts in the con
 </div>
 <div class="paragraph">
 <p>The existing <code>NameContainsKeywordsPredicate</code> was modified to suit the new needs.
-The modified code is shown below.</p>
+The modified code is shown below:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1769,6 +1772,7 @@ Extra command for the user to remember.</p>
 <div class="paragraph">
 <p>The <code>deleteProfilePic</code> command works by taking in the index of the chosen contact and updating the <code>ProfilePic</code> property of the chosen contact to the default profile picture.</p>
 </div>
+<div style="page-break-after: always;"></div>
 <div class="paragraph">
 <p>Below are the sequence diagrams of each command to illustrate how they work:</p>
 </div>
@@ -1810,7 +1814,7 @@ Users do not have to remember a new command.<br>
 <strong>Cons:</strong><br>
 Image might take a while to load, so all the data takes longer to be updated.</p>
 </div>
-<hr>
+<div style="page-break-after: always;"></div>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>deleteProfilePic</code><br></p>
 </div>
@@ -1850,6 +1854,7 @@ No space requirement to store the images locally<br>
 <strong>Cons:</strong><br>
 Visible lag every time an image is displayed as a profile picture may be observed, if the image is too big and on the internet.</p>
 </div>
+<div style="page-break-after: always;"></div>
 </div>
 </div>
 <div class="sect2">
@@ -1942,7 +1947,6 @@ Track all the <code>viewCount</code> in a separate file or class.<br>
 File IO will be required for the saving of the list or the list has to be converted into XML and stored with the rest of the data in <code>addressbook.xml</code>.</p>
 </div>
 <hr>
-<div style="page-break-after: always;"></div>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Updating of <code>Model</code><br></p>
 </div>
@@ -1992,7 +1996,6 @@ DoC will always show the updated order.<br>
 <strong>Cons:</strong><br>
 DoC will lag slightly each time a <code>PersonCard</code> is selected.</p>
 </div>
-<div style="page-break-after: always;"></div>
 </div>
 </div>
 <div class="sect2">
@@ -2145,6 +2148,7 @@ For example, the current shortest command in DoC is 'add' with a length of 3. If
 Typos on longer commands have a higher propensity to produce a string with a Levenshtein distance of more than 2.
 These cannot be detected with this implementation.<br></p>
 </div>
+<div style="page-break-after: always;"></div>
 <div class="paragraph">
 <p><strong>Alternative 1:</strong><br>
 Set a maximum acceptable Levenshtein distance of 3 or higher.<br>
@@ -2188,7 +2192,6 @@ Extra step is presented to the user on a wrong match, affecting the user&#8217;s
 <p><strong>Note:</strong> In our chosen implementation, we mitigate the mentioned cons by including explicit instructions in the suggestion prompt,
 that a response is only required if the user wishes to accept the match.</p>
 </div>
-<div style="page-break-after: always;"></div>
 </div>
 </div>
 </div>
@@ -2239,7 +2242,6 @@ that a response is only required if the user wishes to accept the match.</p>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
-<div style="page-break-after: always;"></div>
 </div>
 </div>
 </div>
@@ -2342,7 +2344,6 @@ The most reliable way to run tests is the 3rd one. The first two methods might f
 </li>
 </ul>
 </div>
-<div style="page-break-after: always;"></div>
 <div class="paragraph">
 <p><strong>Method 2: Using Gradle</strong></p>
 </div>
@@ -2416,7 +2417,6 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 </li>
 </ul>
 </div>
-<div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
 <h3 id="troubleshooting-testing"><a class="link" href="#troubleshooting-testing">7.3. Troubleshooting testing</a></h3>
@@ -2488,7 +2488,6 @@ e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
 </li>
 </ul>
 </div>
-<div style="page-break-after: always;"></div>
 </div>
 </div>
 </div>
@@ -2580,6 +2579,7 @@ Do take a look at the <a href="#model-component">Design: Model Component</a> sec
 </tr>
 </table>
 </div>
+<div style="page-break-after: always;"></div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2863,7 +2863,6 @@ Do take a look at the <a href="#storage-component">Design: Storage Component</a>
 <p>Edits the remark for a person specified in the <code>INDEX</code>.<br>
 Format: <code>remark INDEX r/[REMARK]</code></p>
 </div>
-<div style="page-break-after: always;"></div>
 <div class="paragraph">
 <p>Examples:</p>
 </div>
@@ -2900,6 +2899,7 @@ Removes the remark for the first person.</p>
 </li>
 </ol>
 </div>
+<div style="page-break-after: always;"></div>
 <div class="paragraph">
 <p><strong>Tests:</strong></p>
 </div>
@@ -2987,7 +2987,6 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="paragraph">
 <p>We have to properly encapsulate the remark in our <a href="https://github.com/CS2103AUG2017-T11-B1/main/tree/master/src/main/java/seedu/address/model/person/ReadOnlyPerson.java"><code>ReadOnlyPerson</code></a> class. Instead of just using a <code>String</code>, let&#8217;s follow the conventional class structure that the codebase already uses by adding a <code>Remark</code> class.</p>
 </div>
-<div style="page-break-after: always;"></div>
 <div class="paragraph">
 <p><strong>Main:</strong></p>
 </div>
@@ -3117,6 +3116,7 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ol>
 </div>
+<div style="page-break-after: always;"></div>
 </div>
 </div>
 <div class="sect3">
@@ -3181,221 +3181,242 @@ for <code>RemarkCommandParser</code>.</p>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">search for contacts by common tags</p></td>
 <td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">favourite a contact</p></td>
 <td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">new user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">see usage instructions</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">refer to instructions when I forget how to use the App</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AddressBook Level 4: <code>delete</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">AddressBook Level 4: <code>delete</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">add a new person</p></td>
 <td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AddressBook Level 4: <code>add</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">AddressBook Level 4: <code>add</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">list all my contacts</p></td>
 <td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AddressBook Level 4: <code>list</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">AddressBook Level 4: <code>list</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">update each contact&#8217;s information</p></td>
 <td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AddressBook Level 4: <code>edit</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">AddressBook Level 4: <code>edit</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">find a person by name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">locate details of persons without having to go through the entire list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AddressBook Level 4: <code>find</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">AddressBook Level 4: <code>find</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">delete a person</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">remove entries that I no longer need</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AddressBook Level 4: <code>delete</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">AddressBook Level 4: <code>delete</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">select a person</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Automatically perform a google search on them</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AddressBook Level 4: <code>delete</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">AddressBook Level 4: <code>delete</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">view history of recent commands</p></td>
 <td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AddressBook Level 4: <code>history</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">AddressBook Level 4: <code>history</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">undo a previous command</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">revert any accidental changes</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">AddressBook Level 4: <code>undo</code></p></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 30%;">
+<col style="width: 30%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Priority</th>
+<th class="tableblock halign-left valign-top">As a &#8230;&#8203;</th>
+<th class="tableblock halign-left valign-top">I want to &#8230;&#8203;</th>
+<th class="tableblock halign-left valign-top">So that I can&#8230;&#8203;</th>
+<th class="tableblock halign-left valign-top">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">redo an undone command</p></td>
 <td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AddressBook Level 4: <code>redo</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">AddressBook Level 4: <code>redo</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">delete all contacts</p></td>
 <td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AddressBook Level 4: <code>clear</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">AddressBook Level 4: <code>clear</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">exit the program</p></td>
 <td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AddressBook Level 4: <code>exit</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">AddressBook Level 4: <code>exit</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">call a person</p></td>
 <td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">email a person</p></td>
 <td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">retrieve physical location of a person</p></td>
 <td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">send feedback to the developer</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">to improve the app</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">use shorthands of commands</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">use commands faster</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">share my contacts with other users</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">save time on adding</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">customize the appearance of the app</p></td>
 <td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">swap two contacts in the list</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">view in the desired order</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">view user page of contacts who also use the app</p></td>
 <td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">view the profile picture of a contact</p></td>
 <td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">enable auto-correct for slightly mistyped commands</p></td>
 <td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">store my contacts on an online database</p></td>
 <td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">access the app using my mobile phone</p></td>
 <td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">undo my latest command</p></td>
 <td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">hide <a href="#private-contact-detail">private contact details</a> by default</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">minimize chance of someone else seeing them by accident</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">hide private contact details by default</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">minimize chance of someone else seeing them by accident</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AddressBook Level 4</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">AddressBook Level 4</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user with many persons in the address book</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">sort persons by name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">locate a person easily</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 </tbody>
 </table>
@@ -3491,7 +3512,6 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ol>
 </div>
-<div style="page-break-after: always;"></div>
 <div class="paragraph">
 <p><strong>Extensions</strong></p>
 </div>
@@ -3518,6 +3538,7 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
+<div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
 <h3 id="use-case-swap-persons"><a class="link" href="#use-case-swap-persons">C.3. Use case: Swap persons</a></h3>
@@ -3866,6 +3887,7 @@ for <code>RemarkCommandParser</code>.</p>
 <pre>A contact detail that is not meant to be shared with others</pre>
 </div>
 </div>
+<div style="page-break-after: always;"></div>
 </div>
 </div>
 <div class="sect1">
@@ -3914,7 +3936,7 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 11:10:20 +00:00
+Last updated 2017-11-13 11:51:43 +00:00
 </div>
 </div>
 </body>

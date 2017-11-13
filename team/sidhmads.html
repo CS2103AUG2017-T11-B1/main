@@ -143,8 +143,9 @@ However, if the indexes are stated, only those chosen indexes have the tag remov
 <p>As shown in the diagram above, when the user executes the command <code>removeTag</code>, the <code>RemoveTagCommandParser</code> class will parse the tag and indexes if given, then call the <code>RemoveTagCommand</code>. In <code>RemoveTagCommand</code> the <code>execute()</code> function is called.
 This will invoke the <code>removeTag</code> function that resides in the <code>LogicManager</code>, which will remove the specific tag from specific or all contacts based on the call made by the user. These changes will then be updated and stored.</p>
 </div>
+<div style="page-break-after: always;"></div>
 <div class="paragraph">
-<p>The main logic behind <code>RemoveTagCommand</code> happens in the <code>ModelManager</code>. A brief overview of that code is shown below.</p>
+<p>The main logic behind <code>RemoveTagCommand</code> happens in the <code>ModelManager</code>. A brief overview of that code is shown below:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -296,7 +297,7 @@ With this command, contacts can be found based on their <code>Tags</code> and <c
 </div>
 <div class="paragraph">
 <p>The existing <code>NameContainsKeywordsPredicate</code> was modified to suit the new needs.
-The modified code is shown below.</p>
+The modified code is shown below:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -513,7 +514,6 @@ Note that the <code>EmailCommandParser</code> will raise a <code>ParseException<
 }</code></pre>
 </div>
 </div>
-<div style="page-break-after: always;"></div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design considerations</a></h4>
@@ -734,7 +734,7 @@ This would reduce the possibility of someone missing out on the event.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 11:10:20 +00:00
+Last updated 2017-11-13 11:51:43 +00:00
 </div>
 </div>
 </body>
