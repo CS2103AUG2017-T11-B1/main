@@ -493,19 +493,23 @@ Note that the <code>EmailCommandParser</code> will raise a <code>ParseException<
     <span class="keyword">if</span> (emailTo.equalsIgnoreCase(<span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>)) {
         <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">Invalid recipient email.</span><span class="delimiter">&quot;</span></span>);
     }
-    Desktop desktop = Desktop.getDesktop();
+    Desktop desktop;
     <span class="predefined-type">String</span> url = <span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>;
     <span class="predefined-type">URI</span> mailTo;
 
     <span class="comment">// the calling of the desktop mail app happens here</span>
-    <span class="keyword">try</span> {
-        url = <span class="string"><span class="delimiter">&quot;</span><span class="content">mailTo:</span><span class="delimiter">&quot;</span></span> + emailTo + <span class="string"><span class="delimiter">&quot;</span><span class="content">?subject=</span><span class="delimiter">&quot;</span></span> + <span class="local-variable">this</span>.subject
-                + <span class="string"><span class="delimiter">&quot;</span><span class="content">&amp;body=</span><span class="delimiter">&quot;</span></span> + <span class="local-variable">this</span>.body;
-        mailTo = <span class="keyword">new</span> <span class="predefined-type">URI</span>(url);
-        desktop.mail(mailTo);
-    }
-
-    <span class="comment">// ... catches the possible errors and throws the appropriate exceptions</span>
+    <span class="keyword">if</span> (Desktop.isDesktopSupported() &amp;&amp;
+     (desktop = Desktop.getDesktop()).isSupported(Desktop.Action.MAIL)) {
+        <span class="keyword">try</span> {
+            url = <span class="string"><span class="delimiter">&quot;</span><span class="content">mailTo:</span><span class="delimiter">&quot;</span></span> + emailTo + <span class="string"><span class="delimiter">&quot;</span><span class="content">?subject=</span><span class="delimiter">&quot;</span></span> + <span class="local-variable">this</span>.subject
+                    + <span class="string"><span class="delimiter">&quot;</span><span class="content">&amp;body=</span><span class="delimiter">&quot;</span></span> + <span class="local-variable">this</span>.body;
+            mailTo = <span class="keyword">new</span> <span class="predefined-type">URI</span>(url);
+            desktop.mail(mailTo);
+        }
+         <span class="comment">// ... catches the possible errors and throws the appropriate exceptions</span>
+    } <span class="keyword">else</span> {
+          <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">RuntimeException</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">desktop doesn't support this feature.</span><span class="delimiter">&quot;</span></span>);
+     }
 }</code></pre>
 </div>
 </div>
@@ -598,7 +602,7 @@ Format: <code>map INDEXES</code></p>
 </div>
 </div>
 <div class="paragraph">
-<p>The address of the 1st contact in Google Maps is shown above.</p>
+<p>As shown in the visual guide above, the address of the 1st contact is highlighted on Google Maps with the help of a marker.</p>
 </div>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
@@ -649,9 +653,9 @@ Note that the <code>LocationCommandParser</code> will throw a <code>ParseExcepti
 </div>
 <div class="paragraph">
 <p>Once <code>AddressBookParser</code> identifies the user command as a valid location command, it will make use of the Google Event Center to raise the event.
-The browser panel has subscribed for that particular event and therefore when the event is raised, the browser panel will pick it up and execute the function.
-If the there is only one INDEX, This will eventually render the browser panel with Google Maps and a marker pointing at the address of the requested contact.
-If there are more than one INDEX present, then the direction from one place to another will be shown by the Google Maps.</p>
+The browser panel has already subscribed for that particular event. Therefore when the event is raised, the browser panel will pick it up and execute the function.
+If the there was only one INDEX present, the browser panel with Google Maps and a marker pointing at the address of the requested contact would be rendered.
+If there were more than one INDEX present, the direction from one place to another will be rendered by the Google Maps.</p>
 </div>
 <div class="paragraph">
 <p>This rendering of Google Maps is done via calling the URL over in <code>BrowserPanel</code> as shown in the code snippet below.</p>
@@ -730,7 +734,7 @@ This would reduce the possibility of someone missing out on the event.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 10:39:00 +00:00
+Last updated 2017-11-13 11:10:20 +00:00
 </div>
 </div>
 </body>
