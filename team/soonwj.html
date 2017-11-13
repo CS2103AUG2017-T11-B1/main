@@ -188,16 +188,16 @@ Deletes the profile picture of the 1st contact in the results of the <code>find<
 <p>The UpdateProfilePic/DeleteProfilePic mechanism is facilitated by a <code>ProfilePic</code> class, which is a property class of the <code>Person</code> class. It supports the updating and deleting of profile pictures of each contact. These two commands inherit from <code>Command</code>.</p>
 </div>
 <div class="paragraph">
-<p><code>ProfilePic</code> essentially stores a <strong>valid</strong> <code>URL</code> of an image that will be displayed as the contacts&#8217;s profile picture. Whenever a new contact is added, the contact&#8217;s <code>ProfilePic</code> property will be set to that of a default image. The command: <code>updateProfilePic</code> can then be called to change this property. When the command <code>deleteProfilePic</code> is called, the <code>ProfilePic</code> property of the selected contact will be changed back to the default profile picture.</p>
+<p><code>ProfilePic</code> essentially stores a <strong>valid</strong> <code>URL</code> of an image that will be displayed as the contact&#8217;s profile picture. Whenever a new contact is added, the contact&#8217;s <code>ProfilePic</code> property will be set to that of a default image. The command: <code>updateProfilePic</code> can then be called to change this property. When the command <code>deleteProfilePic</code> is called, the <code>ProfilePic</code> property of the selected contact will be changed back to the default profile picture.</p>
 </div>
 <div class="paragraph">
 <p>Like the other properties of the <code>Person</code> class, the <code>ProfilePic</code> property will also be saved to the chosen storage file. If the image that is referred to by the <code>ProfilePic</code> is moved or deleted, the <code>ProfilePic</code> will reset back to the image of the default profile picture.</p>
 </div>
 <div class="paragraph">
-<p>The <code>updateProfilePic</code>  command works by taking in the index of the chosen contact and updating this contact according to the <code>ProfilePic</code> given. To do so, the <code>updateProfilePic</code> command takes in a URL of the image that the profile picture is to be changed to. This will cause the app to instantiate a new <code>ProfilePic</code> object and check if the URL is valid and if it is valid, the app will proceed to update the contact with the new profile picture, otherwise an IllegalValueException will be thrown.</p>
+<p>The <code>updateProfilePic</code>  command works by taking in the index of the chosen contact, as a parameter, and updating this contact according to the <code>ProfilePic</code> given. To do so, the <code>updateProfilePic</code> command takes in a URL of the image that the profile picture is to be changed to. This will cause DoC to instantiate a new <code>ProfilePic</code> object and check if the URL is valid and if it is valid, DoC will proceed to update the contact with the new profile picture, otherwise an <code>IllegalValueException</code> will be thrown.</p>
 </div>
 <div class="paragraph">
-<p>In addition, the image will be downloaded into a local folder called: <code>ProfilePics/</code> that is generated when the app initializes. This folder is created in the same folder as the <code>src</code> folder. (See code snippet below)</p>
+<p>In addition, the image will be downloaded into a local folder called: <code>ProfilePics/</code> that is generated if it does not exist. This folder is created in the same folder as the <code>src</code> folder. (See code snippet below)</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -225,7 +225,7 @@ Deletes the profile picture of the 1st contact in the results of the <code>find<
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.8.1: UpdateProfilePic Sequence Diagram</em></p>
+<p><em>Figure 4.8.1: <code>UpdateProfilePic</code> sequence diagram</em></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -233,11 +233,11 @@ Deletes the profile picture of the 1st contact in the results of the <code>find<
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.8.2: DeleteProfilePic Sequence Diagram</em></p>
+<p><em>Figure 4.8.2: <code>DeleteProfilePic</code> sequence diagram</em></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>updateProfilePic</code><br></p>
 </div>
@@ -245,16 +245,17 @@ Deletes the profile picture of the 1st contact in the results of the <code>find<
 <p><strong>Chosen Implementation:</strong><br>
 Add a new class that extends <code>Command</code>.<br>
 <strong>Pros:</strong><br>
-The other properties of a contact can be quickly updated, using the <code>add</code> or <code>edit</code> commands, without waiting for an image to be loaded. <br>
+Other properties of a contact can be quickly updated, using the <code>add</code> or <code>edit</code> commands, without waiting for the image to be loaded. <br>
 <strong>Cons:</strong><br>
 Users have to remember another command.<br></p>
 </div>
 <div class="paragraph">
-<p><strong>Alternative:</strong> Just add the function to the <code>add</code> and <code>edit</code> commands.<br>
+<p><strong>Alternative:</strong><br>
+ Just add the function to the <code>add</code> and <code>edit</code> commands.<br>
 <strong>Pros:</strong><br>
 Users do not have to remember a new command.<br>
 <strong>Cons:</strong><br>
-The image might take a while to load, so all the data takes longer to be updated.</p>
+Image might take a while to load, so all the data takes longer to be updated.</p>
 </div>
 <hr>
 <div class="paragraph">
@@ -264,16 +265,17 @@ The image might take a while to load, so all the data takes longer to be updated
 <p><strong>Chosen Implementation:</strong><br>
 Add a new class that extends <code>Command</code>.<br>
 <strong>Pros:</strong><br>
-A quick way to revert the profile picture back to default. <br>
+Quick way to revert the profile picture back to default. <br>
 <strong>Cons:</strong><br>
 Redundant as it is a special case of <code>updateProfilePic</code><br></p>
 </div>
 <div class="paragraph">
-<p><strong>Alternative:</strong> Not have this command at all.<br>
+<p><strong>Alternative:</strong><br>
+Not have this command at all.<br>
 <strong>Pros:</strong><br>
 Lesser commands for the user to remember.<br>
 <strong>Cons:</strong><br>
-The user might not know what the default image URL is.</p>
+User might not know what the default image URL is.</p>
 </div>
 <hr>
 <div class="paragraph">
@@ -288,11 +290,12 @@ After the initial download, subsequent retrieval of image for display can be don
 Initial download may cause a visible lag and freeze the UI for some time.<br></p>
 </div>
 <div class="paragraph">
-<p><strong>Alternative:</strong> Not store the images<br>
+<p><strong>Alternative:</strong><br>
+Not store the images<br>
 <strong>Pros:</strong><br>
 No space requirement to store the images locally<br>
 <strong>Cons:</strong><br>
-There might be a visible lag every time an image is displayed as a profile picture, if the image is too big and on the internet.</p>
+Visible lag every time an image is displayed as a profile picture may be observed, if the image is too big and on the internet.</p>
 </div>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
@@ -325,11 +328,11 @@ There might be a visible lag every time an image is displayed as a profile pictu
 </div>
 </div>
 <div class="sect2">
-<h3 id="viewcount-tracking"><a class="link" href="#viewcount-tracking">ViewCount Tracking</a></h3>
+<h3 id="viewcount-tracking"><a class="link" href="#viewcount-tracking">ViewCount tracking</a></h3>
 <div class="sect3">
 <h4 id="overview-2"><a class="link" href="#overview-2">Overview</a></h4>
 <div class="paragraph">
-<p>The <code>viewCount</code> variable is a <code>private int</code> variable of the <code>Person</code> class. This variable is updated whenever a <code>PersonPanelSelectionChangedEvent</code> is raised. This means that whenever a contact is selected, whether by the <code>select</code> command or by clicking on the <code>PersonCard</code> on the UI, the contact associated with the selected <code>PersonCard</code> will have its <code>viewCount</code> variable incremented by 1.</p>
+<p>The <code>viewCount</code> variable is a <code>private int</code> variable of the <code>Person</code> class. This variable is updated whenever a <code>PersonPanelSelectionChangedEvent</code> is raised. This means that whenever a contact is selected, whether by the <code>select</code> command or by clicking on the <code>PersonCard</code> on the UI, the contact associated with the selected <code>PersonCard</code> will have its <code>viewCount</code> variable incremented by 1, unless the selected <code>PersonCard</code> is already selected.</p>
 </div>
 <div class="paragraph">
 <p>To listen for the <code>PersonPanelSelectionChangedEvent</code>, a listener is placed in the <code>MainApp</code> object, which ensures that the <code>Model</code> associated to it is updated with the right <code>Person</code> object that has its <code>viewCount</code> updated. (See code snippet below)</p>
@@ -356,7 +359,7 @@ There might be a visible lag every time an image is displayed as a profile pictu
 <p>As the <code>viewCount</code> is not displayed on the UI, when this variable of a contact is updated, no <code>AddressBookChangedEvent</code> is raised, so the UI will not be refreshed unnecessarily.</p>
 </div>
 <div class="paragraph">
-<p>Right before the app closes, the app will sort the <code>Person</code> objects in the <code>AddressBook</code> such that the <code>Person</code> objects will be displayed from highest <code>viewCount</code> to lowest. (See code snippet below)</p>
+<p>Right before the DoC closes, the DoC will sort the <code>Person</code> objects in the <code>AddressBook</code> such that the <code>Person</code> objects will be displayed from highest <code>viewCount</code> to lowest. (See code snippet below)</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -389,11 +392,11 @@ There might be a visible lag every time an image is displayed as a profile pictu
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.9.1: UpdateViewCount Sequence Diagram</em></p>
+<p><em>Figure 4.9.1: <code>UpdateViewCount</code> sequence diagram</em></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>viewCount</code><br></p>
 </div>
@@ -403,14 +406,15 @@ Add a new variable to the <code>Person</code> class.<br>
 <strong>Pros:</strong><br>
 No extra classes have to be created and it is clear which <code>Person</code> has a <code>viewCount</code> of what value.<br>
 <strong>Cons:</strong><br>
-The <code>Model</code> has to be updated every time a new <code>PersonCard</code> is selected.<br></p>
+<code>Model</code> has to be updated every time a new <code>PersonCard</code> is selected.<br></p>
 </div>
 <div class="paragraph">
-<p><strong>Alternative:</strong> Track all the <code>viewCount</code> in a separate file or class.<br>
+<p><strong>Alternative:</strong><br>
+Track all the <code>viewCount</code> in a separate file or class.<br>
 <strong>Pros:</strong><br>
 <code>Model</code> does not need to be updated and no existing class will be changed.<br>
 <strong>Cons:</strong><br>
-File IO will be required for the saving of the list or the list has to be converted into XML and stored with the rest of the data is <code>addressbook.xml</code>.</p>
+File IO will be required for the saving of the list or the list has to be converted into XML and stored with the rest of the data in <code>addressbook.xml</code>.</p>
 </div>
 <hr>
 <div style="page-break-after: always;"></div>
@@ -420,21 +424,20 @@ File IO will be required for the saving of the list or the list has to be conver
 <div class="paragraph">
 <p><strong>Chosen Implementation:</strong><br>
 Update <code>Model</code> without raising <code>AddressBookChangedEvent</code>.<br>
-<strong>Pros:</strong><br></p>
-</div>
-<div class="paragraph">
-<p>No unnecessary refreshing of the UI.    <br>
+<strong>Pros:</strong><br>
+No unnecessary refreshing of the UI.    <br>
 <strong>Cons:</strong><br>
-The <code>viewCount</code> variable of each <code>Person</code> is only saved to <code>addressbook.xml</code> only when the app stops or when the next <code>AddressBookChangedEvent</code> is raised.<br></p>
+<code>viewCount</code> variable of each <code>Person</code> is only saved to <code>addressbook.xml</code> only when the DoC stops or when the next <code>AddressBookChangedEvent</code> is raised.<br></p>
 </div>
 <div class="paragraph">
-<p><strong>Alternative:</strong> Update <code>Model</code> normally.<br></p>
+<p><strong>Alternative:</strong><br>
+Update <code>Model</code> normally.<br></p>
 </div>
 <div class="paragraph">
 <p><strong>Pros:</strong><br>
-The <code>addressbook.xml</code> file is always updated once any value is changed.<br>
+<code>addressbook.xml</code> file is always updated once any value is changed.<br>
 <strong>Cons:</strong><br>
-The UI will be refreshed unnecessarily, which may cause a visible lag if large image files are reloaded.</p>
+UI will be refreshed unnecessarily, which may cause a visible lag if large image files are reloaded.</p>
 </div>
 <hr>
 <div class="paragraph">
@@ -442,21 +445,27 @@ The UI will be refreshed unnecessarily, which may cause a visible lag if large i
 </div>
 <div class="paragraph">
 <p><strong>Chosen Implementation:</strong><br>
-Sort right before app stops.<br>
+Sort right before DoC stops.<br>
 <strong>Pros:</strong><br>
-When app is started the next time, it can be started immediately, without having to perform the sort.<br>
+When DoC is started the next time, it can be started immediately, without having to perform the sort.<br>
 <strong>Cons:</strong><br>
-The app might lag a bit when stopping.<br></p>
+DoC might lag a bit when stopping.<br></p>
 </div>
 <div class="paragraph">
-<p><strong>Alternative:</strong> Sort right before app starts.<br>
+<p><strong>Alternative 1:</strong><br>
+Sort right before DoC starts.<br>
 <strong>Pros:</strong><br>
-The app will stop quickly.<br>
+DoC will stop quickly.<br>
 <strong>Cons:</strong><br>
-The app will take a while to start.<br>
-<strong>Alternative 3:</strong> Whenever a viewCount is changed.<br>
-<strong>Pros:</strong> The app will always show the updated order.<br>
-<strong>Cons:</strong> The app will lag slightly each time a <code>PersonCard</code> is selected.</p>
+DoC will take a while to start.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative 2:</strong><br>
+Whenever a viewCount is changed.<br>
+<strong>Pros:</strong><br>
+DoC will always show the updated order.<br>
+<strong>Cons:</strong><br>
+DoC will lag slightly each time a <code>PersonCard</code> is selected.</p>
 </div>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
@@ -499,7 +508,7 @@ The app will take a while to start.<br>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 06:53:21 +00:00
+Last updated 2017-11-13 07:17:53 +00:00
 </div>
 </div>
 </body>

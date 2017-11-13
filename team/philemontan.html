@@ -162,7 +162,7 @@ that this implementation has been built for the express purpose of future extens
 </div>
 <div class="paragraph">
 <p>An exciting possibility is an integration with Facebook, for automated
-retrieval of extensive contact and event information. For example, we can populate a users' contact list on DoC, with his
+retrieval of extensive contact and event information. For example, we can populate a user&#8217;s contact list on DoC, with his
 Facebook friend list, which can include information on their birth dates, gender, and even their public profile pictures.</p>
 </div>
 <div class="paragraph">
@@ -170,7 +170,7 @@ Facebook friend list, which can include information on their birth dates, gender
 which is implemented in an event-driven manner.</p>
 </div>
 <div class="paragraph">
-<p>The following class diagram illustrates the structure of this mechanism, and its' current applications:<br></p>
+<p>The following class diagram illustrates the structure of this mechanism, and its current applications:<br></p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -178,7 +178,7 @@ which is implemented in an event-driven manner.</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.3.1 OAuth2 Class Diagram</em></p>
+<p><em>Figure 4.3.1 <code>OAuth2</code> class diagram</em></p>
 </div>
 <div class="paragraph">
 <p>An important requirement for all child classes of the <code>Oauth2Command</code> structure, is a valid <code>commandType</code> string of the format:
@@ -216,7 +216,7 @@ to the <code>Model</code> component of DoC.</p>
 <h5 id="export-contacts-in-doc-to-google-contacts"><a class="link" href="#export-contacts-in-doc-to-google-contacts">Export contacts in DoC to Google Contacts</a></h5>
 <div class="paragraph">
 <p>The <code>export</code> command converts all contacts currently stored in DoC, with the help of the <code>GooglePersonConverterUtil</code> class,
-to a list of Google&#8217;s <code>Person</code> class objects. The newly converted contacts are then exported to the authenticated users' Google Contacts.</p>
+to a list of Google&#8217;s <code>Person</code> class objects. The newly converted contacts are then exported to the authenticated user&#8217;s Google Contacts.</p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -266,7 +266,7 @@ and has been previously illustrated in section 3.3: Logic component.</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.3.2: Execution Flow of Import and Export Commands</em></p>
+<p><em>Figure 4.3.2: Execution flow of <code>Import</code> and <code>Export</code> commands</em></p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -281,7 +281,7 @@ and has been previously illustrated in section 3.3: Logic component.</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.3.3: Authentication Sequence Diagram</em></p>
+<p><em>Figure 4.3.3: Authentication sequence diagram</em></p>
 </div>
 <div class="paragraph">
 <p>This is a summary of the steps in the <strong>authentication process</strong>:</p>
@@ -295,7 +295,7 @@ and has been previously illustrated in section 3.3: Logic component.</p>
 <p>The <code>BrowserPanel</code> handles this event and navigates to the <strong>authentication URL</strong>* provided by the event.<br></p>
 </li>
 <li>
-<p>The user successfully authenticates and grants DoC read permission of the users' Google Contacts.<br></p>
+<p>The user successfully authenticates and grants DoC read permission of the user&#8217;s Google Contacts.<br></p>
 </li>
 <li>
 <p>The <code>BrowserPanel</code> is redirected to the <strong>success URL</strong>*.<br></p>
@@ -321,8 +321,8 @@ later, under design considerations.</p>
 <h5 id="http-request-process"><a class="link" href="#http-request-process">HTTP request process</a></h5>
 <div class="paragraph">
 <p>With the <code>GoogleCredential</code> object generated at the end of the <strong>authentication process</strong>, we can now send HTTP requests
-to the Google People API easily using Google&#8217;s Java API client, specifically its' <code>PeopleService</code> class. Its documentation can be found in the following url:<br>
-<a href="https://developers.google.com/resources/api-libraries/documentation/people/v1/java/latest/com/google/api/services/people/v1/PeopleService.html" class="bare">https://developers.google.com/resources/api-libraries/documentation/people/v1/java/latest/com/google/api/services/people/v1/PeopleService.html</a></p>
+to the Google People API easily using Google&#8217;s Java API client, specifically its <code>PeopleService</code> class. Its documentation can be found in this
+<a href="https://developers.google.com/resources/api-libraries/documentation/people/v1/java/latest/com/google/api/services/people/v1/PeopleService.html">link</a>.</p>
 </div>
 </div>
 <div class="sect4">
@@ -365,9 +365,9 @@ object is added as a Google <code>Person</code> object&#8217;s <code>UserDefined
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect:</strong> How a successful authentication is handled<br></p>
+<p><strong>Aspect:</strong> Handling of successful Authentication<br></p>
 </div>
 <div class="paragraph">
 <p><strong>Chosen implementation:</strong><br>
@@ -375,9 +375,9 @@ Use a hosted domain as the redirection URL for a successful authentication. This
 <strong>success URL</strong>* the <code>BrowserPanel</code> listens for. After the authentication token is extracted from the URL, we then
 redirect to a Google Contacts page.<br>
 <strong>Pros:</strong><br>
-The underlying <code>HTTP GET</code> is sent to a domain under DoC&#8217;s control, reducing the risk of authentication token leak.<br>
+Underlying <code>HTTP GET</code> is sent to a domain under DoC&#8217;s control, reducing the risk of authentication token leak.<br>
 <strong>Cons:</strong><br>
-The <code>BrowserPanel</code> may display an error page temporarily if the hosted domain is down, however this will not be noticeable if redirection occurs fast.<br></p>
+<code>BrowserPanel</code> may display an error page temporarily if the hosted domain is down, however this will not be noticeable if redirection occurs fast.<br></p>
 </div>
 <div class="paragraph">
 <p><strong>Alternative:</strong><br>
@@ -385,7 +385,7 @@ Redirect to a Google Contacts page immediately.<br>
 <strong>Pros:</strong><br>
 No risk of an error page being display.<br>
 <strong>Cons:</strong><br>
-The underlying <code>HTTP GET</code> containing the authentication token is sent to an external domain.</p>
+Underlying <code>HTTP GET</code> containing the authentication token is sent to an external domain.</p>
 </div>
 <hr>
 <div class="paragraph">
@@ -395,7 +395,7 @@ The underlying <code>HTTP GET</code> containing the authentication token is sent
 <p><strong>Chosen implementation:</strong><br>
 Do not perform any duplication checks in the implementation of the <code>export</code> command.<br>
 <strong>Pros:</strong><br>
-We avoid the overhead of having to first import all the user&#8217;s Google contacts, storing them temporarily, then checking them against
+Avoid overhead of having to first import all the user&#8217;s Google contacts, storing them temporarily, then checking them against
 DoC&#8217;s <code>Model</code> component to sieve out non-duplicates.<br>
 <strong>Cons:</strong><br>
 Multiple calls of the <code>export</code> command will result in duplicates being created on the user&#8217;s Google contacts.<br></p>
@@ -404,7 +404,7 @@ Multiple calls of the <code>export</code> command will result in duplicates bein
 <p><strong>Alternative:</strong><br>
 Implement a way to track changes within DoC&#8217;s <code>Model</code> component, or a way to record export history. <br>
 <strong>Pros:</strong><br>
-We now can choose to export only modified or new <code>Person</code> objects in DoC.<br>
+Choice to export only modified or new <code>Person</code> objects in DoC will be possible.<br>
 <strong>Cons:</strong><br>
 Cross-checking is still required against a user&#8217;s Google contacts, as they can be modified externally.</p>
 </div>
@@ -511,8 +511,8 @@ substitution operations required to transform one string to the other.</pre>
 <div class="sect4">
 <h5 id="explanation-2"><a class="link" href="#explanation-2">Explanation</a></h5>
 <div class="paragraph">
-<p>When a unknown input is entered, the <code>AddressBookParser</code> instantiates an <code>UnknownCommand</code> object with this input.
-The 'AddressBookParser' then calls the <code>suggestionFound()</code> method of this instance. This method proceeds to match the unknown input against
+<p>When an unknown input is entered, the <code>AddressBookParser</code> instantiates an <code>UnknownCommand</code> object with this input.
+The <code>AddressBookParser</code> then calls the <code>suggestionFound()</code> method of this instance. This method proceeds to match the unknown input against
 a list of system-recognized command words. If a match is found, we instantiate the suggested command within the <code>UnknownCommand</code> object,
 and prompt the user for a response. If the user accepts the suggestion, we retrieve the instance of the suggested command and execute it.</p>
 </div>
@@ -558,7 +558,7 @@ with this enhancement in place:</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.10.1: ParseCommand Activity Diagram</em></p>
+<p><em>Figure 4.10.1: <code>ParseCommand</code> activity diagram</em></p>
 </div>
 <div class="paragraph">
 <p>As shown in the diagram above, actions enclosed in a green box are the enhancements applied to the original <code>AddressBookParser</code>,
@@ -628,7 +628,7 @@ response to our prompt, which is shown in the previous code snippet.</p>
 <p><strong>Chosen implementation:</strong><br>
 Set the maximum acceptable Levenshtein distance to 1 less than the length of the shortest command in DoC, which is currently 3.<br>
 <strong>Pros:</strong><br>
-The similarity matching will be more likely to yield relevant result, than if the Levenshtein distance were to be set at the length of the shortest command in DoC or higher.
+Similarity matching will be more likely to yield relevant result, than if the Levenshtein distance were to be set at the length of the shortest command in DoC or higher.
 For example, the current shortest command in DoC is 'add' with a length of 3. If were to set the maximum acceptable Levenshtein distance to 3, any random 3 letter sequence would be matched successfully.<br>
 <strong>Cons:</strong><br>
 Typos on longer commands have a higher propensity to produce a string with a Levenshtein distance of more than 2.
@@ -646,36 +646,36 @@ Random user input might yield positive matches.<br></p>
 <p><strong>Alternative 2:</strong><br>
 Lengthen sytem-recognized command words.<br>
 <strong>Pros:</strong><br>
-We can set a higher maximum acceptable Levenshtein distance without the cons mentioned in  alternative 1.<br>
+Can set a higher maximum acceptable Levenshtein distance without the cons mentioned in  alternative 1.<br>
 <strong>Cons:</strong><br>
-The user would have to type more for each command.</p>
+User would have to type more for each command.</p>
 </div>
 <hr>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Parsing user response after a suggestion is prompted<br></p>
+<p><strong>Aspect:</strong> Parsing of user response after a suggestion is prompted<br></p>
 </div>
 <div class="paragraph">
 <p><strong>Chosen implementation:</strong><br>
-DoC prompts the user for a response of "yes" or "y", which executes the suggested command. Upon any another response,
+Prompt the user for a response of "yes" or "y", which executes the suggested command. Upon any another response,
 the system discards the suggested command and begins the parsing process again.<br>
 <strong>Pros:</strong><br>
 If the mechanism has wrongly matched an unknown input, the user can simply ignore the suggestion prompt and continue without
 further action.<br>
 <strong>Cons:</strong><br>
-The user might infer that a response of "no" or "n" is required to reject the suggestion, and enters an input accordingly.
+User might infer that a response of "no" or "n" is required to reject the suggestion, and enters an input accordingly.
 This may begin a loop that proceeds ad infinitum.<br></p>
 </div>
 <div class="paragraph">
-<p><strong>Alternative 1:</strong><br>
-DoC prompts the user for a response of "no" or "n" to indicate rejection.<br>
+<p><strong>Alternative:</strong><br>
+Prompt the user for a response of "no" or "n" to indicate rejection.<br>
 <strong>Pros:</strong><br>
-The handling would be more intuitive to the user.<br>
+Handling would be more intuitive to the user.<br>
 <strong>Cons:</strong><br>
-An extra step is presented to the user on a wrong match, affecting the user&#8217;s experience.</p>
+Extra step is presented to the user on a wrong match, affecting the user&#8217;s experience.</p>
 </div>
 <div class="paragraph">
 <p><strong>Note:</strong> In our chosen implementation, we mitigate the mentioned cons by including explicit instructions in the suggestion prompt,
-that a response is only required if the user accepts the match.</p>
+that a response is only required if the user wishes to accept the match.</p>
 </div>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
@@ -722,7 +722,7 @@ DoC is run. These can pose a security problem as a user&#8217;s contacts can be 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 06:53:21 +00:00
+Last updated 2017-11-13 07:17:53 +00:00
 </div>
 </div>
 </body>

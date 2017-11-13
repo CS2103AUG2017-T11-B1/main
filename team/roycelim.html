@@ -227,11 +227,13 @@ This added improvement aims to provide convenience when it comes to planning upc
 <div class="sect3">
 <h4 id="summary"><a class="link" href="#summary">Summary</a></h4>
 <div class="paragraph">
-<p>The <code>Event</code> class, which is located inside <code>Model</code>, is implemented with similar logic as <code>Person</code> class. We have introduced three commands that modifies the address book: <code>addE</code>, <code>editE</code> and <code>deleteE</code>, which extends <code>UndoableCommand</code>.
-An <code>Event</code> consist of three sub-components: <code>Header</code>, <code>Desc</code> and <code>EventDate</code>. Commands such as <code>clear</code>, <code>undo</code> and <code>redo</code> can be used to alter events in the list as they deal with code that directly modifies the address book.</p>
+<p>The <code>Event</code> class, which is located inside <code>Model</code>, is implemented with similar logic as the <code>Person</code> class. We have introduced three commands that modify the address book: <code>addE</code>, <code>editE</code> and <code>deleteE</code>, which extend <code>UndoableCommand</code>.</p>
 </div>
 <div class="paragraph">
-<p>The <code>EventPanel</code> is incorporated into the address book <code>MainWindow</code> to display all the events inside the internal list using <code>ObservableList&lt;ReadOnlyEvent&gt;</code>. This process will be explained later on under the section <code>Event card</code>.</p>
+<p>An <code>Event</code> consists of three sub-components: <code>Header</code>, <code>Desc</code> and <code>EventDate</code>. Commands such as <code>clear</code>, <code>undo</code> and <code>redo</code> can be used to alter events in the list as they deal with code that directly modifies the address book.</p>
+</div>
+<div class="paragraph">
+<p>The <code>EventPanel</code> is incorporated into the <code>MainWindow</code> of the DoC to display all the events inside the internal list using <code>ObservableList&lt;ReadOnlyEvent&gt;</code>. This process will be explained later on under the section <code>Event card</code>.</p>
 </div>
 </div>
 <div class="sect3">
@@ -246,13 +248,13 @@ The execution flow is similar for all three methods on a higher level. We can de
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.2.1: AddEvent Sequence Diagram</em></p>
+<p><em>Figure 4.2.1: <code>AddEvent</code> sequence diagram</em></p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="exceptions"><a class="link" href="#exceptions">Exceptions</a></h4>
 <div class="paragraph">
-<p>When the user input an event command with its parameters, the validity of the command word is checked inside the <code>AddressBookParser</code>. Next, the presence of the parameter prefixes is checked inside <code>AddEventCommandParser</code>.
+<p>When the user inputs an event command with its parameters, the validity of the command word is checked inside the <code>AddressBookParser</code>. Next, the presence of the parameter prefixes is checked inside <code>AddEventCommandParser</code>.
 An appropriate <code>ParseException</code> will be thrown if the command word or prefixes are incorrect.</p>
 </div>
 <div class="paragraph">
@@ -267,7 +269,7 @@ An appropriate <code>ParseException</code> will be thrown if the command word or
 <p><code>DuplicateEventException</code>: This exception can be thrown by <code>addE</code> and <code>editE</code> command. The system will first create an <code>Event</code> object with the input parameters, compare the object to all events residing in the event list and throw this exception if there is a duplicate found.</p>
 </li>
 <li>
-<p><code>DateTimeParseException</code>: This exception can be thrown by <code>addE</code> and <code>editE</code> command when the input <code>EventDate</code> parameter is not a valid date. The date&#8217;s format and validity is checked inside the <code>Event</code> class like this:</p>
+<p><code>DateTimeParseException</code>: This exception can be thrown by <code>addE</code> and <code>editE</code> commands when the input <code>EventDate</code> parameter is not a valid date. The date&#8217;s format and validity are checked inside the <code>Event</code> class like this:</p>
 </li>
 </ul>
 </div>
@@ -303,45 +305,46 @@ The sequence diagram below illustrates the interaction between the <code>EventCa
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.2.2: EventCard Interaction Sequence Diagram</em></p>
+<p><em>Figure 4.2.2: <code>EventCard</code> interaction sequence diagram</em></p>
 </div>
 <div class="paragraph">
-<p>The events on the <code>EventListPanel</code> is sorted based on <code>EventDate</code>. An event that is coming soon will appear at the top and events with later dates will be further down the list. Expired events will be pushed to the bottom of the list.
+<p>The events on the <code>EventListPanel</code> are sorted based on their respective <code>EventDate</code>. An event that is coming soon will appear at the top and events with later dates will be further down the list. Expired events will be pushed to the bottom of the list.
 This sorting algorithm is introduced in <code>EventDateComparator</code> which implements <code>Comparator&lt;Event&gt;</code>.</p>
 </div>
 <div style="page-break-after: always;"></div>
 <div class="paragraph">
-<p>The events follow a certain colored background based on its urgency. The visual guide below describes the color code used:</p>
+<p>The events follow a certain colored background based on their respective urgency. The visual guide below describes the color code used:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/EventColorDiagram.png" alt="EventColorDiagram" width="600">
+<img src="../images/EventColorDiagram.png" alt="EventColorDiagram" width="800">
 </div>
 </div>
 <div class="paragraph">
-<p><em>Figure 4.2.3: Event Colour Diagram</em></p>
+<p><em>Figure 4.2.3: Event colour diagram</em></p>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design considerations</a></h4>
 <div class="paragraph">
-<p><strong>Aspect(future enhancement):</strong> How to implement adding/tagging of contacts into an <code>Event</code> using a <code>Person</code> list parameter<br></p>
+<p><strong>Aspect (future enhancement):</strong> Implementation of adding/tagging of contacts into an <code>Event</code> using a <code>Person</code> list parameter<br></p>
 </div>
 <div class="paragraph">
 <p><strong>Chosen Implementation:</strong><br>
 Add by the index of contact shown in the <code>PersonListPanel</code>.<br>
 <strong>Pros:</strong><br>
-System only have to check for validity of index. Better performance compared to Alternative.<br>
+Only check for validity of index has to be done by system. Better performance compared to Alternative.<br>
 <strong>Cons:</strong><br>
 Requires user to refer to the <code>PersonListPanel</code> before executing command to add contact into event&#8217;s <code>Person</code> list.<br></p>
 </div>
 <div class="paragraph">
-<p><strong>Alternative:</strong> Add by the name of contact in the <code>Person</code> list.<br>
+<p><strong>Alternative:</strong><br>
+Add by the name of contact in the <code>Person</code> list.<br>
 <strong>Pros:</strong><br>
 Easier for users to add using names, do not need to refer to the <code>Person</code> list.<br>
 <strong>Cons:</strong><br>
-System have to check through the list to check if the contact&#8217;s name exist in the current address book.</p>
+Check through the list to check if the contact&#8217;s name exist in the current address book has to be done by system.</p>
 </div>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
@@ -374,7 +377,7 @@ and raised issues for bugs discovered (Issues <a href="https://github.com/CS2103
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 06:53:21 +00:00
+Last updated 2017-11-13 07:17:53 +00:00
 </div>
 </div>
 </body>
