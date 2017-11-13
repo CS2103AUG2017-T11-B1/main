@@ -284,6 +284,69 @@ With this command, contacts can be found based on their <code>Tags</code> and <c
 <div class="paragraph">
 <p><mark>Start of Extract [from: Developer Guide]</mark></p>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="find"><a class="link" href="#find">Find</a></h3>
+<div class="sect3">
+<h4 id="overview-2"><a class="link" href="#overview-2">Overview</a></h4>
+<div class="paragraph">
+<p>The <code>FindCommand</code> class is inherited from the
+<code>Command</code> class.It allows the user to search his contacts either by the name of the contact or by the tag of the contact.</p>
+</div>
+<div class="paragraph">
+<p>The existing <code>NameContainsKeywordsPredicate</code> was modified to suit the new needs.
+The modified code is shown below.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">boolean</span> test(ReadOnlyPerson person) {
+        <span class="comment">// ...  find by name logic ...</span>
+        <span class="keyword">if</span> (validNames) {
+            <span class="keyword">return</span> validNames;
+        }
+        <span class="comment">// ... find by tags logic ...</span>
+        <span class="keyword">if</span> (validTags) {
+            <span class="keyword">break</span>;
+        }
+        <span class="keyword">return</span> validTags;
+    }</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/FindSequenceDiagram.png" alt="FindSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p><em>Figure 4.7.1: <code>Find</code> sequence diagram</em></p>
+</div>
+<div class="paragraph">
+<p>As shown in the diagram above, when the user executes the command <code>find</code>, the <code>FindCommandParser</code> class will parse the user&#8217;s input, then call the <code>FindCommand</code>. In <code>FindCommand</code> the <code>execute()</code> function is called.
+This will invoke the <code>updateFilteredPersonList</code> function that resides in the <code>LogicManager</code>, which will filter the contacts based on their name and tag that matches the call made by the user. This change will then be updated on the <code>PersonalListPanel</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design considerations</a></h4>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>find</code><br></p>
+</div>
+<div class="paragraph">
+<p><strong>Chosen Implementation:</strong><br>
+Directly find contacts based on both name and tag.<br>
+<strong>Pros:</strong><br>
+One function that can be used to search by name and tag. <br>
+<strong>Cons:</strong><br>
+If name and tag are similar, the contacts with both the same name and tag will be shown.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Alternative:</strong><br>
+Have two functions. One for find by name and another for find by tags.<br>
+<strong>Pros:</strong><br>
+Easier to find a person by name or by tag, if both name and tag have similar Strings.<br>
+<strong>Cons:</strong><br>
+Extra command for the user to remember.</p>
+</div>
 <div class="paragraph">
 <p><mark>End of Extract</mark></p>
 </div>
@@ -391,7 +454,7 @@ necessary contacts in a jiffy.</p>
 <div class="sect2">
 <h3 id="email"><a class="link" href="#email">Email</a></h3>
 <div class="sect3">
-<h4 id="overview-2"><a class="link" href="#overview-2">Overview</a></h4>
+<h4 id="overview-3"><a class="link" href="#overview-3">Overview</a></h4>
 <div class="paragraph">
 <p>The <code>EmailCommand</code> is the main driver of this functionality. It links the logic in DoC and the content displayed on the email browser.</p>
 </div>
@@ -449,7 +512,7 @@ Note that the <code>EmailCommandParser</code> will raise a <code>ParseException<
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>Email</code><br></p>
 </div>
@@ -560,7 +623,7 @@ one contact&#8217;s location to the next. This will help the User plan his activ
 <div class="sect2">
 <h3 id="map"><a class="link" href="#map">Map</a></h3>
 <div class="sect3">
-<h4 id="overview-3"><a class="link" href="#overview-3">Overview</a></h4>
+<h4 id="overview-4"><a class="link" href="#overview-4">Overview</a></h4>
 <div class="imageblock">
 <div class="content">
 <img src="../images/Location.png" alt="Location" width="800">
@@ -609,7 +672,7 @@ If there are more than one INDEX present, then the direction from one place to a
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">Design considerations</a></h4>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Implementation of <code>map</code><br></p>
 </div>
@@ -667,7 +730,7 @@ This would reduce the possibility of someone missing out on the event.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 10:14:07 +00:00
+Last updated 2017-11-13 10:32:05 +00:00
 </div>
 </div>
 </body>
