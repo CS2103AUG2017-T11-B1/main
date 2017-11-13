@@ -192,7 +192,7 @@ the authentication token differently.</p>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="directive">protected</span> Oauth2Command(<span class="predefined-type">String</span> inputType)  {
     <span class="keyword">if</span> (!inputTypeValid(inputType)) {
-        <span class="keyword">assert</span> <span class="predefined-constant">true</span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">Child classes of Oauth2Command must provide a valid command type in the
+        <span class="keyword">assert</span> <span class="predefined-constant">false</span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">Child classes of Oauth2Command must provide a valid command type in the
             format: SERVICEPROVIDER_functionality</span><span class="delimiter">&quot;</span></span>;
     }
     commandType = inputType;
@@ -722,7 +722,7 @@ DoC is run. These can pose a security problem as a user&#8217;s contacts can be 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 02:57:04 +00:00
+Last updated 2017-11-13 03:49:41 +00:00
 </div>
 </div>
 </body>

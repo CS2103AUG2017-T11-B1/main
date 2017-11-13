@@ -197,7 +197,21 @@ Deletes the profile picture of the 1st contact in the results of the <code>find<
 <p>The <code>updateProfilePic</code>  command works by taking in the index of the chosen contact and updating this contact according to the <code>ProfilePic</code> given. To do so, the <code>updateProfilePic</code> command takes in a URL of the image that the profile picture is to be changed to. This will cause the app to instantiate a new <code>ProfilePic</code> object and check if the URL is valid and if it is valid, the app will proceed to update the contact with the new profile picture, otherwise an IllegalValueException will be thrown.</p>
 </div>
 <div class="paragraph">
-<p>In addition, the image will be downloaded into a local folder called: <code>ProfilePics/</code> that is generated when the app initializes. This folder is created in the same folder as the <code>src</code> folder.</p>
+<p>In addition, the image will be downloaded into a local folder called: <code>ProfilePics/</code> that is generated when the app initializes. This folder is created in the same folder as the <code>src</code> folder. (See code snippet below)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">if</span> (profilePic.toString().compareTo(ProfilePic.DEFAULT_URL) == <span class="integer">0</span>) {
+    deleteOldFile(personToUpdateProfilePic);
+    newProfilePic = profilePic;
+} <span class="keyword">else</span> {
+    <span class="predefined-type">String</span> newFile;
+    createNewDirectory();
+    newFile = setFileName(personToUpdateProfilePic);
+    createNewFile(newFile);
+    newProfilePic = downloadImage(newFile);
+}</code></pre>
+</div>
 </div>
 <div class="paragraph">
 <p>The <code>deleteProfilePic</code> command works by taking in the index of the chosen contact and updating the <code>ProfilePic</code> property of the chosen contact to the default profile picture.</p>
@@ -485,7 +499,7 @@ The app will take a while to start.<br>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 02:57:04 +00:00
+Last updated 2017-11-13 03:49:41 +00:00
 </div>
 </div>
 </body>
